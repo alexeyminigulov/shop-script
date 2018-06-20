@@ -7,8 +7,8 @@ required_plugins.each do |plugin|
 end
 
 domains = {
-  frontend: 'shopscript-frontend.dev',
-  backend:  'shopscript-backend.dev'
+  frontend: 'shopscript.dev',
+  backend:  'backend.shopscript.dev'
 }
 
 config = {
