@@ -45,14 +45,11 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
+        'urlManager' => require __DIR__ . './../config/urlManager.php',
+        'frontendUrlManager' => function () {
+            return \Yii::$app->urlManager;
+        },
+        'backendUrlManager' => require __DIR__ . './../../backend/config/urlManager.php',
     ],
     'params' => $params,
 ];
