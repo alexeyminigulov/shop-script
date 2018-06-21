@@ -3,7 +3,7 @@
 namespace domain\services;
 
 use common\forms\LoginForm;
-use common\models\User;
+use domain\entities\User;
 use domain\repositories\UserRepository;
 
 class UserService

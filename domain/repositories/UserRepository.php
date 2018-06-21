@@ -2,7 +2,7 @@
 
 namespace domain\repositories;
 
-use common\models\User;
+use domain\entities\User;
 use domain\exceptions\EntityNotFoundException;
 
 
