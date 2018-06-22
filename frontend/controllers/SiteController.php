@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use domain\services\ContactService;
 use domain\services\UserService;
 use Yii;
 use yii\base\InvalidParamException;
@@ -20,17 +21,20 @@ use frontend\forms\ContactForm;
 class SiteController extends Controller
 {
     private $service;
+    private $contactService;
 
-    public function __construct($id, $module, UserService $service, array $config = [])
+    public function __construct($id,
+                                $module,
+                                UserService $service,
+                                ContactService $contactService,
+                                array $config = [])
     {
         parent::__construct($id, $module, $config);
 
         $this->service = $service;
+        $this->contactService = $contactService;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -59,9 +63,6 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function actions()
     {
         return [
@@ -134,18 +135,21 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+        $form = new ContactForm();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->contactService->contact($form, Yii::$app->params['adminEmail']);
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
+
+            } catch (\RuntimeException $e) {
+                Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');
             }
             return $this->refresh();
         }
 
         return $this->render('contact', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
+        'frontend\bootstrap\Setup',
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
