@@ -5,14 +5,19 @@ namespace domain\services;
 use common\forms\LoginForm;
 use domain\entities\User;
 use domain\repositories\UserRepository;
+use frontend\forms\PasswordResetRequestForm;
+use frontend\forms\ResetPasswordForm;
+use yii\mail\MailerInterface;
 
 class UserService
 {
-    public $repository;
+    private $repository;
+    private $mailer;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, MailerInterface $mailer)
     {
         $this->repository = $repository;
+        $this->mailer = $mailer;
     }
 
     public function auth(LoginForm $form): User
@@ -24,5 +29,42 @@ class UserService
         }
 
         return $user;
+    }
+
+    public function requestPasswordReset(PasswordResetRequestForm $form)
+    {
+        /* @var $user User */
+        $user = $this->repository->findByEmail($form->email);
+
+        if (!$this->repository->isPasswordResetTokenValid($user->password_reset_token)) {
+            $user->generatePasswordResetToken();
+        }
+
+        $this->repository->save($user);
+
+        $sent = $this->mailer
+            ->compose(
+                ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
+                ['user' => $user]
+            )
+            ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+            ->setTo($form->email)
+            ->setSubject('Password reset for ' . \Yii::$app->name)
+            ->send();
+
+        if (!$sent) {
+            throw new \RuntimeException('Email did not send');
+        }
+    }
+
+    public function passwordReset(ResetPasswordForm $form, $token)
+    {
+        if (!$this->repository->isPasswordResetTokenValid($token)) {
+            throw new \InvalidArgumentException('Token don not validated.');
+        }
+        $user = $this->repository->findByPasswordResetToken($token);
+        $user->setPassword($form->password);
+        $user->removePasswordResetToken();
+        $this->repository->save($user,false);
     }
 }
