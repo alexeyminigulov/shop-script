@@ -6,6 +6,7 @@ use yii\base\BootstrapInterface;
 use yii\di\Container;
 use domain\services\UserService;
 use domain\repositories\UserRepository;
+use yii\mail\MailerInterface;
 
 class Setup implements BootstrapInterface
 {
@@ -15,5 +16,9 @@ class Setup implements BootstrapInterface
         $container = \Yii::$container;
 
         $container->setSingleton(UserRepository::class);
+
+        $container->setSingleton(MailerInterface::class, function () use ($app) {
+            return $app->mailer;
+        });
     }
 }
