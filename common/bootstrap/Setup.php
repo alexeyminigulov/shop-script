@@ -18,6 +18,7 @@ class Setup implements BootstrapInterface
         $container->setSingleton(UserRepository::class);
 
         $container->setSingleton(MailerInterface::class, function () use ($app) {
+            /* @var MailerInterface */
             return $app->mailer;
         });
     }

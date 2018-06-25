@@ -47,9 +47,7 @@ class UserService
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                 ['user' => $user]
             )
-            ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
             ->setTo($form->email)
-            ->setSubject('Password reset for ' . \Yii::$app->name)
             ->send();
 
         if (!$sent) {
