@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use domain\helpers\UserHelper;
 use kartik\widgets\DatePicker;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\UserSearch */
@@ -25,7 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'username',
+            [
+                'attribute' => 'username',
+                'value' => function ($model) {
+                    return Html::a($model->username, Url::to(['user/view', 'id' => $model->id]));
+                },
+                'format' => 'raw',
+            ],
             'email:email',
             [
                 'attribute' => 'created_at',
