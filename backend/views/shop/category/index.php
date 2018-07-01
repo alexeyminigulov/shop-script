@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use domain\helpers\CategoryHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Shop\CategorySearch */
@@ -12,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -23,15 +23,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'name',
+            [
+                'attribute' => 'name',
+                'value' => function ($model) {
+                    return CategoryHelper::getDecoratedName($model);
+                },
+            ],
             'slug',
             'lft',
             'rgt',
             //'depth',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

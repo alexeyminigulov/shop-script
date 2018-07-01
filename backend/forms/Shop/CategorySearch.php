@@ -2,7 +2,6 @@
 
 namespace backend\forms\Shop;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use domain\entities\Shop\Category;
@@ -10,26 +9,21 @@ use domain\entities\Shop\Category;
 /**
  * CategorySearch represents the model behind the search form of `domain\entities\Shop\Category`.
  */
-class CategorySearch extends Category
+class CategorySearch extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $id;
+    public $name;
+    public $slug;
+    public $lft;
+    public $rgt;
+    public $depth;
+
     public function rules()
     {
         return [
             [['id', 'lft', 'rgt', 'depth'], 'integer'],
             [['name', 'slug'], 'safe'],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
@@ -44,6 +38,7 @@ class CategorySearch extends Category
         $query = Category::find();
 
         // add conditions that should always apply here
+        $query->andWhere(['<>', 'depth', 0]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,7 +48,7 @@ class CategorySearch extends Category
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+             $query->where('0=1');
             return $dataProvider;
         }
 

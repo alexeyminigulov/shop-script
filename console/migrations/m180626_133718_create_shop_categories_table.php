@@ -20,6 +20,16 @@ class m180626_133718_create_shop_categories_table extends Migration
             'rgt'   => $this->integer()->notNull(),
             'depth' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->insert('{{%shop_categories}}', [
+            'id' => 1,
+            'name' => '',
+            'slug' => 'root',
+
+            'lft' => 1,
+            'rgt' => 2,
+            'depth' => 0,
+        ]);
     }
 
     public function down()

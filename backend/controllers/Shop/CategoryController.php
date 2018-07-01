@@ -2,6 +2,8 @@
 
 namespace backend\controllers\Shop;
 
+use domain\forms\Shop\CategoryForm;
+use domain\services\CategoryService;
 use Yii;
 use domain\entities\Shop\Category;
 use backend\forms\Shop\CategorySearch;
@@ -64,14 +66,16 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $form = new CategoryForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $service = new CategoryService();
+            $category = $service->create($form);
+            return $this->redirect(['view', 'id' => $category->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

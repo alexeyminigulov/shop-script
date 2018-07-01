@@ -2,6 +2,7 @@
 
 namespace domain\entities\Shop;
 
+use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,15 +14,41 @@ use yii\db\ActiveRecord;
  * @property int $lft
  * @property int $rgt
  * @property int $depth
+ *
+ * @mixin NestedSetsBehavior
  */
 class Category extends ActiveRecord
 {
+    public static function create($name, $slug): self
+    {
+        $category = new Category();
+        $category->name = $name;
+        $category->slug = $slug;
+
+        return $category;
+    }
+
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'name' => 'Name',
             'slug' => 'Slug',
+        ];
+    }
+
+    public function behaviors() {
+        return [
+            [
+                'class' => NestedSetsBehavior::class,
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
 
