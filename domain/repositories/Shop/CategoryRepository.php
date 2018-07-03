@@ -39,4 +39,11 @@ class CategoryRepository
             throw new \RuntimeException('User did not save.');
         }
     }
+
+    public function delete(Category $category)
+    {
+        if ($category->delete() === false) {
+            throw new \RuntimeException('Category has not been deleted.');
+        }
+    }
 }

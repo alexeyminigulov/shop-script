@@ -68,4 +68,10 @@ class CategoryService
 
         $nextCategory->save();
     }
+
+    public function delete($id)
+    {
+        $category = $this->repository->find($id);
+        $this->repository->delete($category);
+    }
 }
