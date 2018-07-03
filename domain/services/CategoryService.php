@@ -27,7 +27,19 @@ class CategoryService
         $category = Category::create($form->name, $form->slug, $parent);
 
         $this->repository->save($category);
+        return $category;
+    }
 
+    public function update(CategoryForm $form): Category
+    {
+        $category = $this->repository->find($form->id);
+        $parent = $this->repository->find($form->parentId);
+        if ($category->id == $parent->id) {
+            throw new \DomainException('Parent do not be same like category.');
+        }
+        $category->edit($form->name, $form->slug, $parent);
+
+        $this->repository->save($category);
         return $category;
     }
 

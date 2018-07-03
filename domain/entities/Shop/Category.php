@@ -19,7 +19,7 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
-    public static function create($name, $slug, ActiveRecord $parent): self
+    public static function create($name, $slug, Category $parent): self
     {
         $category = new Category();
         $category->name = $name;
@@ -28,6 +28,14 @@ class Category extends ActiveRecord
         $category->appendTo($parent);
 
         return $category;
+    }
+
+    public function edit($name, $slug, Category $parent)
+    {
+        $this->name = $name;
+        $this->slug = $slug;
+
+        $this->appendTo($parent);
     }
 
     public function attributeLabels()

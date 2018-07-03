@@ -2,6 +2,7 @@
 
 namespace domain\forms\Shop;
 
+use domain\entities\Shop\Category;
 use yii\base\Model;
 
 /**
@@ -13,9 +14,21 @@ use yii\base\Model;
  */
 class CategoryForm extends Model
 {
+    public $id;
     public $name;
     public $slug;
     public $parentId;
+
+    public function __construct(Category $category = null, $config = [])
+    {
+        if ($category) {
+            $this->id = $category->id;
+            $this->name = $category->name;
+            $this->slug = $category->slug;
+            $this->parentId = $category->parent->id;
+        }
+        parent::__construct($config);
+    }
 
     public function rules()
     {
@@ -28,6 +41,7 @@ class CategoryForm extends Model
     public function attributeLabels()
     {
         return [
+            'parentId' => 'Parent category',
             'name' => 'Name',
         ];
     }
