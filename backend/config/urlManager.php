@@ -5,6 +5,6 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [
-        '<controller:[\w-]+>/index' => 'Shop/<controller>/index',
+//        '<controller:[\w-]+>/index' => 'shop/<controller>/index',
     ],
 ];

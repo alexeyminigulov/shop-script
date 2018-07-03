@@ -39,6 +39,7 @@ class CategorySearch extends Model
 
         // add conditions that should always apply here
         $query->andWhere(['<>', 'depth', 0]);
+        $query->orderBy('lft');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

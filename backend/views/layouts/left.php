@@ -38,7 +38,7 @@ use yii\helpers\Url;
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Users', 'icon' => 'file-code-o', 'url' => ['/user']],
-                    ['label' => 'Category', 'icon' => 'file-code-o', 'url' => [Url::to(['Shop/category/index'])]],
+                    ['label' => 'Category', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/category/index'])]],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

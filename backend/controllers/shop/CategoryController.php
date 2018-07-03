@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers\Shop;
+namespace backend\controllers\shop;
 
 use domain\forms\Shop\CategoryForm;
 use domain\services\CategoryService;
