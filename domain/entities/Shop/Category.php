@@ -19,11 +19,13 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
-    public static function create($name, $slug): self
+    public static function create($name, $slug, ActiveRecord $parent): self
     {
         $category = new Category();
         $category->name = $name;
         $category->slug = $slug;
+
+        $category->appendTo($parent);
 
         return $category;
     }

@@ -16,6 +16,14 @@ use yii\filters\VerbFilter;
  */
 class CategoryController extends Controller
 {
+    private $service;
+
+    public function __construct($id, $module, CategoryService $service, array $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -69,9 +77,14 @@ class CategoryController extends Controller
         $form = new CategoryForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $service = new CategoryService();
-            $category = $service->create($form);
-            return $this->redirect(['view', 'id' => $category->id]);
+            try {
+                $category = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $category->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('create', [

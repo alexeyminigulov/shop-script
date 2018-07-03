@@ -4,16 +4,29 @@ namespace domain\services;
 
 use domain\entities\Shop\Category;
 use domain\forms\Shop\CategoryForm;
+use domain\repositories\Shop\CategoryRepository;
+use domain\exceptions\EntityNotFoundException;
 
 class CategoryService
 {
+    private $repository;
+
+    public function __construct(CategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function create(CategoryForm $form)
     {
-        $category = Category::create($form->name, $form->slug);
+        try {
+            $parent = $this->repository->find($form->parentId);
+        } catch (EntityNotFoundException $e) {
+            throw new EntityNotFoundException('Parent category not exists.');
+        }
 
-        $parent = Category::findOne(['id', $form->parentId]);
-        $category->appendTo($parent);
-        $category->save();
+        $category = Category::create($form->name, $form->slug, $parent);
+
+        $this->repository->save($category);
 
         return $category;
     }
