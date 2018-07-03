@@ -17,6 +17,22 @@ class CategoryRepository
         return $category;
     }
 
+    public function getPrev(Category $category): ?Category
+    {
+        /* @var $prevCategory Category|null */
+        $prevCategory = $category->getPrev()->one();
+
+        return $prevCategory;
+    }
+
+    public function getNext(Category $category): ?Category
+    {
+        /* @var $nextCategory Category|null */
+        $nextCategory = $category->getNext()->one();
+
+        return $nextCategory;
+    }
+
     public function save(Category $category, $runValidation = true)
     {
         if (!$category->save($runValidation)) {

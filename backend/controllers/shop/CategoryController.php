@@ -112,6 +112,18 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function actionMoveUp($id)
+    {
+        $this->service->moveUp($id);
+        return $this->redirect(['index']);
+    }
+
+    public function actionMoveDown($id)
+    {
+        $this->service->moveDown($id);
+        return $this->redirect(['index']);
+    }
+
     /**
      * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

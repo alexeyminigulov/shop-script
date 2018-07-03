@@ -16,7 +16,7 @@ class CategoryService
         $this->repository = $repository;
     }
 
-    public function create(CategoryForm $form)
+    public function create(CategoryForm $form): Category
     {
         try {
             $parent = $this->repository->find($form->parentId);
@@ -29,5 +29,31 @@ class CategoryService
         $this->repository->save($category);
 
         return $category;
+    }
+
+    public function moveUp($id)
+    {
+        $category = $this->repository->find($id);
+
+        $prevCategory = $this->repository->getPrev($category);
+        if (!$prevCategory) {
+            return;
+        }
+        $prevCategory->insertAfter($category);
+
+        $prevCategory->save();
+    }
+
+    public function moveDown($id)
+    {
+        $category = $this->repository->find($id);
+
+        $nextCategory = $this->repository->getNext($category);
+        if (!$nextCategory) {
+            return;
+        }
+        $nextCategory->insertBefore($category);
+
+        $nextCategory->save();
     }
 }
