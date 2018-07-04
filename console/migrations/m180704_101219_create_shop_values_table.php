@@ -17,10 +17,10 @@ class m180704_101219_create_shop_values_table extends Migration
             'value' => $this->string()->notNull(),
         ], $tableOptions);
 
-        $this->addPrimaryKey('{{$pk-shop_values}}', '{{%shop_values}}', ['product_id', 'attribute_id']);
+        $this->addPrimaryKey('{{%pk-shop_values}}', '{{%shop_values}}', ['product_id', 'attribute_id']);
 
-        $this->createIndex('{{$idx-shop_values-product_id}}', '{{%shop_values}}', 'product_id');
-        $this->createIndex('{{$idx-shop_values-attribute_id}}', '{{%shop_values}}', 'attribute_id');
+        $this->createIndex('{{%idx-shop_values-product_id}}', '{{%shop_values}}', 'product_id');
+        $this->createIndex('{{%idx-shop_values-attribute_id}}', '{{%shop_values}}', 'attribute_id');
 
         $this->addForeignKey('{{%fk-shop_values-product_id}}', '{{%shop_values}}', 'product_id', '{{%shop_products}}', 'id', 'CASCADE', 'RESTRICT');
         $this->addForeignKey('{{%fk-shop_values_attribute_id}}', '{{%shop_values}}', 'attribute_id', '{{%shop_attributes}}', 'id', 'CASCADE', 'RESTRICT');

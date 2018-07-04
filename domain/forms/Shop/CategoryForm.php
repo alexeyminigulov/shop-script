@@ -34,6 +34,7 @@ class CategoryForm extends Model
     {
         return [
             [['name', 'slug', 'parentId'], 'required'],
+            [['name', 'slug'], 'string', 'max' => 255],
             ['parentId', 'integer'],
         ];
     }
