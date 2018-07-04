@@ -13,7 +13,7 @@ class m180704_101219_create_shop_values_table extends Migration
 
         $this->createTable('{{%shop_values}}', [
             'product_id' => $this->integer()->notNull(),
-            'attribute_id' => $this->integer(),
+            'attribute_id' => $this->integer()->notNull(),
             'value' => $this->string()->notNull(),
         ], $tableOptions);
 
