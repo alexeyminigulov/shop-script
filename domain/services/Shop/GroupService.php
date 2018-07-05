@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\services;
+namespace domain\services\Shop;
 
 use domain\entities\Shop\Group;
 use domain\forms\Shop\GroupForm;

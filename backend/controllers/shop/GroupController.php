@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use domain\forms\Shop\GroupForm;
-use domain\services\GroupService;
+use domain\services\Shop\GroupService;
 use Yii;
 use domain\entities\Shop\Group;
 use backend\forms\Shop\GroupSearch;

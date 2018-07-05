@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use domain\forms\Shop\CategoryForm;
-use domain\services\CategoryService;
+use domain\services\Shop\CategoryService;
 use Yii;
 use domain\entities\Shop\Category;
 use backend\forms\Shop\CategorySearch;
