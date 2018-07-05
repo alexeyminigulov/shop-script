@@ -2,6 +2,8 @@
 
 namespace backend\controllers\shop;
 
+use domain\forms\Shop\GroupForm;
+use domain\services\GroupService;
 use Yii;
 use domain\entities\Shop\Group;
 use backend\forms\Shop\GroupSearch;
@@ -9,14 +11,16 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * GroupController implements the CRUD actions for Group model.
- */
 class GroupController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    private $service;
+
+    public function __construct($id, $module, GroupService $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     public function behaviors()
     {
         return [
@@ -64,14 +68,15 @@ class GroupController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Group();
+        $form = new GroupForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $group = $this->service->create($form);
+            return $this->redirect(['view', 'id' => $group->id]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
@@ -85,13 +90,15 @@ class GroupController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $form = new GroupForm($model);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $model = $this->service->update($form);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

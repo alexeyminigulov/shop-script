@@ -16,17 +16,24 @@ use Yii;
  */
 class Group extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+    public static function create($name): self
+    {
+        $group = new self();
+        $group->name = $name;
+
+        return $group;
+    }
+
+    public function edit($name)
+    {
+        $this->name = $name;
+    }
+
     public static function tableName()
     {
         return 'shop_attribute_groups';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
