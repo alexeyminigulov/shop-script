@@ -10,26 +10,18 @@ use domain\entities\Shop\Group;
 /**
  * GroupSearch represents the model behind the search form of `domain\entities\Shop\Group`.
  */
-class GroupSearch extends Group
+class GroupSearch extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $id;
+    public $name;
+    public $categoryId;
+
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'categoryId'], 'safe'],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
@@ -41,7 +33,7 @@ class GroupSearch extends Group
      */
     public function search($params)
     {
-        $query = Group::find();
+        $query = Group::find()->innerJoinWith('categoryAssignments', false);
 
         // add conditions that should always apply here
 
@@ -53,7 +45,7 @@ class GroupSearch extends Group
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+             $query->where('0=1');
             return $dataProvider;
         }
 
@@ -63,6 +55,10 @@ class GroupSearch extends Group
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+
+        $query->andFilterWhere([
+            'category_id' => $this->categoryId
+        ]);
 
         return $dataProvider;
     }

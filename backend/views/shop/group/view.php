@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use domain\helpers\CategoryHelper;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Group */
@@ -28,6 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
+            [
+                'label' => 'Categories',
+                'value' => function ($model) {
+                    return CategoryHelper::strNames($model->categories);
+                },
+            ],
         ],
     ]) ?>
 

@@ -88,7 +88,7 @@ class Group extends \yii\db\ActiveRecord
 
     public function getCategories(): ActiveQuery
     {
-        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignment');
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignments');
     }
 
     public function behaviors(): array
