@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 
 class CategoryHelper
 {
-    public static function parentList(): array
+    public static function list(): array
     {
         return ArrayHelper::map(
             Category::find()->orderBy('lft')->asArray()->all(),

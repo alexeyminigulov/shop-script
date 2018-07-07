@@ -13,7 +13,7 @@ use domain\helpers\CategoryHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'parentId')->dropDownList(CategoryHelper::parentList()) ?>
+    <?= $form->field($model, 'parentId')->dropDownList(CategoryHelper::list()) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

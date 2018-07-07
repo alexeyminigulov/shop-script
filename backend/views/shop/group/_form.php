@@ -16,7 +16,7 @@ use domain\widgets\DynamicInput;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'categoryIds')->widget(DynamicInput::className(), [
-        'data' => CategoryHelper::parentList(),
+        'data' => CategoryHelper::list(),
     ]) ?>
 
     <div class="form-group">
