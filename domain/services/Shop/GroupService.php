@@ -18,6 +18,11 @@ class GroupService
     public function create(GroupForm $form): Group
     {
         $group = Group::create($form->name);
+
+        foreach ($form->categoryIds as $id) {
+            $group->assignmentCategory($id);
+        }
+
         $this->repository->save($group);
 
         return $group;

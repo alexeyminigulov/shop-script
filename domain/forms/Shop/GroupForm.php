@@ -9,6 +9,7 @@ class GroupForm extends Model
 {
     public $id;
     public $name;
+    public $categoryIds;
 
     public function __construct(Group $group = null, $config = [])
     {
@@ -19,11 +20,19 @@ class GroupForm extends Model
         parent::__construct($config);
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'categoryIds' => 'Add categories:',
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'categoryIds'], 'required'],
             [['name'], 'string', 'max' => 255],
+//            [['categoryIds'], 'integer'],
         ];
     }
 }
