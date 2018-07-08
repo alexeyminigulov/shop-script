@@ -2,6 +2,8 @@
 
 namespace backend\controllers\shop;
 
+use domain\forms\Shop\AttributeForm;
+use domain\services\Shop\AttributeService;
 use Yii;
 use domain\entities\Shop\Attribute;
 use backend\forms\Shop\AttributeSearch;
@@ -14,9 +16,14 @@ use yii\filters\VerbFilter;
  */
 class AttributeController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    private $service;
+
+    public function __construct($id, $module, AttributeService $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
     public function behaviors()
     {
         return [
@@ -64,14 +71,21 @@ class AttributeController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Attribute();
+        $form = new AttributeForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $attribute = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $attribute->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

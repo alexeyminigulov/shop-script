@@ -11,18 +11,17 @@ use Yii;
  * @property string $name
  * @property int $group_id
  *
- * @property ShopAttributeGroups $group
- * @property ShopValues[] $shopValues
- * @property ShopProducts[] $products
+ * @property Group $group
  */
 class Attribute extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public static function create($name, $groupId)
     {
-        return 'shop_attributes';
+        $attribute = new Attribute();
+        $attribute->name = $name;
+        $attribute->group_id = $groupId;
+
+        return $attribute;
     }
 
     public function rules()
@@ -32,7 +31,7 @@ class Attribute extends \yii\db\ActiveRecord
             [['group_id'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => ShopAttributeGroups::className(), 'targetAttribute' => ['group_id' => 'id']],
+//            [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Group::className(), 'targetAttribute' => ['group_id' => 'id']],
         ];
     }
 
@@ -50,22 +49,11 @@ class Attribute extends \yii\db\ActiveRecord
      */
     public function getGroup()
     {
-        return $this->hasOne(ShopAttributeGroups::className(), ['id' => 'group_id']);
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getShopValues()
+    public static function tableName()
     {
-        return $this->hasMany(ShopValues::className(), ['attribute_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProducts()
-    {
-        return $this->hasMany(ShopProducts::className(), ['id' => 'product_id'])->viaTable('shop_values', ['attribute_id' => 'id']);
+        return 'shop_attributes';
     }
 }
