@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use domain\helpers\GroupHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Shop\AttributeSearch */
@@ -22,11 +23,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
-            'group_id',
+            [
+                'label' => 'Group',
+                'attribute' => 'group_id',
+                'value' => function ($model) {
+                    return $model->group->name;
+                },
+                'filter' => GroupHelper::list(),
+                'headerOptions' => ['class' => 'text-blue'],
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

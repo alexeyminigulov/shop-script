@@ -10,26 +10,18 @@ use domain\entities\Shop\Attribute;
 /**
  * AttributeSearch represents the model behind the search form of `domain\entities\Shop\Attribute`.
  */
-class AttributeSearch extends Attribute
+class AttributeSearch extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $id;
+    public $name;
+    public $group_id;
+
     public function rules()
     {
         return [
             [['id', 'group_id'], 'integer'],
             [['name'], 'safe'],
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
@@ -53,7 +45,7 @@ class AttributeSearch extends Attribute
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+             $query->where('0=1');
             return $dataProvider;
         }
 
