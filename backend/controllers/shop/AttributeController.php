@@ -99,13 +99,21 @@ class AttributeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $form = new AttributeForm($model);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $attribute = $this->service->update($form);
+                return $this->redirect(['view', 'id' => $attribute->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

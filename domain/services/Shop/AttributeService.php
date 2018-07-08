@@ -23,4 +23,15 @@ class AttributeService
 
         return $attribute;
     }
+
+    public function update(AttributeForm $form): Attribute
+    {
+        $attribute = $this->repository->find($form->id);
+
+        $attribute->edit($form->name, $form->groupId);
+
+        $this->repository->save($attribute);
+
+        return $attribute;
+    }
 }

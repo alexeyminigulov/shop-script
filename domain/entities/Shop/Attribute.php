@@ -24,6 +24,12 @@ class Attribute extends \yii\db\ActiveRecord
         return $attribute;
     }
 
+    public function edit($name, $groupId)
+    {
+        $this->name = $name;
+        $this->group_id = $groupId;
+    }
+
     public function rules()
     {
         return [
