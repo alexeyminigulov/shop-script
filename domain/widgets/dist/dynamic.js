@@ -3,17 +3,14 @@
     'use strict';
 
     var addButton = document.querySelector('.add-dynamic-field-btn'),
-        originInputTpl = addButton.previousElementSibling.cloneNode(true),
+        originInputTpl = addButton.parentNode.querySelector(".main-select-input").cloneNode(true),
         formFieldGroup = addButton.parentNode,
         currentNumberElement = 0;
 
 
     addButton.addEventListener("click", function (e) {
 
-        var inputElement = originInputTpl.cloneNode(true);
-        currentNumberElement++;
-        inputElement.setAttribute("id", inputElement.getAttribute("data-id") + "-" + currentNumberElement);
-        inputElement.setAttribute("name", inputElement.getAttribute("data-name") + "[" + currentNumberElement + "]");
+        var inputElement = createSelect();
 
         var divInput = createDiv({"class": "col-lg-10"});
         divInput.appendChild(inputElement);
@@ -30,6 +27,17 @@
 
         addButton.parentNode.insertBefore(divMain, addButton);
 
+        function createSelect() {
+
+            var inputElement = originInputTpl.cloneNode(true);
+            currentNumberElement++;
+            inputElement.setAttribute("id", inputElement.getAttribute("data-id") + "-" + currentNumberElement);
+            inputElement.setAttribute("name", inputElement.getAttribute("data-name") + "[" + currentNumberElement + "]");
+            inputElement.classList.remove("main-select-input");
+            inputElement.value = 1;
+
+            return inputElement;
+        }
 
         function createRemoveBtn() {
 

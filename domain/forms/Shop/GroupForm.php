@@ -2,8 +2,9 @@
 
 namespace domain\forms\Shop;
 
-use domain\entities\Shop\Group;
 use yii\base\Model;
+use domain\entities\Shop\Group;
+use domain\helpers\ActiveRecordHelper;
 
 class GroupForm extends Model
 {
@@ -16,6 +17,7 @@ class GroupForm extends Model
         if ($group) {
             $this->id = $group->id;
             $this->name = $group->name;
+            $this->categoryIds = ActiveRecordHelper::getFields($group->categoryAssignments, 'category_id');
         }
         parent::__construct($config);
     }

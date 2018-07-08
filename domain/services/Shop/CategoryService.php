@@ -6,6 +6,7 @@ use domain\entities\Shop\Category;
 use domain\forms\Shop\CategoryForm;
 use domain\repositories\Shop\CategoryRepository;
 use domain\exceptions\EntityNotFoundException;
+use domain\helpers\ActiveRecordHelper;
 
 class CategoryService
 {
@@ -85,7 +86,7 @@ class CategoryService
 
         $categories = $this->clearCategories($categories);
 
-        $categoryIds = $this->getCategoryIds($categories);
+        $categoryIds = ActiveRecordHelper::getFields($categories);
 
         return $categoryIds;
     }
@@ -109,14 +110,5 @@ class CategoryService
         }
 
         return $this->clearCategories($categoriesOrigin, $level);
-    }
-
-    private function getCategoryIds($categories)
-    {
-        $result = [];
-        foreach ($categories as $category) {
-            $result[] = $category->id;
-        }
-        return $result;
     }
 }
