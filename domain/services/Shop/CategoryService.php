@@ -74,4 +74,49 @@ class CategoryService
         $category = $this->repository->find($id);
         $this->repository->delete($category);
     }
+
+    public function clearCategoryIds(array $categoryIds): array
+    {
+        $categoryIds = array_values(array_unique($categoryIds));
+
+        $categories = $this->repository->getByIds($categoryIds);
+
+        $categories = array_reverse($categories);
+
+        $categories = $this->clearCategories($categories);
+
+        $categoryIds = $this->getCategoryIds($categories);
+
+        return $categoryIds;
+    }
+
+    private function clearCategories($categoriesOrigin, $level = 0)
+    {
+        $categories = array_slice($categoriesOrigin, $level);
+        $level++;
+        if (count($categories) == 1) {
+            return array_reverse($categoriesOrigin);
+        }
+        $first = array_shift($categories);
+
+        foreach ($categories as $i => $category) {
+            if ($first->isChildOf($category)) {
+                $level--;
+                $categoriesOrigin = array_values($categoriesOrigin);
+                unset($categoriesOrigin[$level]);
+                return $this->clearCategories($categoriesOrigin, $level);
+            }
+        }
+
+        return $this->clearCategories($categoriesOrigin, $level);
+    }
+
+    private function getCategoryIds($categories)
+    {
+        $result = [];
+        foreach ($categories as $category) {
+            $result[] = $category->id;
+        }
+        return $result;
+    }
 }

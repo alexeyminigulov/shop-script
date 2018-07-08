@@ -11,7 +11,7 @@ class GroupRepository
     {
         $group = Group::findOne(['id', $id]);
 
-        if ($group) {
+        if (!$group) {
             throw new EntityNotFoundException('Group is not found.');
         }
         return $group;

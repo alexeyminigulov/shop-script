@@ -13,9 +13,6 @@ use yii\db\ActiveQuery;
  * @property string $name
  *
  * @property CategoryAssignment[] $categoryAssignments
- * @property ShopAttributeGroupAssignments[] $shopAttributeGroupAssignments
- * @property ShopCategories[] $categories
- * @property ShopAttributes[] $shopAttributes
  */
 class Group extends \yii\db\ActiveRecord
 {
@@ -44,6 +41,11 @@ class Group extends \yii\db\ActiveRecord
         $this->categoryAssignments = $assignments;
     }
 
+    public function eraseAssignmentCategory()
+    {
+        $this->categoryAssignments = [];
+    }
+
     public static function tableName()
     {
         return 'shop_attribute_groups';
@@ -56,31 +58,7 @@ class Group extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 255],
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-//    public function getShopAttributeGroupAssignments()
-//    {
-//        return $this->hasMany(ShopAttributeGroupAssignments::className(), ['group_id' => 'id']);
-//    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-//    public function getCategories()
-//    {
-//        return $this->hasMany(ShopCategories::className(), ['id' => 'category_id'])->viaTable('shop_attribute_group_assignments', ['group_id' => 'id']);
-//    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-//    public function getShopAttributes()
-//    {
-//        return $this->hasMany(ShopAttributes::className(), ['group_id' => 'id']);
-//    }
-
+    
     public function getCategoryAssignments(): ActiveQuery
     {
         return $this->hasMany(CategoryAssignment::class, ['group_id' => 'id']);

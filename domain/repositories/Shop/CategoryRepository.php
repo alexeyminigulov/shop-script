@@ -46,4 +46,23 @@ class CategoryRepository
             throw new \RuntimeException('Category has not been deleted.');
         }
     }
+
+    /**
+     * @param $ids
+     * @return Category[]
+     */
+    public function getByIds($ids): array
+    {
+        $categories = Category::find()
+            ->where(['id' => $ids])
+            ->andWhere(['<>','id', 1])
+            ->orderBy('lft')
+            ->all();
+
+        if (count($categories) == 0) {
+            throw new \DomainException('Categories is not found.');
+        }
+
+        return $categories;
+    }
 }

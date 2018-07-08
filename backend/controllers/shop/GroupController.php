@@ -71,8 +71,14 @@ class GroupController extends Controller
         $form = new GroupForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $group = $this->service->create($form);
-            return $this->redirect(['view', 'id' => $group->id]);
+            try {
+                $group = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $group->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('create', [
@@ -93,8 +99,14 @@ class GroupController extends Controller
         $form = new GroupForm($model);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $model = $this->service->update($form);
-            return $this->redirect(['view', 'id' => $model->id]);
+            try {
+                $group = $this->service->update($form);
+                return $this->redirect(['view', 'id' => $group->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('update', [
