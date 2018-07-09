@@ -23,4 +23,11 @@ class AttributeRepository
             throw new \RuntimeException('Error during saving.');
         }
     }
+
+    public function delete(Attribute $attribute)
+    {
+        if (!$attribute->delete()) {
+            throw new \RuntimeException('Removing error.');
+        }
+    }
 }

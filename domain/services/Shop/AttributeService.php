@@ -34,4 +34,10 @@ class AttributeService
 
         return $attribute;
     }
+
+    public function delete($id)
+    {
+        $attribute = $this->repository->find($id);
+        $this->repository->delete($attribute);
+    }
 }
