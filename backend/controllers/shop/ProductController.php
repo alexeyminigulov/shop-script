@@ -2,6 +2,7 @@
 
 namespace backend\controllers\shop;
 
+use domain\forms\Shop\ProductSelectForm;
 use Yii;
 use domain\entities\Shop\Product\Product;
 use backend\forms\Shop\ProductSearch;
@@ -37,10 +38,12 @@ class ProductController extends Controller
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $form = new ProductSelectForm();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $form,
         ]);
     }
 
@@ -60,9 +63,10 @@ class ProductController extends Controller
     /**
      * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Product();
 

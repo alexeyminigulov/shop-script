@@ -16,9 +16,13 @@ class m180704_100233_create_shop_products_table extends Migration
             'name' => $this->string()->notNull(),
             'slug' => $this->string()->notNull(),
             'price' => $this->integer()->notNull(),
+            'category_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         $this->createIndex('{{%idx-shop_products-slug}}', '{{%shop_products}}', 'slug', true);
+        $this->createIndex('{{%idx-shop_products-category_id}}', '{{%shop_products}}', 'category_id');
+
+        $this->addForeignKey('{{%fk-shop_products-category_id}}', '{{%shop_products}}', 'category_id', '{{%shop_categories}}', 'id', 'CASCADE', 'RESTRICT');
     }
 
     public function down()
