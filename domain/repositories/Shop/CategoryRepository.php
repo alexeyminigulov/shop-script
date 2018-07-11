@@ -47,6 +47,17 @@ class CategoryRepository
         }
     }
 
+    public function getWithParents($id)
+    {
+        $category = $this->find($id);
+        $categories = $category->getParents()
+            ->andFilterCompare('id', 1, '<>')
+            ->all();
+        $categories[] = $category;
+
+        return $categories;
+    }
+
     /**
      * @param $ids
      * @return Category[]

@@ -3,6 +3,7 @@
 namespace domain\entities\Shop;
 
 use paulzi\nestedsets\NestedSetsBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -14,6 +15,9 @@ use yii\db\ActiveRecord;
  * @property int $lft
  * @property int $rgt
  * @property int $depth
+ *
+ * @property CategoryAssignment[] $categoryAssignments
+ * @property Group[] $groups
  *
  * @mixin NestedSetsBehavior
  */
@@ -65,5 +69,15 @@ class Category extends ActiveRecord
     public static function tableName()
     {
         return '{{%shop_categories}}';
+    }
+
+    public function getCategoryAssignments(): ActiveQuery
+    {
+        return $this->hasMany(CategoryAssignment::class, ['category_id' => 'id']);
+    }
+
+    public function getGroups(): ActiveQuery
+    {
+        return $this->hasMany(Group::class, ['id' => 'group_id'])->via('categoryAssignments');
     }
 }

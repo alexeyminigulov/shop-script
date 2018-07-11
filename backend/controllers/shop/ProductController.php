@@ -2,7 +2,9 @@
 
 namespace backend\controllers\shop;
 
+use domain\forms\Shop\Product\ProductCreateForm;
 use domain\forms\Shop\ProductSelectForm;
+use domain\services\Shop\ProductService;
 use Yii;
 use domain\entities\Shop\Product\Product;
 use backend\forms\Shop\ProductSearch;
@@ -15,9 +17,15 @@ use yii\filters\VerbFilter;
  */
 class ProductController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+    private $service;
+
+    public function __construct($id, $module, ProductService $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+
+        $this->service = $service;
+    }
+
     public function behaviors()
     {
         return [
@@ -68,14 +76,21 @@ class ProductController extends Controller
      */
     public function actionCreate($id)
     {
-        $model = new Product();
+        $form = new ProductCreateForm($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $model = $this->service->create($form);
+                return $this->redirect(['view', 'id' => $model->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

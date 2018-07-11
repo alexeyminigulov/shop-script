@@ -18,6 +18,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
+    <?php
+    foreach ($model->groups as $group) {
+        echo '<div class="box box-default">';
+            echo '<div class="box-header with-border text-bold">' .Html::encode($group->name). '</div>';
+            echo '<div class="box-body">';
+            foreach ($group->attributes as $attribute) {
+                echo $form->field($attribute, 'value', [
+                    'labelOptions' => ['style' => 'font-weight: normal'],
+                ])->textInput();
+            }
+            echo '</div>';
+        echo '</div>';
+    }
+    ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
