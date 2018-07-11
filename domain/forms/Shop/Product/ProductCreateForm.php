@@ -58,18 +58,27 @@ class ProductCreateForm extends Model
             return false;
         }
 
-        $scope = 'ValueForm';
-        if (isset($data[$scope])) {
-            foreach ($this->groups as $group) {
-                foreach ($group->attributes as $attribute) {
-                    /* @var $attribute ValueForm */
-                    $attribute->setAttributes($data[$scope][$attribute->id]);
-                }
-            }
+        foreach ($this->compositeForms() as $scope) {
 
-            return true;
+            if (isset($data[$scope])) {
+                foreach ($this->groups as $group) {
+                    foreach ($group->attributes as $attribute) {
+                        /* @var $attribute ValueForm */
+                        $attribute->setAttributes($data[$scope][$attribute->id]);
+                    }
+                }
+            } else {
+                return false;
+            }
         }
 
-        return false;
+        return true;
+    }
+
+    private function compositeForms()
+    {
+        return [
+            'ValueForm',
+        ];
     }
 }
