@@ -71,12 +71,13 @@ class ProductController extends Controller
     /**
      * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param integer $id Category id
      * @return mixed
      */
     public function actionCreate($id)
     {
-        $form = new ProductCreateForm($id);
+        $groups = $this->service->getGroups($id);
+        $form = new ProductCreateForm($id, $groups);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {

@@ -3,11 +3,14 @@
 namespace domain\forms\Shop\Product;
 
 use domain\entities\Shop\Group;
-use domain\repositories\Shop\CategoryRepository;
-use domain\repositories\Shop\ProductRepository;
-use domain\services\Shop\ProductService;
 use yii\base\Model;
 
+/**
+ * Class ProductCreateForm
+ * @package domain\forms\Shop\Product
+ *
+ * @property int $categoryId
+ */
 class ProductCreateForm extends Model
 {
     public $name;
@@ -15,17 +18,22 @@ class ProductCreateForm extends Model
     public $price;
     public $groups;
 
-    private $service;
+    private $categoryId;
 
-    public function __construct($categoryId, $config = [])
+    /**
+     * ProductCreateForm constructor.
+     * @param int $categoryId
+     * @param Group[] $groups
+     * @param array $config
+     */
+    public function __construct($categoryId, array $groups, $config = [])
     {
         parent::__construct($config);
 
-        $this->service = new ProductService(new ProductRepository(), new CategoryRepository());
-
+        $this->categoryId = $categoryId;
         $this->groups = array_map(function (Group $group) {
             return new GroupForm($group);
-        }, $this->service->getGroups($categoryId));
+        }, $groups);
     }
 
     public function rules()
@@ -34,6 +42,34 @@ class ProductCreateForm extends Model
             [['name', 'slug', 'price'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
             [['price'], 'integer'],
+//            [['slug'], 'unique'],
         ];
+    }
+
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    public function load($data, $formName = null)
+    {
+        $result = parent::load($data, $formName);
+        if (!$result) {
+            return false;
+        }
+
+        $scope = 'ValueForm';
+        if (isset($data[$scope])) {
+            foreach ($this->groups as $group) {
+                foreach ($group->attributes as $attribute) {
+                    /* @var $attribute ValueForm */
+                    $attribute->setAttributes($data[$scope][$attribute->id]);
+                }
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -13,6 +13,16 @@ use yii\db\ActiveRecord;
  */
 class Value extends ActiveRecord
 {
+    public static function create($productId, $attributeId, $valuation)
+    {
+        $value = new Value();
+        $value->product_id = $productId;
+        $value->attribute_id = $attributeId;
+        $value->value = $valuation;
+
+        return $value;
+    }
+
     public function rules()
     {
         return [

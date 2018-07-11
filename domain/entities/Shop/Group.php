@@ -13,6 +13,7 @@ use yii\db\ActiveQuery;
  * @property string $name
  *
  * @property CategoryAssignment[] $categoryAssignments
+ * @property Attribute[] $attributes0
  */
 class Group extends \yii\db\ActiveRecord
 {

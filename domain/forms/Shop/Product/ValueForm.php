@@ -8,6 +8,7 @@ use yii\base\Model;
 
 class ValueForm extends Model
 {
+    public $id;
     public $value;
 
     private $attribute;
@@ -15,6 +16,7 @@ class ValueForm extends Model
     public function __construct(Attribute $attribute, Value $value = null, $config = [])
     {
         parent::__construct($config);
+        $this->id = $attribute->id;
         $this->attribute = $attribute;
 
         if ($value) {
@@ -35,5 +37,12 @@ class ValueForm extends Model
         return [
             'value' => $this->attribute->name,
         ];
+    }
+
+    public function formName()
+    {
+        $name = parent::formName();
+        $name .= '[' .$this->id. ']';
+        return $name;
     }
 }
