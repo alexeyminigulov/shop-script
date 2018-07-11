@@ -2,6 +2,7 @@
 
 namespace domain\entities\Shop\Product;
 
+use domain\entities\Shop\Attribute;
 use yii\db\ActiveRecord;
 
 /**
@@ -10,6 +11,8 @@ use yii\db\ActiveRecord;
  * @property int $product_id
  * @property int $attribute_id
  * @property string $value
+ *
+ * @property string $attribute0
  */
 class Value extends ActiveRecord
 {
@@ -30,6 +33,15 @@ class Value extends ActiveRecord
             [['product_id', 'attribute_id'], 'integer'],
             [['value'], 'string', 'max' => 255],
         ];
+    }
+
+    /**
+     * ====================== Relation =======================
+     */
+
+    public function getAttribute0()
+    {
+        return $this->hasOne(Attribute::className(), ['id' => 'attribute_id']);
     }
 
     public static function tableName()

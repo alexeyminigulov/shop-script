@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use domain\entities\Shop\Product\Value;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Product\Product */
@@ -32,5 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
         ],
     ]) ?>
+
+    <div class="box box-default">
+        <div class="box-header with-border text-bold">Characteristics</div>
+        <div class="box-body">
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => array_map(function (Value $value) {
+                    return [
+                        'label' => $value->attribute0->name,
+                        'value' => $value->value,
+                    ];
+                }, $model->values),
+            ]) ?>
+        </div>
+    </div>
 
 </div>
