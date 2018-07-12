@@ -31,9 +31,24 @@ class Product extends \yii\db\ActiveRecord
         return $product;
     }
 
+    public function edit($name, $slug, $price)
+    {
+        $this->name = $name;
+        $this->slug = $slug;
+        $this->price = $price;
+    }
+
     public function assignmentValue(Value $value)
     {
         $values = $this->values;
+
+        foreach ($values as &$val) {
+            if($val->product_id == $value->product_id && $val->attribute_id == $value->attribute_id) {
+                $val = $value;
+                $this->values = $values;
+                return;
+            }
+        }
 
         $values[] = $value;
 

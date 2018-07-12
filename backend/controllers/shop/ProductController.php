@@ -3,6 +3,7 @@
 namespace backend\controllers\shop;
 
 use domain\forms\Shop\Product\ProductCreateForm;
+use domain\forms\Shop\Product\ProductEditForm;
 use domain\forms\Shop\ProductSelectForm;
 use domain\services\Shop\ProductService;
 use Yii;
@@ -104,14 +105,23 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $product = $this->findModel($id);
+        $groups = $this->service->getGroups($product->category_id);
+        $form = new ProductEditForm($product, $groups);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $product = $this->service->update($form);
+                return $this->redirect(['view', 'id' => $product->id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

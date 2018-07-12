@@ -26,6 +26,11 @@ class Value extends ActiveRecord
         return $value;
     }
 
+    public function edit($value)
+    {
+        $this->value = $value;
+    }
+
     public function rules()
     {
         return [

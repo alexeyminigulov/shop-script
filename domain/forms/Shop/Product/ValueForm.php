@@ -20,7 +20,7 @@ class ValueForm extends Model
         $this->attribute = $attribute;
 
         if ($value) {
-            $this->value = $value;
+            $this->value = $value->value;
         }
     }
 
