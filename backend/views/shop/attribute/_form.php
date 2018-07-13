@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use domain\helpers\GroupHelper;
+use domain\helpers\AttributeHelper;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Attribute */
@@ -12,6 +13,8 @@ use domain\helpers\GroupHelper;
 <div class="attribute-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'type')->dropDownList(AttributeHelper::typeList()) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

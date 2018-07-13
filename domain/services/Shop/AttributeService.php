@@ -17,7 +17,7 @@ class AttributeService
 
     public function create(AttributeForm $form): Attribute
     {
-        $attribute = Attribute::create($form->name, $form->groupId);
+        $attribute = Attribute::create($form->name, $form->type, $form->groupId);
 
         $this->repository->save($attribute);
 
@@ -28,7 +28,7 @@ class AttributeService
     {
         $attribute = $this->repository->find($form->id);
 
-        $attribute->edit($form->name, $form->groupId);
+        $attribute->edit($form->name, $form->type, $form->groupId);
 
         $this->repository->save($attribute);
 

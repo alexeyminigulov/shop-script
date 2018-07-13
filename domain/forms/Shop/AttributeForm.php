@@ -10,6 +10,7 @@ class AttributeForm extends Model
     public $id;
     public $name;
     public $groupId;
+    public $type;
 
     public function __construct(Attribute $attribute = null, $config = [])
     {
@@ -17,6 +18,7 @@ class AttributeForm extends Model
             $this->id = $attribute->id;
             $this->name = $attribute->name;
             $this->groupId = $attribute->group_id;
+            $this->type = $attribute->type;
         }
         parent::__construct($config);
     }
@@ -24,8 +26,8 @@ class AttributeForm extends Model
     public function rules()
     {
         return [
-            [['name', 'groupId'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'groupId', 'type'], 'required'],
+            [['name', 'type'], 'string', 'max' => 255],
             ['groupId', 'integer'],
         ];
     }
