@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use domain\entities\Shop\Attribute;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Attribute */
@@ -28,8 +30,40 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'group_id',
+            [
+                'label' => 'Group',
+                'value' => $model->group->name,
+            ],
+            'type',
         ],
     ]) ?>
+
+    <?php if ($model->type == Attribute::TYPE_SELECT
+    || $model->type == Attribute::TYPE_CHECKBOX
+    || $model->type == Attribute::TYPE_NUMBER): ?>
+    <div class="box box-default">
+        <div class="box-header with-border text-bold">Additional Information:</div>
+        <div class="box-body">
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    call_user_func(function () use ($model) {
+                        if ($model->type == Attribute::TYPE_NUMBER) {
+                            return [
+                                'label' => 'Unit',
+                                'value' => $model->unit->name,
+                            ];
+                        } else if ($model->type == Attribute::TYPE_SELECT || $model->type == Attribute::TYPE_CHECKBOX) {
+                            return [
+                                'label' => 'List',
+                                'value' => implode(', ', ArrayHelper::getColumn($model->items, 'option')),
+                            ];
+                        }
+                    }),
+                ],
+            ]) ?>
+        </div>
+    </div>
+    <?php endif; ?>
 
 </div>
