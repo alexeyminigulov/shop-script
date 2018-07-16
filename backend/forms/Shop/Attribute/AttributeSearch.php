@@ -1,11 +1,11 @@
 <?php
 
-namespace backend\forms\Shop;
+namespace backend\forms\Shop\Attribute;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 
 /**
  * AttributeSearch represents the model behind the search form of `domain\entities\Shop\Attribute`.

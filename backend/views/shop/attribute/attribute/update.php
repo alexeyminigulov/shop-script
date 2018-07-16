@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use domain\helpers\GroupHelper;
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
 /* @var $model \domain\forms\Shop\Attribute\AttributeEditForm */

@@ -2,7 +2,7 @@
 
 namespace domain\forms\Shop\Attribute;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 use yii\base\Model;
 
 class AttributeEditForm extends Model

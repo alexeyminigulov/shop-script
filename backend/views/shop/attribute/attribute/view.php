@@ -2,11 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use domain\entities\Shop\Attribute;
 use yii\helpers\ArrayHelper;
+use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
-/* @var $model domain\entities\Shop\Attribute */
+/* @var $model domain\entities\Shop\Attribute\Attribute */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Attributes', 'url' => ['index']];

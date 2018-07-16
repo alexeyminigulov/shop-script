@@ -1,11 +1,11 @@
 <?php
 
-namespace domain\services\Shop;
+namespace domain\services\Shop\Attribute;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 use domain\forms\Shop\Attribute\AttributeEditForm;
-use domain\forms\Shop\AttributeForm;
-use domain\repositories\Shop\AttributeRepository;
+use domain\forms\Shop\Attribute\AttributeCreateForm;
+use domain\repositories\Shop\Attribute\AttributeRepository;
 use domain\services\TransactionManager;
 
 class AttributeService
@@ -19,7 +19,7 @@ class AttributeService
         $this->transaction = $transaction;
     }
 
-    public function create(AttributeForm $form): Attribute
+    public function create(AttributeCreateForm $form): Attribute
     {
         $attribute = Attribute::create($form->name, $form->type, $form->groupId);
 

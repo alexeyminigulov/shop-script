@@ -1,11 +1,11 @@
 <?php
 
-namespace domain\forms\Shop;
+namespace domain\forms\Shop\Attribute;
 
-use domain\entities\Shop\Attribute;
 use yii\base\Model;
+use domain\entities\Shop\Attribute\Attribute;
 
-class AttributeForm extends Model
+class AttributeCreateForm extends Model
 {
     public $id;
     public $name;

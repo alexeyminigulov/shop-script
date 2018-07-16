@@ -7,7 +7,7 @@ use domain\helpers\AttributeHelper;
 use domain\widgets\TypeAttribute;
 
 /* @var $this yii\web\View */
-/* @var $model domain\entities\Shop\Attribute */
+/* @var $model domain\entities\Shop\Attribute\Attribute */
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = 'Create Attribute';

@@ -1,17 +1,17 @@
 <?php
 
-namespace backend\controllers\shop;
+namespace backend\controllers\shop\attribute;
 
-use backend\forms\Shop\Attribute\ItemSearch;
-use domain\forms\Shop\AttributeForm;
-use domain\forms\Shop\Attribute\AttributeEditForm;
-use domain\services\Shop\AttributeService;
 use Yii;
-use domain\entities\Shop\Attribute;
-use backend\forms\Shop\AttributeSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use backend\forms\Shop\Attribute\ItemSearch;
+use domain\forms\Shop\Attribute\AttributeCreateForm;
+use domain\forms\Shop\Attribute\AttributeEditForm;
+use domain\services\Shop\Attribute\AttributeService;
+use domain\entities\Shop\Attribute\Attribute;
+use backend\forms\Shop\Attribute\AttributeSearch;
 
 /**
  * AttributeController implements the CRUD actions for Attribute model.
@@ -73,7 +73,7 @@ class AttributeController extends Controller
      */
     public function actionCreate()
     {
-        $form = new AttributeForm();
+        $form = new AttributeCreateForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {

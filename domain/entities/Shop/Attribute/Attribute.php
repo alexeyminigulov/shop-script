@@ -1,12 +1,10 @@
 <?php
 
-namespace domain\entities\Shop;
+namespace domain\entities\Shop\Attribute;
 
-use domain\entities\Shop\Attribute\Item;
-use domain\entities\Shop\Attribute\Unit;
-use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-use Yii;
 use yii\db\ActiveRecord;
+use domain\entities\Shop\Group;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "shop_attributes".

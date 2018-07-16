@@ -1,8 +1,8 @@
 <?php
 
-namespace domain\repositories\Shop;
+namespace domain\repositories\Shop\Attribute;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 use domain\exceptions\EntityNotFoundException;
 
 class AttributeRepository

@@ -2,7 +2,7 @@
 
 namespace domain\helpers;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 
 class AttributeHelper
 {
