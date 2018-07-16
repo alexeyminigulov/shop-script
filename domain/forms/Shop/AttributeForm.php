@@ -11,6 +11,7 @@ class AttributeForm extends Model
     public $name;
     public $groupId;
     public $type;
+    public $additionData;
 
     public function __construct(Attribute $attribute = null, $config = [])
     {
@@ -30,6 +31,46 @@ class AttributeForm extends Model
             [['name', 'type'], 'string', 'max' => 255],
             ['groupId', 'integer'],
         ];
+    }
+
+    public function validate($attributeNames = null, $clearErrors = true)
+    {
+        $result = parent::validate($attributeNames, $clearErrors);
+        if (!$result) {
+            return false;
+        }
+
+        if ($this->type == Attribute::TYPE_NUMBER
+            || $this->type == Attribute::TYPE_SELECT
+            || $this->type == Attribute::TYPE_CHECKBOX) {
+            $result = empty($this->additionData) ? false : true;
+        }
+        return $result;
+    }
+
+    public function load($data, $formName = null)
+    {
+        $result = parent::load($data, $formName);
+        if (!$result) {
+            return false;
+        }
+
+        if ($this->type == Attribute::TYPE_NUMBER
+            || $this->type == Attribute::TYPE_SELECT
+            || $this->type == Attribute::TYPE_CHECKBOX) {
+
+            if ($data[$this->formName()]['additionData']) {
+                if ($this->type == Attribute::TYPE_NUMBER) {
+                    $this->additionData = $data[$this->formName()]['additionData'];
+                } else {
+                    $this->additionData = explode(PHP_EOL, $data[$this->formName()]['additionData']);
+                }
+                $result = true;
+            } else {
+                $result = false;
+            }
+        }
+        return $result;
     }
 
     public function attributeLabels()

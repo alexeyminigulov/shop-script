@@ -19,7 +19,7 @@ class m180713_084637_create_shop_type_units_table extends Migration
 
         $this->createIndex('{{%idx-shop_type_units-attribute_id}}', '{{%shop_type_units}}', 'attribute_id', true);
 
-        $this->addForeignKey('{{%fk-shop_type_units-attribute_id}}', '{{%shop_type_units}}', 'attribute_id', '{{%shop_attributes}}', 'id');
+        $this->addForeignKey('{{%fk-shop_type_units-attribute_id}}', '{{%shop_type_units}}', 'attribute_id', '{{%shop_attributes}}', 'id', 'CASCADE', 'RESTRICT');
     }
 
     public function down()

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use domain\helpers\GroupHelper;
 use domain\helpers\AttributeHelper;
+use domain\widgets\TypeAttribute;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Attribute */
@@ -14,7 +15,9 @@ use domain\helpers\AttributeHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'type')->dropDownList(AttributeHelper::typeList()) ?>
+    <?= $form->field($model, 'type')->widget(TypeAttribute::className(), [
+        'items' => AttributeHelper::typeList(),
+    ]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

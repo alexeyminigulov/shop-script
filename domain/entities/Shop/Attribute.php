@@ -2,6 +2,9 @@
 
 namespace domain\entities\Shop;
 
+use domain\entities\Shop\Attribute\Item;
+use domain\entities\Shop\Attribute\Unit;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -14,6 +17,8 @@ use yii\db\ActiveRecord;
  * @property int $group_id
  *
  * @property Group $group
+ * @property Unit $unit
+ * @property Item[] $items
  */
 class Attribute extends ActiveRecord
 {
@@ -40,6 +45,21 @@ class Attribute extends ActiveRecord
         $this->group_id = $groupId;
     }
 
+    public function assignUnit($name)
+    {
+        $unit = Unit::create($name, $this->id);
+        $this->unit = $unit;
+    }
+
+    public function assignList(array $list)
+    {
+        $items = [];
+        foreach ($list as $item) {
+            $items[] = Item::create($item, $this->id);
+        }
+        $this->items = $items;
+    }
+
     public function rules()
     {
         return [
@@ -54,6 +74,26 @@ class Attribute extends ActiveRecord
     public function getGroup()
     {
         return $this->hasOne(Group::className(), ['id' => 'group_id']);
+    }
+
+    public function getUnit()
+    {
+        return $this->hasOne(Unit::className(), ['attribute_id' => 'id']);
+    }
+
+    public function getItems()
+    {
+        return $this->hasMany(Item::class, ['attribute_id' => 'id']);
+    }
+
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => ['unit', 'items'],
+            ],
+        ];
     }
 
     public static function tableName()

@@ -19,7 +19,7 @@ class m180713_085649_create_shop_type_list_table extends Migration
 
         $this->createIndex('{{%idx-shop_type_list-attribute_id}}', '{{%shop_type_list}}', 'attribute_id');
 
-        $this->addForeignKey('{{%fk-shop_type_list-attribute_id}}', '{{%shop_type_list}}', 'attribute_id', '{{%shop_attributes}}', 'id');
+        $this->addForeignKey('{{%fk-shop_type_list-attribute_id}}', '{{%shop_type_list}}', 'attribute_id', '{{%shop_attributes}}', 'id', 'CASCADE', 'RESTRICT');
     }
 
     public function down()
