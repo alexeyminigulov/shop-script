@@ -22,6 +22,11 @@ class Unit extends ActiveRecord
         return $unit;
     }
 
+    public function edit($name)
+    {
+        $this->name = $name;
+    }
+
     public function rules()
     {
         return [

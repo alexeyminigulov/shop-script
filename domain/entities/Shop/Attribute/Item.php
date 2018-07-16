@@ -22,6 +22,11 @@ class Item extends ActiveRecord
         return $item;
     }
 
+    public function edit($option)
+    {
+        $this->option = $option;
+    }
+
     public function rules()
     {
         return [

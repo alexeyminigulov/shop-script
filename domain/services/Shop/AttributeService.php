@@ -3,6 +3,7 @@
 namespace domain\services\Shop;
 
 use domain\entities\Shop\Attribute;
+use domain\forms\Shop\Attribute\AttributeEditForm;
 use domain\forms\Shop\AttributeForm;
 use domain\repositories\Shop\AttributeRepository;
 use domain\services\TransactionManager;
@@ -36,7 +37,7 @@ class AttributeService
         return $attribute;
     }
 
-    public function update(AttributeForm $form): Attribute
+    public function update(AttributeEditForm $form): Attribute
     {
         $attribute = $this->repository->find($form->id);
 

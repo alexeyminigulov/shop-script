@@ -2,7 +2,9 @@
 
 namespace backend\controllers\shop;
 
+use backend\forms\Shop\Attribute\ItemSearch;
 use domain\forms\Shop\AttributeForm;
+use domain\forms\Shop\Attribute\AttributeEditForm;
 use domain\services\Shop\AttributeService;
 use Yii;
 use domain\entities\Shop\Attribute;
@@ -99,7 +101,8 @@ class AttributeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $form = new AttributeForm($model);
+        $form = new AttributeEditForm($model);
+        $dataProvider = (new ItemSearch())->search();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
@@ -114,6 +117,7 @@ class AttributeController extends Controller
 
         return $this->render('update', [
             'model' => $form,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
