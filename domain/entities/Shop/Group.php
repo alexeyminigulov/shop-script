@@ -2,8 +2,8 @@
 
 namespace domain\entities\Shop;
 
-use Yii;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use domain\entities\Shop\Attribute\Attribute;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
@@ -16,7 +16,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property CategoryAssignment[] $categoryAssignments
  * @property Attribute[] $attributes0
  */
-class Group extends \yii\db\ActiveRecord
+class Group extends ActiveRecord
 {
     public static function create($name): self
     {

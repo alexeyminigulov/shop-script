@@ -2,10 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use domain\helpers\AttributeHelper;
 use domain\entities\Shop\Product\Value;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Product\Product */
+/* @var $repository \domain\repositories\Shop\ProductRepository */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -34,19 +36,22 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?php
+    foreach ($repository->getGroups($model->category_id) as $group): ?>
     <div class="box box-default">
-        <div class="box-header with-border text-bold">Characteristics</div>
+        <div class="box-header with-border text-bold bg-light-blue-gradient"><?= Html::encode($group->name) ?></div>
         <div class="box-body">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => array_map(function (Value $value) {
                     return [
                         'label' => $value->attribute0->name,
-                        'value' => $value->value,
+                        'value' => AttributeHelper::getPrettyValue($value),
                     ];
                 }, $model->values),
             ]) ?>
         </div>
     </div>
+    <?php endforeach; ?>
 
 </div>

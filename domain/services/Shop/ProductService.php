@@ -7,7 +7,6 @@ use domain\entities\Shop\Product\Value;
 use domain\forms\Shop\Product\ProductCreateForm;
 use domain\forms\Shop\Product\ProductEditForm;
 use domain\forms\Shop\Product\ValueForm;
-use domain\repositories\Shop\CategoryRepository;
 use domain\repositories\Shop\ProductRepository;
 use domain\repositories\Shop\ValueRepository;
 use domain\services\TransactionManager;
@@ -15,18 +14,15 @@ use domain\services\TransactionManager;
 class ProductService
 {
     private $repository;
-    private $categoryRepository;
     private $valueRepository;
     private $transaction;
 
     public function __construct(ProductRepository $repository,
-                                CategoryRepository $categoryRepository,
                                 ValueRepository $valueRepository,
                                 TransactionManager $transaction
     )
     {
         $this->repository = $repository;
-        $this->categoryRepository = $categoryRepository;
         $this->valueRepository = $valueRepository;
         $this->transaction = $transaction;
     }
@@ -40,10 +36,10 @@ class ProductService
             $this->repository->save($product);
 
             foreach ($form->groups as $group) {
-                /** @var ValueForm $value */
-                foreach ($group->attributes as $value) {
+                /** @var ValueForm $valueForm */
+                foreach ($group->attributes as $valueForm) {
 
-                    $value = Value::create($product->id, $value->id, $value->value);
+                    $value = Value::create($product->id, $valueForm->id, $valueForm->value);
                     $product->assignmentValue($value);
                 }
             }
@@ -73,17 +69,5 @@ class ProductService
         });
 
         return $product;
-    }
-
-    public function getGroups($categoryId)
-    {
-        $categories = $this->categoryRepository->getWithParents($categoryId);
-
-        $groups = [];
-        foreach ($categories as $category) {
-            $groups = array_merge($groups, $category->groups);
-        }
-
-        return $groups;
     }
 }

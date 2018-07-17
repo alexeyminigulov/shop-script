@@ -12,12 +12,15 @@ use yii\db\ActiveRecord;
  * @property int $attribute_id
  * @property string $value
  *
- * @property string $attribute0
+ * @property Attribute $attribute0
  */
 class Value extends ActiveRecord
 {
     public static function create($productId, $attributeId, $valuation)
     {
+        if (is_array($valuation)) {
+            $valuation = json_encode($valuation);
+        }
         $value = new Value();
         $value->product_id = $productId;
         $value->attribute_id = $attributeId;
@@ -47,6 +50,15 @@ class Value extends ActiveRecord
     public function getAttribute0()
     {
         return $this->hasOne(Attribute::className(), ['id' => 'attribute_id']);
+    }
+
+    public function __get($name)
+    {
+        $result = parent::__get($name);
+        if (is_string($result) && json_decode($result)) {
+            return json_decode($result);
+        }
+        return $result;
     }
 
     public static function tableName()

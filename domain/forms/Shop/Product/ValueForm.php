@@ -42,8 +42,10 @@ class ValueForm extends Model
             call_user_func(function () {
                 if ($this->type == Attribute::TYPE_NUMBER) {
                     return [['value'], 'number'];
-                } elseif ($this->type == Attribute::TYPE_CHECKBOX || $this->type == Attribute::TYPE_RADIO_BUTTON) {
+                } elseif ($this->type == Attribute::TYPE_RADIO_BUTTON) {
                     return [['value'], 'integer'];
+                } elseif ($this->type == Attribute::TYPE_CHECKBOX) {
+                    return [['value'], 'each', 'rule' => ['integer']];
                 } else {
                     return [['value'], 'string', 'max' => 255];
                 }

@@ -5,6 +5,7 @@ namespace backend\controllers\shop;
 use domain\forms\Shop\Product\ProductCreateForm;
 use domain\forms\Shop\Product\ProductEditForm;
 use domain\forms\Shop\ProductSelectForm;
+use domain\repositories\Shop\ProductRepository;
 use domain\services\Shop\ProductService;
 use Yii;
 use domain\entities\Shop\Product\Product;
@@ -19,12 +20,14 @@ use yii\filters\VerbFilter;
 class ProductController extends Controller
 {
     private $service;
+    private $repository;
 
-    public function __construct($id, $module, ProductService $service, $config = [])
+    public function __construct($id, $module, ProductService $service, ProductRepository $repository, $config = [])
     {
         parent::__construct($id, $module, $config);
 
         $this->service = $service;
+        $this->repository = $repository;
     }
 
     public function behaviors()
@@ -66,6 +69,7 @@ class ProductController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'repository' => $this->repository,
         ]);
     }
 
@@ -77,7 +81,7 @@ class ProductController extends Controller
      */
     public function actionCreate($id)
     {
-        $groups = $this->service->getGroups($id);
+        $groups = $this->repository->getGroups($id);
         $form = new ProductCreateForm($id, $groups);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
@@ -106,7 +110,7 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $product = $this->findModel($id);
-        $groups = $this->service->getGroups($product->category_id);
+        $groups = $this->repository->getGroups($product->category_id);
         $form = new ProductEditForm($product, $groups);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {

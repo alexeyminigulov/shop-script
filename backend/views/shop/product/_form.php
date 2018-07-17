@@ -23,7 +23,7 @@ use domain\entities\Shop\Attribute\Attribute;
     <?php
     foreach ($model->groups as $group) {
         echo '<div class="box box-default">';
-            echo '<div class="box-header with-border text-bold">' .Html::encode($group->name). '</div>';
+            echo '<div class="box-header with-border text-bold bg-light-blue-gradient">' .Html::encode($group->name). '</div>';
             echo '<div class="box-body">';
             /** @var \domain\forms\Shop\Product\ValueForm $valueForm */
             foreach ($group->attributes as $valueForm) {
@@ -35,7 +35,7 @@ use domain\entities\Shop\Attribute\Attribute;
 
                 } else {
                     echo $form->field($valueForm, 'value', [
-                        'labelOptions' => ['style' => 'font-weight: normal'],
+//                        'labelOptions' => ['style' => 'font-weight: normal'],
                     ])->textInput();
                 }
             }

@@ -7,6 +7,13 @@ use domain\exceptions\EntityNotFoundException;
 
 class ProductRepository
 {
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function find($id): Product
     {
         $product = Product::findOne(['id', $id]);
@@ -15,6 +22,20 @@ class ProductRepository
             throw new EntityNotFoundException('Product is not found.');
         }
         return $product;
+    }
+
+    public function getGroups($categoryId)
+    {
+        $categories = $this->categoryRepository->getWithParents($categoryId);
+
+        $groups = [];
+        foreach ($categories as $category) {
+            $groups = array_merge($groups, $category->groups);
+        }
+        if (empty($groups)) {
+            throw new EntityNotFoundException('Groups is not found.');
+        }
+        return $groups;
     }
 
     public function save(Product $product, $runValidation = true)

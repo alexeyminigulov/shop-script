@@ -2,9 +2,11 @@
 
 namespace domain\entities\Shop\Product;
 
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
+use domain\entities\Shop\Category;
 use domain\entities\Shop\Attribute\Attribute;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-use Yii;
 
 /**
  * This is the model class for table "shop_products".
@@ -17,8 +19,9 @@ use Yii;
  *
  * @property Value[] $values
  * @property Attribute[] $attributes0
+ * @property Category $category
  */
-class Product extends \yii\db\ActiveRecord
+class Product extends ActiveRecord
 {
     public static function create($name, $slug, $price, $categoryId): self
     {
@@ -67,6 +70,11 @@ class Product extends \yii\db\ActiveRecord
     public function getAttributes0()
     {
         return $this->hasMany(Attribute::className(), ['id' => 'attribute_id'])->viaTable('shop_values', ['product_id' => 'id']);
+    }
+
+    public function getCategory(): ActiveQuery
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
     public function behaviors()
