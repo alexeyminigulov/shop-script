@@ -2,7 +2,7 @@
 
 namespace domain\forms\Shop\Product;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 use domain\entities\Shop\Group;
 use domain\entities\Shop\Product\Value;
 use yii\base\Model;

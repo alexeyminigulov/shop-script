@@ -3,7 +3,7 @@
     'use strict';
 
     var TYPE_NUMBER = "number",
-        TYPE_SELECT = "select",
+        TYPE_RADIO_BUTTON = "radiobutton",
         TYPE_CHECKBOX = "checkbox";
 
 
@@ -43,7 +43,7 @@
                 }
                 parent.appendChild(unitInput);
                 break;
-            case TYPE_SELECT:
+            case TYPE_RADIO_BUTTON:
             case TYPE_CHECKBOX:
                 if (input = parent.querySelector('.type-attribute-data')) {
                     if (input.tagName == "INPUT") {

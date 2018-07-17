@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\bootstrap\ActiveForm;
+use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Product\Product */
@@ -23,10 +25,19 @@ use yii\widgets\ActiveForm;
         echo '<div class="box box-default">';
             echo '<div class="box-header with-border text-bold">' .Html::encode($group->name). '</div>';
             echo '<div class="box-body">';
-            foreach ($group->attributes as $attribute) {
-                echo $form->field($attribute, 'value', [
-                    'labelOptions' => ['style' => 'font-weight: normal'],
-                ])->textInput();
+            /** @var \domain\forms\Shop\Product\ValueForm $valueForm */
+            foreach ($group->attributes as $valueForm) {
+                if ($valueForm->type == Attribute::TYPE_CHECKBOX) {
+                    echo $form->field($valueForm, 'value')->checkboxList(ArrayHelper::map($valueForm->attribute->items, 'id', 'option'));
+
+                } elseif ($valueForm->type == Attribute::TYPE_RADIO_BUTTON) {
+                    echo $form->field($valueForm, 'value')->radioList(ArrayHelper::map($valueForm->attribute->items, 'id', 'option'));
+
+                } else {
+                    echo $form->field($valueForm, 'value', [
+                        'labelOptions' => ['style' => 'font-weight: normal'],
+                    ])->textInput();
+                }
             }
             echo '</div>';
         echo '</div>';

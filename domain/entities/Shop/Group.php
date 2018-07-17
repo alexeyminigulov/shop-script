@@ -2,9 +2,10 @@
 
 namespace domain\entities\Shop;
 
-use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\db\ActiveQuery;
+use domain\entities\Shop\Attribute\Attribute;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * This is the model class for table "shop_attribute_groups".

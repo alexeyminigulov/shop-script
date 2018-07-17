@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
         <?= $form->field($model, 'groupId')->dropDownList(GroupHelper::list()) ?>
 
-        <?php if ($model->type == Attribute::TYPE_SELECT || $model->type == Attribute::TYPE_CHECKBOX): ?>
+        <?php if ($model->type == Attribute::TYPE_RADIO_BUTTON || $model->type == Attribute::TYPE_CHECKBOX): ?>
             <div class="box box-default">
                 <div class="box-header with-border text-bold"><?php echo ucfirst($model->type); ?>:</div>
                 <div class="box-body">

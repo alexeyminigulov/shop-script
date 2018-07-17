@@ -12,7 +12,7 @@ class AttributeHelper
             Attribute::TYPE_TEXT => 'text',
             Attribute::TYPE_BOOLEAN => 'boolean',
             Attribute::TYPE_NUMBER => 'number',
-            Attribute::TYPE_SELECT => 'select',
+            Attribute::TYPE_RADIO_BUTTON => 'radio button',
             Attribute::TYPE_CHECKBOX => 'checkbox',
         );
     }

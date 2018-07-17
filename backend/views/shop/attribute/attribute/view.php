@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <?php if ($model->type == Attribute::TYPE_SELECT
+    <?php if ($model->type == Attribute::TYPE_RADIO_BUTTON
     || $model->type == Attribute::TYPE_CHECKBOX
     || $model->type == Attribute::TYPE_NUMBER): ?>
     <div class="box box-default">
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Unit',
                                 'value' => $model->unit->name,
                             ];
-                        } else if ($model->type == Attribute::TYPE_SELECT || $model->type == Attribute::TYPE_CHECKBOX) {
+                        } else if ($model->type == Attribute::TYPE_RADIO_BUTTON || $model->type == Attribute::TYPE_CHECKBOX) {
                             return [
                                 'label' => 'List',
                                 'value' => implode(', ', ArrayHelper::getColumn($model->items, 'option')),

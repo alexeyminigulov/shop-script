@@ -28,7 +28,7 @@ class AttributeService
 
             if ($attribute->type == Attribute::TYPE_NUMBER) {
                 $attribute->assignUnit($form->additionData);
-            } else if ($attribute->type == Attribute::TYPE_SELECT || $attribute->type == Attribute::TYPE_CHECKBOX) {
+            } else if ($attribute->type == Attribute::TYPE_RADIO_BUTTON || $attribute->type == Attribute::TYPE_CHECKBOX) {
                 $attribute->assignList($form->additionData);
             }
             $this->repository->save($attribute);

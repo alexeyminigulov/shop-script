@@ -41,7 +41,7 @@ class AttributeCreateForm extends Model
         }
 
         if ($this->type == Attribute::TYPE_NUMBER
-            || $this->type == Attribute::TYPE_SELECT
+            || $this->type == Attribute::TYPE_RADIO_BUTTON
             || $this->type == Attribute::TYPE_CHECKBOX) {
             $result = empty($this->additionData) ? false : true;
         }
@@ -56,7 +56,7 @@ class AttributeCreateForm extends Model
         }
 
         if ($this->type == Attribute::TYPE_NUMBER
-            || $this->type == Attribute::TYPE_SELECT
+            || $this->type == Attribute::TYPE_RADIO_BUTTON
             || $this->type == Attribute::TYPE_CHECKBOX) {
 
             if ($data[$this->formName()]['additionData']) {

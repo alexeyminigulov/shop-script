@@ -2,7 +2,7 @@
 
 namespace domain\entities\Shop\Product;
 
-use domain\entities\Shop\Attribute;
+use domain\entities\Shop\Attribute\Attribute;
 use yii\db\ActiveRecord;
 
 /**
