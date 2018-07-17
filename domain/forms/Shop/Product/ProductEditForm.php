@@ -83,6 +83,23 @@ class ProductEditForm extends Model
         return true;
     }
 
+    public function validate($attributeNames = null, $clearErrors = true)
+    {
+        $result = parent::validate($attributeNames, $clearErrors);
+        if (!$result) {
+            return false;
+        }
+        foreach ($this->groups as $group) {
+            foreach ($group->attributes as $attribute) {
+                /* @var $attribute ValueForm */
+                if (!$attribute->validate()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private function compositeForms()
     {
         return [
