@@ -19,25 +19,25 @@ class AttributeHelper
         );
     }
 
-    public static function getPrettyValue(Value $value)
+    public static function getPrettyValue(Attribute $attribute, $productId)
     {
-        switch ($value->attribute0->type) {
+        $value = Value::findAll(['attribute_id' => $attribute->id, 'product_id' => $productId]);
+        switch ($attribute->type) {
             case Attribute::TYPE_NUMBER:
-                $result = $value->value .' '. $value->attribute0->unit->name;
+                $result = $value[0]->value .' '. $attribute->unit->name;
                 break;
             case Attribute::TYPE_RADIO_BUTTON:
-                $result = Item::findOne(['id', $value->value])->option;
+                $result = Item::findOne(['id', $value[0]->value])->option;
                 break;
             case Attribute::TYPE_CHECKBOX:
                 $result = [];
-                $items = Item::findAll(['id' => $value->value]);
-                foreach ($items as $item) {
-                    $result[] = $item->option;
+                foreach ($value as $val) {
+                    $result[] = Item::findOne(['id' => $val->value])->option;
                 }
                 $result = implode(', ', $result);
                 break;
             default:
-                $result = $value->value;
+                $result = $value[0]->value;
         }
         return $result;
     }

@@ -23,15 +23,21 @@ class ValueForm extends Model
 
     private $_attribute;
 
-    public function __construct(Attribute $attribute, Value $value = null, $config = [])
+    public function __construct(Attribute $attribute, array $values = null, $config = [])
     {
         parent::__construct($config);
         $this->id = $attribute->id;
         $this->type = $attribute->type;
         $this->_attribute = $attribute;
 
-        if ($value) {
-            $this->value = $value->value;
+        if ($values) {
+            if ($this->type == Attribute::TYPE_CHECKBOX) {
+                $this->value = array_map(function (Value $value) {
+                    return $value->value;
+                }, $values);
+            } else {
+                $this->value = $values[0]->value;
+            }
         }
     }
 

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use domain\helpers\AttributeHelper;
-use domain\entities\Shop\Product\Value;
+use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
 /* @var $model domain\entities\Shop\Product\Product */
@@ -37,18 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?php
+    /** @var \domain\entities\Shop\Group $group */
     foreach ($repository->getGroups($model->category_id) as $group): ?>
     <div class="box box-default">
         <div class="box-header with-border text-bold bg-light-blue-gradient"><?= Html::encode($group->name) ?></div>
         <div class="box-body">
             <?= DetailView::widget([
-                'model' => $model,
-                'attributes' => array_map(function (Value $value) {
+                'model' => $group,
+                'attributes' => array_map(function (Attribute $attribute) use ($model) {
                     return [
-                        'label' => $value->attribute0->name,
-                        'value' => AttributeHelper::getPrettyValue($value),
+                        'label' => $attribute->name,
+                        'value' => AttributeHelper::getPrettyValue($attribute, $model->id),
                     ];
-                }, $model->values),
+                }, $group->attributes0),
             ]) ?>
         </div>
     </div>

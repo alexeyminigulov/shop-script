@@ -29,7 +29,7 @@ class GroupForm extends Model
 
         } else {
             $this->attributes = array_map(function (Attribute $attribute) use ($productId) {
-                $value = Value::findOne([
+                $value = Value::findAll([
                     'product_id' => $productId,
                     'attribute_id' => $attribute->id]);
                 return new ValueForm($attribute, $value);

@@ -39,8 +39,15 @@ class ProductService
                 /** @var ValueForm $valueForm */
                 foreach ($group->attributes as $valueForm) {
 
-                    $value = Value::create($product->id, $valueForm->id, $valueForm->value);
-                    $product->assignmentValue($value);
+                    if (!is_array($valueForm->value)) {
+                        $value = Value::create($product->id, $valueForm->id, $valueForm->value);
+                        $product->assignmentValue($value);
+                        continue;
+                    }
+                    foreach ($valueForm->value as $value) {
+                        $value = Value::create($product->id, $valueForm->id, $value);
+                        $product->assignmentValue($value);
+                    }
                 }
             }
             $this->repository->save($product);

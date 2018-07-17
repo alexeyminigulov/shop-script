@@ -46,9 +46,9 @@ class Product extends ActiveRecord
         $values = $this->values;
 
         foreach ($values as &$val) {
-            if($val->product_id == $value->product_id && $val->attribute_id == $value->attribute_id) {
-                $val = $value;
-                $this->values = $values;
+            if($val->product_id == $value->product_id
+                && $val->attribute_id == $value->attribute_id
+                && $val->value == $value->value) {
                 return;
             }
         }
