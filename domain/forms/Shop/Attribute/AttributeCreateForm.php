@@ -63,7 +63,10 @@ class AttributeCreateForm extends Model
                 if ($this->type == Attribute::TYPE_NUMBER) {
                     $this->additionData = $data[$this->formName()]['additionData'];
                 } else {
-                    $this->additionData = explode(PHP_EOL, $data[$this->formName()]['additionData']);
+                    $values = explode(PHP_EOL, $data[$this->formName()]['additionData']);
+                    $this->additionData = array_map(function ($value) {
+                        return trim($value);
+                    }, $values);
                 }
                 $result = true;
             } else {

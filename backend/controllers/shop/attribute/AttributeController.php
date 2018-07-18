@@ -102,7 +102,7 @@ class AttributeController extends Controller
     {
         $model = $this->findModel($id);
         $form = new AttributeEditForm($model);
-        $dataProvider = (new ItemSearch())->search();
+        $dataProvider = (new ItemSearch())->search($id);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {

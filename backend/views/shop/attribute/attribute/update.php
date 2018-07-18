@@ -47,6 +47,9 @@ $this->params['breadcrumbs'][] = 'Update';
                         ],
                     ]) ?>
                 </div>
+                <div class="box-footer">
+                    <?= Html::a('Add', ['shop/attribute/item/create', 'id' => $model->attribute->id], ['class' => 'btn btn-primary']) ?>
+                </div>
             </div>
         <?php elseif ($model->type == Attribute::TYPE_NUMBER): ?>
             <div class="box box-default">

@@ -2,6 +2,7 @@
 
 namespace domain\repositories\Shop;
 
+use domain\entities\Shop\Attribute\Item;
 use domain\entities\Shop\Product\Value;
 use domain\exceptions\EntityNotFoundException;
 
@@ -15,6 +16,12 @@ class ValueRepository
             throw new EntityNotFoundException('Value is not found.');
         }
         return $value;
+    }
+
+    public function isExist(Item $item): bool
+    {
+        $value = Value::findOne(['attribute_id' => $item->attribute_id, 'value' => $item->id]);
+        return isset($value);
     }
 
     public function save(Value $value, $runValidation = true)

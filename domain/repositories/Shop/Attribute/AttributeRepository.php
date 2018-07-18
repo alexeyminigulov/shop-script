@@ -9,12 +9,18 @@ class AttributeRepository
 {
     public function find($id): Attribute
     {
-        $group = Attribute::findOne(['id', $id]);
+        $attribute = Attribute::findOne(['id', $id]);
 
-        if (!$group) {
-            throw new EntityNotFoundException('Group is not found.');
+        if (!$attribute) {
+            throw new EntityNotFoundException('Attribute is not found.');
         }
-        return $group;
+        return $attribute;
+    }
+
+    public function isExist($id): bool
+    {
+        $attribute = Attribute::findOne(['id', $id]);
+        return isset($attribute);
     }
 
     public function save(Attribute $attribute)

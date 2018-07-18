@@ -2,6 +2,7 @@
 
 namespace backend\controllers\shop\attribute;
 
+use domain\forms\Shop\Attribute\ItemCreateForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -35,6 +36,26 @@ class ItemController extends Controller
         ];
     }
 
+    public function actionCreate($id)
+    {
+        $form = new ItemCreateForm($id);
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $item = $this->service->create($form);
+                return $this->redirect(['shop/attribute/attribute/update', 'id' => $id]);
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+
+        return $this->render('create', [
+            'model' => $form,
+        ]);
+    }
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -42,8 +63,8 @@ class ItemController extends Controller
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $unit = $this->service->update($form);
-                return $this->redirect(['view', 'id' => $unit->id]);
+                $item = $this->service->update($form);
+                return $this->redirect(['shop/attribute/attribute/update', 'id' => $item->attribute_id]);
 
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -54,6 +75,19 @@ class ItemController extends Controller
         return $this->render('update', [
             'model' => $form,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        $item = $this->findModel($id);
+        try {
+            $this->service->delete($id);
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+
+        return $this->redirect(['shop/attribute/attribute/update', 'id' => $item->attribute_id]);
     }
 
     protected function findModel($id)

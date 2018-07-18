@@ -26,14 +26,20 @@ class ItemSearch extends Model
     /**
      * Creates data provider instance with search query applied
      *
+     * @param int $attributeId
+     *
      * @return ActiveDataProvider
      */
-    public function search()
+    public function search($attributeId)
     {
         $query = Item::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]);
+
+        $query->andFilterWhere([
+            'attribute_id' => $attributeId,
         ]);
 
         return $dataProvider;
