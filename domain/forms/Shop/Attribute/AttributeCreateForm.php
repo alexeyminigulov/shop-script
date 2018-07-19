@@ -40,7 +40,8 @@ class AttributeCreateForm extends Model
             return false;
         }
 
-        if ($this->type == Attribute::TYPE_NUMBER
+        if ($this->type == Attribute::TYPE_INTEGER
+            || $this->type == Attribute::TYPE_NUMBER
             || $this->type == Attribute::TYPE_RADIO_BUTTON
             || $this->type == Attribute::TYPE_CHECKBOX) {
             $result = empty($this->additionData) ? false : true;
@@ -55,12 +56,13 @@ class AttributeCreateForm extends Model
             return false;
         }
 
-        if ($this->type == Attribute::TYPE_NUMBER
+        if ($this->type == Attribute::TYPE_INTEGER
+            || $this->type == Attribute::TYPE_NUMBER
             || $this->type == Attribute::TYPE_RADIO_BUTTON
             || $this->type == Attribute::TYPE_CHECKBOX) {
 
             if ($data[$this->formName()]['additionData']) {
-                if ($this->type == Attribute::TYPE_NUMBER) {
+                if ($this->type == Attribute::TYPE_INTEGER || $this->type == Attribute::TYPE_NUMBER) {
                     $this->additionData = $data[$this->formName()]['additionData'];
                 } else {
                     $values = explode(PHP_EOL, $data[$this->formName()]['additionData']);

@@ -30,7 +30,7 @@ class UnitController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $unit = $this->service->update($form);
-                return $this->redirect(['view', 'id' => $unit->id]);
+                return $this->redirect(['shop/attribute/attribute/update', 'id' => $unit->attribute_id]);
 
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);

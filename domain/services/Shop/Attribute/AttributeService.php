@@ -26,7 +26,7 @@ class AttributeService
         $this->transaction->wrap(function () use ($form, $attribute) {
             $this->repository->save($attribute);
 
-            if ($attribute->type == Attribute::TYPE_NUMBER) {
+            if ($attribute->type == Attribute::TYPE_INTEGER || $attribute->type == Attribute::TYPE_NUMBER) {
                 $attribute->assignUnit($form->additionData);
             } else if ($attribute->type == Attribute::TYPE_RADIO_BUTTON || $attribute->type == Attribute::TYPE_CHECKBOX) {
                 $attribute->assignList($form->additionData);

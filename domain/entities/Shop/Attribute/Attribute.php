@@ -22,7 +22,8 @@ class Attribute extends ActiveRecord
 {
     const TYPE_BOOLEAN = 'boolean';
     const TYPE_TEXT = 'text';
-    const TYPE_NUMBER = 'number';
+    const TYPE_INTEGER = 'integer';
+    const TYPE_NUMBER = 'double';
     const TYPE_RADIO_BUTTON = 'radiobutton';
     const TYPE_CHECKBOX = 'checkbox';
 

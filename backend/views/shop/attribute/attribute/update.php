@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     <?= Html::a('Add', ['shop/attribute/item/create', 'id' => $model->attribute->id], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
-        <?php elseif ($model->type == Attribute::TYPE_NUMBER): ?>
+        <?php elseif ($model->type == Attribute::TYPE_INTEGER || $model->type == Attribute::TYPE_NUMBER): ?>
             <div class="box box-default">
                 <div class="box-header with-border text-bold"><?php echo ucfirst($model->type); ?>:</div>
                 <div class="box-body">

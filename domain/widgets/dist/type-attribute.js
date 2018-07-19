@@ -2,7 +2,8 @@
 
     'use strict';
 
-    var TYPE_NUMBER = "number",
+    var TYPE_INTEGER = "integer",
+        TYPE_NUMBER = "double",
         TYPE_RADIO_BUTTON = "radiobutton",
         TYPE_CHECKBOX = "checkbox";
 
@@ -33,6 +34,7 @@
 
 
         switch (typeAttribute.value) {
+            case TYPE_INTEGER:
             case TYPE_NUMBER:
                 if (input = parent.querySelector('.type-attribute-data')) {
                     if (input.tagName == "TEXTAREA") {

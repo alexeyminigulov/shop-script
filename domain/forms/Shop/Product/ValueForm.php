@@ -7,7 +7,7 @@ use domain\entities\Shop\Product\Value;
 use yii\base\Model;
 
 /**
- * This is the model class for table "shop_attributes".
+ * This is the model class for table "shop_values".
  *
  * @property int $id
  * @property string $type
@@ -46,15 +46,21 @@ class ValueForm extends Model
         return [
             [['value'], 'required'],
             call_user_func(function () {
-                if ($this->type == Attribute::TYPE_NUMBER) {
-                    return [['value'], 'number'];
-                } elseif ($this->type == Attribute::TYPE_RADIO_BUTTON) {
-                    return [['value'], 'integer'];
-                } elseif ($this->type == Attribute::TYPE_CHECKBOX) {
-                    return [['value'], 'each', 'rule' => ['integer']];
-                } else {
-                    return [['value'], 'string', 'max' => 255];
+                switch ($this->type) {
+                    case Attribute::TYPE_INTEGER:
+                    case Attribute::TYPE_RADIO_BUTTON:
+                        $result = [['value'], 'integer'];
+                        break;
+                    case Attribute::TYPE_NUMBER:
+                        $result = [['value'], 'number'];
+                        break;
+                    case Attribute::TYPE_CHECKBOX:
+                        $result = [['value'], 'each', 'rule' => ['integer']];
+                        break;
+                    default:
+                        $result = [['value'], 'string', 'max' => 255];
                 }
+                return $result;
             }),
         ];
     }
