@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'action' => Url::to(['shop/product/create'])
                             ]); ?>
 
-        <?= $form->field($model, 'categoryId')->dropDownList(CategoryHelper::list(), ['name' => 'id']) ?>
+        <?= $form->field($model, 'categoryId')->dropDownList(CategoryHelper::list(false), ['name' => 'id']) ?>
 
         <div class="form-group">
             <?= Html::submitButton('Create Product', ['class' => 'btn btn-success']) ?>

@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use domain\helpers\CategoryHelper;
 
 /* @var $this yii\web\View */
+/* @var $model domain\entities\Shop\Group */
 /* @var $searchModel backend\forms\Shop\GroupSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -22,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',

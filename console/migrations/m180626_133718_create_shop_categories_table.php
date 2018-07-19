@@ -23,7 +23,7 @@ class m180626_133718_create_shop_categories_table extends Migration
 
         $this->insert('{{%shop_categories}}', [
             'id' => 1,
-            'name' => '',
+            'name' => 'Root',
             'slug' => 'root',
 
             'lft' => 1,

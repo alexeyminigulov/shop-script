@@ -51,7 +51,7 @@ class CategoryRepository
     {
         $category = $this->find($id);
         $categories = $category->getParents()
-            ->andFilterCompare('id', 1, '<>')
+//            ->andFilterCompare('id', 1, '<>')
             ->all();
         $categories[] = $category;
 
@@ -66,7 +66,7 @@ class CategoryRepository
     {
         $categories = Category::find()
             ->where(['id' => $ids])
-            ->andWhere(['<>','id', 1])
+//            ->andWhere(['<>','id', 1])
             ->orderBy('lft')
             ->all();
 

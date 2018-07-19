@@ -15,6 +15,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  *
  * @property CategoryAssignment[] $categoryAssignments
  * @property Attribute[] $attributes0
+ * @property Category[] $categories
  */
 class Group extends ActiveRecord
 {
