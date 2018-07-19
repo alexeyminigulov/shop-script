@@ -6,16 +6,21 @@ use domain\entities\Shop\Attribute\Attribute;
 use domain\forms\Shop\Attribute\AttributeEditForm;
 use domain\forms\Shop\Attribute\AttributeCreateForm;
 use domain\repositories\Shop\Attribute\AttributeRepository;
+use domain\repositories\Shop\ValueRepository;
 use domain\services\TransactionManager;
 
 class AttributeService
 {
     private $repository;
+    private $repoValue;
     private $transaction;
 
-    public function __construct(AttributeRepository $repository, TransactionManager $transaction)
+    public function __construct(AttributeRepository $repository,
+                                ValueRepository $valueRepo,
+                                TransactionManager $transaction)
     {
         $this->repository = $repository;
+        $this->repoValue = $valueRepo;
         $this->transaction = $transaction;
     }
 
@@ -41,7 +46,12 @@ class AttributeService
     {
         $attribute = $this->repository->find($form->id);
 
-        $attribute->edit($form->name, $form->type, $form->groupId);
+        $attribute->edit($form->name, $form->type);
+
+        if ($form->groupId != $attribute->group_id && $this->repoValue->isExist(['attribute_id' => $attribute->id])) {
+            throw new \DomainException('Attribute is bind to products.');
+        }
+        $attribute->changeGroup($form->groupId);
 
         $this->repository->save($attribute);
 
@@ -51,6 +61,9 @@ class AttributeService
     public function delete($id)
     {
         $attribute = $this->repository->find($id);
+        if ($this->repoValue->isExist(['attribute_id' => $attribute->id])) {
+            throw new \DomainException('Attribute is bind to products');
+        }
         $this->repository->delete($attribute);
     }
 }

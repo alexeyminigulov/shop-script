@@ -26,7 +26,7 @@ class ItemService
 
     public function create(ItemCreateForm $form): Item
     {
-        if(!$this->attributeRepo->isExist($form->attributeId)) {
+        if(!$this->attributeRepo->isExist(['id', $form->attributeId])) {
             throw new \DomainException('Attribute is not exist.');
         }
         if ($this->repository->isExist($form)) {
@@ -54,7 +54,7 @@ class ItemService
     {
         $item = $this->repository->find($id);
 
-        if ($this->valueRepo->isExist($item)) {
+        if ($this->valueRepo->isExist(['attribute_id' => $item->attribute_id, 'value' => $item->id])) {
             throw new \DomainException('Value is exist.');
         }
 

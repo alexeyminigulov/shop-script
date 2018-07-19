@@ -17,9 +17,9 @@ class AttributeRepository
         return $attribute;
     }
 
-    public function isExist($id): bool
+    public function isExist(array $condition): bool
     {
-        $attribute = Attribute::findOne(['id', $id]);
+        $attribute = Attribute::findOne($condition);
         return isset($attribute);
     }
 

@@ -23,4 +23,11 @@ class GroupRepository
             throw new \RuntimeException('Group did not save.');
         }
     }
+
+    public function delete(Group $group)
+    {
+        if ($group->delete() === false) {
+            throw new \RuntimeException('Group has not been delete.');
+        }
+    }
 }

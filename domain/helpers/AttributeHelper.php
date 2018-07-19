@@ -23,6 +23,9 @@ class AttributeHelper
     public static function getPrettyValue(Attribute $attribute, $productId)
     {
         $value = Value::findAll(['attribute_id' => $attribute->id, 'product_id' => $productId]);
+        if (empty($value)) {
+            return '';
+        }
         switch ($attribute->type) {
             case Attribute::TYPE_INTEGER:
             case Attribute::TYPE_NUMBER:

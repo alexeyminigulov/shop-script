@@ -37,11 +37,15 @@ class Attribute extends ActiveRecord
         return $attribute;
     }
 
-    public function edit($name, $type, $groupId)
+    public function edit($name, $type)
     {
         $this->name = $name;
         $this->type = $type;
-        $this->group_id = $groupId;
+    }
+
+    public function changeGroup($id)
+    {
+        $this->group_id = $id;
     }
 
     public function assignUnit($name)

@@ -18,10 +18,28 @@ class ValueRepository
         return $value;
     }
 
-    public function isExist(Item $item): bool
+    public function isExist(array $condition): bool
     {
-        $value = Value::findOne(['attribute_id' => $item->attribute_id, 'value' => $item->id]);
+        $value = Value::findOne($condition);
         return isset($value);
+    }
+
+    public function getByOne(array $condition)
+    {
+        $value = Value::findOne($condition);
+        if (!$value) {
+            throw new EntityNotFoundException('Value is not found.');
+        }
+        return $value;
+    }
+
+    public function getByAll(array $condition)
+    {
+        $values = Value::findAll($condition);
+        if (empty($values)) {
+            throw new EntityNotFoundException('Values is not found.');
+        }
+        return $values;
     }
 
     public function save(Value $value, $runValidation = true)

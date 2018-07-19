@@ -35,50 +35,50 @@ class AttributeEditForm extends Model
         ];
     }
 
-    public function validate($attributeNames = null, $clearErrors = true)
-    {
-        $result = parent::validate($attributeNames, $clearErrors);
-        if (!$result) {
-            return false;
-        }
+//    public function validate($attributeNames = null, $clearErrors = true)
+//    {
+//        $result = parent::validate($attributeNames, $clearErrors);
+//        if (!$result) {
+//            return false;
+//        }
+//
+//        if ($this->type == Attribute::TYPE_INTEGER
+//            || $this->type == Attribute::TYPE_NUMBER
+//            || $this->type == Attribute::TYPE_RADIO_BUTTON
+//            || $this->type == Attribute::TYPE_CHECKBOX) {
+//            $result = empty($this->additionData) ? false : true;
+//        }
+//        return $result;
+//    }
 
-        if ($this->type == Attribute::TYPE_INTEGER
-            || $this->type == Attribute::TYPE_NUMBER
-            || $this->type == Attribute::TYPE_RADIO_BUTTON
-            || $this->type == Attribute::TYPE_CHECKBOX) {
-            $result = empty($this->additionData) ? false : true;
-        }
-        return $result;
-    }
-
-    public function load($data, $formName = null)
-    {
-        $result = parent::load($data, $formName);
-        if (!$result) {
-            return false;
-        }
-
-        if ($this->type == Attribute::TYPE_INTEGER
-            || $this->type == Attribute::TYPE_NUMBER
-            || $this->type == Attribute::TYPE_RADIO_BUTTON
-            || $this->type == Attribute::TYPE_CHECKBOX) {
-
-            if ($data[$this->formName()]['additionData']) {
-                if ($this->type == Attribute::TYPE_INTEGER || $this->type == Attribute::TYPE_NUMBER) {
-                    $this->additionData = $data[$this->formName()]['additionData'];
-                } else {
-                    $values = explode(PHP_EOL, $data[$this->formName()]['additionData']);
-                    $this->additionData = array_map(function ($value) {
-                        return trim($value);
-                    }, $values);
-                }
-                $result = true;
-            } else {
-                $result = false;
-            }
-        }
-        return $result;
-    }
+//    public function load($data, $formName = null)
+//    {
+//        $result = parent::load($data, $formName);
+//        if (!$result) {
+//            return false;
+//        }
+//
+//        if ($this->type == Attribute::TYPE_INTEGER
+//            || $this->type == Attribute::TYPE_NUMBER
+//            || $this->type == Attribute::TYPE_RADIO_BUTTON
+//            || $this->type == Attribute::TYPE_CHECKBOX) {
+//
+//            if ($data[$this->formName()]['additionData']) {
+//                if ($this->type == Attribute::TYPE_INTEGER || $this->type == Attribute::TYPE_NUMBER) {
+//                    $this->additionData = $data[$this->formName()]['additionData'];
+//                } else {
+//                    $values = explode(PHP_EOL, $data[$this->formName()]['additionData']);
+//                    $this->additionData = array_map(function ($value) {
+//                        return trim($value);
+//                    }, $values);
+//                }
+//                $result = true;
+//            } else {
+//                $result = false;
+//            }
+//        }
+//        return $result;
+//    }
 
     public function getAttribute()
     {

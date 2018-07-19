@@ -4,6 +4,7 @@ namespace domain\services\Shop;
 
 use domain\entities\Shop\Group;
 use domain\forms\Shop\GroupForm;
+use domain\repositories\Shop\Attribute\AttributeRepository;
 use domain\repositories\Shop\GroupRepository;
 use domain\services\TransactionManager;
 
@@ -11,15 +12,18 @@ class GroupService
 {
     private $repository;
     private $categoryService;
+    private $attributeRepo;
     private $transaction;
 
     public function __construct(GroupRepository $repository,
                                 CategoryService $categoryService,
+                                AttributeRepository $attributeRepo,
                                 TransactionManager $transaction
                                 )
     {
         $this->repository = $repository;
         $this->categoryService = $categoryService;
+        $this->attributeRepo = $attributeRepo;
         $this->transaction = $transaction;
     }
 
@@ -54,5 +58,14 @@ class GroupService
         });
 
         return $group;
+    }
+
+    public function delete($id)
+    {
+        $group = $this->repository->find($id);
+        if ($this->attributeRepo->isExist(['group_id' => $group->id])) {
+            throw new \DomainException('Group is bind to attributes.');
+        }
+        $this->repository->delete($group);
     }
 }
