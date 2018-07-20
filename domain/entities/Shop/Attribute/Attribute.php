@@ -2,6 +2,7 @@
 
 namespace domain\entities\Shop\Attribute;
 
+use domain\entities\Shop\Filter;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Group;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -17,6 +18,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property Group $group
  * @property Unit $unit
  * @property Item[] $items
+ * @property Filter $filter
  */
 class Attribute extends ActiveRecord
 {
@@ -89,12 +91,17 @@ class Attribute extends ActiveRecord
         return $this->hasMany(Item::class, ['attribute_id' => 'id']);
     }
 
+    public function getFilter()
+    {
+        return $this->hasOne(Filter::className(), ['attribute_id' => 'id']);
+    }
+
     public function behaviors(): array
     {
         return [
             [
                 'class' => SaveRelationsBehavior::className(),
-                'relations' => ['unit', 'items'],
+                'relations' => ['unit', 'items', 'filter'],
             ],
         ];
     }

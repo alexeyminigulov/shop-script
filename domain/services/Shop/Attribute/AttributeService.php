@@ -3,6 +3,7 @@
 namespace domain\services\Shop\Attribute;
 
 use domain\entities\Shop\Attribute\Attribute;
+use domain\entities\Shop\Filter;
 use domain\forms\Shop\Attribute\AttributeEditForm;
 use domain\forms\Shop\Attribute\AttributeCreateForm;
 use domain\repositories\Shop\Attribute\AttributeRepository;
@@ -36,6 +37,10 @@ class AttributeService
             } else if ($attribute->type == Attribute::TYPE_RADIO_BUTTON || $attribute->type == Attribute::TYPE_CHECKBOX) {
                 $attribute->assignList($form->additionData);
             }
+
+            $filter = Filter::create($attribute->name, $attribute->id);
+            $attribute->filter = $filter;
+
             $this->repository->save($attribute);
         });
 
