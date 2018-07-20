@@ -4,8 +4,8 @@ namespace backend\controllers\shop;
 
 use Yii;
 use yii\web\Controller;
-use domain\entities\Shop\Group;
-use domain\forms\Shop\GroupForm;
+use domain\entities\Shop\Filter;
+use domain\forms\Shop\FilterForm;
 use yii\web\NotFoundHttpException;
 use backend\forms\Shop\FilterSearch;
 use domain\services\Shop\FilterService;
@@ -45,12 +45,12 @@ class FilterController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $form = new GroupForm($model);
+        $form = new FilterForm($model);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
-                $group = $this->service->update($form);
-                return $this->redirect(['view', 'id' => $group->id]);
+                $filter = $this->service->update($form);
+                return $this->redirect(['index']);
 
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
@@ -64,15 +64,15 @@ class FilterController extends Controller
     }
 
     /**
-     * Finds the Group model based on its primary key value.
+     * Finds the Filter model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Group the loaded model
+     * @return Filter the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Group::findOne($id)) !== null) {
+        if (($model = Filter::findOne($id)) !== null) {
             return $model;
         }
 

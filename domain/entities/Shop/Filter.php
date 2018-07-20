@@ -30,9 +30,10 @@ class Filter extends ActiveRecord
         return $filter;
     }
 
-    public function edit($name)
+    public function edit($name, $status)
     {
         $this->name = $name;
+        $this->status = $status;
     }
 
     /**
