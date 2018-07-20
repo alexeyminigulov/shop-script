@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use domain\helpers\GroupHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\forms\Shop\AttributeSearch */
+/* @var $searchModel backend\forms\Shop\Attribute\AttributeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Attributes';

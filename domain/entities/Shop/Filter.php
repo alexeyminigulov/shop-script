@@ -35,17 +35,17 @@ class Filter extends ActiveRecord
         $this->name = $name;
     }
 
-    public static function tableName()
-    {
-        return '{{%shop_filters}}';
-    }
-
     /**
      *  ========================== Relation ===========================
      */
 
     public function getAttribute0()
     {
-        $this->hasOne(Attribute::className(), ['id' => 'attribute_id']);
+        return $this->hasOne(Attribute::className(), ['id' => 'attribute_id']);
+    }
+
+    public static function tableName()
+    {
+        return '{{%shop_filters}}';
     }
 }

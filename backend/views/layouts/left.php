@@ -41,6 +41,7 @@ use yii\helpers\Url;
                     ['label' => 'Category', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/category/index'])]],
                     ['label' => 'Feature groups', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/group/index'])]],
                     ['label' => 'Attribute', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/attribute/attribute/index'])]],
+                    ['label' => 'Filter', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/filter/index'])]],
                     ['label' => 'Product', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/product/index'])]],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
