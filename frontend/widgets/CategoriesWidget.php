@@ -9,6 +9,8 @@ class CategoriesWidget extends Widget
 {
     public function run()
     {
+        $this->registerClientScript();
+
         $result = "";
         $categories = Category::find()->andWhere(['<>', 'id', 1])
             ->andWhere(['depth' => 1])->orderBy('lft')->all();
@@ -42,11 +44,16 @@ class CategoriesWidget extends Widget
 EOF;
     }
 
+    private function registerClientScript()
+    {
+        $view = $this->getView();
+        CategoriesAsset::register($view);
+    }
 
     private function firstLvlItem(Category $category)
     {
         if (empty($category->children)) {
-            return "<li class='ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest hidden-tablet'><a href='http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest' class='ty-menu__item-link a-first-lvl'><div class='menu-lvl-ctn'>$category->name</div></a></li>";
+            return "<li class='ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest hidden-tablet'><a href='/shop/catalog/view?slug=dsdad' class='ty-menu__item-link a-first-lvl'><div class='menu-lvl-ctn'>$category->name</div></a></li>";
         }
 
         $subUl = $this->secondLvlUL($category);
