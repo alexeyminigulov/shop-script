@@ -1,6 +1,6 @@
 <?php
 
-use frontend\widgets\CategoriesWidget;
+use frontend\widgets\CatalogWidget;
 
 ?>
 <div class="tygh-header clearfix">
@@ -157,7 +157,7 @@ use frontend\widgets\CategoriesWidget;
                 <div class="span16 top-menu-grid  small-grid top-menu">
                     <div class="row-fluid ">
 
-                        <?= CategoriesWidget::widget() ?>
+                        <?= CatalogWidget::widget() ?>
 
                         <div class="span7 search-block-grid">
                             <div class=" top-search">

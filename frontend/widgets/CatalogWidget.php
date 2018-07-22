@@ -5,7 +5,7 @@ namespace frontend\widgets;
 use domain\entities\Shop\Category;
 use yii\base\Widget;
 
-class CategoriesWidget extends Widget
+class CatalogWidget extends Widget
 {
     public function run()
     {
@@ -47,7 +47,7 @@ EOF;
     private function registerClientScript()
     {
         $view = $this->getView();
-        CategoriesAsset::register($view);
+        CatalogAsset::register($view);
     }
 
     private function firstLvlItem(Category $category)

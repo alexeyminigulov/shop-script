@@ -4,7 +4,7 @@ namespace frontend\widgets;
 
 use yii\web\AssetBundle;
 
-class CategoriesAsset extends AssetBundle
+class CatalogAsset extends AssetBundle
 {
     public $sourcePath = '@frontend/widgets/dist';
     public $js = [
