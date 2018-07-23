@@ -1,28 +1,30 @@
 <?php
 
-/* @var $category \domain\entities\Shop\Category */
-/* @var $lastElem boolean */
-
-use yii\helpers\Html;
+/* @var $this \yii\web\View */
+/* @var $tplBreadCrumbs string */
 
 ?>
 
-<?php if (!$lastElem): ?>
-<span class="ty-breadcrumbs__slash">/</span>
-<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-    <a itemprop="item" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/elektronika/mp3-pleery/" class="ty-breadcrumbs__a">
-        <meta itemprop="position" content="4">
-        <meta itemprop="name" content="<?= Html::encode($category->name) ?>">
-        <bdi><?= Html::encode($category->name) ?></bdi>
-    </a>
-</span>
-<?php else: ?>
-<span class="ty-breadcrumbs__slash">/</span>
-<span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-    <span itemprop="item" class="ty-breadcrumbs__current">
-        <meta itemprop="position" content="5">
-        <meta itemprop="name" content="<?= Html::encode($category->name) ?>">
-        <bdi><?= Html::encode($category->name) ?></bdi>
-    </span>
-</span>
-<?php endif; ?>
+<div id="breadcrumbs_11">
+    <div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="ty-breadcrumbs clearfix">
+
+        <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/" class="ty-breadcrumbs__a">
+                <meta itemprop="position" content="1">
+                <meta itemprop="name" content="Главная">
+                <bdi>Главная</bdi>
+            </a>
+        </span>
+        <span class="ty-breadcrumbs__slash">/</span>
+        <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/catalog-ru/" class="ty-breadcrumbs__a">
+                <meta itemprop="position" content="2">
+                <meta itemprop="name" content="Каталог">
+                <bdi>Каталог</bdi>
+            </a>
+        </span>
+
+        <?= $tplBreadCrumbs ?>
+
+    </div>
+</div>

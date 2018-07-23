@@ -22,12 +22,14 @@ class BreadCrumbs extends Widget
         $tplBreadCrumbs = '';
         foreach ($this->categories as $key => $category) {
             $lastElem = $key == count($this->categories) - 1;
-            $tplBreadCrumbs .= $this->render('breadCrumbs', [
+            $tplBreadCrumbs .= $this->render('_breadCrumb', [
                 'category' => $category,
                 'lastElem' => $lastElem,
             ]);
         }
 
-        return $tplBreadCrumbs;
+        return $this->render('breadCrumbs', [
+            'tplBreadCrumbs' => $tplBreadCrumbs,
+        ]);
     }
 }

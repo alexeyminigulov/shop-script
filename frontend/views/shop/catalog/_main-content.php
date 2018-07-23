@@ -6,6 +6,7 @@
 /* @var $products \domain\entities\Shop\Product\Product[] */
 
 use yii\helpers\Html;
+use frontend\widgets\BreadCrumbs;
 
 ?>
 
@@ -15,7 +16,7 @@ use yii\helpers\Html;
             <span><?= Html::encode($category->name) ?></span>
         </h1>
         <div class="ty-mainbox-body">
-            <?= $this->render('_breadcrumbs', [
+            <?= BreadCrumbs::widget([
                 'categories' => $categories,
             ]) ?>
 
