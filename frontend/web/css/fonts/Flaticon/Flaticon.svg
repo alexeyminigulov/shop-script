@@ -1,0 +1,58 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20170910 at Thu Apr 14 17:45:31 2016
+ By Jimmy Wärting
+Created by Apache with FontForge 2.0 (http://fontforge.sf.net)
+</metadata>
+<defs>
+<font id="Flaticon" horiz-adv-x="512" >
+  <font-face 
+    font-family="Flaticon"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="512"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
+    ascent="448"
+    descent="-64"
+    bbox="-0.89441 -64.8944 512.894 448.894"
+    underline-thickness="25"
+    underline-position="-76"
+    unicode-range="U+0020-F109"
+  />
+<missing-glyph horiz-adv-x="187" 
+d="M17 0v341h136v-341h-136zM34 17h102v307h-102v-307z" />
+    <glyph glyph-name=".notdef" horiz-adv-x="187" 
+d="M17 0v341h136v-341h-136zM34 17h102v307h-102v-307z" />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" horiz-adv-x="170" 
+ />
+    <glyph glyph-name="space" unicode=" " horiz-adv-x="200" 
+ />
+    <glyph glyph-name="uniF100" unicode="&#xf100;" 
+d="M256 448q106 0 181 -75t75 -181t-75 -181t-181 -75t-181 75t-75 181t75 181t181 75zM256 0q79 0 135.5 56.5t56.5 135.5q0 80 -56.5 136t-135.5 56q-80 0 -136 -56t-56 -136q0 -79 56 -135.5t136 -56.5zM128 224l128 128l128 -128h-96v-192h-64v192h-96z" />
+    <glyph glyph-name="uniF101" unicode="&#xf101;" 
+d="M462 23q0 -36 -25.5 -61.5t-62.5 -25.5h-236q-37 0 -62.5 25.5t-25.5 61.5q0 15 10.5 25.5t25.5 10.5t25.5 -10.5t10.5 -25.5q0 -6 4.5 -10.5t11.5 -4.5h236q7 0 11.5 4.5t4.5 10.5q0 15 10.5 25.5t25.5 10.5t25.5 -10.5t10.5 -25.5zM175 280q-10 -10 -25 -10t-25.5 10.5
+t-10.5 25.5t10 25l107 106q10 11 25 11t25 -11l107 -106q10 -10 10 -25t-10.5 -25.5t-25.5 -10.5t-25 10l-45 45v-204q0 -15 -10.5 -25.5t-25.5 -10.5t-25.5 10.5t-10.5 25.5v204z" />
+    <glyph glyph-name="uniF102" unicode="&#xf102;" 
+d="M256 448q106 0 181 -75t75 -181t-75 -181t-181 -75t-181 75t-75 181t75 181t181 75zM379 137q5 5 5 12.5t-5 12.5l-111 110q-5 5 -12 5t-12 -5l-111 -110q-5 -5 -5 -12.5t5 -12.5t12 -5t12 5l99 99l99 -99q5 -5 12 -5t12 5z" />
+    <glyph glyph-name="uniF103" unicode="&#xf103;" 
+d="M256 448q106 0 181 -75t75 -181t-75 -181t-181 -75t-181 75t-75 181t75 181t181 75zM256 -30q92 0 157 65t65 157t-65 157t-157 65t-157 -65t-65 -157t65 -157t157 -65zM268 325l115 -101q5 -5 5 -12t-5 -12.5t-12.5 -5.5t-12.5 6l-103 90l-102 -90q-5 -6 -12.5 -6
+t-12.5 5.5t-5 12.5t5 12l115 101q5 6 12 5q8 1 13 -5zM268 202l115 -101q5 -5 5 -12t-5 -12.5t-12.5 -5.5t-12.5 6l-103 90l-102 -90q-5 -6 -12.5 -6t-12.5 5.5t-5 12.5t5 12l115 101q5 6 12 5q8 1 13 -5z" />
+    <glyph glyph-name="uniF104" unicode="&#xf104;" 
+d="M256 448q106 0 181 -75t75 -181t-75 -181t-181 -75t-181 75t-75 181t75 181t181 75zM256 0q79 0 135.5 56.5t56.5 135.5q0 80 -56.5 136t-135.5 56q-80 0 -136 -56t-56 -136q0 -79 56 -135.5t136 -56.5zM128 128l128 160l128 -160h-256z" />
+    <glyph glyph-name="uniF105" unicode="&#xf105;" 
+d="M448 416q27 0 45.5 -19t18.5 -45v-320q0 -26 -18.5 -45t-45.5 -19h-384q-27 0 -45.5 19t-18.5 45v320q0 26 18.5 45t45.5 19h384zM448 32v320h-384v-320h384zM256 256l96 -128h-192z" />
+    <glyph glyph-name="uniF106" unicode="&#xf106;" 
+d="M256 342l-229 -229l-27 27l256 255l256 -255l-27 -27zM0 16l256 255l256 -255l-27 -27l-229 229l-229 -229z" />
+    <glyph glyph-name="uniF107" unicode="&#xf107;" 
+d="M0 448h512v-512h-512v512zM376 114l24 24l-144 144l-144 -144l24 -24l120 120z" />
+    <glyph glyph-name="uniF108" unicode="&#xf108;" 
+d="M274 289l72 -72q8 -8 8 -18.5t-8 -18.5v1q-7 -8 -17.5 -8t-18.5 8l-28 28v-107q0 -10 -7.5 -17.5t-18.5 -7.5t-18.5 7.5t-7.5 17.5v107l-28 -28q-8 -8 -18.5 -8t-17.5 8v-1q-8 8 -8 18.5t8 18.5l72 72v0q7 8 18 8t18 -8zM478 320q53 -92 25.5 -194.5t-119.5 -155.5
+t-194.5 -25.5t-155.5 119.5t-25.5 194.5t119.5 155.5t194.5 25.5t155.5 -119.5zM358.5 14.5q73.5 42.5 95.5 124.5t-20.5 155.5t-124.5 95.5t-155.5 -20.5t-95.5 -124.5t20.5 -155.5t124.5 -95.5t155.5 20.5z" />
+    <glyph glyph-name="uniF109" unicode="&#xf109;" 
+d="M0 448h512v-512h-512v512zM490 -42v468h-468v-468h468zM245 329l-124 -114l-14 15l149 140l149 -140l-14 -15l-124 114v-315h-22v315z" />
+  </font>
+</defs></svg>

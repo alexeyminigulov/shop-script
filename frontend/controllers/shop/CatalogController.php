@@ -29,7 +29,9 @@ class CatalogController extends Controller
     {
         $category = $this->findModel($slug);
         $categories = $this->repository->getWithParents($category->id, false);
-        $categoryIds = ActiveRecordHelper::getFields($categories, 'id');
+        $descendantsCategory = [$category];
+        $descendantsCategory = array_merge($descendantsCategory, $category->descendants);
+        $categoryIds = ActiveRecordHelper::getFields($descendantsCategory, 'id');
         $products = $this->repoProduct->getProducts($categoryIds);
 
         return $this->render('view', [

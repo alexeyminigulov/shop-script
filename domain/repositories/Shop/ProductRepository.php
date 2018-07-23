@@ -40,11 +40,8 @@ class ProductRepository
 
     public function getProducts(array $categoryIds)
     {
-        $products = Product::find()->where(['id' => $categoryIds])->all();
+        $products = Product::find()->where(['category_id' => $categoryIds])->all();
 
-        if (empty($products)) {
-            throw new EntityNotFoundException('Products is not found.');
-        }
         return $products;
     }
 
