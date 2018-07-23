@@ -18,7 +18,9 @@
                     'products' => $products,
                 ]) ?>
 
-                <?= $this->render('_left') ?>
+                <?= $this->render('_left', [
+                        'category' => $category,
+                ]) ?>
             </div>
         </div>
     </div>
