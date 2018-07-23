@@ -53,7 +53,7 @@ EOF;
     private function firstLvlItem(Category $category)
     {
         if (empty($category->children)) {
-            return "<li class='ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest hidden-tablet'><a href='/shop/catalog/view?slug=dsdad' class='ty-menu__item-link a-first-lvl'><div class='menu-lvl-ctn'>$category->name</div></a></li>";
+            return "<li class='ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest hidden-tablet'><a href='/shop/catalog/view?slug=clothes' class='ty-menu__item-link a-first-lvl'><div class='menu-lvl-ctn'>$category->name</div></a></li>";
         }
 
         $subUl = $this->secondLvlUL($category);

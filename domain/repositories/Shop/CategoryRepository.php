@@ -47,12 +47,13 @@ class CategoryRepository
         }
     }
 
-    public function getWithParents($id)
+    public function getWithParents($id, $withRoot = true)
     {
         $category = $this->find($id);
-        $categories = $category->getParents()
-//            ->andFilterCompare('id', 1, '<>')
-            ->all();
+
+        $categories = $withRoot ? $category->getParents()->all()
+            : $category->getParents()->andFilterCompare('id', 1, '<>')->all();
+
         $categories[] = $category;
 
         return $categories;

@@ -38,6 +38,16 @@ class ProductRepository
         return $groups;
     }
 
+    public function getProducts(array $categoryIds)
+    {
+        $products = Product::find()->where(['id' => $categoryIds])->all();
+
+        if (empty($products)) {
+            throw new EntityNotFoundException('Products is not found.');
+        }
+        return $products;
+    }
+
     public function save(Product $product, $runValidation = true)
     {
         if (!$product->save($runValidation)) {
