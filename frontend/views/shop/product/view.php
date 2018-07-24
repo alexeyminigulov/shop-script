@@ -6,9 +6,9 @@
 
 use yii\helpers\Html;
 use frontend\widgets\BreadCrumbs;
+use frontend\widgets\ProductContentFeatures;
 
 ?>
-
 <div class="tygh-content clearfix">
     <div class="container-fluid  content-grid full_width">
         <div class="container-fluid-row">
@@ -51,23 +51,16 @@ use frontend\widgets\BreadCrumbs;
                                                     </a><a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_769" class="cm-thumbnails-mini ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_769_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/uMhBLQB2lSbT9kBm_500.jpg" alt="" title="">
                                                     </a>
                                                 </div>
-                                                <!-- Inline script moved to the bottom of the page -->
-                                                <!-- Inline script moved to the bottom of the page -->
-                                                <!-- Inline script moved to the bottom of the page -->
-                                                <!-- Inline script moved to the bottom of the page -->
                                             </div>
-                                            <!--product_images_214_update-->
                                         </div>
                                     </div>
                                     <div class="span9 ty-product-block__left">
-                                        <?= $this->render('_card-product') ?>
+                                        <?= $this->render('_card-product', [
+                                                'product' => $product,
+                                        ]) ?>
                                     </div>
                                     <div class="ty-discussion-post-popup hidden" id="new_post_dialog_214" title="Написать отзыв">
                                         <form action="http://demo.cs-cart.ru/stores/0074ef20992a3836/" method="post" class="posts-form cm-processed-form" name="add_post_form" id="add_post_form_214">
-                                            <input type="hidden" name="result_ids" value="posts_list*,new_post*,average_rating*">
-                                            <input type="hidden" name="post_data[thread_id]" value="226">
-                                            <input type="hidden" name="redirect_url" value="http://demo.cs-cart.ru/stores/0074ef20992a3836/elektronika/kompyutery/nastolnye-pk/asus-cp6130/?selected_section=discussion#discussion">
-                                            <input type="hidden" name="selected_section" value="">
                                             <div id="new_post_214">
                                                 <div class="ty-control-group">
                                                     <label for="dsc_name_214" class="ty-control-group__title cm-required">Ваше имя</label>
@@ -112,36 +105,9 @@ use frontend\widgets\BreadCrumbs;
                                             <p><span style="font-size: small;">Глянцевая поверхность ASUS CP6130 придает им элегантности, а бросающиаяся в глаза кнопка включения уместно расположена в середине корпуса. </span></p>
                                         </div>
                                     </div>
-                                    <div id="content_features" class="ty-wysiwyg-content content-features hidden">
-                                        <div>
-                                            <div class="ty-product-feature">
-                                                <span class="ty-product-feature__label">Бренд:</span>
-                                                <div class="ty-product-feature__value">ASUS</div>
-                                            </div>
-                                            <div class="ty-product-feature-group">
-                                                <h3 class="ty-subheader">
-                                                    Электроника
-                                                </h3>
-                                                <div class="ty-product-feature">
-                                       <span class="ty-product-feature__label">
-                                          Операционная система
-                                          <span class="ty-help-info">
-                                             <a id="opener_content_15_notes" class="cm-dialog-opener cm-dialog-auto-size " data-ca-target-id="content_content_15_notes" rel="nofollow"><span><span class="ty-tooltip-block"><i class="ty-icon-help-circle"></i></span></span></a>
-                                             <div class="hidden ty-wysiwyg-content" id="content_content_15_notes" title="Операционная система">
-                                                <p>Операционная система</p>
-                                             </div>
-                                          </span>
-                                          :
-                                       </span>
-                                                    <div class="ty-product-feature__value">Windows 7 Home Premium</div>
-                                                </div>
-                                                <div class="ty-product-feature">
-                                                    <span class="ty-product-feature__label">Объём памяти:</span>
-                                                    <div class="ty-product-feature__value">1TB</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?= ProductContentFeatures::widget([
+                                        'product' => $product,
+                                    ]) ?>
                                     <div id="content_files" class="ty-wysiwyg-content content-files">
                                     </div>
                                     <div id="content_tags" class="ty-wysiwyg-content content-tags">
