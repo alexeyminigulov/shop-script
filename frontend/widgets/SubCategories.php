@@ -25,18 +25,18 @@ class SubCategories extends Widget
         foreach ($categories as $category) {
             if ($this->category->id == $category->id) {
 
-                $tplSubCategories .= $this->render('_current-sub-category', [
+                $tplSubCategories .= $this->render('sub-category/_currentSubCategory', [
                     'category' => $category,
                 ]);
             } else {
 
-                $tplSubCategories .= $this->render('_sub-category', [
+                $tplSubCategories .= $this->render('sub-category/_subCategory', [
                     'category' => $category,
                 ]);
             }
         }
 
-        $subcategoriesGrid = $this->render('subcategories', [
+        $subcategoriesGrid = $this->render('sub-category/view', [
             'tplSubCategories' => $tplSubCategories,
         ]);
 

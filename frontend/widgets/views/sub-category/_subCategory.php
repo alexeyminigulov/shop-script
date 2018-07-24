@@ -3,11 +3,12 @@
 /* @var $category \domain\entities\Shop\Category */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
 <li class="ty-subcategories__item">
-    <a href="http://demo.cs-cart.ru/stores/0074ef20992a3836/elektronika/mp3-pleery/ipod/">
+    <a href="<?= Url::to(['shop/catalog/view', 'slug' => $category->slug]) ?>">
         <span><?= Html::encode($category->name) ?></span>
     </a>
 </li>
