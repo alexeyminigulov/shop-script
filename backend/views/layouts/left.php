@@ -38,6 +38,7 @@ use yii\helpers\Url;
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Users', 'icon' => 'file-code-o', 'url' => ['/user']],
+                    ['label' => 'Brand', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/brand/index'])]],
                     ['label' => 'Category', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/category/index'])]],
                     ['label' => 'Feature groups', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/group/index'])]],
                     ['label' => 'Attribute', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/attribute/attribute/index'])]],
