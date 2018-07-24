@@ -47,6 +47,7 @@ class ProductContentFeatures extends Widget
         foreach ($group->attributes0 as $attribute) {
             $attributesTpl .= $this->render('product-content-features/_attributeTemplate', [
                 'attribute' => $attribute,
+                'product' => $this->product,
             ]);
         }
 
