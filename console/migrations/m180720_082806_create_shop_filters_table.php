@@ -20,7 +20,7 @@ class m180720_082806_create_shop_filters_table extends Migration
 
         $this->createIndex('{{%idx-shop_filters-attribute_id}}', '{{%shop_filters}}', 'attribute_id', true);
 
-        $this->addForeignKey('{{%fk-shop_filters-attribute_id}}', '{{%shop_filters}}', 'attribute_id', '{{%shop_attributes}}', 'id');
+        $this->addForeignKey('{{%fk-shop_filters-attribute_id}}', '{{%shop_filters}}', 'attribute_id', '{{%shop_attributes}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function down()
