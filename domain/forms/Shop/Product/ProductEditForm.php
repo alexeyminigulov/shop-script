@@ -17,6 +17,8 @@ class ProductEditForm extends Model
     public $id;
     public $name;
     public $slug;
+    public $brandId;
+    public $description;
     public $price;
     public $groups;
 
@@ -35,6 +37,8 @@ class ProductEditForm extends Model
         $this->id = $product->id;
         $this->name = $product->name;
         $this->slug = $product->slug;
+        $this->brandId = $product->brand_id;
+        $this->description = $product->description;
         $this->price = $product->price;
 
         $this->product = $product;
@@ -47,9 +51,10 @@ class ProductEditForm extends Model
     public function rules()
     {
         return [
-            [['name', 'slug', 'price'], 'required'],
+            [['name', 'slug', 'price', 'brandId'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
             [['price'], 'integer'],
+            [['description'], 'string'],
 //            [['slug'], 'unique'],
         ];
     }

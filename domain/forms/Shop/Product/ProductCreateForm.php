@@ -16,6 +16,8 @@ class ProductCreateForm extends Model
     public $name;
     public $slug;
     public $price;
+    public $brandId;
+    public $description;
     public $groups;
 
     private $categoryId;
@@ -39,9 +41,10 @@ class ProductCreateForm extends Model
     public function rules()
     {
         return [
-            [['name', 'slug', 'price'], 'required'],
+            [['name', 'slug', 'price', 'brandId'], 'required'],
             [['name', 'slug'], 'string', 'max' => 255],
-            [['price'], 'integer'],
+            [['price', 'brandId'], 'integer'],
+            [['description'], 'string'],
 //            [['slug'], 'unique'],
         ];
     }

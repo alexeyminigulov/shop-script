@@ -30,7 +30,7 @@ class ProductService
 
     public function create(ProductCreateForm $form)
     {
-        $product = Product::create($form->name, $form->slug, $form->price, $form->categoryId);
+        $product = Product::create($form->name, $form->slug, $form->price, $form->categoryId, $form->brandId, $form->description);
 
         $this->transaction->wrap(function () use ($product, $form) {
 
@@ -60,7 +60,7 @@ class ProductService
     public function update(ProductEditForm $form)
     {
         $product = $this->repository->find($form->id);
-        $product->edit($form->name, $form->slug, $form->price);
+        $product->edit($form->name, $form->slug, $form->price, $form->brandId, $form->description);
 
         $this->transaction->wrap(function () use ($product, $form) {
 

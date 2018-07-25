@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+use domain\helpers\BrandHelper;
 use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
@@ -17,6 +18,10 @@ use domain\entities\Shop\Attribute\Attribute;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'brandId')->dropDownList(BrandHelper::list())->label('Brand') ?>
+
+    <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

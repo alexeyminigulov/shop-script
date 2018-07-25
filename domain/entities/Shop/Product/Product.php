@@ -2,6 +2,7 @@
 
 namespace domain\entities\Shop\Product;
 
+use domain\entities\Shop\Brand;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
@@ -16,29 +17,36 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property string $slug
  * @property int $price
  * @property int $category_id
+ * @property int $brand_id
+ * @property string $description
  *
+ * @property Brand $brand
  * @property Value[] $values
  * @property Attribute[] $attributes0
  * @property Category $category
  */
 class Product extends ActiveRecord
 {
-    public static function create($name, $slug, $price, $categoryId): self
+    public static function create($name, $slug, $price, $categoryId, $brandId, $description): self
     {
         $product = new Product();
         $product->name = $name;
         $product->slug = $slug;
         $product->price = $price;
         $product->category_id = $categoryId;
+        $product->brand_id = $brandId;
+        $product->description = $description;
 
         return $product;
     }
 
-    public function edit($name, $slug, $price)
+    public function edit($name, $slug, $price, $brandId, $description)
     {
         $this->name = $name;
         $this->slug = $slug;
         $this->price = $price;
+        $this->brand_id = $brandId;
+        $this->description = $description;
     }
 
     public function assignmentValue(Value $value)
@@ -60,6 +68,11 @@ class Product extends ActiveRecord
     public function getValues()
     {
         return $this->hasMany(Value::className(), ['product_id' => 'id']);
+    }
+
+    public function getBrand()
+    {
+        return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
     }
 
     public function getAttributes0()
