@@ -14,7 +14,11 @@ use domain\entities\Shop\Attribute\Attribute;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype' => 'multipart/form-data',
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
@@ -27,6 +31,8 @@ use domain\entities\Shop\Attribute\Attribute;
     <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
+
+    <?= $form->field($model, 'mainPicture')->fileInput() ?>
 
     <?php
     foreach ($model->groups as $group) {

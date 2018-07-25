@@ -33,7 +33,7 @@ class ProductService
         $product = Product::create(
             $form->code, $form->name, $form->slug, $form->price,
             $form->categoryId, $form->brandId, $form->description,
-            $form->status
+            $form->mainPicture, $form->status
         );
 
         $this->transaction->wrap(function () use ($product, $form) {

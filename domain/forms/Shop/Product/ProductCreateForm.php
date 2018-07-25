@@ -5,6 +5,7 @@ namespace domain\forms\Shop\Product;
 use domain\entities\Shop\Group;
 use domain\entities\Shop\Product\Product;
 use yii\base\Model;
+use yii\web\UploadedFile;
 
 /**
  * Class ProductCreateForm
@@ -22,6 +23,7 @@ class ProductCreateForm extends Model
     public $description;
     public $groups;
     public $status;
+    public $mainPicture;
 
     private $categoryId;
 
@@ -49,6 +51,7 @@ class ProductCreateForm extends Model
             [['price', 'brandId'], 'integer'],
             [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
+            [['mainPicture'], 'file', 'extensions' => 'png, jpg'],
 //            [['slug'], 'unique'],
         ];
     }
@@ -97,6 +100,13 @@ class ProductCreateForm extends Model
             }
         }
         return true;
+    }
+
+    public function beforeValidate()
+    {
+        $this->mainPicture = UploadedFile::getInstance($this, 'mainPicture');
+
+        return parent::beforeValidate();
     }
 
     private function compositeForms()

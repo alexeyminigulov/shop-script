@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
 use domain\entities\Shop\Attribute\Attribute;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "shop_products".
@@ -20,6 +21,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property int $category_id
  * @property int $brand_id
  * @property string $description
+ * @property string $main_picture
  * @property string $status
  *
  * @property Brand $brand
@@ -32,7 +34,10 @@ class Product extends ActiveRecord
     const STATUS_ACTIVE = 10;
     const STATUS_HIDE = 0;
 
-    public static function create($code, $name, $slug, $price, $categoryId, $brandId, $description, $status): self
+    public static function create($code, $name, $slug, $price,
+                                  $categoryId, $brandId, $description,
+                                  UploadedFile $picture, $status
+    ): self
     {
         $product = new Product();
         $product->code = $code;
@@ -42,6 +47,7 @@ class Product extends ActiveRecord
         $product->category_id = $categoryId;
         $product->brand_id = $brandId;
         $product->description = $description;
+        $product->main_picture = $picture;
         $product->status = $status;
 
         return $product;
@@ -101,8 +107,22 @@ class Product extends ActiveRecord
                 'class' => SaveRelationsBehavior::className(),
                 'relations' => ['values'],
             ],
+            [
+                'class' => '\yiidreamteam\upload\FileUploadBehavior',
+                'attribute' => 'main_picture',
+                'filePath' => '@static/[[pk]].[[extension]]',
+                'fileUrl' => '@static/uploads/[[pk]].[[extension]]',
+            ],
         ];
     }
+
+    public function rules()
+    {
+        return [
+            ['main_picture', 'file'],
+        ];
+    }
+
 
     public static function tableName()
     {
