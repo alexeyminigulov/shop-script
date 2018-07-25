@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use domain\helpers\ProductHelper;
 use domain\helpers\AttributeHelper;
 use domain\entities\Shop\Attribute\Attribute;
 
@@ -30,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
+            'code',
             'name',
             'slug',
             [
@@ -38,6 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'description',
             'price',
+            [
+                'attribute' => 'status',
+                'value' => ProductHelper::statusName($model->status),
+            ],
         ],
     ]) ?>
 

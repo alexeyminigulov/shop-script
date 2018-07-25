@@ -3,6 +3,7 @@
 namespace domain\forms\Shop\Product;
 
 use domain\entities\Shop\Group;
+use domain\entities\Shop\Product\Product;
 use yii\base\Model;
 
 /**
@@ -13,12 +14,14 @@ use yii\base\Model;
  */
 class ProductCreateForm extends Model
 {
+    public $code;
     public $name;
     public $slug;
     public $price;
     public $brandId;
     public $description;
     public $groups;
+    public $status;
 
     private $categoryId;
 
@@ -41,9 +44,10 @@ class ProductCreateForm extends Model
     public function rules()
     {
         return [
-            [['name', 'slug', 'price', 'brandId'], 'required'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['code', 'name', 'slug', 'price', 'brandId', 'status'], 'required'],
+            [['code', 'name', 'slug'], 'string', 'max' => 255],
             [['price', 'brandId'], 'integer'],
+            [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
 //            [['slug'], 'unique'],
         ];

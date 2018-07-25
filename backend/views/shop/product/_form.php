@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use domain\helpers\BrandHelper;
+use domain\helpers\ProductHelper;
 use domain\entities\Shop\Attribute\Attribute;
 
 /* @var $this yii\web\View */
@@ -14,6 +15,8 @@ use domain\entities\Shop\Attribute\Attribute;
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -48,6 +51,8 @@ use domain\entities\Shop\Attribute\Attribute;
         echo '</div>';
     }
     ?>
+
+    <?= $form->field($model, 'status')->dropDownList(ProductHelper::getListStatus()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

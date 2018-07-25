@@ -13,12 +13,14 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * This is the model class for table "shop_products".
  *
  * @property int $id
+ * @property string $code
  * @property string $name
  * @property string $slug
  * @property int $price
  * @property int $category_id
  * @property int $brand_id
  * @property string $description
+ * @property string $status
  *
  * @property Brand $brand
  * @property Value[] $values
@@ -27,26 +29,33 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  */
 class Product extends ActiveRecord
 {
-    public static function create($name, $slug, $price, $categoryId, $brandId, $description): self
+    const STATUS_ACTIVE = 10;
+    const STATUS_HIDE = 0;
+
+    public static function create($code, $name, $slug, $price, $categoryId, $brandId, $description, $status): self
     {
         $product = new Product();
+        $product->code = $code;
         $product->name = $name;
         $product->slug = $slug;
         $product->price = $price;
         $product->category_id = $categoryId;
         $product->brand_id = $brandId;
         $product->description = $description;
+        $product->status = $status;
 
         return $product;
     }
 
-    public function edit($name, $slug, $price, $brandId, $description)
+    public function edit($code, $name, $slug, $price, $brandId, $description, $status)
     {
+        $this->code = $code;
         $this->name = $name;
         $this->slug = $slug;
         $this->price = $price;
         $this->brand_id = $brandId;
         $this->description = $description;
+        $this->status = $status;
     }
 
     public function assignmentValue(Value $value)

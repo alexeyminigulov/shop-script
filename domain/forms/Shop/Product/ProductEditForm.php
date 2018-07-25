@@ -15,12 +15,14 @@ use yii\base\Model;
 class ProductEditForm extends Model
 {
     public $id;
+    public $code;
     public $name;
     public $slug;
     public $brandId;
     public $description;
     public $price;
     public $groups;
+    public $status;
 
     private $product;
 
@@ -35,11 +37,13 @@ class ProductEditForm extends Model
         parent::__construct($config);
 
         $this->id = $product->id;
+        $this->code = $product->code;
         $this->name = $product->name;
         $this->slug = $product->slug;
         $this->brandId = $product->brand_id;
         $this->description = $product->description;
         $this->price = $product->price;
+        $this->status = $product->status;
 
         $this->product = $product;
 
@@ -51,9 +55,10 @@ class ProductEditForm extends Model
     public function rules()
     {
         return [
-            [['name', 'slug', 'price', 'brandId'], 'required'],
-            [['name', 'slug'], 'string', 'max' => 255],
+            [['code', 'name', 'slug', 'price', 'brandId', 'status'], 'required'],
+            [['code', 'name', 'slug'], 'string', 'max' => 255],
             [['price'], 'integer'],
+            [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
 //            [['slug'], 'unique'],
         ];
