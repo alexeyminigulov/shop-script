@@ -32,7 +32,7 @@ use domain\entities\Shop\Attribute\Attribute;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'mainPicture')->fileInput() ?>
+    <?= $form->field($model, 'pictures[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?php
     foreach ($model->groups as $group) {

@@ -3,6 +3,7 @@
 namespace domain\services\Shop;
 
 use domain\entities\Shop\Attribute\Attribute;
+use domain\entities\Shop\Product\Picture;
 use domain\entities\Shop\Product\Product;
 use domain\entities\Shop\Product\Value;
 use domain\forms\Shop\Product\ProductCreateForm;
@@ -33,7 +34,7 @@ class ProductService
         $product = Product::create(
             $form->code, $form->name, $form->slug, $form->price,
             $form->categoryId, $form->brandId, $form->description,
-            $form->mainPicture, $form->status
+            $form->status
         );
 
         $this->transaction->wrap(function () use ($product, $form) {
@@ -54,6 +55,11 @@ class ProductService
                         $product->assignmentValue($value);
                     }
                 }
+            }
+
+            foreach ($form->pictures as $key => $file) {
+                $picture = Picture::create($product->id, $key, $file);
+                $product->assignPicture($picture);
             }
             $this->repository->save($product);
         });

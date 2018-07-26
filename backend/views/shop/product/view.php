@@ -44,13 +44,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'value' => ProductHelper::statusName($model->status),
             ],
-            [
-                'attribute' => 'main_picture',
-                'value' => Html::img($model->getThumbFileUrl('main_picture', 'thumb')),
-                'format' => 'raw',
-            ],
         ],
     ]) ?>
+
+    <div class="box box-default">
+        <div class="box-header with-border text-bold bg-light-blue-gradient">Pictures</div>
+        <div class="box-body">
+            <?php foreach ($model->pictures as $picture): ?>
+            <div><?= Html::img($picture->getThumbFileUrl('picture', 'thumb')) ?></div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 
     <?php
     /** @var \domain\entities\Shop\Group $group */

@@ -24,7 +24,7 @@ class ProductEditForm extends Model
     public $price;
     public $groups;
     public $status;
-    public $mainPicture;
+    public $pictures;
 
     private $product;
 
@@ -46,7 +46,7 @@ class ProductEditForm extends Model
         $this->description = $product->description;
         $this->price = $product->price;
         $this->status = $product->status;
-        $this->mainPicture = $product->main_picture;
+        $this->pictures = $product->pictures;
 
         $this->product = $product;
 
@@ -63,7 +63,7 @@ class ProductEditForm extends Model
             [['price'], 'integer'],
             [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
-            [['mainPicture'], 'file', 'extensions' => 'png, jpg'],
+            [['pictures'], 'file', 'extensions' => 'png, jpg'],
 //            [['slug'], 'unique'],
         ];
     }
@@ -116,7 +116,7 @@ class ProductEditForm extends Model
 
     public function beforeValidate()
     {
-        $this->mainPicture = UploadedFile::getInstance($this, 'mainPicture');
+        $this->pictures = UploadedFile::getInstances($this, 'pictures');
 
         return parent::beforeValidate();
     }

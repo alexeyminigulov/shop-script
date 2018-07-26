@@ -21,23 +21,24 @@ use yii\web\UploadedFile;
  * @property int $category_id
  * @property int $brand_id
  * @property string $description
- * @property string $main_picture
+ * @property string $main_picture_id
  * @property string $status
  *
  * @property Brand $brand
  * @property Value[] $values
  * @property Attribute[] $attributes0
  * @property Category $category
+ * @property Picture[] $pictures
+ * @property Picture $mainPicture
  */
 class Product extends ActiveRecord
 {
     const STATUS_ACTIVE = 10;
     const STATUS_HIDE = 0;
 
-    public static function create($code, $name, $slug, $price,
-                                  $categoryId, $brandId, $description,
-                                  UploadedFile $picture, $status
-    ): self
+    public static function create($code, $name, $slug,
+                                  $price, $categoryId, $brandId,
+                                  $description, $status): self
     {
         $product = new Product();
         $product->code = $code;
@@ -47,7 +48,6 @@ class Product extends ActiveRecord
         $product->category_id = $categoryId;
         $product->brand_id = $brandId;
         $product->description = $description;
-        $product->main_picture = $picture;
         $product->status = $status;
 
         return $product;
@@ -63,7 +63,7 @@ class Product extends ActiveRecord
         $this->price = $price;
         $this->brand_id = $brandId;
         $this->description = $description;
-        $this->main_picture = $picture;
+        $this->main_picture_id = $picture;
         $this->status = $status;
     }
 
@@ -77,6 +77,15 @@ class Product extends ActiveRecord
     public function eraseValues()
     {
         $this->values = [];
+    }
+
+    public function assignPicture(Picture $picture)
+    {
+        $pictures = $this->pictures;
+        $pictures[] = $picture;
+        $this->pictures = $pictures;
+
+        $this->populateRelation('mainPicture', reset($pictures));
     }
 
     /**
@@ -103,32 +112,37 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
+    public function getPictures()
+    {
+        return $this->hasMany(Picture::className(), ['product_id' => 'id']);
+    }
+
+    public function getMainPicture()
+    {
+        return $this->hasOne(Picture::className(), ['id' => 'main_picture_id']);
+    }
+
     public function behaviors()
     {
         return [
             [
                 'class' => SaveRelationsBehavior::className(),
-                'relations' => ['values'],
-            ],
-            [
-                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
-                'attribute' => 'main_picture',
-                'thumbs' => [
-                    'thumb' => ['width' => 400, 'height' => 300],
-                ],
-                'filePath' => '@static/[[pk]].[[extension]]',
-                'fileUrl' => '@staticUrl/[[pk]].[[extension]]',
-                'thumbPath' => '@static/[[profile]]_[[pk]].[[extension]]',
-                'thumbUrl' => '@staticUrl/[[profile]]_[[pk]].[[extension]]',
+                'relations' => ['values', 'pictures', 'mainPicture'],
             ],
         ];
     }
 
-    public function rules()
+    public function afterSave($insert, $changedAttributes)
     {
-        return [
-            ['main_picture', 'file'],
-        ];
+        $related = $this->getRelatedRecords();
+
+        parent::afterSave($insert, $changedAttributes);
+
+        if (key_exists('mainPicture', $related)) {
+
+            $idPicture = $related['mainPicture']->id;
+            $this->updateAttributes(['main_picture_id' => $idPicture]);
+        }
     }
 
 

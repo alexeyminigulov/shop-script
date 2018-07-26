@@ -23,7 +23,7 @@ class ProductCreateForm extends Model
     public $description;
     public $groups;
     public $status;
-    public $mainPicture;
+    public $pictures;
 
     private $categoryId;
 
@@ -51,7 +51,7 @@ class ProductCreateForm extends Model
             [['price', 'brandId'], 'integer'],
             [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
-            [['mainPicture'], 'file', 'extensions' => 'png, jpg'],
+            [['pictures'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
 //            [['slug'], 'unique'],
         ];
     }
@@ -104,7 +104,7 @@ class ProductCreateForm extends Model
 
     public function beforeValidate()
     {
-        $this->mainPicture = UploadedFile::getInstance($this, 'mainPicture');
+        $this->pictures = UploadedFile::getInstances($this, 'pictures');
 
         return parent::beforeValidate();
     }
