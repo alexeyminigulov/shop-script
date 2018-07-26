@@ -8,7 +8,8 @@ end
 
 domains = {
   frontend: 'shopscript.dev',
-  backend:  'backend.shopscript.dev'
+  backend:  'backend.shopscript.dev',
+  static:   'static.shopscript.dev'
 }
 
 config = {

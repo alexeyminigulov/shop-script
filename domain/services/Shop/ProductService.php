@@ -66,7 +66,8 @@ class ProductService
         $product = $this->repository->find($form->id);
         $product->edit(
             $form->code, $form->name, $form->slug, $form->price,
-            $form->brandId, $form->description, $form->status
+            $form->brandId, $form->description,
+            $form->mainPicture, $form->status
         );
 
         $this->transaction->wrap(function () use ($product, $form) {

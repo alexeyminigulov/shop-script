@@ -53,7 +53,9 @@ class Product extends ActiveRecord
         return $product;
     }
 
-    public function edit($code, $name, $slug, $price, $brandId, $description, $status)
+    public function edit($code, $name, $slug, $price,
+                         $brandId, $description,
+                         UploadedFile $picture, $status)
     {
         $this->code = $code;
         $this->name = $name;
@@ -61,6 +63,7 @@ class Product extends ActiveRecord
         $this->price = $price;
         $this->brand_id = $brandId;
         $this->description = $description;
+        $this->main_picture = $picture;
         $this->status = $status;
     }
 
@@ -108,10 +111,15 @@ class Product extends ActiveRecord
                 'relations' => ['values'],
             ],
             [
-                'class' => '\yiidreamteam\upload\FileUploadBehavior',
+                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
                 'attribute' => 'main_picture',
+                'thumbs' => [
+                    'thumb' => ['width' => 400, 'height' => 300],
+                ],
                 'filePath' => '@static/[[pk]].[[extension]]',
-                'fileUrl' => '@static/uploads/[[pk]].[[extension]]',
+                'fileUrl' => '@staticUrl/[[pk]].[[extension]]',
+                'thumbPath' => '@static/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '@staticUrl/[[profile]]_[[pk]].[[extension]]',
             ],
         ];
     }

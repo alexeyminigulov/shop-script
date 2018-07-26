@@ -44,6 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'value' => ProductHelper::statusName($model->status),
             ],
+            [
+                'attribute' => 'main_picture',
+                'value' => Html::img($model->getThumbFileUrl('main_picture', 'thumb')),
+                'format' => 'raw',
+            ],
         ],
     ]) ?>
 
