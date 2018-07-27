@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+use kartik\widgets\FileInput;
 use domain\helpers\BrandHelper;
 use domain\helpers\ProductHelper;
 use domain\entities\Shop\Attribute\Attribute;
@@ -32,7 +33,9 @@ use domain\entities\Shop\Attribute\Attribute;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'pictures[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+    <?= $form->field($model, 'pictures[]')->widget(FileInput::classname(), [
+        'options' => ['multiple' => true, 'accept' => 'image/*'],
+    ]) ?>
 
     <?php
     foreach ($model->groups as $group) {

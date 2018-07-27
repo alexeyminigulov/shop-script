@@ -47,12 +47,39 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <div class="box box-default">
-        <div class="box-header with-border text-bold bg-light-blue-gradient">Pictures</div>
+    <div class="box" id="pictures">
+        <div class="box-header with-border">Pictures</div>
         <div class="box-body">
-            <?php foreach ($model->pictures as $picture): ?>
-            <div><?= Html::img($picture->getThumbFileUrl('picture', 'thumb')) ?></div>
-            <?php endforeach; ?>
+
+            <div class="row">
+                <?php foreach ($model->pictures as $picture): ?>
+                    <div class="col-md-2 col-xs-3" style="text-align: center">
+                        <div class="btn-group">
+                            <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span>', ['move-picture-up', 'id' => $model->id, 'photo_id' => $picture->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                            ]); ?>
+                            <?= Html::a('<span class="glyphicon glyphicon-remove"></span>', ['delete-photo', 'id' => $model->id, 'photo_id' => $picture->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                                'data-confirm' => 'Remove photo?',
+                            ]); ?>
+                            <?= Html::a('<span class="glyphicon glyphicon-arrow-right"></span>', ['move-picture-down', 'id' => $model->id, 'photo_id' => $picture->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                            ]); ?>
+                        </div>
+                        <div>
+                            <?= Html::a(
+                                Html::img($picture->getThumbFileUrl('picture', 'thumb')),
+                                $picture->getUploadedFileUrl('picture'),
+                                ['class' => 'thumbnail', 'target' => '_blank']
+                            ) ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
         </div>
     </div>
 

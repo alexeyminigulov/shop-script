@@ -129,6 +129,30 @@ class ProductController extends Controller
         ]);
     }
 
+    public function actionMovePictureUp($id, $photo_id)
+    {
+        try {
+            $product = $this->service->movePictureUp($id, $photo_id);
+            return $this->redirect(['view', 'id' => $product->id]);
+
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+    }
+
+    public function actionMovePictureDown($id, $photo_id)
+    {
+        try {
+            $product = $this->service->movePictureDown($id, $photo_id);
+            return $this->redirect(['view', 'id' => $product->id]);
+
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+    }
+
     /**
      * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

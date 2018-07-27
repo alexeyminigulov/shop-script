@@ -53,9 +53,9 @@ class Product extends ActiveRecord
         return $product;
     }
 
-    public function edit($code, $name, $slug, $price,
-                         $brandId, $description,
-                         UploadedFile $picture, $status)
+    public function edit($code, $name, $slug,
+                         $price, $brandId,
+                         $description, $status)
     {
         $this->code = $code;
         $this->name = $name;
@@ -63,7 +63,6 @@ class Product extends ActiveRecord
         $this->price = $price;
         $this->brand_id = $brandId;
         $this->description = $description;
-        $this->main_picture_id = $picture;
         $this->status = $status;
     }
 
@@ -86,6 +85,42 @@ class Product extends ActiveRecord
         $this->pictures = $pictures;
 
         $this->populateRelation('mainPicture', reset($pictures));
+    }
+
+    public function movePictureDown(Picture $picture)
+    {
+        $this->movePicture($picture, 1);
+    }
+
+    public function movePictureUp(Picture $picture)
+    {
+        $this->movePicture($picture, -1);
+    }
+
+    private function movePicture(Picture $picture, $step)
+    {
+        $pictures = $this->pictures;
+        $photo = null;
+        foreach ($pictures as &$image) {
+            if ($picture->sort + $step == $image->sort) {
+                $photo = clone $picture;
+                $picture->sort = $image->sort;
+                $image->sort = $photo->sort;
+                break;
+            }
+        }
+        if (!$photo) {
+            return;
+        }
+
+        foreach ($pictures as &$image) {
+
+            if ($image->id == $picture->id) {
+                $image->sort = $picture->sort;
+            }
+        }
+
+        $this->pictures = $pictures;
     }
 
     /**
@@ -114,7 +149,7 @@ class Product extends ActiveRecord
 
     public function getPictures()
     {
-        return $this->hasMany(Picture::className(), ['product_id' => 'id']);
+        return $this->hasMany(Picture::className(), ['product_id' => 'id'])->orderBy('sort');
     }
 
     public function getMainPicture()

@@ -63,7 +63,7 @@ class ProductEditForm extends Model
             [['price'], 'integer'],
             [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
-            [['pictures'], 'file', 'extensions' => 'png, jpg'],
+            [['pictures'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
 //            [['slug'], 'unique'],
         ];
     }

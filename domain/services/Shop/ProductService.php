@@ -9,6 +9,7 @@ use domain\entities\Shop\Product\Value;
 use domain\forms\Shop\Product\ProductCreateForm;
 use domain\forms\Shop\Product\ProductEditForm;
 use domain\forms\Shop\Product\ValueForm;
+use domain\repositories\Shop\PictureRepository;
 use domain\repositories\Shop\ProductRepository;
 use domain\repositories\Shop\ValueRepository;
 use domain\services\TransactionManager;
@@ -17,15 +18,18 @@ class ProductService
 {
     private $repository;
     private $valueRepository;
+    private $pictureRepository;
     private $transaction;
 
     public function __construct(ProductRepository $repository,
                                 ValueRepository $valueRepository,
+                                PictureRepository $pictureRepository,
                                 TransactionManager $transaction
     )
     {
         $this->repository = $repository;
         $this->valueRepository = $valueRepository;
+        $this->pictureRepository = $pictureRepository;
         $this->transaction = $transaction;
     }
 
@@ -71,9 +75,9 @@ class ProductService
     {
         $product = $this->repository->find($form->id);
         $product->edit(
-            $form->code, $form->name, $form->slug, $form->price,
-            $form->brandId, $form->description,
-            $form->mainPicture, $form->status
+            $form->code, $form->name, $form->slug,
+            $form->price, $form->brandId,
+            $form->description, $form->status
         );
 
         $this->transaction->wrap(function () use ($product, $form) {
@@ -96,8 +100,46 @@ class ProductService
                     }
                 }
             }
+
+            foreach ($form->pictures as $key => $file) {
+                $picture = Picture::create($product->id, $key, $file);
+                $product->assignPicture($picture);
+            }
             $this->repository->save($product);
         });
+
+        return $product;
+    }
+
+    public function movePictureUp($productId, $pictureId): Product
+    {
+        $funcMoveDown = function (Product $product, Picture $picture) {
+            $product->movePictureUp($picture);
+        };
+
+        return call_user_func_array([$this, 'movePicture'], [$productId, $pictureId, $funcMoveDown]);
+    }
+
+    public function movePictureDown($productId, $pictureId): Product
+    {
+        $funcMoveDown = function (Product $product, Picture $picture) {
+            $product->movePictureDown($picture);
+        };
+
+        return call_user_func_array([$this, 'movePicture'], [$productId, $pictureId, $funcMoveDown]);
+    }
+
+    private function movePicture($productId, $pictureId, callable $func): Product
+    {
+        $picture = $this->pictureRepository->find($pictureId);
+        if ($picture->product_id != $productId) {
+            throw new \DomainException('Don\'t match product id');
+        }
+        $product = $this->repository->find($productId);
+
+        call_user_func($func, $product, $picture);
+
+        $this->repository->save($product);
 
         return $product;
     }
