@@ -16,4 +16,11 @@ class PictureRepository
         }
         return $picture;
     }
+
+    public function delete(Picture $picture)
+    {
+        if ($picture->delete() === false) {
+            throw new \RuntimeException('Picture has not been delete.');
+        }
+    }
 }

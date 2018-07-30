@@ -111,6 +111,15 @@ class ProductService
         return $product;
     }
 
+    public function deletePicture($productId, $pictureId)
+    {
+        $picture = $this->pictureRepository->find($pictureId);
+        if ($picture->product_id != $productId) {
+            throw new \DomainException('Don\'t match product id');
+        }
+        $this->pictureRepository->delete($picture);
+    }
+
     public function movePictureUp($productId, $pictureId): Product
     {
         $funcMoveDown = function (Product $product, Picture $picture) {

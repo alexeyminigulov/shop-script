@@ -153,6 +153,18 @@ class ProductController extends Controller
         }
     }
 
+    public function actionDeletePhoto($id, $photo_id)
+    {
+        try {
+            $this->service->deletePicture($id, $photo_id);
+            return $this->redirect(['view', 'id' => $id]);
+
+        } catch (\DomainException $e) {
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+    }
+
     /**
      * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
