@@ -45,6 +45,11 @@ class ProductRepository
         return $products;
     }
 
+    public function getMaxValueSortPicture(Product $product): int
+    {
+        return $product->getPictures()->max('sort');
+    }
+
     public function save(Product $product, $runValidation = true)
     {
         if (!$product->save($runValidation)) {

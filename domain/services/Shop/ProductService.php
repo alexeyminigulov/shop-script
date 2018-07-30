@@ -101,8 +101,10 @@ class ProductService
                 }
             }
 
-            foreach ($form->pictures as $key => $file) {
-                $picture = Picture::create($product->id, $key, $file);
+            $maxValSortPicture = $this->repository->getMaxValueSortPicture($product);
+            foreach ($form->pictures as $file) {
+                $maxValSortPicture++;
+                $picture = Picture::create($product->id, $maxValSortPicture, $file);
                 $product->assignPicture($picture);
             }
             $this->repository->save($product);
@@ -113,11 +115,12 @@ class ProductService
 
     public function deletePicture($productId, $pictureId)
     {
-        $picture = $this->pictureRepository->find($pictureId);
-        if ($picture->product_id != $productId) {
-            throw new \DomainException('Don\'t match product id');
-        }
-        $this->pictureRepository->delete($picture);
+        $funcDeletePicture = function (Product $product, Picture $picture) {
+            $maxValSortPicture = $this->repository->getMaxValueSortPicture($product);
+            $product->deletePicture($picture, $maxValSortPicture);
+        };
+
+        return call_user_func_array([$this, 'movePicture'], [$productId, $pictureId, $funcDeletePicture]);
     }
 
     public function movePictureUp($productId, $pictureId): Product

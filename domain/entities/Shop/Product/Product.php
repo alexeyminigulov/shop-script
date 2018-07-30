@@ -87,6 +87,28 @@ class Product extends ActiveRecord
         $this->populateRelation('mainPicture', reset($pictures));
     }
 
+    public function deletePicture(Picture $picture, int $maxSort)
+    {
+        $pictures = $this->pictures;
+        $sort = $picture->sort;
+
+        foreach ($pictures as $key => $val) {
+            if ($val->id == $picture->id) {
+                unset($pictures[$key]);
+                break;
+            }
+        }
+
+        if ($maxSort > $sort) {
+            foreach ($pictures as &$val) {
+                if ($val->sort == $maxSort) {
+                    $val->sort = $sort;
+                }
+            }
+        }
+        $this->pictures = $pictures;
+    }
+
     public function movePictureDown(Picture $picture)
     {
         $this->movePicture($picture, 1);
@@ -147,7 +169,7 @@ class Product extends ActiveRecord
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
-    public function getPictures()
+    public function getPictures(): ActiveQuery
     {
         return $this->hasMany(Picture::className(), ['product_id' => 'id'])->orderBy('sort');
     }
