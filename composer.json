@@ -24,7 +24,8 @@
         "paulzi/yii2-nested-sets": "^1.0",
         "la-haute-societe/yii2-save-relations-behavior": "*",
         "yii-dream-team/yii2-upload-behavior": "*",
-        "bower-asset/jquery-zoom": "^1.7"
+        "bower-asset/jquery-zoom": "^1.7",
+        "bower-asset/magnific-popup": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

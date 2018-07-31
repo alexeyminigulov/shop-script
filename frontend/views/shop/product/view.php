@@ -265,3 +265,21 @@ foreach ($product->pictures as $key => $picture) {
 $this->registerJs($js);
 
 ?>
+
+<?php
+
+$js = "$('a.cm-image-previewer.cm-previewer.ty-previewer').magnificPopup({
+        type: 'image',
+		closeBtnInside: false,
+		mainClass: 'mfp-with-zoom mfp-img-mobile',
+		image: {
+			verticalFit: true
+		},
+        gallery: {
+          enabled: true 
+        },
+	})";
+
+$this->registerJs($js);
+
+?>
