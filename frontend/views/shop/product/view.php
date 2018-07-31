@@ -31,25 +31,30 @@ use frontend\widgets\ProductContentFeatures;
                                             </div>
                                             <div class="one-col">
                                                 <div class="ty-product-img cm-preview-wrapper" style="display:inline-block">
-                                                    <a id="det_img_link_2145b5600b13baf1_765" data-ca-image-id="preview[product_images_2145b5600b13baf1]" class="cm-image-previewer cm-previewer ty-previewer" data-ca-image-width="500" data-ca-image-height="500" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/P_50013287768924f3386bc5fe80.jpg" title=""><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_765" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/400/350/detailed/0/P_50013287768924f3386bc5fe80.jpg" alt="" title="" data-cloudzoom="zoomImage: &quot;http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/P_50013287768924f3386bc5fe80.jpg&quot;" style="user-select: none;">
-                                                        <span class="ty-previewer__icon hidden-phone"></span></a>
-                                                    <a id="det_img_link_2145b5600b13baf1_766" data-ca-image-id="preview[product_images_2145b5600b13baf1]" class="cm-image-previewer hidden cm-previewer ty-previewer" data-ca-image-width="500" data-ca-image-height="500" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/nDMJWQLHhMN4fi8b_500.jpg" title=""><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_766" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/400/350/detailed/0/nDMJWQLHhMN4fi8b_500.jpg" alt="" title="" data-cloudzoom="zoomImage: &quot;http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/nDMJWQLHhMN4fi8b_500.jpg&quot;">
-                                                        <span class="ty-previewer__icon hidden-phone"></span></a>
-                                                    <a id="det_img_link_2145b5600b13baf1_767" data-ca-image-id="preview[product_images_2145b5600b13baf1]" class="cm-image-previewer hidden cm-previewer ty-previewer" data-ca-image-width="500" data-ca-image-height="500" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/b3k0951cYIyn1LDE_500.jpg" title=""><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_767" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/400/350/detailed/0/b3k0951cYIyn1LDE_500.jpg" alt="" title="" data-cloudzoom="zoomImage: &quot;http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/572/500/detailed/0/b3k0951cYIyn1LDE_500.jpg&quot;">
-                                                        <span class="ty-previewer__icon hidden-phone"></span></a>
-                                                    <a id="det_img_link_2145b5600b13baf1_768" data-ca-image-id="preview[product_images_2145b5600b13baf1]" class="cm-image-previewer hidden cm-previewer ty-previewer" data-ca-image-width="735" data-ca-image-height="750" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/858/750/detailed/0/vx8EzIhsyOV81i8h_500.jpg" title=""><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_768" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/400/350/detailed/0/vx8EzIhsyOV81i8h_500.jpg" alt="" title="" data-cloudzoom="zoomImage: &quot;http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/858/750/detailed/0/vx8EzIhsyOV81i8h_500.jpg&quot;">
-                                                        <span class="ty-previewer__icon hidden-phone"></span></a>
-                                                    <a id="det_img_link_2145b5600b13baf1_769" data-ca-image-id="preview[product_images_2145b5600b13baf1]" class="cm-image-previewer hidden cm-previewer ty-previewer" data-ca-image-width="1000" data-ca-image-height="1000" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/1143/1000/detailed/0/uMhBLQB2lSbT9kBm_500.jpg" title=""><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_769" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/400/350/detailed/0/uMhBLQB2lSbT9kBm_500.jpg" alt="" title="" data-cloudzoom="zoomImage: &quot;http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/1143/1000/detailed/0/uMhBLQB2lSbT9kBm_500.jpg&quot;">
-                                                        <span class="ty-previewer__icon hidden-phone"></span></a>
+                                                    <?php foreach ($product->pictures as $key => $picture): ?>
+                                                        <a class="cm-image-previewer cm-previewer ty-previewer<?= $key != 0 ? ' hidden' : '' ?>"
+                                                           <?= "id='$key'" ?>
+                                                           href=""
+                                                           data-ca-image-width="<?= $key == 0 ? '650' : '1000' ?>"
+                                                           data-ca-image-height="<?= $key == 0 ? '650' : '1000' ?>">
+                                                            <?= Html::img($picture->getThumbFileUrl('picture', 'thumb_400_350'), [
+                                                                'class' => 'ty-pict cm-image',
+                                                                'alt' => '',
+                                                                'title' => '',
+                                                            ]) ?>
+                                                            <span class="ty-previewer__icon hidden-phone"></span>
+                                                        </a>
+                                                    <?php endforeach; ?>
+
                                                     <p class="ty-center"><small style="color:#999;">Наведите на картинку для увеличения</small></p>
                                                 </div>
-                                                <div class="ty-product-thumbnails ty-center cm-image-gallery" id="images_preview_2145b5600b13baf1" style="width: 400px;">
-                                                    <a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_765" class="cm-thumbnails-mini active ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_765_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/P_50013287768924f3386bc5fe80.jpg" alt="" title="">
-                                                    </a><a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_766" class="cm-thumbnails-mini ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_766_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/nDMJWQLHhMN4fi8b_500.jpg" alt="" title="">
-                                                    </a><a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_767" class="cm-thumbnails-mini ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_767_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/b3k0951cYIyn1LDE_500.jpg" alt="" title="">
-                                                    </a><a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_768" class="cm-thumbnails-mini ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_768_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/vx8EzIhsyOV81i8h_500.jpg" alt="" title="">
-                                                    </a><a data-ca-gallery-large-id="det_img_link_2145b5600b13baf1_769" class="cm-thumbnails-mini ty-product-thumbnails__item"><img class="ty-pict     cm-image" id="det_img_2145b5600b13baf1_769_mini" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/50/50/detailed/0/uMhBLQB2lSbT9kBm_500.jpg" alt="" title="">
-                                                    </a>
+                                                <div class="ty-product-thumbnails ty-center cm-image-gallery" style="width: 400px;">
+                                                    <?php foreach ($product->pictures as $key => $picture): ?>
+                                                        <a <?= "data-ca-gallery-large-id='$key'" ?>
+                                                                class="cm-thumbnails-mini ty-product-thumbnails__item<?= $key == 0 ? ' active' : '' ?>">
+                                                            <?= Html::img($picture->getThumbFileUrl('picture', 'thumb_50_50')) ?>
+                                                        </a>
+                                                    <?php endforeach; ?>
                                                 </div>
                                             </div>
                                         </div>

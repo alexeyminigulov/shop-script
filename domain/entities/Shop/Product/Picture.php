@@ -46,9 +46,13 @@ class Picture extends ActiveRecord
         return [
             [
                 'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+                'createThumbsOnRequest' => true,
                 'attribute' => 'picture',
                 'thumbs' => [
                     'thumb' => ['width' => 400, 'height' => 300],
+                    'thumb_50_50' => ['width' => 50, 'height' => 50],
+                    'thumb_189_189' => ['width' => 189, 'height' => 189],
+                    'thumb_400_350' => ['width' => 400, 'height' => 350],
                 ],
                 'filePath' => '@static/[[pk]].[[extension]]',
                 'fileUrl' => '@staticUrl/[[pk]].[[extension]]',

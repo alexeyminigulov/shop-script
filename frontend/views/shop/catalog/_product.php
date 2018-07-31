@@ -12,7 +12,11 @@ use yii\helpers\Url;
             <div class="ty-grid-body">
                 <div class="ty-grid-list__image">
                     <a href="http://demo.cs-cart.ru/stores/0074ef20992a3836/elektronika/mp3-pleery/audiosistemy-dlya-mp3/yamaha-pdx-11-db/">
-                        <img class="ty-pict cm-image" src="http://demo.cs-cart.ru/stores/0074ef20992a3836/images/thumbnails/189/189/detailed/0/p149239z.jpg" alt="" title="">
+                        <?= Html::img($product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
+                            'class' => 'ty-pict cm-image',
+                            'alt' => '',
+                            'title' => '',
+                        ]) ?>
                     </a>
                     <div class="grid-list-buttons">
                         <div class="ty-quick-view-button">
