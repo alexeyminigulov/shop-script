@@ -53,6 +53,7 @@ class Picture extends ActiveRecord
                     'thumb_50_50' => ['width' => 50, 'height' => 50],
                     'thumb_189_189' => ['width' => 189, 'height' => 189],
                     'thumb_400_350' => ['width' => 400, 'height' => 350],
+                    'thumb_800_800' => ['width' => 800, 'height' => 800],
                 ],
                 'filePath' => '@static/[[pk]].[[extension]]',
                 'fileUrl' => '@staticUrl/[[pk]].[[extension]]',

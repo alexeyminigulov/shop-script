@@ -34,7 +34,7 @@ use frontend\widgets\ProductContentFeatures;
                                                     <?php foreach ($product->pictures as $key => $picture): ?>
                                                         <a class="cm-image-previewer cm-previewer ty-previewer<?= $key != 0 ? ' hidden' : '' ?>"
                                                            <?= "id='$key'" ?>
-                                                           href=""
+                                                           href="<?= $picture->getThumbFileUrl('picture', 'thumb_800_800') ?>"
                                                            data-ca-image-width="<?= $key == 0 ? '650' : '1000' ?>"
                                                            data-ca-image-height="<?= $key == 0 ? '650' : '1000' ?>">
                                                             <?= Html::img($picture->getThumbFileUrl('picture', 'thumb_400_350'), [
@@ -247,3 +247,21 @@ use frontend\widgets\ProductContentFeatures;
         </div>
     </div>
 </div>
+
+<?php
+
+$js = '';
+
+foreach ($product->pictures as $key => $picture) {
+    $url = $picture->getThumbFileUrl('picture', 'thumb_800_800');
+    $js .= "$('#$key').zoom({
+        url: '$url',
+        callback: function(){
+        $(this).colorbox({href: this.src});
+        }
+      });";
+}
+
+$this->registerJs($js);
+
+?>
