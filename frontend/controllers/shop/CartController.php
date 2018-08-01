@@ -6,7 +6,6 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Product\Product;
 use domain\services\Shop\CartService;
-use yii\helpers\VarDumper;
 
 /**
  * Catalog controller
@@ -24,9 +23,11 @@ class CartController extends Controller
 
     public function actionIndex()
     {
-        $cart = $this->service->getCart();
-        VarDumper::dump($cart, 5, true);
-        exit(34);
+        $cartItems = $this->service->getCart()->getItems();
+
+        return $this->render('index', [
+            'cartItems' => $cartItems,
+        ]);
     }
 
     public function actionAdd($productId)

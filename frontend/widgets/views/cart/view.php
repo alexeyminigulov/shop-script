@@ -2,6 +2,8 @@
 
 /* @var $items string */
 /* @var $countProducts integer */
+
+use yii\helpers\Url;
 ?>
 
 <div class="top-cart-content ty-float-right">
@@ -26,9 +28,9 @@
                     <?= $items ?>
                 </div>
 
-                <div class="cm-cart-buttons ty-cart-content__buttons buttons-container hidden">
+                <div class="cm-cart-buttons ty-cart-content__buttons buttons-container">
                     <div class="ty-float-left">
-                        <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/cart/" rel="nofollow" class="ty-btn ty-btn__secondary">Корзина</a>
+                        <a href="<?= Url::to(['shop/cart/index']) ?>" rel="nofollow" class="ty-btn ty-btn__secondary">Корзина</a>
                     </div>
                     <div class="ty-float-right">
                         <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/checkout/" rel="nofollow" class="ty-btn ty-btn__primary">Оформить заказ</a>

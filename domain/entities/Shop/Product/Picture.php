@@ -52,6 +52,7 @@ class Picture extends ActiveRecord
                     'thumb' => ['width' => 400, 'height' => 300],
                     'thumb_40_40' => ['width' => 40, 'height' => 40],
                     'thumb_50_50' => ['width' => 50, 'height' => 50],
+                    'thumb_120_120' => ['width' => 120, 'height' => 120],
                     'thumb_189_189' => ['width' => 189, 'height' => 189],
                     'thumb_400_350' => ['width' => 400, 'height' => 350],
                     'thumb_800_800' => ['width' => 800, 'height' => 800],
