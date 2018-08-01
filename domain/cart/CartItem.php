@@ -17,7 +17,7 @@ class CartItem
 
     public function getId(): string
     {
-        return md5(serialize([$this->product->id, $this->quantity]));
+        return md5(serialize([$this->product->id, $this->product->code]));
     }
 
     public function getProductId(): int

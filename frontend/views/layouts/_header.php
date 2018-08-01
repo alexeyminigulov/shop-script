@@ -1,6 +1,7 @@
 <?php
 
 use frontend\widgets\CatalogWidget;
+use frontend\widgets\CartWidget;
 
 ?>
 <div class="tygh-header clearfix">
@@ -182,44 +183,7 @@ use frontend\widgets\CatalogWidget;
 
 
                         <div class="span5 cart-content-grid">
-                            <div class=" top-cart-content ty-float-right">
-
-                                <div class="ty-dropdown-box" id="cart_status_3945">
-                                    <div id="sw_dropdown_3945" class="ty-dropdown-box__title  cm-combination">
-                                        <div>
-
-                                            <i class="ty-minicart__icon ty-icon-basket empty"><span class="basket-cart-amount">0</span></i>
-                                            <span class="ty-minicart-title empty-cart ty-hand"><small>Ваша</small>&nbsp;Корзина</span>
-                                            <i class="ty-icon-down-micro"></i>
-
-
-                                        </div>
-                                    </div>
-                                    <div id="dropdown_3945" class="cm-popup-box ty-dropdown-box__content hidden">
-
-                                        <div class="cm-cart-content cm-cart-content-thumb cm-cart-content-delete">
-                                            <div class="ty-cart-items">
-                                                <div class="ty-cart-items__empty ty-center">Корзина</div>
-                                            </div>
-
-                                            <div class="cm-cart-buttons ty-cart-content__buttons buttons-container hidden">
-                                                <div class="ty-float-left">
-                                                    <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/cart/" rel="nofollow" class="ty-btn ty-btn__secondary">Корзина</a>
-                                                </div>
-                                                <div class="ty-float-right">
-                                                    <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/checkout/" rel="nofollow" class="ty-btn ty-btn__primary">Оформить заказ</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-
-                            </div>
+                            <?= CartWidget::widget() ?>
                             <div class="ty-dropdown-box  top-my-account ty-float-right">
                                 <div id="sw_dropdown_3946" class="ty-dropdown-box__title cm-combination unlogged">
 
@@ -295,9 +259,7 @@ use frontend\widgets\CatalogWidget;
                                                         <div class="buttons-container clearfix">
                                                             <div class="ty-float-right">
 
-
                                                                 <button  class="ty-btn__login ty-btn__secondary ty-btn" type="submit" name="dispatch[auth.login]" >Войти</button>
-
 
                                                             </div>
                                                             <div class="ty-login__remember-me">
@@ -317,7 +279,7 @@ use frontend\widgets\CatalogWidget;
 
                                 </div>
                             </div>
-                            <div class=" hidden search-button-grid ty-float-right">
+                            <div class="hidden search-button-grid ty-float-right">
                                 <div class="ty-wysiwyg-content"  data-ca-live-editor-object-id="0" data-ca-live-editor-object-type=""><a class="search-button-mobile" onclick="ShowSearch()"><i class="ty-icon-search"></i></a>
                                     <a class="close-button-mobile hidden" onclick="HideSearch()"><i class="uni-close"></i></a>
                                 </div>
