@@ -5,12 +5,8 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
-use frontend\assets\JqueryZoomAsset;
-use frontend\assets\MagnificPopup;
 
 AppAsset::register($this);
-JqueryZoomAsset::register($this);
-MagnificPopup::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

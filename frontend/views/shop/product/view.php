@@ -7,7 +7,11 @@
 use yii\helpers\Html;
 use frontend\widgets\BreadCrumbs;
 use frontend\widgets\ProductContentFeatures;
+use frontend\assets\JqueryZoomAsset;
+use frontend\assets\MagnificPopup;
 
+JqueryZoomAsset::register($this);
+MagnificPopup::register($this);
 ?>
 <div class="tygh-content clearfix">
     <div class="container-fluid  content-grid full_width">
