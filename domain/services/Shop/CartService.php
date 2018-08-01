@@ -29,6 +29,11 @@ class CartService
         $this->cart->add(new CartItem($product, $quantity));
     }
 
+    public function set($id, $quantity): void
+    {
+        $this->cart->set($id, $quantity);
+    }
+
     public function delete($id): void
     {
         $this->cart->remove($id);

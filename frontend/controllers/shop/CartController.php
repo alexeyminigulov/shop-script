@@ -2,6 +2,7 @@
 namespace frontend\controllers\shop;
 
 use Yii;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Product\Product;
@@ -24,9 +25,11 @@ class CartController extends Controller
     public function actionIndex()
     {
         $cartItems = $this->service->getCart()->getItems();
+        $cost = $this->service->getCart()->getCost();
 
         return $this->render('index', [
             'cartItems' => $cartItems,
+            'cost' => $cost,
         ]);
     }
 
@@ -36,6 +39,16 @@ class CartController extends Controller
 
         $this->service->add($product->id, 1);
 
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionRecount()
+    {
+        $reqParams = Yii::$app->request->getQueryParams()['cart_products'];
+
+        foreach ($reqParams as $id => $current) {
+            $this->service->set($id, $current['amount']);
+        }
         return $this->redirect(Yii::$app->request->referrer);
     }
 

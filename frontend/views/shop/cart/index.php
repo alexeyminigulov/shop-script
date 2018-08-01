@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+/* @var $cost \domain\cart\cost\Cost */
 /* @var $cartItems \domain\cart\CartItem[] */
 
 use yii\helpers\Url;
@@ -14,37 +15,28 @@ use yii\helpers\Html;
                 <div class="span16 breadcrumbs-grid">
                     <div id="breadcrumbs_10">
                         <div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="ty-breadcrumbs clearfix">
-                     <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <a itemprop="item" href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/" class="ty-breadcrumbs__a">
-                           <meta itemprop="position" content="1">
-                           <meta itemprop="name" content="Главная">
-                           <bdi>Главная</bdi>
-                        </a>
-                     </span>
+                            <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                                <a itemprop="item" href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/" class="ty-breadcrumbs__a">
+                                   <bdi>Главная</bdi>
+                                </a>
+                            </span>
                             <span class="ty-breadcrumbs__slash">/</span>
                             <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                        <span itemprop="item" class="ty-breadcrumbs__current">
-                           <meta itemprop="position" content="2">
-                           <meta itemprop="name" content="Содержимое корзины">
-                           <bdi>Содержимое корзины</bdi>
-                        </span>
-                     </span>
+                                <span itemprop="item" class="ty-breadcrumbs__current">
+                                   <bdi>Содержимое корзины</bdi>
+                                </span>
+                             </span>
                         </div>
-                        <!--breadcrumbs_10-->
                     </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid-row">
-            <div class="row-fluid ">
+            <div class="row-fluid">
                 <div class="span16 main-content-grid">
                     <div class="ty-mainbox-container clearfix">
                         <div class="ty-mainbox-body">
-                            <!-- Inline script moved to the bottom of the page -->
-                            <!-- Inline script moved to the bottom of the page -->
-                            <form name="checkout_form" class="cm-check-changes cm-processed-form" action="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="redirect_mode" value="cart">
-                                <input type="hidden" name="result_ids" value="cart_items,checkout_totals,checkout_steps,cart_status*,checkout_cart">
+                            <form id="cart_form" name="checkout_form" class="cm-check-changes cm-processed-form" action="<?= Url::to(['shop/cart/recount']) ?>" method="get">
                                 <h1 class="ty-mainbox-title">Содержимое корзины</h1>
                                 <div>
                                     <div class="ty-mainbox-cart__body">
@@ -92,7 +84,7 @@ use yii\helpers\Html;
                                                                 <div class="quantity cm-reload-1386058436 changer">
                                                                     <div class="ty-center ty-value-changer cm-value-changer">
                                                                         <a class="cm-increase ty-value-changer__increase">+</a>
-                                                                        <input type="text" size="3" name="cart_products[<?= $cartItem->getProduct()->id ?>][amount]" value="<?= $cartItem->getQuantity() ?>" class="ty-value-changer__input cm-amount">
+                                                                        <input type="text" size="3" name="cart_products[<?= $cartItem->getId() ?>][amount]" value="<?= $cartItem->getQuantity() ?>" class="ty-value-changer__input cm-amount">
                                                                         <a class="cm-decrease ty-value-changer__decrease">−</a>
                                                                     </div>
                                                                 </div>
@@ -130,11 +122,8 @@ use yii\helpers\Html;
                                                 <div id="applied_promotions">
                                                     <span class="ty-strong">Ваши бонусы</span>
                                                     <ul>
-                                                        <li>
-                                                            Бесплатная доставка на заказ от 3000 руб.
-                                                        </li>
+                                                        <li>Бесплатная доставка на заказ от 3000 руб.</li>
                                                     </ul>
-                                                    <!--applied_promotions-->
                                                 </div>
                                             </li>
                                         </ul>
@@ -142,30 +131,31 @@ use yii\helpers\Html;
                                     <ul class="ty-cart-statistic ty-statistic-list">
                                         <li class="ty-cart-statistic__item ty-statistic-list-subtotal">
                                             <span class="ty-cart-statistic__title">Сумма</span>
-                                            <span class="ty-cart-statistic__value"><bdi><span>18&nbsp;992</span>&nbsp;<span class="ty-rub">Р</span></bdi></span>
+                                            <span class="ty-cart-statistic__value"><bdi><span><?= $cost->getTotal() ?></span>&nbsp;<span class="ty-rub">Р</span></bdi></span>
                                         </li>
                                         <li class="ty-cart-statistic__item ty-statistic-list-shipping-method">
                                             <span class="ty-cart-statistic__title">Стоимость доставки</span>
-                                            <span class="ty-cart-statistic__value">        <i class="ty-cart-total__icon-estimation ty-icon-flight"></i><a id="opener_shipping_estimation_block" class="cm-dialog-opener cm-dialog-auto-size ty-cart-total__a-estimation" data-ca-target-id="shipping_estimation_block" href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/cart/" rel="nofollow">Рассчитать</a>
-                                 </span>
+                                            <span class="ty-cart-statistic__value">
+                                                <i class="ty-cart-total__icon-estimation ty-icon-flight"></i>
+                                                <a class="cm-dialog-opener cm-dialog-auto-size ty-cart-total__a-estimation" href="" rel="nofollow">Рассчитать</a>
+                                            </span>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                     <ul class="ty-cart-statistic__total-list">
                                         <li class="ty-cart-statistic__item ty-cart-statistic__total">
                                             <span class="ty-cart-statistic__total-title">Итоговая стоимость</span>
-                                            <span class="ty-cart-statistic__total-value"><bdi><span id="sec_cart_total" class="ty-price">18&nbsp;992</span>&nbsp;<span class="ty-price"><span class="ty-rub">Р</span></span></bdi></span>
+                                            <span class="ty-cart-statistic__total-value"><bdi><span class="ty-price"><?= $cost->getTotal() ?></span>&nbsp;<span class="ty-price"><span class="ty-rub">Р</span></span></bdi></span>
                                         </li>
                                     </ul>
-                                    <!--checkout_totals-->
                                 </div>
                             </div>
                             <div class="buttons-container ty-cart-content__bottom-buttons clearfix">
                                 <div class="ty-float-left ty-cart-content__left-buttons">
-                                    <a href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/elektronika/mp3-pleery/" class="ty-btn ty-btn__secondary ">Закрыть</a>
+                                    <a href="<?= Url::to(Yii::$app->request->referrer) ?>" class="ty-btn ty-btn__secondary ">Закрыть</a>
                                 </div>
                                 <div class="ty-float-right ty-cart-content__right-buttons">
-                                    <a class="ty-btn ty-btn__secondary cm-external-click " data-ca-external-click-id="button_cart">Пересчитать</a>
+                                    <button class="ty-btn ty-btn__secondary cm-external-click" type="submit" form="cart_form">Пересчитать</button>
                                     <a href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/checkout/" class="ty-btn ty-btn__primary ">Оформить заказ</a>
                                 </div>
                             </div>
