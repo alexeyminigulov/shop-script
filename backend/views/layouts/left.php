@@ -44,6 +44,7 @@ use yii\helpers\Url;
                     ['label' => 'Attribute', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/attribute/attribute/index'])]],
                     ['label' => 'Filter', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/filter/index'])]],
                     ['label' => 'Product', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/product/index'])]],
+                    ['label' => 'DeliveryMethod', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/delivery/index'])]],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
