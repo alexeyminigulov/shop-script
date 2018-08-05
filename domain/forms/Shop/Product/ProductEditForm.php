@@ -25,6 +25,8 @@ class ProductEditForm extends Model
     public $groups;
     public $status;
     public $pictures;
+    public $weight;
+    public $quantity;
 
     private $product;
 
@@ -47,6 +49,8 @@ class ProductEditForm extends Model
         $this->price = $product->price;
         $this->status = $product->status;
         $this->pictures = $product->pictures;
+        $this->weight = $product->weight;
+        $this->quantity = $product->quantity;
 
         $this->product = $product;
 
@@ -58,9 +62,9 @@ class ProductEditForm extends Model
     public function rules()
     {
         return [
-            [['code', 'name', 'slug', 'price', 'brandId', 'status'], 'required'],
+            [['code', 'name', 'slug', 'price', 'brandId', 'status', 'weight', 'quantity'], 'required'],
             [['code', 'name', 'slug'], 'string', 'max' => 255],
-            [['price'], 'integer'],
+            [['price', 'weight', 'quantity'], 'integer'],
             [['status'], 'in', 'range' => [Product::STATUS_ACTIVE, Product::STATUS_HIDE]],
             [['description'], 'string'],
             [['pictures'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],

@@ -39,7 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->brand->name,
             ],
             'description',
-            'price',
+            [
+                'attribute' => 'price',
+                'value' => ProductHelper::price($model->price),
+            ],
+            [
+                'attribute' => 'weight',
+                'value' => ProductHelper::weight($model->weight),
+            ],
+            'quantity',
             [
                 'attribute' => 'status',
                 'value' => ProductHelper::statusName($model->status),

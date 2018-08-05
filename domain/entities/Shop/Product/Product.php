@@ -23,6 +23,8 @@ use yii\web\UploadedFile;
  * @property string $description
  * @property string $main_picture_id
  * @property string $status
+ * @property int $weight
+ * @property int $quantity
  *
  * @property Brand $brand
  * @property Value[] $values
@@ -38,7 +40,8 @@ class Product extends ActiveRecord
 
     public static function create($code, $name, $slug,
                                   $price, $categoryId, $brandId,
-                                  $description, $status): self
+                                  $description, $status,
+                                  $weight, $quantity): self
     {
         $product = new Product();
         $product->code = $code;
@@ -49,13 +52,16 @@ class Product extends ActiveRecord
         $product->brand_id = $brandId;
         $product->description = $description;
         $product->status = $status;
+        $product->weight = $weight;
+        $product->quantity = $quantity;
 
         return $product;
     }
 
     public function edit($code, $name, $slug,
                          $price, $brandId,
-                         $description, $status)
+                         $description, $status,
+                         $weight, $quantity)
     {
         $this->code = $code;
         $this->name = $name;
@@ -64,6 +70,8 @@ class Product extends ActiveRecord
         $this->brand_id = $brandId;
         $this->description = $description;
         $this->status = $status;
+        $this->weight = $weight;
+        $this->quantity = $quantity;
     }
 
     public function assignmentValue(Value $value)

@@ -38,7 +38,7 @@ class ProductService
         $product = Product::create(
             $form->code, $form->name, $form->slug, $form->price,
             $form->categoryId, $form->brandId, $form->description,
-            $form->status
+            $form->status, $form->weight, $form->quantity
         );
 
         $this->transaction->wrap(function () use ($product, $form) {
@@ -77,7 +77,8 @@ class ProductService
         $product->edit(
             $form->code, $form->name, $form->slug,
             $form->price, $form->brandId,
-            $form->description, $form->status
+            $form->description, $form->status,
+            $form->weight, $form->quantity
         );
 
         $this->transaction->wrap(function () use ($product, $form) {

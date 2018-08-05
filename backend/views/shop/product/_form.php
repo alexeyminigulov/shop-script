@@ -61,6 +61,10 @@ use domain\entities\Shop\Attribute\Attribute;
     }
     ?>
 
+    <?= $form->field($model, 'weight')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'status')->dropDownList(ProductHelper::getListStatus()) ?>
 
     <div class="form-group">
