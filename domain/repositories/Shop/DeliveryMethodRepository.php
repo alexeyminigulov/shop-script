@@ -7,6 +7,14 @@ use domain\exceptions\EntityNotFoundException;
 
 class DeliveryMethodRepository
 {
+    public function get($id): DeliveryMethod
+    {
+        if (!$method = DeliveryMethod::findOne($id)) {
+            throw new EntityNotFoundException('DeliveryMethod is not found.');
+        }
+        return $method;
+    }
+
     public function find($id): DeliveryMethod
     {
         $deliveryMethod = DeliveryMethod::findOne(['id', $id]);

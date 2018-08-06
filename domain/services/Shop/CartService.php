@@ -9,12 +9,12 @@ use domain\repositories\Shop\ProductRepository;
 class CartService
 {
     private $cart;
-    private $repoProduct;
+    private $products;
 
-    public function __construct(Cart $cart, ProductRepository $productRepository)
+    public function __construct(Cart $cart, ProductRepository $products)
     {
         $this->cart = $cart;
-        $this->repoProduct = $productRepository;
+        $this->products = $products;
     }
 
     public function getCart(): Cart
@@ -24,7 +24,7 @@ class CartService
 
     public function add($productId, $quantity): void
     {
-        $product = $this->repoProduct->find($productId);
+        $product = $this->products->find($productId);
 
         $this->cart->add(new CartItem($product, $quantity));
     }

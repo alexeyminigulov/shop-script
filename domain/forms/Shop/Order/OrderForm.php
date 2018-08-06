@@ -11,17 +11,11 @@ use elisdn\compositeForm\CompositeForm;
  */
 class OrderForm extends CompositeForm
 {
-    public $userId;
-    public $paymentMethod;
-    public $cost;
     public $note;
-    public $currentStatus;
-    public $cancelReason;
-    public $statusesJson;
 
-    public function __construct($config = [])
+    public function __construct(int $weight, $config = [])
     {
-        $this->delivery = new DeliveryForm();
+        $this->delivery = new DeliveryForm($weight);
         $this->customer = new CustomerForm();
 
         parent::__construct($config);
@@ -30,9 +24,7 @@ class OrderForm extends CompositeForm
     public function rules()
     {
         return [
-            [['userId', 'paymentMethod', 'cost', 'note', 'currentStatus', 'cancelReason', 'statusesJson'], 'required'],
-            [['userId', 'cost', 'currentStatus'], 'integer'],
-            [['paymentMethod', 'note', 'cancelReason', 'statusesJson'], 'string', 'max' => 255],
+            [['note'], 'string'],
         ];
     }
 

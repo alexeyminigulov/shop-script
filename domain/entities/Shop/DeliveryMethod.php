@@ -2,6 +2,8 @@
 
 namespace domain\entities\Shop;
 
+use Yii;
+use domain\entities\Shop\Queries\DeliveryQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -33,6 +35,15 @@ class DeliveryMethod extends ActiveRecord
         $this->sort = $sort;
         $this->min_weight = $minWeight;
         $this->max_weight = $maxWeight;
+    }
+
+    /**
+     * @return object|\domain\entities\Shop\Queries\DeliveryQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function find(): DeliveryQuery
+    {
+        return Yii::createObject(DeliveryQuery::class, [get_called_class()]);
     }
 
     public static function tableName()

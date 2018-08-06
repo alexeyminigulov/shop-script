@@ -9,6 +9,14 @@ use Yii;
 
 class UserRepository
 {
+    public function get($id): User
+    {
+        if (!$user = User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE])) {
+            throw new EntityNotFoundException('User not found.');
+        }
+        return $user;
+    }
+
     /**
      * Finds user by name and password
      *

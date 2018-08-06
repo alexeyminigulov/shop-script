@@ -2,10 +2,14 @@
 
 namespace domain\entities\Shop;
 
+use domain\entities\Shop\Order\Status;
 use domain\entities\User;
-use domain\forms\Shop\Order\CustomerForm;
-use domain\forms\Shop\Order\DeliveryForm;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use domain\entities\Shop\Order\CustomerData;
+use domain\entities\Shop\Order\DeliveryData;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+use yii\helpers\Json;
 
 /**
  * @property int $id
@@ -25,48 +29,48 @@ use yii\db\ActiveRecord;
  * @property string $delivery_index
  * @property string $delivery_address
  *
- * @property OrderItem $orderItems
+ * @property OrderItem $items
+ * @property CustomerData $customerData
+ * @property DeliveryData $deliveryData
+ * @property array statuses
  */
 class Order extends ActiveRecord
 {
-    public static function create(
-        $userId,
-        $paymentMethod,
-        $cost,
-        $note,
-        $currentStatus,
-        $cancelReason,
-        $statusesJson,
-        DeliveryForm $delivery,
-        CustomerForm $customer
-    ): self
+    public $customerData;
+    public $deliveryData;
+    public $statuses = [];
+
+    public static function create($userId, CustomerData $customerData, array $orderItems, $cost, $note)
     {
         $order = new self();
         $order->user_id = $userId;
-        $order->payment_method = $paymentMethod;
+        $order->customerData = $customerData;
+        $order->items = $orderItems;
         $order->cost = $cost;
         $order->note = $note;
-        $order->current_status = $currentStatus;
-        $order->cancel_reason = $cancelReason;
-        $order->statuses_json = $statusesJson;
-
-        $order->delivery_method_id = $delivery->deliveryMethodId;
-        $order->delivery_method_name = $delivery->deliveryMethodName;
-        $order->delivery_cost = $delivery->deliveryCost;
-
-        $order->customer_phone = $customer->customerPhone;
-        $order->customer_name = $customer->customerName;
-        $order->delivery_index = $customer->deliveryIndex;
-        $order->delivery_address = $customer->deliveryAddress;
+        $order->addStatus(Status::NEW);
 
         return $order;
     }
 
-    public function assignOrderItem(OrderItem $orderItem)
+    public function setDeliveryInfo(DeliveryMethod $method, DeliveryData $deliveryData): void
     {
-        $orderItems = $this->orderItems;
-        $orderItems[] = $orderItem;
-        $this->orderItems = $orderItems;
+        $this->delivery_method_id = $method->id;
+        $this->delivery_method_name = $method->name;
+        $this->delivery_cost = $method->cost;
+
+        $this->deliveryData = $deliveryData;
+    }
+
+    private function addStatus($value): void
+    {
+        $this->statuses[] = new Status($value, time());
+        $this->current_status = $value;
+    }
+
+    public function canBePaid()
+    {
+        return true;
     }
 
     /**
@@ -83,9 +87,63 @@ class Order extends ActiveRecord
         return $this->hasOne(DeliveryMethod::class, ['id' => 'delivery_method_id']);
     }
 
-    public function getOrderItems()
+    public function getItems()
     {
-        return $this->hasMany(OrderItem::class, ['id' => 'order_id']);
+        return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
+    }
+
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'updatedAtAttribute' => false,
+            ],
+            [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => ['items'],
+            ],
+        ];
+    }
+
+    public function afterFind(): void
+    {
+        $this->statuses = array_map(function ($row) {
+            return new Status(
+                $row['value'],
+                $row['created_at']
+            );
+        }, Json::decode($this->getAttribute('statuses_json')));
+
+        $this->customerData = new CustomerData(
+            $this->getAttribute('customer_phone'),
+            $this->getAttribute('customer_name')
+        );
+
+        $this->deliveryData = new DeliveryData(
+            $this->getAttribute('delivery_index'),
+            $this->getAttribute('delivery_address')
+        );
+
+        parent::afterFind();
+    }
+
+    public function beforeSave($insert): bool
+    {
+        $this->setAttribute('statuses_json', Json::encode(array_map(function (Status $status) {
+            return [
+                'value' => $status->value,
+                'created_at' => $status->created_at,
+            ];
+        }, $this->statuses)));
+
+        $this->setAttribute('customer_phone', $this->customerData->phone);
+        $this->setAttribute('customer_name', $this->customerData->name);
+
+        $this->setAttribute('delivery_index', $this->deliveryData->index);
+        $this->setAttribute('delivery_address', $this->deliveryData->address);
+
+        return parent::beforeSave($insert);
     }
 
     public static function tableName()

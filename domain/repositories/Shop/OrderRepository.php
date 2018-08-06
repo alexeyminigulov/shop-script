@@ -9,12 +9,22 @@ class OrderRepository
 {
     public function find($id): Order
     {
-        $brand = Order::findOne(['id', $id]);
+        $order = Order::findOne(['id', $id]);
 
-        if (!$brand) {
+        if (!$order) {
             throw new EntityNotFoundException('Order is not found.');
         }
-        return $brand;
+        return $order;
+    }
+
+    public function findOwn($userId, $id)
+    {
+        $order = Order::find()->andWhere(['user_id' => $userId, 'id' => $id])->one();
+
+        if (!$order) {
+            throw new EntityNotFoundException('Order is not found.');
+        }
+        return $order;
     }
 
     public function save(Order $order, $runValidation = true)

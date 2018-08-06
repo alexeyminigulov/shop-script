@@ -16,16 +16,21 @@ use domain\entities\Shop\Product\Product;
  */
 class OrderItem extends ActiveRecord
 {
-    public static function create($productId, $productName, $productCode, $price, $quantity): self
+    public static function create(Product $product, $price, $quantity): self
     {
         $orderItem = new self();
-        $orderItem->product_id = $productId;
-        $orderItem->product_name = $productName;
-        $orderItem->product_code = $productCode;
+        $orderItem->product_id = $product->id;
+        $orderItem->product_name = $product->name;
+        $orderItem->product_code = $product->code;
         $orderItem->price = $price;
         $orderItem->quantity = $quantity;
 
         return $orderItem;
+    }
+
+    public function getCost()
+    {
+        return $this->price * $this->quantity;
     }
 
     /**

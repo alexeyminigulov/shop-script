@@ -74,6 +74,14 @@ class Product extends ActiveRecord
         $this->quantity = $quantity;
     }
 
+    public function checkout(int $quantity)
+    {
+        if ($this->quantity < $quantity) {
+            throw new \DomainException('Only ' . $this->quantity . ' items are available.');
+        }
+        $this->quantity -= $quantity;
+    }
+
     public function assignmentValue(Value $value)
     {
         $values = $this->values;

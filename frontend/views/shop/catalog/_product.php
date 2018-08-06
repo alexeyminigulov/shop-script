@@ -50,8 +50,8 @@ use yii\helpers\Url;
                 <div class="ty-grid-list__control">
                     <div class="button-container">
                         <div class="cm-reload-140">
-                            <a class="ty-btn__primary ty-btn__big ty-btn__add-to-cart cm-form-dialog-closer ty-btn" href="<?= Url::to(['shop/cart/add', 'productId' => $product->id]) ?>">Купить</a>
-                            <a class="cm-dialog-opener cm-dialog-auto-size ty-btn ty-btn__text ty-cr-product-button" href="http://demo.cs-cart.ru/stores/0074ef20992a3836/index.php?dispatch=call_requests.request&amp;product_id=140&amp;obj_prefix=" rel="nofollow">
+                            <a class="ty-btn__primary ty-btn__big cm-form-dialog-closer ty-btn" href="<?= Url::to(['shop/cart/add', 'productId' => $product->id]) ?>" rel="nofollow">Купить</a>
+                            <a class="cm-dialog-opener cm-dialog-auto-size ty-btn ty-btn__text ty-cr-product-button" href="<?= Url::to(['shop/order/index']) ?>" rel="nofollow">
                                 <span>Купить в один клик</span>
                             </a>
                             <div class="hidden" title="Купить в один клик"></div>

@@ -156,7 +156,7 @@ use yii\helpers\Html;
                                 </div>
                                 <div class="ty-float-right ty-cart-content__right-buttons">
                                     <button class="ty-btn ty-btn__secondary cm-external-click" type="submit" form="cart_form">Пересчитать</button>
-                                    <a href="http://demo.cs-cart.ru/stores/ca33079d2c5d3392/checkout/" class="ty-btn ty-btn__primary ">Оформить заказ</a>
+                                    <a href="<?= Url::to(['shop/order/index']) ?>" class="ty-btn ty-btn__primary" rel="nofollow">Оформить заказ</a>
                                 </div>
                             </div>
                         </div>

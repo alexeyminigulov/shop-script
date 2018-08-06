@@ -33,7 +33,7 @@ use yii\helpers\Url;
                         <a href="<?= Url::to(['shop/cart/index']) ?>" rel="nofollow" class="ty-btn ty-btn__secondary">Корзина</a>
                     </div>
                     <div class="ty-float-right">
-                        <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/checkout/" rel="nofollow" class="ty-btn ty-btn__primary">Оформить заказ</a>
+                        <a href="<?= Url::to(['shop/order/index']) ?>" rel="nofollow" class="ty-btn ty-btn__primary">Оформить заказ</a>
                     </div>
                 </div>
 
