@@ -26,6 +26,8 @@ class ProductHelper
 
     public static function price($value)
     {
-        return number_format($value, 0, '', ' ') . ' rub';
+        $value = number_format($value, 0, '', ' ');
+
+        return "<span>$value</span>&nbsp;<span class=\"ty-rub\">Р</span>";
     }
 }

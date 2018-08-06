@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'price',
                 'value' => ProductHelper::price($model->price),
+                'format' => 'raw',
             ],
             [
                 'attribute' => 'weight',

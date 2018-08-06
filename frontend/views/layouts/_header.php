@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use frontend\widgets\CatalogWidget;
 use frontend\widgets\CartWidget;
 
@@ -164,18 +165,9 @@ use frontend\widgets\CartWidget;
                             <div class=" top-search">
                                 <div class="ty-search-block">
                                     <form action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" name="search_form" method="get">
-                                        <input type="hidden" name="subcats" value="Y" />
-                                        <input type="hidden" name="pcode_from_q" value="Y" />
-                                        <input type="hidden" name="pshort" value="Y" />
-                                        <input type="hidden" name="pfull" value="Y" />
-                                        <input type="hidden" name="pname" value="Y" />
-                                        <input type="hidden" name="pkeywords" value="Y" />
-                                        <input type="hidden" name="search_performed" value="Y" />
 
-                                        <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint" /><button title="Найти" class="ty-search-magnifier" type="submit"><i class="ty-icon-search"></i></button>
-                                        <input type="hidden" name="dispatch" value="products.search" />
+                                        <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint"><button title="Найти" class="ty-search-magnifier" type="submit"><i class="ty-icon-search"></i></button>
 
-                                        <input type="hidden" name="security_hash" class="cm-no-hide-input" value="2198a5b676ffd4e8f8299c6a7007a82f" />
                                     </form>
                                 </div>
                             </div>
@@ -199,14 +191,15 @@ use frontend\widgets\CartWidget;
 
                                     <div id="account_info_3946">
                                         <ul class="ty-account-info">
-
-
-                                            <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/orders/" rel="nofollow">Заказы</a></li>
-                                            <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/" rel="nofollow">Список сравнения</a></li>
-
-
-
-                                            <li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow">Отложенные товары</a></li>
+                                            <li class="ty-account-info__item ty-dropdown-box__item">
+                                                <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Заказы</a>
+                                            </li>
+                                            <li class="ty-account-info__item ty-dropdown-box__item">
+                                                <a class="ty-account-info__a underlined" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/" rel="nofollow">Список сравнения</a>
+                                            </li>
+                                            <li class="ty-account-info__item ty-dropdown-box__item">
+                                                <a class="ty-account-info__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow">Отложенные товары</a>
+                                            </li>
                                         </ul>
 
                                         <div class="ty-account-info__orders updates-wrapper track-orders" id="track_orders_block_3946">

@@ -4,6 +4,7 @@ namespace frontend\controllers\cabinet;
 use Yii;
 use domain\cart\Cart;
 use yii\web\Controller;
+use domain\entities\User;
 use domain\entities\Shop\Order;
 use yii\web\NotFoundHttpException;
 use domain\repositories\Shop\OrderRepository;
@@ -23,6 +24,17 @@ class OrderController extends Controller
         parent::__construct($id, $module, $config);
         $this->orders = $orders;
         $this->cart = $cart;
+    }
+
+    public function actionIndex()
+    {
+        /** @var User $user */
+        $user = Yii::$app->user->identity;
+        $orders = $user->orders;
+
+        return $this->render('index', [
+            'orders' => $orders,
+        ]);
     }
 
     public function actionView($id)
