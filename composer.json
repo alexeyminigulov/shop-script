@@ -26,7 +26,8 @@
         "yii-dream-team/yii2-upload-behavior": "*",
         "bower-asset/jquery-zoom": "^1.7",
         "bower-asset/magnific-popup": "^1.1",
-        "elisdn/yii2-composite-form": "^1.1"
+        "elisdn/yii2-composite-form": "^1.1",
+        "yii-cms/yii2-robokassa": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

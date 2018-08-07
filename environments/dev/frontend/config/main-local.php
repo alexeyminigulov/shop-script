@@ -12,6 +12,17 @@ if (!YII_ENV_TEST) {
         'class' => 'yii\gii\Module',
         'allowedIPs' => ['127.0.0.1', '::1', '192.168.83.*'],
     ];
+
+    $config['components'] = [
+        'robokassa' => [
+            'class' => '\robokassa\Merchant',
+            'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
+            'sMerchantLogin' => '',
+            'sMerchantPass1' => '',
+            'sMerchantPass2' => '',
+            'isTest' => !YII_ENV_PROD,
+        ],
+    ];
 }
 
 return $config;
