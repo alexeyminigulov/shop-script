@@ -2,7 +2,9 @@
 
 namespace domain\repositories\Shop;
 
+use domain\entities\Shop\Attribute\Attribute;
 use domain\entities\Shop\Category;
+use domain\entities\Shop\Group;
 use domain\exceptions\EntityNotFoundException;
 
 class CategoryRepository
@@ -57,6 +59,48 @@ class CategoryRepository
         $categories[] = $category;
 
         return $categories;
+    }
+
+    public function getGroups($id)
+    {
+        $categories = $this->getWithParents($id);
+
+        $groups = [];
+        foreach ($categories as $category) {
+            $groups = array_merge($groups, $category->groups);
+        }
+        if (empty($groups)) {
+            throw new EntityNotFoundException('Groups is not found.');
+        }
+        return $groups;
+    }
+
+    public function getAttributes($id)
+    {
+        /** @var Group[] $groups */
+        $groups = $this->getGroups($id);
+        $attributes = [];
+
+        foreach ($groups as $group) {
+            $attributes = array_merge($attributes, $group->attributes0);
+        }
+        if (empty($attributes)) {
+            throw new EntityNotFoundException('Attributes is not found.');
+        }
+        return $attributes;
+    }
+
+    public function getFilters($id)
+    {
+        /** @var Attribute[] $attributes */
+        $attributes = $this->getAttributes($id);
+        $filters = [];
+
+        foreach ($attributes as $attribute) {
+            $filters[] = $attribute->filter;
+        }
+
+        return $filters;
     }
 
     /**

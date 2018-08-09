@@ -4,6 +4,7 @@
 /* @var $category \domain\entities\Shop\Category */
 
 use frontend\widgets\SubCategories;
+use frontend\widgets\FiltersWidget;
 
 ?>
 
@@ -14,7 +15,9 @@ use frontend\widgets\SubCategories;
         ]) ?>
     </div>
     <div class="row-fluid ">
-        <?= $this->render('_filters') ?>
+        <?= FiltersWidget::widget([
+                'category' => $category,
+        ]) ?>
     </div>
     <div class="row-fluid ">
         <?= $this->render('_bestsellers') ?>

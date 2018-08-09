@@ -15,7 +15,7 @@ use frontend\widgets\CartWidget;
                     <div class=" top-logo">
                         <div class="ty-logo-container">
                             <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" title="">
-                                <img src="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/images/logos/2/unitheme-logo.png" width="190" height="47" alt="" class="ty-logo-container__image" />
+                                <img src="<?= Url::to('/image/logo.png') ?>" width="190" height="47" alt="" class="ty-logo-container__image" />
                             </a>
                         </div>
                     </div>
