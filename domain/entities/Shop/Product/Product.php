@@ -109,7 +109,14 @@ class Product extends ActiveRecord
         $sort = $picture->sort;
 
         foreach ($pictures as $key => $val) {
+
             if ($val->id == $picture->id) {
+                if ($key == 0) {
+                    if (count($pictures) < 2) {
+                        throw new \DomainException('Last picture can\'t be removed');
+                    }
+                    $this->mainPicture = $pictures[1];
+                }
                 unset($pictures[$key]);
                 break;
             }
@@ -144,6 +151,9 @@ class Product extends ActiveRecord
                 $photo = clone $picture;
                 $picture->sort = $image->sort;
                 $image->sort = $photo->sort;
+                if ($image->sort == 0) {
+                    $this->mainPicture = $image;
+                }
                 break;
             }
         }
@@ -155,6 +165,9 @@ class Product extends ActiveRecord
 
             if ($image->id == $picture->id) {
                 $image->sort = $picture->sort;
+                if ($picture->sort == 0) {
+                    $this->mainPicture = $picture;
+                }
             }
         }
 
