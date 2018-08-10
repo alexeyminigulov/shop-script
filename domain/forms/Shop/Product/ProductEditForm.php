@@ -13,7 +13,7 @@ use yii\web\UploadedFile;
  *
  * @property int $categoryId
  */
-class ProductEditForm extends Model
+class ProductEditForm extends ExtensionForm
 {
     public $id;
     public $code;
@@ -77,47 +77,6 @@ class ProductEditForm extends Model
         return $this->categoryId;
     }
 
-    public function load($data, $formName = null)
-    {
-        $result = parent::load($data, $formName);
-        if (!$result) {
-            return false;
-        }
-
-        foreach ($this->compositeForms() as $scope) {
-
-            if (isset($data[$scope])) {
-                foreach ($this->groups as $group) {
-                    foreach ($group->attributes as $attribute) {
-                        /* @var $attribute ValueForm */
-                        $attribute->setAttributes($data[$scope][$attribute->id]);
-                    }
-                }
-            } else {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function validate($attributeNames = null, $clearErrors = true)
-    {
-        $result = parent::validate($attributeNames, $clearErrors);
-        if (!$result) {
-            return false;
-        }
-        foreach ($this->groups as $group) {
-            foreach ($group->attributes as $attribute) {
-                /* @var $attribute ValueForm */
-                if (!$attribute->validate()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public function beforeValidate()
     {
         $this->pictures = UploadedFile::getInstances($this, 'pictures');
@@ -125,10 +84,10 @@ class ProductEditForm extends Model
         return parent::beforeValidate();
     }
 
-    private function compositeForms()
+    protected function compositeForms()
     {
         return [
-            'ValueForm',
+            'groups' => ['attributes', 'ValueForm'],
         ];
     }
 }

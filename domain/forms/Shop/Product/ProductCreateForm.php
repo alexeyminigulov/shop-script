@@ -4,7 +4,6 @@ namespace domain\forms\Shop\Product;
 
 use domain\entities\Shop\Group;
 use domain\entities\Shop\Product\Product;
-use yii\base\Model;
 use yii\web\UploadedFile;
 
 /**
@@ -13,7 +12,7 @@ use yii\web\UploadedFile;
  *
  * @property int $categoryId
  */
-class ProductCreateForm extends Model
+class ProductCreateForm extends ExtensionForm
 {
     public $code;
     public $name;
@@ -63,47 +62,6 @@ class ProductCreateForm extends Model
         return $this->categoryId;
     }
 
-    public function load($data, $formName = null)
-    {
-        $result = parent::load($data, $formName);
-        if (!$result) {
-            return false;
-        }
-
-        foreach ($this->compositeForms() as $scope) {
-
-            if (isset($data[$scope])) {
-                foreach ($this->groups as $group) {
-                    foreach ($group->attributes as $attribute) {
-                        /* @var $attribute ValueForm */
-                        $attribute->setAttributes($data[$scope][$attribute->id]);
-                    }
-                }
-            } else {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function validate($attributeNames = null, $clearErrors = true)
-    {
-        $result = parent::validate($attributeNames, $clearErrors);
-        if (!$result) {
-            return false;
-        }
-        foreach ($this->groups as $group) {
-            foreach ($group->attributes as $attribute) {
-                /* @var $attribute ValueForm */
-                if (!$attribute->validate()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     public function beforeValidate()
     {
         $this->pictures = UploadedFile::getInstances($this, 'pictures');
@@ -111,10 +69,10 @@ class ProductCreateForm extends Model
         return parent::beforeValidate();
     }
 
-    private function compositeForms()
+    protected function compositeForms()
     {
         return [
-            'ValueForm',
+            'groups' => ['attributes', 'ValueForm'],
         ];
     }
 }
