@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $category \domain\entities\Shop\Category */
 /* @var $categories \domain\entities\Shop\Category[] */
-/* @var $products \domain\entities\Shop\Product\Product[] */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 
 ?>
 
@@ -15,7 +15,7 @@
                 <?= $this->render('_main-content', [
                     'category' => $category,
                     'categories' => $categories,
-                    'products' => $products,
+                    'dataProvider' => $dataProvider,
                 ]) ?>
 
                 <?= $this->render('_left', [

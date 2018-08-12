@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $category \domain\entities\Shop\Category */
 /* @var $categories \domain\entities\Shop\Category[] */
-/* @var $products \domain\entities\Shop\Product\Product[] */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use frontend\widgets\BreadCrumbs;
@@ -21,7 +21,7 @@ use frontend\widgets\BreadCrumbs;
             ]) ?>
 
             <?= $this->render('_category-products', [
-                'products' => $products,
+                'dataProvider' => $dataProvider,
             ]) ?>
         </div>
     </div>

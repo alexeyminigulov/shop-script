@@ -1,7 +1,9 @@
 <?php
 
 /* @var $this \yii\web\View */
-/* @var $products \domain\entities\Shop\Product\Product[] */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+
+use yii\widgets\LinkPager;
 
 ?>
 <div class="cat-view-grid" id="category_products_11">
@@ -9,12 +11,21 @@
         <?= $this->render('_sort-container') ?>
         <div class="grid-list ">
             <?php
-            foreach ($products as $product) {
+            foreach ($dataProvider->getModels() as $product) {
                 echo $this->render('_product', [
-                        'product' => $product,
+                     'product' => $product,
                 ]);
             }
             ?>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 text-left">
+        <?= LinkPager::widget([
+            'pagination' => $dataProvider->getPagination(),
+        ]) ?>
+    </div>
+    <div class="col-sm-6 text-right">Showing <?= $dataProvider->getCount() ?> of <?= $dataProvider->getTotalCount() ?></div>
 </div>

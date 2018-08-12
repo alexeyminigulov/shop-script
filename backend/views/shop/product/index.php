@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use domain\helpers\CategoryHelper;
+use \domain\entities\Shop\Product\Product;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Shop\ProductSearch */
@@ -43,6 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'slug',
             'price',
+            [
+                'label' => 'Category',
+                'attribute' => 'category_id',
+                'value' => function (Product $product) {
+                    return $product->category->name;
+                },
+                'headerOptions' => ['class' => 'text-blue'],
+                'filter' => CategoryHelper::list(false),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

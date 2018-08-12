@@ -6,7 +6,7 @@ use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Category;
 use domain\helpers\ActiveRecordHelper;
 use domain\repositories\Shop\CategoryRepository;
-use domain\repositories\Shop\ProductRepository;
+use domain\readRepositories\Shop\ProductReadRepository;
 
 /**
  * Catalog controller
@@ -14,15 +14,15 @@ use domain\repositories\Shop\ProductRepository;
 class CatalogController extends Controller
 {
     private $repository;
-    private $repoProduct;
+    private $products;
 
     public function __construct($id, $module, CategoryRepository $repository,
-                                ProductRepository $repoProduct,
+                                ProductReadRepository $products,
                                 $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->repository = $repository;
-        $this->repoProduct = $repoProduct;
+        $this->products = $products;
     }
 
     public function actionView($slug)
@@ -32,12 +32,12 @@ class CatalogController extends Controller
         $descendantsCategory = [$category];
         $descendantsCategory = array_merge($descendantsCategory, $category->descendants);
         $categoryIds = ActiveRecordHelper::getFields($descendantsCategory, 'id');
-        $products = $this->repoProduct->getProducts($categoryIds);
+        $dataProvider = $this->products->getAll($categoryIds);
 
         return $this->render('view', [
             'category' => $category,
             'categories' => $categories,
-            'products' => $products,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

@@ -12,7 +12,9 @@ use yii\helpers\Url;
             <div class="ty-grid-body">
                 <div class="ty-grid-list__image">
                     <a href="http://demo.cs-cart.ru/stores/0074ef20992a3836/elektronika/mp3-pleery/audiosistemy-dlya-mp3/yamaha-pdx-11-db/">
-                        <?= Html::img($product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
+                        <?= Html::img(empty($product->mainPicture)
+                            ? $product->getDefaultPicture()->getThumbFileUrl('picture', 'thumb_189_189')
+                            : $product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
                             'class' => 'ty-pict cm-image',
                             'alt' => '',
                             'title' => '',

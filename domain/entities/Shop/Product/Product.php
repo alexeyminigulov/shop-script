@@ -208,6 +208,11 @@ class Product extends ActiveRecord
         return $this->hasOne(Picture::className(), ['id' => 'main_picture_id']);
     }
 
+    public function getDefaultPicture(): Picture
+    {
+        return Picture::findOne(['id', 1]);
+    }
+
     public function behaviors()
     {
         return [

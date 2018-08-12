@@ -38,13 +38,6 @@ class ProductRepository
         return $groups;
     }
 
-    public function getProducts(array $categoryIds)
-    {
-        $products = Product::find()->where(['category_id' => $categoryIds])->all();
-
-        return $products;
-    }
-
     public function getMaxValueSortPicture(Product $product): int
     {
         return $product->getPictures()->max('sort');
