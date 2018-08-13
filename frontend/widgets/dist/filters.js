@@ -2,7 +2,6 @@
     'use strict';
 
     var base_url;
-    var ajax_ids;
     var no_trigger = false;
 
     var HASH_SEPARATOR = '_';
@@ -53,38 +52,30 @@
             }
         }
 
-        function getProducts(url, obj) {
-            if (ajax_ids) {
-                $.ceAjax('request', url, {
-                    result_ids: ajax_ids,
-                    full_render: true,
-                    save_history: true,
-                    caching: false,
-                    scroll: '.ty-mainbox-title',
-                    obj: obj,
-                    callback: function (response) {
-                        if (response.no_products) {
-                            resetFilters(obj);
-                        }
-                    }
-                });
-            } else {
-                $.redirect(url);
-            }
-
-            return false;
-        }
+        // function getProducts(url, obj) {
+        //     var queryName = obj.attr('name');
+        //     var queryParam = obj.attr('value');
+        //     var query = queryName +'='+ queryParam;
+        //
+        //     $.ajax({
+        //         method: "GET",
+        //         url: url,
+        //         data: query
+        //     })
+        //     .done(function( msg ) {
+        //         console.log( "Data Saved: " + msg );
+        //     });
+        // }
 
         function setHandler() {
             $(_.doc).on('change', '.cm-product-filters-checkbox', function () {
                 if (no_trigger) {
                     return false;
                 }
-
-                var self = $(this);
-                var container = self.parents('.cm-product-filters');
-
-                return getProducts($.attachToUrl(base_url, 'features_hash=' + generateHash(container)), self);
+                //
+                // var self = $(this);
+                //
+                // return getProducts(base_url, self);
             });
         }
 
@@ -96,7 +87,6 @@
                     var self = $(this);
                     if (self.data('caBaseUrl')) {
                         base_url = self.data('caBaseUrl');
-                        ajax_ids = self.data('caTargetId');
                     }
                 });
 
@@ -132,8 +122,8 @@
                     step: data.step,
                     values: [data.left, data.right],
                     slide: function (event, ui) {
-                        $('#' + id + '_left').val(ui.values[0]);
-                        $('#' + id + '_right').val(ui.values[1]);
+                        $('#' + id + '_min').val(ui.values[0]);
+                        $('#' + id + '_max').val(ui.values[1]);
                     },
                     change: function (event, ui) {
                         var replacement = ui.values[0] + '-' + ui.values[1];
@@ -157,10 +147,10 @@
                     $('#elm_checkbox_' + id).val(replacement).prop('checked', true);
                 }
 
-                $('#' + id + '_left, #' + id + '_right')
+                $('#' + id + '_min, #' + id + '_max')
                     .off('change')
                     .on('change', function () {
-                        var index = $(this).attr('id') == id + '_left' ? 0 : 1;
+                        var index = $(this).attr('id') == id + '_min' ? 0 : 1;
                         $el.slider('values', index, _.toNumeric($(this).val()));
                     });
 

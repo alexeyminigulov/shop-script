@@ -3,6 +3,7 @@
 namespace domain\entities\Shop\Attribute;
 
 use domain\entities\Shop\Filter;
+use domain\entities\Shop\Product\Value;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Group;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -63,6 +64,16 @@ class Attribute extends ActiveRecord
             $items[] = Item::create($item, $this->id);
         }
         $this->items = $items;
+    }
+
+    public function getMin()
+    {
+        return Value::find()->where(['attribute_id' => $this->id])->min('value');
+    }
+
+    public function getMax()
+    {
+        return Value::find()->where(['attribute_id' => $this->id])->max('value');
     }
 
     public function rules()

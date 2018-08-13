@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers\shop;
 
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Category;
@@ -39,6 +40,13 @@ class CatalogController extends Controller
             'categories' => $categories,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionFilter()
+    {
+        var_dump(\Yii::$app->request->get());
+        exit(43);
+//        return Json::encode([1,2,4]);
     }
 
     protected function findModel($slug)

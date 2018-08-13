@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -83,7 +84,7 @@ AppAsset::register($this);
             default_editor: 'redactor',
             default_previewer: 'magnific',
             current_path: '/stores/8ae4a590ed09f99f',
-            current_location: 'http://demo.cs-cart.ru/stores/8ae4a590ed09f99f',
+            current_location: '<?= Url::base('http') ?>',
             images_dir: 'http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/design/themes/responsive/media/images',
             notice_displaying_time: 5,
             cart_language: 'ru',
