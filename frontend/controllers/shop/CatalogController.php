@@ -1,7 +1,8 @@
 <?php
 namespace frontend\controllers\shop;
 
-use yii\helpers\Json;
+use Yii;
+use domain\forms\Shop\Search\SearchForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Category;
@@ -42,11 +43,24 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionFilter()
+    public function actionSearch()
     {
-        var_dump(\Yii::$app->request->get());
-        exit(43);
-//        return Json::encode([1,2,4]);
+        $category = $this->findModel(Yii::$app->request->get('slug'));
+        $categories = $this->repository->getWithParents($category->id, false);
+        $attributes = $this->repository->getAttributes($category->id);
+
+        $form = new SearchForm($attributes);
+        if ($form->load(Yii::$app->request->get())) {
+
+            $dataProvider = $this->products->search($form);
+
+            return $this->render('view', [
+                'category' => $category,
+                'categories' => $categories,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+        return $this->redirect('view?slug=' . Yii::$app->request->get('slug'));
     }
 
     protected function findModel($slug)

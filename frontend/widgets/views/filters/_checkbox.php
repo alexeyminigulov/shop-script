@@ -19,7 +19,7 @@ use yii\helpers\Html;
                 <li class="cm-product-filters-checkbox-container ty-product-filters__group">
                     <input class="cm-product-filters-checkbox" type="checkbox"
                            id="checkbox_<?= $attribute->id .'_'. $item->id ?>"
-                           name="product_filters[<?= Html::encode($attribute->id) ?>][]"
+                           name="v[<?= $attribute->id ?>][value][]"
                            value="<?= Html::encode($item->id) ?>">
                     <label for="checkbox_<?= $attribute->id .'_'. $item->id ?>"><?= Html::encode($item->option) ?></label>
                 </li>

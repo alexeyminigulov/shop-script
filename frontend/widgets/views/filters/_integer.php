@@ -20,7 +20,7 @@ use yii\helpers\Html;
                 <span class="ty-price-slider__filter-prefix"></span>
                 <input type="text" class="ty-price-slider__input-text"
                        id="slider_<?= $attribute->id ?>_min"
-                       name="product_filters[<?= $attribute->id ?>][min]" value="<?= $attribute->getMin() ?>">
+                       name="v[<?= $attribute->id ?>][value][min]" value="<?= $attribute->getMin() ?>">
                 <span class="ty-rub">Р</span>
             </bdi>
             &nbsp;–&nbsp;
@@ -28,7 +28,7 @@ use yii\helpers\Html;
                 <span class="ty-price-slider__filter-prefix"></span>
                 <input type="text" class="ty-price-slider__input-text"
                        id="slider_<?= $attribute->id ?>_max"
-                       name="product_filters[<?= $attribute->id ?>][max]" value="<?= $attribute->getMax() ?>">
+                       name="v[<?= $attribute->id ?>][value][max]" value="<?= $attribute->getMax() ?>">
                 <span class="ty-rub">Р</span>
             </bdi>
         </p>

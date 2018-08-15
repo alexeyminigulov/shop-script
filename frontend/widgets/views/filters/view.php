@@ -4,6 +4,7 @@
 /* @var $tplFilters string */
 
 use yii\helpers\Url;
+use Yii;
 
 ?>
 
@@ -14,11 +15,11 @@ use yii\helpers\Url;
         </div>
         <div class="ty-mainbox-body">
             <div class="cm-product-filters"
-                 data-ca-base-url="<?= Url::to(['shop/catalog/filter'], true) ?>"
                  id="product_filters_39">
                 <div class="ty-product-filters__wrapper">
-                    <form action="<?= Url::to(['shop/catalog/filter']) ?>" method="get">
+                    <form action="<?= Url::to(['shop/catalog/search']) ?>" method="get">
 
+                        <input type="text" hidden name="slug" value="<?= Yii::$app->request->get('slug') ?>">
                         <?= $tplFilters ?>
                         <div class="ty-product-filters__tools clearfix">
                             <button class="button btn-product-filter" type="submit">Найти</button>
