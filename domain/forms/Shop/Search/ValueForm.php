@@ -26,6 +26,18 @@ class ValueForm extends Model
         ];
     }
 
+    public function getAttribute0(): Attribute
+    {
+        return $this->_attribute;
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'value' => $this->_attribute->name,
+        ];
+    }
+
     public function formName()
     {
         return 'v';

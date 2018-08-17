@@ -29,7 +29,12 @@ class CatalogController extends Controller
 
     public function actionView($slug)
     {
-        $category = $this->findModel($slug);
+        $category = $this->findModel(Yii::$app->request->get('slug'));
+        $attributes = $this->repository->getAttributes($category->id);
+        $form = new SearchForm($attributes);
+        $form->load(Yii::$app->request->get());
+
+//        $category = $this->findModel($slug);
         $categories = $this->repository->getWithParents($category->id, false);
         $descendantsCategory = [$category];
         $descendantsCategory = array_merge($descendantsCategory, $category->descendants);
@@ -40,6 +45,7 @@ class CatalogController extends Controller
             'category' => $category,
             'categories' => $categories,
             'dataProvider' => $dataProvider,
+            'model' => $form,
         ]);
     }
 
@@ -58,6 +64,7 @@ class CatalogController extends Controller
                 'category' => $category,
                 'categories' => $categories,
                 'dataProvider' => $dataProvider,
+                'model' => $form,
             ]);
         }
         return $this->redirect('view?slug=' . Yii::$app->request->get('slug'));

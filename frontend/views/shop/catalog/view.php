@@ -4,6 +4,7 @@
 /* @var $category \domain\entities\Shop\Category */
 /* @var $categories \domain\entities\Shop\Category[] */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $model \domain\forms\Shop\Search\SearchForm */
 
 ?>
 
@@ -19,7 +20,8 @@
                 ]) ?>
 
                 <?= $this->render('_left', [
-                        'category' => $category,
+                    'category' => $category,
+                    'model' => $model,
                 ]) ?>
             </div>
         </div>

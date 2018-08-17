@@ -4,6 +4,7 @@ namespace frontend\widgets;
 
 use domain\entities\Shop\Attribute\Attribute;
 use domain\entities\Shop\Filter;
+use domain\forms\Shop\Search\SearchForm;
 use Yii;
 use yii\base\Widget;
 use domain\entities\Shop\Category;
@@ -13,6 +14,8 @@ class FiltersWidget extends Widget
 {
     /* @var $category Category */
     public $category;
+    /* @var $model SearchForm */
+    public $model;
     /** @var $filters Filter[] */
     private $filters;
     /* @var $categories CategoryRepository */
@@ -31,9 +34,9 @@ class FiltersWidget extends Widget
 
         $tplFilters = '';
 
-        foreach ($this->filters as $filter) {
-            $tplFilters .= $this->getTplFilter($filter);
-        }
+//        foreach ($this->filters as $filter) {
+//            $tplFilters .= $this->getTplFilter($filter);
+//        }
 
         $result = $this->getTemplate($tplFilters);
 
@@ -46,30 +49,28 @@ class FiltersWidget extends Widget
         FiltersAsset::register($view);
     }
 
-    private function getTplFilter(Filter $filter)
-    {
-        $attribute = $filter->attribute0;
-
-        if ($attribute->type == Attribute::TYPE_INTEGER) {
-
-            return $this->render('filters/_integer', [
-                'attribute' => $attribute,
-            ]);
-
-        } else if ($attribute->type == Attribute::TYPE_CHECKBOX) {
-
-            return $this->render('filters/_checkbox', [
-                'attribute' => $attribute,
-            ]);
-
-        }
-        return '';
-    }
-
+//    private function getTplFilter(Filter $filter)
+//    {
+//        $attribute = $filter->attribute0;
+//
+//        if ($attribute->type == Attribute::TYPE_INTEGER) {
+//
+//            return $this->render('filters/_integer', [
+//                'attribute' => $attribute,
+//            ]);
+//
+//        } else if ($attribute->type == Attribute::TYPE_CHECKBOX) {
+//
+//            return $this->render('filters/_checkbox', [
+//                'attribute' => $attribute,
+//            ]);
+//
+//        }
+//        return '';
+//    }
+//
     private function getTemplate($tplFilters)
     {
-        return $this->render('filters/view', [
-            'tplFilters' => $tplFilters,
-        ]);
+        return $this->render('filters/view', ['model' => $this->model]);
     }
 }

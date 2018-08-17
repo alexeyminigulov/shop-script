@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $category \domain\entities\Shop\Category */
+/* @var $model \domain\forms\Shop\Search\SearchForm */
 
 use frontend\widgets\SubCategories;
 use frontend\widgets\FiltersWidget;
@@ -16,7 +17,8 @@ use frontend\widgets\FiltersWidget;
     </div>
     <div class="row-fluid ">
         <?= FiltersWidget::widget([
-                'category' => $category,
+            'category' => $category,
+            'model' => $model,
         ]) ?>
     </div>
     <div class="row-fluid ">
