@@ -239,6 +239,6 @@ class Product extends ActiveRecord
 
     public static function tableName()
     {
-        return 'shop_products';
+        return '{{%shop_products}}';
     }
 }
