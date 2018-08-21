@@ -4,12 +4,11 @@ namespace domain\entities\Shop\Product;
 
 use domain\entities\Shop\Brand;
 use yii\db\ActiveQuery;
-use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
+use domain\entities\DefaultPicture;
 use domain\entities\Shop\Attribute\Attribute;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "shop_products".
@@ -209,9 +208,9 @@ class Product extends ActiveRecord
         return $this->hasOne(Picture::className(), ['id' => 'main_picture_id']);
     }
 
-    public function getDefaultPicture(): Picture
+    public function getDefaultPicture()
     {
-        return Picture::findOne(['id', 1]);
+        return DefaultPicture::findOne(['picture', 'product.png']);
     }
 
     public function __get($name)
