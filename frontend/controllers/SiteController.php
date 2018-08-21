@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use domain\entities\Shop\Product\Product;
 use domain\services\ContactService;
 use domain\services\UserService;
 use Yii;
@@ -82,7 +83,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $products = Product::find()->limit(15)->all();
+
+        return $this->render('index', [
+            'products' => $products,
+        ]);
     }
 
     /**
