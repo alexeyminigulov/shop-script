@@ -13,9 +13,7 @@ use domain\helpers\ProductHelper;
             <div class="ty-grid-body">
                 <div class="ty-grid-list__image">
                     <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/elektronika/mp3-pleery/naushniki/naushniki-beats-by-dr.-dre-solo2-wireless-black/">
-                        <?= Html::img(empty($product->mainPicture)
-                            ? $product->getDefaultPicture()->getThumbFileUrl('picture', 'thumb_189_189')
-                            : $product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
+                        <?= Html::img($product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
                             'class' => 'ty-pict cm-image',
                             'alt' => '',
                             'title' => '',

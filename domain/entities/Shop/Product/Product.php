@@ -4,6 +4,7 @@ namespace domain\entities\Shop\Product;
 
 use domain\entities\Shop\Brand;
 use yii\db\ActiveQuery;
+use yii\db\ActiveQueryInterface;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
 use domain\entities\Shop\Attribute\Attribute;
@@ -211,6 +212,19 @@ class Product extends ActiveRecord
     public function getDefaultPicture(): Picture
     {
         return Picture::findOne(['id', 1]);
+    }
+
+    public function __get($name)
+    {
+        if ($name == 'mainPicture') {
+            $value = parent::__get($name);
+
+            return empty($value)
+                ? $this->getDefaultPicture()
+                : $value;
+        }
+
+        return parent::__get($name);
     }
 
     public function behaviors()

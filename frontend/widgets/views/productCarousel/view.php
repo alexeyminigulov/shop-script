@@ -18,9 +18,7 @@ use domain\helpers\ProductHelper;
 
                 <div class="ty-grid-list__image">
                     <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/elektronika/foto-video/cifrovye-fotoapparaty/nikon-1-j1-two-lens-kit-krasnyy/">
-                        <?= Html::img(empty($product->mainPicture)
-                            ? $product->getDefaultPicture()->getThumbFileUrl('picture', 'thumb_189_189')
-                            : $product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
+                        <?= Html::img($product->mainPicture->getThumbFileUrl('picture', 'thumb_189_189'), [
                             'class' => 'ty-pict cm-image',
                             'alt' => '',
                             'title' => '',

@@ -17,6 +17,10 @@ class m180725_110837_create_shop_pictures_table extends Migration
             'picture' => $this->string()->notNull(),
             'sort' => $this->integer()->notNull(),
         ], $tableOptions);
+
+
+        $this->createIndex('{{%idx-shop_pictures-product_id}}', '{{%shop_pictures}}', 'product_id');
+        $this->addForeignKey('{{%fk-shop_pictures-product_id}}', '{{%shop_pictures}}', 'product_id', '{{%shop_products}}', 'id', 'CASCADE', 'RESTRICT');
     }
 
     public function down()
