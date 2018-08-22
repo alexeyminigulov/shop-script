@@ -3,6 +3,7 @@
 namespace domain\forms\Shop\Manager;
 
 use domain\entities\Shop\Manager\Banner;
+use domain\validators\HexColorValidator;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -14,6 +15,8 @@ class BannerForm extends Model
     public $description;
     public $btnTitle;
     public $btnUrl;
+    public $backgroundColor;
+    public $colorScheme;
     public $image;
     public $backgroundImg;
 
@@ -26,6 +29,8 @@ class BannerForm extends Model
             $this->description = $banner->description;
             $this->btnTitle = $banner->button_title;
             $this->btnUrl = $banner->button_url;
+            $this->backgroundColor = $banner->background_color;
+            $this->colorScheme = $banner->color_scheme;
         }
         parent::__construct($config);
     }
@@ -33,9 +38,11 @@ class BannerForm extends Model
     public function rules()
     {
         return [
-            [['name', 'title', 'description', 'btnTitle', 'btnUrl'], 'required'],
+            [['name', 'title', 'description', 'btnTitle', 'btnUrl', 'backgroundColor', 'colorScheme'], 'required'],
             [['name', 'title', 'btnTitle', 'btnUrl'], 'string', 'max' => 255],
             [['image', 'backgroundImg'], 'image', 'extensions' => 'png, jpg'],
+            [['backgroundColor'], HexColorValidator::class],
+            [['colorScheme'], 'in', 'range' => [Banner::SCHEME_LIGHT, Banner::SCHEME_DARK]],
         ];
     }
 

@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'button_title',
             'button_url',
+            'background_color',
+            'color_scheme',
             [
                 'attribute' => 'image',
                 'value' => Html::a(

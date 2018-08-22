@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use domain\entities\Shop\Manager\Banner;
 
 /* @var $this yii\web\View */
 /* @var $model \domain\forms\Shop\Manager\BannerForm */
@@ -23,6 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'btnUrl')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'image')->fileInput() ?>
         <?= $form->field($model, 'backgroundImg')->fileInput() ?>
+        <?= $form->field($model, 'backgroundColor')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'colorScheme')->dropDownList([
+            Banner::SCHEME_LIGHT => 'Светлая',
+            Banner::SCHEME_DARK => 'Темная'
+        ]) ?>
 
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

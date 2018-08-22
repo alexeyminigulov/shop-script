@@ -17,14 +17,20 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property string $button_url
  * @property string $image
  * @property string $background_img
+ * @property string $background_color
+ * @property string $color_scheme
  *
  * @mixin ImageUploadBehavior
  */
 class Banner extends ActiveRecord
 {
+    const SCHEME_LIGHT = 'light';
+    const SCHEME_DARK = 'dark';
+
     public static function create($name, $title, $description,
                                   $btnTitle, $btnUrl,
-                                  UploadedFile $image = null, UploadedFile $backgroundImg = null): self
+                                  UploadedFile $image = null, UploadedFile $backgroundImg = null,
+                                  $backgroundColor, $colorScheme): self
     {
         $banner = new Banner();
         $banner->name = $name;
@@ -34,13 +40,16 @@ class Banner extends ActiveRecord
         $banner->button_url = $btnUrl;
         $banner->image = $image;
         $banner->background_img = $backgroundImg;
+        $banner->background_color = $backgroundColor;
+        $banner->color_scheme = $colorScheme;
 
         return $banner;
     }
 
     public function edit($name, $title, $description,
                          $btnTitle, $btnUrl,
-                         UploadedFile $image = null, UploadedFile $backgroundImg = null)
+                         UploadedFile $image = null, UploadedFile $backgroundImg = null,
+                         $backgroundColor, $colorScheme)
     {
         $this->name = $name;
         $this->title = $title;
@@ -49,6 +58,8 @@ class Banner extends ActiveRecord
         $this->button_url = $btnUrl;
         $this->image = $image;
         $this->background_img = $backgroundImg;
+        $this->background_color = $backgroundColor;
+        $this->color_scheme = $colorScheme;
     }
 
     public function behaviors()

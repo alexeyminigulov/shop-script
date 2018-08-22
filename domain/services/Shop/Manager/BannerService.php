@@ -17,7 +17,9 @@ class BannerService
 
     public function create(BannerForm $form): Banner
     {
-        $banner = Banner::create($form->name, $form->title, $form->description, $form->btnTitle, $form->btnUrl, $form->image, $form->backgroundImg);
+        $banner = Banner::create($form->name, $form->title, $form->description,
+            $form->btnTitle, $form->btnUrl, $form->image, $form->backgroundImg,
+            $form->backgroundColor, $form->colorScheme);
 
         $this->repository->save($banner);
 
@@ -27,7 +29,11 @@ class BannerService
     public function update(BannerForm $form): Banner
     {
         $banner = $this->repository->find($form->id);
-        $banner->edit($form->name, $form->title, $form->description, $form->btnTitle, $form->btnUrl, $form->image, $form->backgroundImg);
+
+        $banner->edit($form->name, $form->title, $form->description, $form->btnTitle,
+            $form->btnUrl, $form->image, $form->backgroundImg,
+            $form->backgroundColor, $form->colorScheme);
+
         $this->repository->save($banner);
 
         return $banner;

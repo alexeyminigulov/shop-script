@@ -6,10 +6,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
-<div class="ab-advanced-banner ty-banner__image-item shadow dark"
+<div class="ab-advanced-banner ty-banner__image-item shadow <?= $banner->color_scheme ?>"
      style="background: <?= $banner->background_img
          ? 'url('. $banner->getImageFileUrl('background_img') .')'
-         : '#EEEEEE' ?>;margin:0px;">
+         : $banner->background_color ?>;margin:0px;">
 
     <div class="advanced-banner-content" style="min-height:400px">
 
