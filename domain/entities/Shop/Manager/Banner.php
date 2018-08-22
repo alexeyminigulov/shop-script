@@ -22,7 +22,9 @@ use yiidreamteam\upload\ImageUploadBehavior;
  */
 class Banner extends ActiveRecord
 {
-    public static function create($name, $title, $description, $btnTitle, $btnUrl, UploadedFile $image, $backgroundImg): self
+    public static function create($name, $title, $description,
+                                  $btnTitle, $btnUrl,
+                                  UploadedFile $image, UploadedFile $backgroundImg): self
     {
         $banner = new Banner();
         $banner->name = $name;
@@ -45,17 +47,31 @@ class Banner extends ActiveRecord
                 'attribute' => 'image',
                 'thumbs' => [
                     'thumb' => ['width' => 400, 'height' => 300],
-                    'thumb_40_40' => ['width' => 40, 'height' => 40],
-                    'thumb_50_50' => ['width' => 50, 'height' => 50],
                     'thumb_120_120' => ['width' => 120, 'height' => 120],
                     'thumb_189_189' => ['width' => 189, 'height' => 189],
                     'thumb_400_350' => ['width' => 400, 'height' => 350],
                     'thumb_800_800' => ['width' => 800, 'height' => 800],
                 ],
-                'filePath' => '@static/banners/[[pk]].[[extension]]',
-                'fileUrl' => '@staticUrl/banners/[[pk]].[[extension]]',
-                'thumbPath' => '@static/banners/[[profile]]_[[pk]].[[extension]]',
-                'thumbUrl' => '@staticUrl/banners/[[profile]]_[[pk]].[[extension]]',
+                'filePath' => '@static/banners/image/[[pk]].[[extension]]',
+                'fileUrl' => '@staticUrl/banners/image/[[pk]].[[extension]]',
+                'thumbPath' => '@static/banners/image/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '@staticUrl/banners/image/[[profile]]_[[pk]].[[extension]]',
+            ],
+            [
+                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+                'createThumbsOnRequest' => true,
+                'attribute' => 'background_img',
+                'thumbs' => [
+                    'thumb' => ['width' => 400, 'height' => 300],
+                    'thumb_120_120' => ['width' => 120, 'height' => 120],
+                    'thumb_189_189' => ['width' => 189, 'height' => 189],
+                    'thumb_400_350' => ['width' => 400, 'height' => 350],
+                    'thumb_800_800' => ['width' => 800, 'height' => 800],
+                ],
+                'filePath' => '@static/banners/background/[[pk]].[[extension]]',
+                'fileUrl' => '@staticUrl/banners/background/[[pk]].[[extension]]',
+                'thumbPath' => '@static/banners/background/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '@staticUrl/banners/background/[[profile]]_[[pk]].[[extension]]',
             ],
         ];
     }

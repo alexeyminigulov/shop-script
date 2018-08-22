@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
         <?= $form->field($model, 'btnTitle')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'btnUrl')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'image')->fileInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'backgroundImg')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'image')->fileInput() ?>
+        <?= $form->field($model, 'backgroundImg')->fileInput() ?>
 
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

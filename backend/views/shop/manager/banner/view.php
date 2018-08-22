@@ -41,7 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             ),
                 'format' => 'raw',
             ],
-            'background_img',
+            [
+                'attribute' => 'background_img',
+                'value' => Html::a(
+                    Html::img($model->getThumbFileUrl('background_img', 'thumb')),
+                    $model->getUploadedFileUrl('background_img'),
+                    ['class' => 'thumbnail', 'target' => '_blank']
+                ),
+                'format' => 'raw',
+            ],
         ],
     ]) ?>
 
