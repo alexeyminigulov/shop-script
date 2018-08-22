@@ -29,7 +29,7 @@ class BannerWidget extends Widget
     private function registerClientScript()
     {
         $view = $this->getView();
-//        ProductCarouselAsset::register($view);
+        BannerAsset::register($view);
     }
 
     private function getTemplate()

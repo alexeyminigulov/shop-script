@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
-<div id="banner_slider_3956" class="banners owl-carousel">
+<div id="banner_slider" class="banners owl-carousel">
     <?php foreach ($banners as $banner): ?>
 
         <?= $this->render('_template', ['banner' => $banner]) ?>
