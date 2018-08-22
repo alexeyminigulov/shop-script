@@ -27,6 +27,7 @@
             mobile = [479, 1];
 
         if (elm.length) {
+            elm = window.jQuery(elm);
             elm.owlCarousel({
                 direction: 'ltr',
                 items: item,
@@ -82,6 +83,7 @@
 
 
         if (elm.length) {
+            elm = window.jQuery(elm);
             elm.owlCarousel({
                 direction: 'ltr',
                 items: item,
@@ -137,6 +139,7 @@
 
 
         if (elm.length) {
+            elm = window.jQuery(elm);
             elm.owlCarousel({
                 direction: 'ltr',
                 items: item,

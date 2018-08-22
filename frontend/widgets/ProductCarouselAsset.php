@@ -14,6 +14,6 @@ class ProductCarouselAsset extends AssetBundle
         'css/productCarousel.css',
     ];
     public $depends = [
-        'frontend\assets\AppAsset',
+        'frontend\assets\OwlCarouselAsset',
     ];
 }

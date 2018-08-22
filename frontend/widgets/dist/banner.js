@@ -2,6 +2,7 @@
     $.ceEvent('on', 'ce.commoninit', function(context) {
         var slider = context.find('#banner_slider');
         if (slider.length) {
+            slider = window.jQuery(slider);
             slider.owlCarousel({
                 direction: 'ltr',
                 items: 1,

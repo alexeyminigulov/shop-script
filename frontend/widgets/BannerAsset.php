@@ -13,6 +13,6 @@ class BannerAsset extends AssetBundle
     public $css = [
     ];
     public $depends = [
-        'yii\web\YiiAsset',
+        'frontend\assets\OwlCarouselAsset',
     ];
 }

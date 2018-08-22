@@ -6,8 +6,10 @@
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
+use frontend\assets\OwlCarouselAsset;
 
 AppAsset::register($this);
+OwlCarouselAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -222,17 +224,8 @@ AppAsset::register($this);
 
 
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/product_image_gallery.js') ?>" ></script>
-
-
-
-<script type="text/javascript" src="<?= Yii::getAlias('@web/js/owl.carousel.min.js') ?>" ></script>
-
-
-
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/tabs.js') ?>" ></script>
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/exceptions.js') ?>" ></script>
-
-
 
 
 
