@@ -3,6 +3,8 @@
 namespace console\controllers;
 
 use Yii;
+use domain\entities\Shop\Brand;
+use domain\entities\Shop\Category;
 use Faker\Factory;
 use yii\console\Controller;
 use domain\entities\Shop\Attribute\Attribute;
@@ -88,5 +90,49 @@ class SeedController extends Controller
 
             $this->repository->save($product, false);
         });
+    }
+
+    public function actionBrand()
+    {
+        $brand = Brand::create('Acer', 'acer');
+        $brand->save();
+
+        $brand = Brand::create('Lenova', 'lenova');
+        $brand->save();
+
+        $brand = Brand::create('Apple', 'apple');
+        $brand->save();
+
+        $brand = Brand::create('Adidas', 'adidas');
+        $brand->save();
+
+        $brand = Brand::create('Samsung', 'samsung');
+        $brand->save();
+
+        $brand = Brand::create('Lg', 'lg');
+        $brand->save();
+    }
+
+    public function actionCategory()
+    {
+        $parentCategory = Category::findOne(['id' => 1]);
+        $category = Category::create('Electronic', 'electronic', $parentCategory);
+        $category->save();
+
+        $parentCategory = Category::findOne(['id' => 2]);
+        $category = Category::create('Computers', 'Computers', $parentCategory);
+        $category->save();
+
+        $parentCategory = Category::findOne(['id' => 3]);
+        $category = Category::create('PC', 'pc', $parentCategory);
+        $category->save();
+
+        $parentCategory = Category::findOne(['id' => 1]);
+        $category = Category::create('Clothes', 'clothes', $parentCategory);
+        $category->save();
+
+        $parentCategory = Category::findOne(['id' => 5]);
+        $category = Category::create('Man clothes', 'man-clothes', $parentCategory);
+        $category->save();
     }
 }
