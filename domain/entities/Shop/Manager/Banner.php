@@ -24,7 +24,7 @@ class Banner extends ActiveRecord
 {
     public static function create($name, $title, $description,
                                   $btnTitle, $btnUrl,
-                                  UploadedFile $image, UploadedFile $backgroundImg): self
+                                  UploadedFile $image = null, UploadedFile $backgroundImg = null): self
     {
         $banner = new Banner();
         $banner->name = $name;
@@ -36,6 +36,19 @@ class Banner extends ActiveRecord
         $banner->background_img = $backgroundImg;
 
         return $banner;
+    }
+
+    public function edit($name, $title, $description,
+                         $btnTitle, $btnUrl,
+                         UploadedFile $image = null, UploadedFile $backgroundImg = null)
+    {
+        $this->name = $name;
+        $this->title = $title;
+        $this->description = $description;
+        $this->button_title = $btnTitle;
+        $this->button_url = $btnUrl;
+        $this->image = $image;
+        $this->background_img = $backgroundImg;
     }
 
     public function behaviors()
