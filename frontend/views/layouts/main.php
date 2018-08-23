@@ -58,31 +58,13 @@ OwlCarouselAsset::register($this);
 
 
 
-
-
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" data-no-defer></script>
-
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/tygh.js') ?>"></script>
 <script type="text/javascript">
     (function(_, $) {
 
         $.extend(_, {
             index_script: 'index.php',
-            changes_warning: /*'Y'*/'N',
-            currencies: {
-                'primary': {
-                    'decimals_separator': '.',
-                    'thousands_separator': '&nbsp;',
-                    'decimals': '0'
-                },
-                'secondary': {
-                    'decimals_separator': '.',
-                    'thousands_separator': '&nbsp;',
-                    'decimals': '0',
-                    'coefficient': '1.00000'
-                }
-            },
             default_editor: 'redactor',
             default_previewer: 'magnific',
             current_path: '/stores/8ae4a590ed09f99f',
@@ -100,8 +82,6 @@ OwlCarouselAsset::register($this);
             init_context: ''
         });
 
-
-
         $(document).ready(function(){
             $.runCart('C');
         });
@@ -115,11 +95,6 @@ OwlCarouselAsset::register($this);
         });
     }(Tygh, Tygh.$));
 </script>
-
-
-
-
-
 
 <script type="text/javascript">
     function ShowSearch() {
@@ -142,7 +117,6 @@ OwlCarouselAsset::register($this);
             var desc_div = $('div#content_features > div');
             if (desc_div.length) {
                 var fh = desc_div.outerHeight();
-
 
                 if (desc.hasClass('hidden')){
                     desc.removeClass('hidden');
