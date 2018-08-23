@@ -6,6 +6,7 @@
 
 use frontend\widgets\SubCategories;
 use frontend\widgets\FiltersWidget;
+use frontend\widgets\BestSellersWidget;
 
 ?>
 
@@ -22,6 +23,6 @@ use frontend\widgets\FiltersWidget;
         ]) ?>
     </div>
     <div class="row-fluid ">
-        <?= $this->render('_bestsellers') ?>
+        <?= BestSellersWidget::widget() ?>
     </div>
 </div>
