@@ -2,34 +2,38 @@
 
 namespace frontend\widgets;
 
+use Yii;
 use domain\entities\Shop\Category;
-use yii\base\Widget;
+use yii\widgets\Breadcrumbs as Widget;
 
 class BreadCrumbs extends Widget
 {
     /* @var $categories Category[] */
     public $categories;
+    public $params;
 
-    public function run()
+    public function init()
     {
-        $result = $this->getTemplate();
+        parent::init();
+        $this->options = [
+            'class' => 'ty-breadcrumbs clearfix breadcrumb',
+            'style' => 'background-color:#fff;border-bottom:0px;'
+        ];
 
-        return $result;
-    }
+        $this->homeLink = ['label' => 'Главная', 'url' => Yii::$app->homeUrl];
 
-    private function getTemplate()
-    {
-        $tplBreadCrumbs = '';
-        foreach ($this->categories as $key => $category) {
-            $lastElem = $key == count($this->categories) - 1;
-            $tplBreadCrumbs .= $this->render('_breadCrumb', [
-                'category' => $category,
-                'lastElem' => $lastElem,
-            ]);
+        if ($this->categories) {
+
+            $links = array_map(function ($category) {
+                return ['label' => $category->name, 'url' => 'view?slug='. $category->slug];
+            }, $this->categories);
+            $lastKey = count($links)-1;
+            unset($links[$lastKey]['url']);
+
+            $this->links = $links;
+
+        } else {
+            $this->links = isset($this->params) ? $this->params : [];
         }
-
-        return $this->render('breadCrumbs', [
-            'tplBreadCrumbs' => $tplBreadCrumbs,
-        ]);
     }
 }

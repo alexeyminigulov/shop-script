@@ -20,7 +20,6 @@ MagnificPopup::register($this);
                 <div class="span16 main-content-grid row-container">
                     <div class="row-fluid ">
                         <div class="span16 ">
-                            <!-- Inline script moved to the bottom of the page -->
                             <div class="ty-product-block ty-product-detail">
                                 <div class="row-fluid  ty-product-block__wrapper clearfix">
                                     <h1 class="ty-product-block-title"><bdi><?= Html::encode($product->name) ?></bdi></h1>

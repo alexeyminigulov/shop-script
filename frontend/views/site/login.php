@@ -6,7 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\widgets\Breadcrumbs;
+use frontend\widgets\BreadCrumbs;
 
 $this->title = 'Войти';
 $this->params['breadcrumbs'][] = $this->title;
@@ -19,13 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row-fluid ">
                 <div class="span16 breadcrumbs-grid">
                     <div id="breadcrumbs_10">
-                        <?= Breadcrumbs::widget([
-                            'homeLink' => ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
-                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                            'options' => [
-                                'class' => 'ty-breadcrumbs clearfix breadcrumb',
-                                'style' => 'background-color:#fff;border-bottom:0px;'
-                            ],
+                        <?= BreadCrumbs::widget([
+                            'params' => $this->params['breadcrumbs'],
                         ]) ?>
                     </div>
                 </div>
