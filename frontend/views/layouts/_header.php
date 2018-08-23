@@ -60,64 +60,17 @@ use frontend\widgets\CartWidget;
                 </div>
                 <div class="span5 top-phones-grid">
                     <div class=" ty-float-right">
-                        <div class="ty-wysiwyg-content"  data-ca-live-editor-object-id="0" data-ca-live-editor-object-type="">
+                        <div class="ty-wysiwyg-content">
                             <div class="ty-cr-phone-number">
                                 <div class="ty-cr-phone"><a href="tel:+88000000000">+8(800) 0000000</a><br><a href="tel:+88000000000">+8(800) 0000000</a></div>
                                 <div class="ty-cr-phone-number-link">
-
                                     <div class="ty-cr-link">
-                                        <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/kontakty/">
-                                            Контакты
+                                        <a href="<?= Url::to(['site/about']) ?>">
+                                            Информация
                                         </a>
                                     </div>
-                                    <div class="ty-cr-link">
-
-                                        <a id="opener_call_request_3940" class="cm-dialog-opener cm-dialog-auto-size "  data-ca-target-id="content_call_request_3940"  rel="nofollow"><span>Перезвонить</span></a>
-
-                                        <div class="hidden" id="content_call_request_3940" title="Перезвонить">
-                                            <div id="call_request_3940">
-
-                                                <form name="call_requests_form_main" id="form_call_request_3940" action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="post" class="cm-ajax cm-ajax-full-render">
-                                                    <div class="ty-control-group">
-                                                        <label class="ty-control-group__title" for="call_data_call_request_3940_name">Ваше имя</label>
-                                                        <input id="call_data_call_request_3940_name" size="50" class="ty-input-text-full" type="text" name="call_data[name]" value="" />
-                                                    </div>
-
-                                                    <div class="ty-control-group">
-                                                        <label for="call_data_call_request_3940_phone" class="ty-control-group__title cm-cr-mask-phone-lbl cm-required">Телефон</label>
-                                                        <input id="call_data_call_request_3940_phone" class="ty-input-text-full cm-cr-mask-phone ty-inputmask-bdi" size="50" type="text" name="call_data[phone]" value="" />
-                                                    </div>
-
-
-                                                    <div class="ty-control-group">
-                                                        <label for="call_data_call_request_3940_convenient_time_from" class="ty-control-group__title">Удобное время</label>
-                                                        <bdi>
-                                                            <input id="call_data_call_request_3940_convenient_time_from" class="ty-input-text cm-cr-mask-time" size="6" type="text" name="call_data[time_from]" value="" placeholder="09:00" /> -
-                                                            <input id="call_data_call_request_3940_convenient_time_to" class="ty-input-text cm-cr-mask-time" size="6" type="text" name="call_data[time_to]" value="" placeholder="20:00" />
-                                                        </bdi>
-                                                    </div>
-
-                                                    <div class="buttons-container">
-                                                        <button  class="ty-btn__primary ty-btn__big cm-form-dialog-closer ty-btn ty-btn" type="submit" name="dispatch[call_requests.request]" >Отправить</button>
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class=" ty-float-right">
-                        <div id="abt__unitheme_wishlist_count">
-                            <a class="cm-tooltip ty-wishlist__a " href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow" title="Отложенные товары"><i class="uni-wish1"></i></a>
-                        </div>
-                        <div id="abt__unitheme_compared_products">
-                            <a class="cm-tooltip ty-compare__a " href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/" rel="nofollow" title="Список сравнения"><i class="uni-compare"></i></a>
                         </div>
                     </div>
                 </div>
@@ -213,52 +166,9 @@ use frontend\widgets\CartWidget;
 
                                             <?php endif; ?>
 
-
-                                            <div  id="login_block3946" class="hidden" title="Войти">
-                                                <div class="ty-login-popup">
-
-
-                                                    <form name="popup3946_form" action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="post">
-
-                                                        <div class="ty-control-group">
-                                                            <label for="login_popup3946" class="ty-login__filed-label ty-control-group__label cm-required cm-trim cm-email">E-mail</label>
-                                                            <input type="text" id="login_popup3946" name="user_login" size="30" value="customer@example.com" class="ty-login__input cm-focus" />
-                                                        </div>
-
-
-                                                        <div class="ty-control-group ty-password-forgot">
-                                                            <label for="psw_popup3946" class="ty-login__filed-label ty-control-group__label ty-password-forgot__label cm-required">Пароль</label><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=auth.recover_password" class="ty-password-forgot__a"  tabindex="5">Забыли пароль?</a>
-                                                            <input type="password" id="psw_popup3946" name="password" size="30" value="customer" class="ty-login__input" maxlength="32" />
-                                                        </div>
-
-                                                        <div class="ty-login-reglink ty-center">
-                                                            <a class="ty-login-reglink__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/profiles-add/" rel="nofollow">Создать учетную запись</a>
-                                                        </div>
-
-
-                                                        <div class="buttons-container clearfix">
-                                                            <div class="ty-float-right">
-
-                                                                <button  class="ty-btn__login ty-btn__secondary ty-btn" type="submit" name="dispatch[auth.login]" >Войти</button>
-
-                                                            </div>
-                                                            <div class="ty-login__remember-me">
-                                                                <label for="remember_me_popup3946" class="ty-login__remember-me-label"><input class="checkbox" type="checkbox" name="remember_me" id="remember_me_popup3946" value="Y" />Запомнить</label>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="hidden search-button-grid ty-float-right">
-                                <div class="ty-wysiwyg-content"  data-ca-live-editor-object-id="0" data-ca-live-editor-object-type=""><a class="search-button-mobile" onclick="ShowSearch()"><i class="ty-icon-search"></i></a>
-                                    <a class="close-button-mobile hidden" onclick="HideSearch()"><i class="uni-close"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -124,3 +124,7 @@ a.desc:after {
     content: "→";
     color: #858585;
 }
+
+.ty-cr-phone-number-link a {
+    text-decoration: none;
+}
