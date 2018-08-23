@@ -2,38 +2,69 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\forms\LoginForm */
+/* @var $model \frontend\forms\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\Breadcrumbs;
 
-$this->title = 'Login';
+$this->title = 'Войти';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="tygh-content clearfix">
+    <div class="container-fluid content-grid">
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+        <div class="container-fluid-row">
+            <div class="row-fluid ">
+                <div class="span16 breadcrumbs-grid">
+                    <div id="breadcrumbs_10">
+                        <?= Breadcrumbs::widget([
+                            'homeLink' => ['label' => 'Главная', 'url' => Yii::$app->homeUrl],
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                            'options' => [
+                                'class' => 'ty-breadcrumbs clearfix breadcrumb',
+                                'style' => 'background-color:#fff;border-bottom:0px;'
+                            ],
+                        ]) ?>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+        <div class="container-fluid-row">
+            <div class="row-fluid">
+                <div class="span8 main-content-grid row-container">
+
+                    <div class="ty-mainbox-container clearfix">
+                        <h1 class="ty-mainbox-title">
+                            <?= Html::encode($this->title) ?>
+                        </h1>
+                        <div class="ty-mainbox-body">
+                            <div class="ty-account">
+                                <?php $form = ActiveForm::begin(['id' => 'login-form', 'class' => 'cm-processed-form']); ?>
+
+                                <?= $form->field($model, 'username', ['options' => ['class' => 'ty-control-group']])->textInput(['autofocus' => true, 'class' => 'ty-input-text cm-focus']) ?>
+
+                                <?= $form->field($model, 'password', ['options' => ['class' => 'ty-control-group']])->passwordInput(['class' => 'ty-input-text cm-autocomplete-off']) ?>
+
+                                <?= $form->field($model, 'rememberMe', ['options' => ['class' => 'ty-control-group']])->checkbox() ?>
+
+                                <div style="color:#999;margin:1em 0">
+                                    <?= Html::a('Забыли пароль?', ['site/request-password-reset']) ?>.
+                                </div>
+
+                                <div class="form-group">
+                                    <?= Html::submitButton('Войти', ['class' => 'ty-btn__login ty-btn__secondary ty-btn', 'name' => 'login-button']) ?>
+                                </div>
+
+                                <?php ActiveForm::end(); ?>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-            <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
 </div>

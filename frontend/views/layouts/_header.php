@@ -1,6 +1,8 @@
 <?php
 
+use Yii;
 use yii\helpers\Url;
+use yii\helpers\Html;
 use frontend\widgets\CatalogWidget;
 use frontend\widgets\CartWidget;
 
@@ -11,81 +13,64 @@ use frontend\widgets\CartWidget;
 
         <div class="container-fluid-row">
             <div class="row-fluid ">
+
                 <div class="span4 top-logo-grid">
                     <div class=" top-logo">
                         <div class="ty-logo-container">
-                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" title="">
+                            <a href="<?= Url::home() ?>" title="">
                                 <img src="<?= Url::to('/image/logo.png') ?>" width="190" height="47" alt="" class="ty-logo-container__image" />
                             </a>
                         </div>
                     </div>
                 </div>
-
-
                 <div class="span7 top-links-menu-grid">
                     <ul class="ty-menu__items cm-responsive-menu">
-
-
                         <li class="ty-menu__item ty-menu__menu-btn visible-phone">
                             <a class="ty-menu__item-link" onclick="$('.cat-menu-horizontal .ty-menu__items').toggleClass('open');">
                                 <i class="ty-icon-short-list"></i>
                                 <span>Каталог товаров</span>
                             </a>
                         </li>
-
-
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__brands ">
                             <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=product_features.view_all&amp;filter_id=10" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">
-                                    Бренды                        </div>
+                                <div class="menu-lvl-ctn">Бренды</div>
                             </a>
                         </li>
-
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__newest ">
                             <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">
-                                    Новинки                        </div>
+                                <div class="menu-lvl-ctn">Новинки</div>
                             </a>
                         </li>
-
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__hits ">
                             <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.bestsellers" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">
-                                    Хиты продаж                        </div>
+                                <div class="menu-lvl-ctn">Хиты продаж</div>
                             </a>
                         </li>
-
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__sale ">
                             <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.on_sale" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">
-                                    Скидки                        </div>
+                                <div class="menu-lvl-ctn">Скидки</div>
                             </a>
                         </li>
-
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl last  ty-menu-item__promo ">
                             <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/promotions/" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">
-                                    Акции                        </div>
+                                <div class="menu-lvl-ctn">Акции</div>
                             </a>
                         </li>
-
-
                     </ul>
                 </div>
-
-
-
-
                 <div class="span5 top-phones-grid">
                     <div class=" ty-float-right">
-                        <div class="ty-wysiwyg-content"  data-ca-live-editor-object-id="0" data-ca-live-editor-object-type=""><div class="ty-cr-phone-number">
-                                <!-- <div class="ty-cr-work">Без выходных</div> -->
+                        <div class="ty-wysiwyg-content"  data-ca-live-editor-object-id="0" data-ca-live-editor-object-type="">
+                            <div class="ty-cr-phone-number">
                                 <div class="ty-cr-phone"><a href="tel:+88000000000">+8(800) 0000000</a><br><a href="tel:+88000000000">+8(800) 0000000</a></div>
                                 <div class="ty-cr-phone-number-link">
-                                    <div class="ty-cr-link"><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/kontakty/">Контакты</a></div>
+
                                     <div class="ty-cr-link">
-
-
+                                        <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/kontakty/">
+                                            Контакты
+                                        </a>
+                                    </div>
+                                    <div class="ty-cr-link">
 
                                         <a id="opener_call_request_3940" class="cm-dialog-opener cm-dialog-auto-size "  data-ca-target-id="content_call_request_3940"  rel="nofollow"><span>Перезвонить</span></a>
 
@@ -93,10 +78,6 @@ use frontend\widgets\CartWidget;
                                             <div id="call_request_3940">
 
                                                 <form name="call_requests_form_main" id="form_call_request_3940" action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="post" class="cm-ajax cm-ajax-full-render">
-                                                    <input type="hidden" name="result_ids" value="call_request_3940" />
-                                                    <input type="hidden" name="return_url" value="index.php" />
-
-
                                                     <div class="ty-control-group">
                                                         <label class="ty-control-group__title" for="call_data_call_request_3940_name">Ваше имя</label>
                                                         <input id="call_data_call_request_3940_name" size="50" class="ty-input-text-full" type="text" name="call_data[name]" value="" />
@@ -116,39 +97,28 @@ use frontend\widgets\CartWidget;
                                                         </bdi>
                                                     </div>
 
-
-
-
                                                     <div class="buttons-container">
-
-
                                                         <button  class="ty-btn__primary ty-btn__big cm-form-dialog-closer ty-btn ty-btn" type="submit" name="dispatch[call_requests.request]" >Отправить</button>
-
-
                                                     </div>
-
-                                                    <input type="hidden" name="security_hash" class="cm-no-hide-input" value="2198a5b676ffd4e8f8299c6a7007a82f" />
                                                 </form>
 
                                             </div>
-
-
                                         </div>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class=" ty-float-right">
 
+                    <div class=" ty-float-right">
                         <div id="abt__unitheme_wishlist_count">
                             <a class="cm-tooltip ty-wishlist__a " href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow" title="Отложенные товары"><i class="uni-wish1"></i></a>
                         </div>
-
                         <div id="abt__unitheme_compared_products">
                             <a class="cm-tooltip ty-compare__a " href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/" rel="nofollow" title="Список сравнения"><i class="uni-compare"></i></a>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -166,7 +136,10 @@ use frontend\widgets\CartWidget;
                                 <div class="ty-search-block">
                                     <form action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" name="search_form" method="get">
 
-                                        <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint"><button title="Найти" class="ty-search-magnifier" type="submit"><i class="ty-icon-search"></i></button>
+                                        <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint">
+                                        <button title="Найти" class="ty-search-magnifier" type="submit">
+                                            <i class="ty-icon-search"></i>
+                                        </button>
 
                                     </form>
                                 </div>
@@ -181,7 +154,7 @@ use frontend\widgets\CartWidget;
 
                                     <a class="ty-account-info__title" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/profiles-update/">
                                         <i class="ty-icon-user"></i>&nbsp;
-                                        <span class="ty-account-info__title-txt" ><small>Ваш личный</small>Кабинет</span>
+                                        <span class="ty-account-info__title-txt"><small>Ваш личный</small>Кабинет</span>
                                         <i class="ty-icon-down-micro ty-account-info__user-arrow"></i>
                                     </a>
 
@@ -191,6 +164,11 @@ use frontend\widgets\CartWidget;
 
                                     <div id="account_info_3946">
                                         <ul class="ty-account-info">
+                                            <?php if (!Yii::$app->user->isGuest): ?>
+                                                <li class="ty-account-info__item ty-dropdown-box__item">
+                                                    <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Учетная запись</a>
+                                                </li>
+                                            <?php endif; ?>
                                             <li class="ty-account-info__item ty-dropdown-box__item">
                                                 <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Заказы</a>
                                             </li>
@@ -204,8 +182,6 @@ use frontend\widgets\CartWidget;
 
                                         <div class="ty-account-info__orders updates-wrapper track-orders" id="track_orders_block_3946">
                                             <form action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="POST" class="cm-ajax cm-post cm-ajax-full-render" name="track_order_quick">
-                                                <input type="hidden" name="result_ids" value="track_orders_block_*" />
-                                                <input type="hidden" name="return_url" value="index.php" />
 
                                                 <div class="ty-account-info__orders-txt">Отслеживание заказа</div>
 
@@ -213,16 +189,29 @@ use frontend\widgets\CartWidget;
                                                     <label for="track_order_item3946" class="cm-required hidden">Отслеживание заказа</label>
                                                     <input type="text" size="20" class="ty-input-text cm-hint" id="track_order_item3946" name="track_data" value="Номер заказа/E-mail" />
                                                     <button title="Выполнить" class="ty-btn-go" type="submit"><i class="ty-btn-go__icon ty-icon-right-dir"></i></button>
-                                                    <input type="hidden" name="dispatch" value="orders.track_request" />
-
                                                 </div>
-                                                <input type="hidden" name="security_hash" class="cm-no-hide-input" value="2198a5b676ffd4e8f8299c6a7007a82f" />
+
                                             </form>
                                         </div>
 
                                         <div class="ty-account-info__buttons buttons-container">
 
-                                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/login/?return_url=index.php"  data-ca-target-id="login_block3946" class="cm-dialog-opener cm-dialog-auto-size ty-btn ty-btn__secondary" rel="nofollow">Войти</a><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/profiles-add/" rel="nofollow" class="ty-btn ty-btn__primary">Регистрация</a>
+                                            <?php if (Yii::$app->user->isGuest): ?>
+                                                <a href="<?= Url::to(['site/login']) ?>" class="ty-btn ty-btn__secondary" rel="nofollow">
+                                                    Войти
+                                                </a>
+                                                <a href="<?= Url::to(['site/signup']) ?>" class="ty-btn ty-btn__primary" rel="nofollow">
+                                                    Регистрация
+                                                </a>
+                                            <?php else: ?>
+
+                                                <?= Html::beginForm(['/site/logout'], 'post') ?>
+
+                                                <?= Html::submitButton('Выйти', ['class' => 'ty-btn ty-btn__primary']) ?>
+
+                                                <?= Html::endForm() ?>
+
+                                            <?php endif; ?>
 
 
                                             <div  id="login_block3946" class="hidden" title="Войти">
@@ -230,8 +219,6 @@ use frontend\widgets\CartWidget;
 
 
                                                     <form name="popup3946_form" action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="post">
-                                                        <input type="hidden" name="return_url" value="index.php" />
-                                                        <input type="hidden" name="redirect_url" value="index.php" />
 
                                                         <div class="ty-control-group">
                                                             <label for="login_popup3946" class="ty-login__filed-label ty-control-group__label cm-required cm-trim cm-email">E-mail</label>
@@ -259,9 +246,6 @@ use frontend\widgets\CartWidget;
                                                                 <label for="remember_me_popup3946" class="ty-login__remember-me-label"><input class="checkbox" type="checkbox" name="remember_me" id="remember_me_popup3946" value="Y" />Запомнить</label>
                                                             </div>
                                                         </div>
-
-
-                                                        <input type="hidden" name="security_hash" class="cm-no-hide-input" value="2198a5b676ffd4e8f8299c6a7007a82f" />
                                                     </form>
 
 
