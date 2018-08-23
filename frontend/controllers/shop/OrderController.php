@@ -1,11 +1,12 @@
 <?php
 namespace frontend\controllers\shop;
 
+use Yii;
 use domain\cart\Cart;
 use domain\forms\Shop\Order\OrderForm;
 use domain\services\Shop\OrderService;
-use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Product\Product;
 
@@ -24,6 +25,21 @@ class OrderController extends Controller
         parent::__construct($id, $module, $config);
         $this->service = $service;
         $this->cart = $cart;
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
     }
 
     public function actionIndex()

@@ -4,6 +4,7 @@ namespace frontend\controllers\cabinet;
 use Yii;
 use domain\cart\Cart;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use domain\entities\User;
 use domain\entities\Shop\Order;
 use yii\web\NotFoundHttpException;
@@ -24,6 +25,21 @@ class OrderController extends Controller
         parent::__construct($id, $module, $config);
         $this->orders = $orders;
         $this->cart = $cart;
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
     }
 
     public function actionIndex()

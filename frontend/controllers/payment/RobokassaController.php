@@ -4,12 +4,28 @@ namespace frontend\controllers\payment;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use domain\entities\Shop\Order;
 use yii\web\BadRequestHttpException;
 use domain\entities\Shop\Order\Status;
 
 class RobokassaController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionInvoice($id)
     {
         $order = $this->loadModel($id);
