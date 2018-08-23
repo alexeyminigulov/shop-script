@@ -128,3 +128,7 @@ a.desc:after {
 .ty-cr-phone-number-link a {
     text-decoration: none;
 }
+
+input.ty-price-slider__input-text {
+    width: 88px;
+}

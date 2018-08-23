@@ -22,7 +22,6 @@ use yii\helpers\Html;
                 <input type="text" class="ty-price-slider__input-text"
                        id="slider_<?= $valueForm->getAttribute0()->id ?>_min"
                        name="v[<?= $valueForm->getAttribute0()->id ?>][value][min]" value="<?= $valueForm->value['min'] ?>">
-                <span class="ty-rub">Р</span>
             </bdi>
             &nbsp;–&nbsp;
             <bdi class="ty-price-slider__bidi-container">
@@ -30,7 +29,6 @@ use yii\helpers\Html;
                 <input type="text" class="ty-price-slider__input-text"
                        id="slider_<?= $valueForm->getAttribute0()->id ?>_max"
                        name="v[<?= $valueForm->getAttribute0()->id ?>][value][max]" value="<?= $valueForm->value['max'] ?>">
-                <span class="ty-rub">Р</span>
             </bdi>
         </p>
         <div id="slider_<?= $valueForm->getAttribute0()->id ?>"
@@ -38,12 +36,12 @@ use yii\helpers\Html;
             <ul class="ty-range-slider__wrapper">
                 <li class="ty-range-slider__item" style="left: 0%;">
                     <span class="ty-range-slider__num">
-                        <span>‎<bdi><span><?= $valueForm->getAttribute0()->getMin() ?></span></bdi><span class="ty-rub">Р</span></span>
+                        <span>‎<bdi><span><?= $valueForm->getAttribute0()->getMin() ?></span></bdi></span>
                     </span>
                 </li>
                 <li class="ty-range-slider__item" style="left: 100%;">
                     <span class="ty-range-slider__num">
-                        <span>‎<bdi><span><?= $valueForm->getAttribute0()->getMax() ?></span></bdi><span class="ty-rub">Р</span></span>
+                        <span>‎<bdi><span><?= $valueForm->getAttribute0()->getMax() ?></span></bdi></span>
                     </span>
                 </li>
             </ul>
