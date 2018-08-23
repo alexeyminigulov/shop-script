@@ -44,6 +44,8 @@ class OrderController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'layout_site';
+
         $form = new OrderForm($this->cart->getWeight());
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
