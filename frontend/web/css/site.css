@@ -121,7 +121,7 @@ a.desc:after {
 
 .breadcrumb > li + li:before {
     padding: 0 6px;
-    content: "→";
+    content: "\2192";
     color: #858585;
 }
 
