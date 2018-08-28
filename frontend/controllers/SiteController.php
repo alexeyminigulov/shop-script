@@ -5,6 +5,7 @@ use domain\entities\Shop\Product\Product;
 use domain\services\ContactService;
 use domain\services\UserService;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -83,7 +84,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $products = Product::find()->limit(15)->all();
+        $products = Product::find()->limit(15)->joinWith(['mainPicture'])->all();
 
         return $this->render('index', [
             'products' => $products,

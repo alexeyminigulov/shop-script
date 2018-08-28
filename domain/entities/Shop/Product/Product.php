@@ -38,6 +38,8 @@ class Product extends ActiveRecord
     const STATUS_ACTIVE = 10;
     const STATUS_HIDE = 0;
 
+    private static $defaultPicture;
+
     public static function create($code, $name, $slug,
                                   $price, $categoryId, $brandId,
                                   $description, $status,
@@ -210,7 +212,12 @@ class Product extends ActiveRecord
 
     public function getDefaultPicture()
     {
-        return DefaultPicture::findOne(['picture', 'product.png']);
+        if (self::$defaultPicture) {
+            return self::$defaultPicture;
+        }
+        self::$defaultPicture = DefaultPicture::findOne(['picture', 'product.png']);
+
+        return self::$defaultPicture;
     }
 
     public function __get($name)

@@ -13,8 +13,7 @@ class ProductCarousel extends Widget
     public function init()
     {
         parent::init();
-        $this->products = Product::find()->limit(10)->all();
-
+        $this->products = Product::find()->limit(10)->joinWith(['mainPicture'])->all();
     }
 
     public function run()
