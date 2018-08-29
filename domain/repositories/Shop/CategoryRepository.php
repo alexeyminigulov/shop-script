@@ -121,4 +121,22 @@ class CategoryRepository
 
         return $categories;
     }
+
+    /**
+     * @param Category[] $categories
+     * @param $id
+     * @return array
+     */
+    public function getLoadedChildren(array $categories, $id)
+    {
+        $parent = current(array_filter($categories, function (Category $category) use ($id) {
+            return $category->id == $id;
+        }));
+
+        return array_filter($categories, function (Category $category) use ($parent) {
+            if ($parent->depth+1 >= $category->depth && $parent->lft < $category->lft) {
+                return true;
+            }
+        });
+    }
 }

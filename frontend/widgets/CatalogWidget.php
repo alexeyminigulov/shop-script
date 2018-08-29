@@ -3,10 +3,23 @@
 namespace frontend\widgets;
 
 use domain\entities\Shop\Category;
+use domain\repositories\Shop\CategoryRepository;
 use yii\base\Widget;
 
 class CatalogWidget extends Widget
 {
+    /* @var $categories Category[] */
+    private $categories;
+
+    /* @var $repository CategoryRepository */
+    private $repository;
+
+    public function init()
+    {
+        parent::init();
+        $this->repository = new CategoryRepository();
+    }
+
     public function run()
     {
         $this->registerClientScript();
@@ -23,10 +36,11 @@ class CatalogWidget extends Widget
     private function tplCatalog()
     {
         $result = "";
-        $categories = Category::find()->andWhere(['<>', 'id', 1])->andWhere(['depth' => 1])->orderBy('lft')->all();
+        $this->categories = Category::find()->andWhere(['<>', 'id', 1])->orderBy('lft')->all();
 
         /** @var Category $category */
-        foreach ($categories as $category) {
+        foreach ($this->categories as $category) {
+            if ($category->depth == 1)
             $result .= $this->firstLvlItem($category);
         }
 
@@ -37,7 +51,9 @@ class CatalogWidget extends Widget
 
     private function firstLvlItem(Category $category)
     {
-        if (empty($category->children)) {
+        $children = $this->repository->getLoadedChildren($this->categories, $category->id);
+
+        if (empty($children)) {
             return $this->render('catalog/_itemFirstLevel', [
                 'category' => $category
             ]);
@@ -55,7 +71,9 @@ class CatalogWidget extends Widget
     {
         $result = '';
 
-        if (!empty($category->children)) {
+        $children = $this->repository->getLoadedChildren($this->categories, $category->id);
+
+        if (!empty($children)) {
 
             $items = $this->subLi($category);
 
@@ -70,7 +88,7 @@ class CatalogWidget extends Widget
     private function subLi(Category $category)
     {
         $result = '';
-        $subCategory = $category->children;
+        $subCategory = $this->repository->getLoadedChildren($this->categories, $category->id);
         $subCategory = array_chunk($subCategory, 3);
 
         foreach ($subCategory as $items) {
@@ -110,11 +128,12 @@ class CatalogWidget extends Widget
     private function getThirdItems(Category $category)
     {
         $result = '';
+        $children = $this->repository->getLoadedChildren($this->categories, $category->id);
 
-        if (!empty($category->children)) {
+        if (!empty($children)) {
 
             $items = '';
-            $subCategories = $category->children;
+            $subCategories = $children;
 
             /** @var Category $subCategory */
             foreach ($subCategories as $subCategory) {
