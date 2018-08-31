@@ -2,10 +2,9 @@
 
 namespace frontend\widgets;
 
-use domain\entities\Shop\Attribute\Attribute;
+use Yii;
 use domain\entities\Shop\Filter;
 use domain\forms\Shop\Search\SearchForm;
-use Yii;
 use yii\base\Widget;
 use domain\entities\Shop\Category;
 use domain\repositories\Shop\CategoryRepository;
@@ -32,13 +31,7 @@ class FiltersWidget extends Widget
     {
         $this->registerClientScript();
 
-        $tplFilters = '';
-
-//        foreach ($this->filters as $filter) {
-//            $tplFilters .= $this->getTplFilter($filter);
-//        }
-
-        $result = $this->getTemplate($tplFilters);
+        $result = $this->getTemplate();
 
         return $result;
     }
@@ -49,27 +42,7 @@ class FiltersWidget extends Widget
         FiltersAsset::register($view);
     }
 
-//    private function getTplFilter(Filter $filter)
-//    {
-//        $attribute = $filter->attribute0;
-//
-//        if ($attribute->type == Attribute::TYPE_INTEGER) {
-//
-//            return $this->render('filters/_integer', [
-//                'attribute' => $attribute,
-//            ]);
-//
-//        } else if ($attribute->type == Attribute::TYPE_CHECKBOX) {
-//
-//            return $this->render('filters/_checkbox', [
-//                'attribute' => $attribute,
-//            ]);
-//
-//        }
-//        return '';
-//    }
-//
-    private function getTemplate($tplFilters)
+    private function getTemplate()
     {
         return $this->render('filters/view', ['model' => $this->model]);
     }

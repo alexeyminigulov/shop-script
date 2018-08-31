@@ -13,7 +13,7 @@ class BestSellersWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->bestSellers = Product::find()->limit(5)->all();
+        $this->bestSellers = Product::find()->limit(5)->joinWith(['mainPicture'])->all();
     }
 
     public function run()

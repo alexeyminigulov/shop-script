@@ -2,6 +2,7 @@
 
 namespace frontend\widgets;
 
+use Yii;
 use domain\entities\Shop\Category;
 use domain\repositories\Shop\CategoryRepository;
 use yii\base\Widget;
@@ -17,7 +18,7 @@ class CatalogWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->repository = new CategoryRepository();
+        $this->repository = Yii::$container->get(CategoryRepository::class);
     }
 
     public function run()
