@@ -23,9 +23,25 @@ echo "Done!"
 info "Update to php7.1"
 add-apt-repository ppa:ondrej/php
 
+info "Add ElasticSearch source"
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+
 info "Update OS software"
 apt-get update
 apt-get upgrade -y
+
+info "Install JDK"
+apt-get install default-jdk -y
+
+info "Install ElasticSearch"
+apt-get install apt-transport-https
+apt-get install elasticsearch -y
+sed -i 's/-Xms1g/-Xms64m/' /etc/elasticsearch/jvm.options
+sed -i 's/-Xmx1g/-Xmx64m/' /etc/elasticsearch/jvm.options
+sed -i 's/network.host: 192.168.0.1/network.host: 192.168.0.1/' /etc/elasticsearch/elasticsearch.yml
+systemctl daemon-reload
+systemctl enable elasticsearch.service
 
 info "Install additional software"
 apt-get install -y php7.1-curl php7.1-cli php7.1-intl php7.1-mysqlnd php7.1-gd php7.1-fpm php7.1-mbstring php7.1-xml unzip nginx mysql-server-5.7 php.xdebug
