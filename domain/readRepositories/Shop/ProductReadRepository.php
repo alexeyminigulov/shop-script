@@ -14,7 +14,9 @@ class ProductReadRepository
 {
     public function getAll($categoryIds): DataProviderInterface
     {
-        $query = Product::find()->where(['category_id' => $categoryIds])->joinWith(['mainPicture']);
+        $query = Product::find()->where(['category_id' => $categoryIds])
+            ->where(['status' => Product::STATUS_ACTIVE])
+            ->joinWith(['mainPicture']);
 
         return $this->getProvider($query);
     }

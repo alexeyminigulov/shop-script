@@ -24,6 +24,20 @@ class ProductRepository
         return $product;
     }
 
+    /**
+     * @param bool $onlyActive
+     * @return Product[]
+     */
+    public function getAll($onlyActive = false): array
+    {
+        $products = $onlyActive ? Product::findAll(['status', Product::STATUS_ACTIVE]) : Product::find()->all();
+
+        if (empty($products)) {
+            throw new EntityNotFoundException('Products is not found.');
+        }
+        return $products;
+    }
+
     public function getGroups($categoryId)
     {
         $categories = $this->categoryRepository->getWithParents($categoryId);
