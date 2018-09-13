@@ -4,6 +4,7 @@
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use yii\widgets\LinkPager;
+use frontend\widgets\ProductBadge;
 
 ?>
 <div class="cat-view-grid" id="category_products_11">
@@ -12,8 +13,8 @@ use yii\widgets\LinkPager;
         <div class="grid-list ">
             <?php
             foreach ($dataProvider->getModels() as $product) {
-                echo $this->render('_product', [
-                     'product' => $product,
+                echo ProductBadge::widget([
+                    'product' => $product,
                 ]);
             }
             ?>

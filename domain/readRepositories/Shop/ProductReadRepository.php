@@ -2,13 +2,13 @@
 
 namespace domain\readRepositories\Shop;
 
-use Yii;
-use yii\base\Model;
+use Elasticsearch\ClientBuilder;
 use domain\entities\Shop\Product\Value;
 use yii\data\ActiveDataProvider;
 use domain\forms\Shop\Search\SearchForm;
 use domain\entities\Shop\Product\Product;
 use yii\data\DataProviderInterface;
+use yii\helpers\ArrayHelper;
 
 class ProductReadRepository
 {
@@ -17,6 +17,41 @@ class ProductReadRepository
         $query = Product::find()->where(['category_id' => $categoryIds])
             ->where(['status' => Product::STATUS_ACTIVE])
             ->joinWith(['mainPicture']);
+
+        return $this->getProvider($query);
+    }
+
+    /**
+     * @param $q
+     * @return null|ActiveDataProvider
+     */
+    public function searchByText($q)
+    {
+        $client = ClientBuilder::create()->setHosts(['127.0.0.1:9200'])->build();
+
+        $params = [
+            'index' => 'shop_products',
+            'type' => 'products',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'name' => $q,
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $client->search($params);
+
+        $ids = ArrayHelper::getColumn($response['hits']['hits'], '_id');
+
+        if ($ids) {
+            $query = Product::find()
+//                ->andWhere(['status' => Product::STATUS_ACTIVE])
+                ->andWhere(['id' => $ids]);
+        } else {
+            $query = Product::find()->where(['id' => 0]);
+        }
 
         return $this->getProvider($query);
     }

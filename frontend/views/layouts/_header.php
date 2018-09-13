@@ -1,6 +1,5 @@
 <?php
 
-use Yii;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use frontend\widgets\CatalogWidget;
@@ -87,7 +86,7 @@ use frontend\widgets\CartWidget;
                         <div class="span7 search-block-grid">
                             <div class=" top-search">
                                 <div class="ty-search-block">
-                                    <form action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" name="search_form" method="get">
+                                    <form action="<?= Url::to(['shop/product/search']) ?>" name="search_form" method="get">
 
                                         <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint">
                                         <button title="Найти" class="ty-search-magnifier" type="submit">
