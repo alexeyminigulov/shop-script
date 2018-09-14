@@ -5,8 +5,6 @@
 /* @var $model \domain\forms\Shop\Search\SearchForm */
 
 use yii\helpers\Url;
-use Yii;
-
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use domain\entities\Shop\Attribute\Attribute;
@@ -37,7 +35,8 @@ use domain\entities\Shop\Attribute\Attribute;
                                     'form' => $form,
                                     'valueForm' => $value,
                                 ]);
-                            } else if ($value->getAttribute0()->type == Attribute::TYPE_CHECKBOX) {
+                            } else if ($value->getAttribute0()->type == Attribute::TYPE_CHECKBOX
+                                || $value->getAttribute0()->type == Attribute::TYPE_RADIO_BUTTON) {
                                 echo $this->render('_checkbox', [
                                     'form' => $form,
                                     'valueForm' => $value,

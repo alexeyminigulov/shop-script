@@ -2,8 +2,9 @@
 
 namespace domain\readRepositories\Shop;
 
-use Elasticsearch\ClientBuilder;
-use domain\entities\Shop\Product\Value;
+use domain\entities\Shop\Attribute\Attribute;
+use domain\forms\Shop\Search\ValueForm;
+use Elasticsearch\Client;
 use yii\data\ActiveDataProvider;
 use domain\forms\Shop\Search\SearchForm;
 use domain\entities\Shop\Product\Product;
@@ -12,6 +13,13 @@ use yii\helpers\ArrayHelper;
 
 class ProductReadRepository
 {
+    private $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     public function getAll($categoryIds): DataProviderInterface
     {
         $query = Product::find()->where(['category_id' => $categoryIds])
@@ -27,8 +35,6 @@ class ProductReadRepository
      */
     public function searchByText($q)
     {
-        $client = ClientBuilder::create()->setHosts(['127.0.0.1:9200'])->build();
-
         $params = [
             'index' => 'shop_products',
             'type' => 'products',
@@ -41,8 +47,7 @@ class ProductReadRepository
             ]
         ];
 
-        $response = $client->search($params);
-
+        $response = $this->client->search($params);
         $ids = ArrayHelper::getColumn($response['hits']['hits'], '_id');
 
         if ($ids) {
@@ -58,31 +63,62 @@ class ProductReadRepository
 
     public function search(SearchForm $form)
     {
-        $query = Product::find()->alias('p');
+        $params = [
+            'index' => 'shop_products',
+            'type' => 'products',
+            'body' => [
+                "query" => [
+                    "bool" => [
+                        "must" =>
+                            array_values(
+                                array_map(function (ValueForm $value) {
 
-        $productIds = null;
-        foreach ($form->values as $attributeId => $valueForm) {
+                                return [
+                                    "nested" => [
+                                        "path" => "values",
+                                        "score_mode" => "avg",
+                                        "query" => [
+                                            "bool" => [
+                                                "must" =>
+                                                    call_user_func(function () use ($value) {
+                                                        if ($value->attribute0->type == Attribute::TYPE_INTEGER) {
+                                                            return [
+                                                                [  "match" => ["values.attribute_id" => $value->attribute0->id] ],
+                                                                [  "range" => ["values.value_int" => ["gte" => $value->value['min']]]  ],
+                                                                [  "range" => ["values.value_int" => ["lte" => $value->value['max']]]  ],
+                                                            ];
+                                                        }
+                                                        else if ($value->attribute0->type == Attribute::TYPE_RADIO_BUTTON) {
+                                                            return [
+                                                                [  "match" => ["values.attribute_id" => $value->attribute0->id] ],
+                                                                [  "terms" => ["values.value_radio_btn" => $value->value]],
+                                                            ];
+                                                        }
+                                                        else if ($value->attribute0->type == Attribute::TYPE_CHECKBOX) {
+                                                            return array_map(function ($v) use ($value) {
+                                                                return [
+                                                                    [  "match" => ["values.attribute_id" => $value->attribute0->id] ],
+                                                                    [  "terms" => ["values.values" => [$v]]],
+                                                                ];
+                                                            }, $value->value);
+                                                        }
+                                                    }),
+                                            ],
+                                        ],
+                                    ],
+                                ];
 
-            $values = $valueForm->value;
+                            }, array_filter($form->values, function (ValueForm $value) { return $value->isFilled(); }))
+                        ),
+                    ],
+                ],
+            ],
+        ];
 
-            if(empty($values)) {
-                continue;
-            }
+        $response = $this->client->search($params);
+        $productIds = ArrayHelper::getColumn($response['hits']['hits'], '_id');
 
-            $q = Value::find()->andWhere(['attribute_id' => $attributeId]);
-
-            if (array_key_exists('min', $values)) {
-                $q->andFilterWhere(['>', 'value', $values['min']]);
-                $q->andFilterWhere(['<', 'value', $values['max']]);
-
-            } else {
-                $q->andFilterWhere(['value' => $values]);
-            }
-            $foundIds = $q->select('product_id')->column();
-            $productIds = $productIds == null ? $foundIds : array_intersect($productIds, $foundIds);
-        }
-
-        $query->andWhere(['id' => $productIds]);
+        $query = Product::find()->alias('p')->andWhere(['id' => $productIds]);
 
         return $this->getProvider($query);
     }

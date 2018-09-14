@@ -7,6 +7,7 @@ use domain\entities\Shop\Product\Value;
 use domain\repositories\Shop\ProductRepository;
 use Elasticsearch\ClientBuilder;
 use yii\console\Controller;
+use yii\helpers\ArrayHelper;
 
 class SearchController extends Controller
 {
@@ -80,6 +81,9 @@ class SearchController extends Controller
                                     'value_int' => [
                                         'type' => 'integer',
                                     ],
+                                    'value_radio_btn' => [
+                                        'type' => 'integer',
+                                    ],
                                 ]
                             ]
                         ]
@@ -93,6 +97,49 @@ class SearchController extends Controller
         $products = $this->products->getAll(false);
 
         foreach ($products as $product) {
+
+            $values = call_user_func(function ($values) {
+
+                $result = [];
+
+                foreach ($values as $value) {
+
+                    $productValue = call_user_func(function (Value $value) {
+                        switch ($value->attribute0->type) {
+                            case Attribute::TYPE_INTEGER:
+                                $result = ['value_int' => intval($value->value)];
+                                break;
+                            case Attribute::TYPE_RADIO_BUTTON:
+                                $result = ['value_radio_btn' => intval($value->value)];
+                                break;
+                            case Attribute::TYPE_CHECKBOX:
+                                $result = ['values' => [intval($value->value)]];
+                                break;
+                            default:
+                                $result = ['value_string' => $value->value];
+                        }
+                        return $result;
+                    }, $value);
+
+                    if (isset($result[$value->attribute_id])) {
+                        $values = $result[$value->attribute_id]['values'];
+                        $values[] = reset($productValue['values']);
+
+                        $result[$value->attribute_id] = [
+                            'attribute_id' => $value->attribute_id,
+                            'values' => $values,
+                        ];
+                        continue;
+                    }
+                    $result[$value->attribute_id] = [
+                        'attribute_id' => $value->attribute_id,
+                        key($productValue) => reset($productValue)
+                    ];
+                }
+
+                return array_values($result);
+            }, $product->values);
+
             $this->client->index([
                 'index' => 'shop_products',
                 'type' => 'products',
@@ -107,26 +154,7 @@ class SearchController extends Controller
                     'code' => $product->code,
                     'weight' => $product->weight,
                     'quantity' => $product->quantity,
-                    'values' => array_map(function (Value $value) {
-
-                        $productValue = call_user_func(function (Value $value) {
-                            switch ($value->attribute0->type) {
-                                case Attribute::TYPE_INTEGER:
-                                case Attribute::TYPE_RADIO_BUTTON:
-                                case Attribute::TYPE_CHECKBOX:
-                                    $result = ['value_int' => $value->value];
-                                    break;
-                                default:
-                                    $result = ['value_string' => $value->value];
-                            }
-                            return $result;
-                        }, $value);
-
-                        return [
-                            'attribute_id' => $value->attribute_id,
-                            key($productValue) => reset($productValue)
-                        ];
-                    }, $product->values),
+                    'values' => $values,
                 ],
             ]);
         }

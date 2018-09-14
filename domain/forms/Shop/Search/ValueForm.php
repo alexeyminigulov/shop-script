@@ -5,6 +5,11 @@ namespace domain\forms\Shop\Search;
 use yii\base\Model;
 use domain\entities\Shop\Attribute\Attribute;
 
+/**
+ * Class ValueForm
+ *
+ * @property Attribute $attribute0
+ */
 class ValueForm extends Model
 {
     public $id;
@@ -17,6 +22,11 @@ class ValueForm extends Model
         parent::__construct($config);
         $this->id = $attribute->id;
         $this->_attribute = $attribute;
+    }
+
+    public function isFilled(): bool
+    {
+        return !empty(reset($this->value));
     }
 
     public function rules()
