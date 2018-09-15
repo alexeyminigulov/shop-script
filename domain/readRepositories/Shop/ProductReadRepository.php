@@ -41,7 +41,10 @@ class ProductReadRepository
             'body' => [
                 'query' => [
                     'match' => [
-                        'name' => $q,
+                        'name' => [
+                            'query' => $q,
+                            'analyzer' => 'standard',
+                        ],
                     ]
                 ]
             ]

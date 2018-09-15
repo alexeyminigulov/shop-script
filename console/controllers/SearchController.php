@@ -7,7 +7,6 @@ use domain\entities\Shop\Product\Value;
 use domain\repositories\Shop\ProductRepository;
 use Elasticsearch\ClientBuilder;
 use yii\console\Controller;
-use yii\helpers\ArrayHelper;
 
 class SearchController extends Controller
 {
@@ -28,11 +27,32 @@ class SearchController extends Controller
             $this->client->indices()->delete(['index' => 'shop_products']);
         }
 
-        $this->stdout('Creating of index' . PHP_EOL);
+        $this->stdout('Creating of analyzer and Creating of index' . PHP_EOL);
 
         $this->client->indices()->create([
             'index' => 'shop_products',
             'body' => [
+                'settings' => [
+                    'analysis' => [
+                        'filter' => [
+                            'autocomplete_filter' => [
+                                'type' => 'edge_ngram',
+                                'min_gram' => 1,
+                                'max_gram' => 20,
+                            ]
+                        ],
+                        'analyzer' => [
+                            'autocomplete' => [
+                                'type' => 'custom',
+                                'tokenizer' => 'standard',
+                                'filter' => [
+                                    'lowercase',
+                                    'autocomplete_filter',
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
                 'mappings' => [
                     'products' => [
                         '_source' => [
@@ -44,6 +64,7 @@ class SearchController extends Controller
                             ],
                             'name' => [
                                 'type' => 'text',
+                                'analyzer' => 'autocomplete',
                             ],
                             'description' => [
                                 'type' => 'text',
