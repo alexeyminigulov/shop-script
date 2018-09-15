@@ -78,6 +78,9 @@ class SearchController extends Controller
                             'category_id' => [
                                 'type' => 'integer',
                             ],
+                            'category_slug' => [
+                                'type' => 'text',
+                            ],
                             'brand_id' => [
                                 'type' => 'integer',
                             ],
@@ -171,6 +174,7 @@ class SearchController extends Controller
                     'slug' => $product->slug,
                     'price' => $product->price,
                     'category_id' => $product->category_id,
+                    'category_slug' => $product->category->slug,
                     'brand_id' => $product->brand_id,
                     'code' => $product->code,
                     'weight' => $product->weight,

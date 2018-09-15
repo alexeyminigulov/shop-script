@@ -72,6 +72,15 @@ class ProductReadRepository
             'body' => [
                 "query" => [
                     "bool" => [
+                        "filter" =>
+                            call_user_func(function () use ($form) {
+                                if (!empty($form->priceFrom) && !empty($form->priceTo)) {
+                                    return [
+                                        ["range" => ["price" => ["gte" => $form->priceFrom, "lt" => $form->priceTo]]],
+                                        ["match" => ["category_slug" => $form->slug] ],
+                                    ];
+                                }
+                            }),
                         "must" =>
                             array_values(
                                 array_map(function (ValueForm $value) {

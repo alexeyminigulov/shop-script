@@ -26,7 +26,10 @@ class ValueForm extends Model
 
     public function isFilled(): bool
     {
-        return !empty(reset($this->value));
+        if (!empty($this->value) && is_array($this->value)) {
+            return !empty(reset($this->value));
+        }
+        return false;
     }
 
     public function rules()

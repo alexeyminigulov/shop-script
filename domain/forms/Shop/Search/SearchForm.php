@@ -3,6 +3,7 @@
 namespace domain\forms\Shop\Search;
 
 use domain\entities\Shop\Attribute\Attribute;
+use domain\entities\Shop\Product\Product;
 use elisdn\compositeForm\CompositeForm;
 
 /**
@@ -13,6 +14,8 @@ use elisdn\compositeForm\CompositeForm;
 class SearchForm extends CompositeForm
 {
     public $slug;
+    public $priceFrom;
+    public $priceTo;
 
     public function __construct(array $attributes, $config = [])
     {
@@ -34,7 +37,18 @@ class SearchForm extends CompositeForm
         return [
             [['slug'], 'required'],
             [['slug'], 'string', 'max' => 255],
+            [['priceFrom', 'priceTo'], 'integer'],
         ];
+    }
+
+    public function getMinPrice()
+    {
+        return Product::find()->min('price');
+    }
+
+    public function getMaxPrice()
+    {
+        return Product::find()->max('price');
     }
 
     protected function internalForms()
