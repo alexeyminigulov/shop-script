@@ -16,10 +16,10 @@ class m180704_120406_create_shop_attribute_group_assignments_table extends Migra
             'group_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
-        $this->addPrimaryKey('pk-shop_attribute_group_assignments}}', '{{%shop_attribute_group_assignments}}', ['category_id', 'group_id']);
+        $this->addPrimaryKey('{{%pk-shop_attribute_group_assignments}}', '{{%shop_attribute_group_assignments}}', ['category_id', 'group_id']);
 
-        $this->createIndex('idx-shop_attribute_group_assignments-category_id}}', '{{%shop_attribute_group_assignments}}', 'category_id');
-        $this->createIndex('idx-shop_attribute_group_assignments-group_id}}', '{{%shop_attribute_group_assignments}}', 'group_id');
+        $this->createIndex('{{%idx-shop_attribute_group_assignments-category_id}}', '{{%shop_attribute_group_assignments}}', 'category_id');
+        $this->createIndex('{{%idx-shop_attribute_group_assignments-group_id}}', '{{%shop_attribute_group_assignments}}', 'group_id');
 
         $this->addForeignKey('{{%fk-shop_attribute_group_assignments-category_id}}', '{{%shop_attribute_group_assignments}}', 'category_id', '{{%shop_categories}}', 'id', 'CASCADE', 'RESTRICT');
         $this->addForeignKey('{{%fk-shop_attribute_group_assignments-group_id}}', '{{%shop_attribute_group_assignments}}', 'group_id', '{{%shop_attribute_groups}}', 'id', 'CASCADE', 'RESTRICT');
