@@ -3,12 +3,16 @@
 /* @var $this \yii\web\View */
 /* @var $product \domain\entities\Shop\Product\Product */
 /* @var $categories \domain\entities\Shop\Category[] */
+/* @var $comment \domain\forms\Shop\Discussion\CommentForm */
+/* @var $discussions \domain\entities\Shop\Discussion[] */
 
 use yii\helpers\Html;
 use frontend\widgets\BreadCrumbs;
 use frontend\widgets\ProductContentFeatures;
 use frontend\assets\JqueryZoomAsset;
 use frontend\assets\MagnificPopup;
+use yii\widgets\ActiveForm;
+use frontend\widgets\DiscussionWidget;
 
 JqueryZoomAsset::register($this);
 MagnificPopup::register($this);
@@ -68,35 +72,50 @@ MagnificPopup::register($this);
                                         ]) ?>
                                     </div>
                                     <div class="ty-discussion-post-popup hidden" id="new_post_dialog_214" title="Написать отзыв">
-                                        <form action="http://demo.cs-cart.ru/stores/0074ef20992a3836/" method="post" class="posts-form cm-processed-form" name="add_post_form" id="add_post_form_214">
+                                        <?php $form = ActiveForm::begin([
+                                            'action' => ['shop/product/comment'],
+                                            'options' => [
+                                                'class' => 'posts-form cm-processed-form',
+                                                'name' => 'add_post_form',
+                                                'id' => 'add_post_form_214',
+                                            ]
+                                        ]); ?>
+
+                                            <?= $form->field($comment, 'productId', [
+                                                'options' => ['class' => ''],
+                                            ])->hiddenInput()->label(false) ?>
+
                                             <div id="new_post_214">
-                                                <div class="ty-control-group">
-                                                    <label for="dsc_name_214" class="ty-control-group__title cm-required">Ваше имя</label>
-                                                    <input type="text" id="dsc_name_214" name="post_data[name]" value="" size="50" class="ty-input-text-large">
-                                                </div>
                                                 <div class="ty-control-group">
                                                     <label for="rating_214" class="ty-control-group__title cm-required cm-multiple-radios">Ваша оценка</label>
                                                     <div class="clearfix cm-field-container">
                                                         <div class="ty-rating" id="rating_214">
-                                                            <input type="radio" id="rating_214_5" class="ty-rating__check" name="post_data[rating_value]" value="5"><label class="ty-rating__label" for="rating_214_5" title="Отлично!">Отлично!</label>
-                                                            <input type="radio" id="rating_214_4" class="ty-rating__check" name="post_data[rating_value]" value="4"><label class="ty-rating__label" for="rating_214_4" title="Очень хорошо">Очень хорошо</label>
-                                                            <input type="radio" id="rating_214_3" class="ty-rating__check" name="post_data[rating_value]" value="3"><label class="ty-rating__label" for="rating_214_3" title="Сносно">Сносно</label>
-                                                            <input type="radio" id="rating_214_2" class="ty-rating__check" name="post_data[rating_value]" value="2"><label class="ty-rating__label" for="rating_214_2" title="Плохо">Плохо</label>
-                                                            <input type="radio" id="rating_214_1" class="ty-rating__check" name="post_data[rating_value]" value="1"><label class="ty-rating__label" for="rating_214_1" title="Очень плохо">Очень плохо</label>
+                                                            <input type="radio" id="rating_214_5" class="ty-rating__check" name="CommentForm[rating]" value="5"><label class="ty-rating__label" for="rating_214_5" title="Отлично!">Отлично!</label>
+                                                            <input type="radio" id="rating_214_4" class="ty-rating__check" name="CommentForm[rating]" value="4"><label class="ty-rating__label" for="rating_214_4" title="Очень хорошо">Очень хорошо</label>
+                                                            <input type="radio" id="rating_214_3" class="ty-rating__check" name="CommentForm[rating]" value="3"><label class="ty-rating__label" for="rating_214_3" title="Сносно">Сносно</label>
+                                                            <input type="radio" id="rating_214_2" class="ty-rating__check" name="CommentForm[rating]" value="2"><label class="ty-rating__label" for="rating_214_2" title="Плохо">Плохо</label>
+                                                            <input type="radio" id="rating_214_1" class="ty-rating__check" name="CommentForm[rating]" value="1"><label class="ty-rating__label" for="rating_214_1" title="Очень плохо">Очень плохо</label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="ty-control-group">
-                                                    <label for="dsc_message_214" class="ty-control-group__title cm-required">Ваше сообщение</label>
-                                                    <textarea id="dsc_message_214" name="post_data[message]" class="ty-input-textarea ty-input-text-large" rows="5" cols="72"></textarea>
-                                                </div>
-                                                <!--new_post_214-->
+
+                                                <?= $form->field($comment, 'text', [
+                                                    'options' => [
+                                                        'class' => 'ty-control-group',
+                                                    ],
+                                                    'labelOptions' => ['class' => 'ty-control-group__title'],
+                                                ])->textarea([
+                                                    'id' => 'dsc_message_214',
+                                                    'class' => 'ty-input-textarea ty-input-text-large',
+                                                    'rows' => '5',
+                                                    'cols' => '72',
+                                                ])->label('Ваше сообщение') ?>
                                             </div>
+
                                             <div class="buttons-container">
                                                 <button class="ty-btn__secondary ty-btn" type="submit" name="dispatch[discussion.add]">Отправить</button>
                                             </div>
-                                            <input type="hidden" name="security_hash" class="cm-no-hide-input" value="e809baceaeeed99a23e1a09f43008161">
-                                        </form>
+                                        <?php ActiveForm::end(); ?>
                                     </div>
                                 </div>
                                 <!-- Inline script moved to the bottom of the page -->
@@ -123,87 +142,9 @@ MagnificPopup::register($this);
                                     <div id="content_attachments" class="ty-wysiwyg-content content-attachments">
                                     </div>
                                     <div id="content_discussion" class="ty-wysiwyg-content content-discussion hidden">
-                                        <div class="discussion-block" id="content_discussion_block">
-                                            <div id="posts_list_214">
-                                                <div class="ty-pagination-container cm-pagination-container" id="pagination_contents_comments_214">
-                                                    <div class="ty-discussion-post__content ty-mb-l">
-                                                        <div class="ty-discussion-post " id="post_27">
-                                             <span itemscope="" itemtype="http://schema.org/Review">
-                                                <span itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                                   <meta itemprop="ratingValue" content="3">
-                                                </span>
-                                                <meta itemprop="itemReviewed" content="ASUS CP6130">
-                                                <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                                                   <meta itemprop="name" content="Виктор Вединов">
-                                                </span>
-                                                <meta itemprop="datePublished" content="2014-09-09">
-                                                <meta itemprop="reviewBody" content="Небольшой (вполне уместится на письменном столе), высокая пропускная способность видеокарты в текущем ценовом диапазоне, система восстановления ОС (активируется нажатием F9).
-                                                   Недостаток: При первом запуске монитор не показывает картинку, нужно подождать несколько минут не выключая компьютер.">
-                                             </span>
-                                                            <div class="row-fluid">
-                                                                <div class="span3">
-                                                                    <span class="ty-discussion-post__author">Виктор Вединов</span>
-                                                                    <div class="clearfix ty-discussion-post__rating">
-                                                      <span class="ty-nowrap ty-stars">
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star-empty"></i>
-                                                      <i class="ty-stars__icon ty-icon-star-empty"></i>
-                                                      </span>
-                                                                    </div>
-                                                                    <p><span class="ty-discussion-post__date">09/09/2014, 04:36</span></p>
-                                                                </div>
-                                                                <div class="span13">
-                                                                    <div class="ty-discussion-post__message">Небольшой (вполне уместится на письменном столе), высокая пропускная способность видеокарты в текущем ценовом диапазоне, система восстановления ОС (активируется нажатием F9).<br>
-                                                                        <br>
-                                                                        Недостаток: При первом запуске монитор не показывает картинку, нужно подождать несколько минут не выключая компьютер.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="ty-discussion-post__content ty-mb-l">
-                                                        <div class="ty-discussion-post " id="post_26">
-                                             <span itemscope="" itemtype="http://schema.org/Review">
-                                                <span itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-                                                   <meta itemprop="ratingValue" content="4">
-                                                </span>
-                                                <meta itemprop="itemReviewed" content="ASUS CP6130">
-                                                <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-                                                   <meta itemprop="name" content="Раиса Малышева">
-                                                </span>
-                                                <meta itemprop="datePublished" content="2014-09-08">
-                                                <meta itemprop="reviewBody" content="Прекрасный компьютер. Покупался для домашнего пользования. Подключен к телевизору 42&amp;quot;. Компактный корпус, влезет куда угодно.">
-                                             </span>
-                                                            <div class="row-fluid">
-                                                                <div class="span3">
-                                                                    <span class="ty-discussion-post__author">Раиса Малышева</span>
-                                                                    <div class="clearfix ty-discussion-post__rating">
-                                                      <span class="ty-nowrap ty-stars">
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star"></i>
-                                                      <i class="ty-stars__icon ty-icon-star-empty"></i>
-                                                      </span>
-                                                                    </div>
-                                                                    <p><span class="ty-discussion-post__date">09/08/2014, 05:13</span></p>
-                                                                </div>
-                                                                <div class="span13">
-                                                                    <div class="ty-discussion-post__message">Прекрасный компьютер. Покупался для домашнего пользования. Подключен к телевизору 42". Компактный корпус, влезет куда угодно.</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--pagination_contents_comments_214-->
-                                                </div>
-                                                <!--posts_list_214-->
-                                            </div>
-                                            <div class="ty-discussion-post__buttons buttons-container">
-                                                <a class="ty-btn cm-dialog-opener cm-dialog-auto-size ty-btn__primary " rel="nofollow" data-ca-target-id="new_post_dialog_214">Написать отзыв</a>
-                                            </div>
-                                        </div>
+                                        <?= DiscussionWidget::widget([
+                                                'discussions' => $discussions,
+                                        ]) ?>
                                     </div>
                                     <div id="content_required_products" class="ty-wysiwyg-content content-required_products">
                                     </div>

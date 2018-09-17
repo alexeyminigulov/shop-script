@@ -5,6 +5,7 @@ namespace domain\entities\Shop;
 use yii\db\ActiveRecord;
 use domain\entities\User;
 use domain\entities\Shop\Product\Product;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "shop_discussions".
@@ -23,12 +24,13 @@ class Discussion extends ActiveRecord
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 10;
 
-    public static function create($userId, $productId, $text): self
+    public static function create($userId, $productId, $text, $rating): self
     {
         $discussion = new self();
         $discussion->user_id = $userId;
         $discussion->product_id = $productId;
-        $discussion->text = $text;
+        $discussion->text = Html::encode($text);
+        $discussion->rating = $rating;
         $discussion->status = self::STATUS_INACTIVE;
 
         return $discussion;

@@ -14,7 +14,7 @@ class m180916_095525_create_shop_discussions_table extends Migration
         $this->createTable('{{%shop_discussions}}', [
             'user_id' => $this->integer()->notNull(),
             'product_id' => $this->integer()->notNull(),
-            'text' => $this->string()->notNull(),
+            'text' => $this->text()->notNull(),
             'rating' => $this->integer()->notNull(),
             'status' => $this->integer()->notNull()->defaultValue(0),
         ], $tableOptions);
@@ -24,7 +24,7 @@ class m180916_095525_create_shop_discussions_table extends Migration
         $this->createIndex('{{%idx-shop_discussions-user_id}}', '{{%shop_discussions}}', 'user_id');
         $this->createIndex('{{%idx-shop_discussions-product_id}}', '{{%shop_discussions}}', 'product_id');
 
-        $this->addForeignKey('{{%fk-shop_discussions-user_id}}', '{{%shop_discussions}}', 'user_id', '{{%shop_users}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('{{%fk-shop_discussions-user_id}}', '{{%shop_discussions}}', 'user_id', '{{%users}}', 'id', 'CASCADE', 'RESTRICT');
         $this->addForeignKey('{{%fk-shop_discussions-product_id}}', '{{%shop_discussions}}', 'product_id', '{{%shop_products}}', 'id', 'CASCADE', 'RESTRICT');
     }
 

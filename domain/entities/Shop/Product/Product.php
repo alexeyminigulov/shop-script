@@ -3,6 +3,7 @@
 namespace domain\entities\Shop\Product;
 
 use domain\entities\Shop\Brand;
+use domain\entities\Shop\Discussion;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
@@ -32,6 +33,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property Category $category
  * @property Picture[] $pictures
  * @property Picture $mainPicture
+ * @property Discussion[] $discussions
  */
 class Product extends ActiveRecord
 {
@@ -198,6 +200,11 @@ class Product extends ActiveRecord
     public function getCategory(): ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function getDiscussions()
+    {
+        return $this->hasMany(Discussion::className(), ['product_id' => 'id']);
     }
 
     public function getPictures(): ActiveQuery
