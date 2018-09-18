@@ -2,8 +2,9 @@
 
 namespace domain\forms\Blog;
 
-use domain\entities\Blog\Post;
 use yii\base\Model;
+use domain\entities\Blog\Post;
+use yii\web\UploadedFile;
 
 /**
  * Class PostForm
@@ -14,7 +15,7 @@ use yii\base\Model;
  * @property string $title
  * @property string $description;
  * @property string $content
- * @property string $photo
+ * @property UploadedFile $photo
  * @property int $status
  */
 class PostForm extends Model
@@ -41,7 +42,18 @@ class PostForm extends Model
     {
         return [
             [['title', 'description', 'content', 'photo'], 'required'],
-            [['title', 'description', 'content'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+            [['description', 'content'], 'string'],
+            [['photo'], 'image'],
         ];
+    }
+
+    public function beforeValidate(): bool
+    {
+        if (parent::beforeValidate()) {
+            $this->photo = UploadedFile::getInstance($this, 'photo');
+            return true;
+        }
+        return false;
     }
 }

@@ -13,7 +13,7 @@ class m180917_125045_create_blog_posts_table extends Migration
 
         $this->createTable('{{%blog_posts}}', [
             'id' => $this->primaryKey(),
-            'create_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer()->notNull(),
             'title' => $this->string()->notNull(),
             'description' => $this->text()->notNull(),
             'content' => $this->text()->notNull(),

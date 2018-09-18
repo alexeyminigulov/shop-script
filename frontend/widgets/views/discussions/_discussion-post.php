@@ -42,7 +42,7 @@ use yii\helpers\Html;
             </div>
             <div class="span13">
                 <div class="ty-discussion-post__message">
-                    <?= Html::encode($discussion->text) ?>
+                    <?= Yii::$app->formatter->asNtext($discussion->text) ?>
                 </div>
             </div>
         </div>

@@ -3,6 +3,9 @@
 namespace domain\entities\Blog;
 
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
+use yiidreamteam\upload\ImageUploadBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "blog_posts".
@@ -14,13 +17,15 @@ use yii\db\ActiveRecord;
  * @property string $content
  * @property string $photo
  * @property int $status
+ *
+ * @mixin ImageUploadBehavior
  */
 class Post extends ActiveRecord
 {
     const STATUS_ACTIVE = 10;
     const STATUS_INACTIVE = 0;
 
-    public static function create($title, $description, $content, $photo): self
+    public static function create($title, $description, $content, UploadedFile $photo): self
     {
         $post = new self();
         $post->title = $title;
@@ -32,7 +37,7 @@ class Post extends ActiveRecord
         return $post;
     }
 
-    public function edit($title, $description, $content, $photo)
+    public function edit($title, $description, $content, UploadedFile $photo)
     {
         $this->title = $title;
         $this->description = $description;
@@ -48,6 +53,29 @@ class Post extends ActiveRecord
     public function draft()
     {
         $this->status = self::STATUS_INACTIVE;
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+                'createThumbsOnRequest' => true,
+                'attribute' => 'photo',
+                'thumbs' => [
+                    'thumb' => ['width' => 188, 'height' => 130],
+                ],
+                'filePath' => '@static/posts/[[pk]].[[extension]]',
+                'fileUrl' => '@staticUrl/posts/[[pk]].[[extension]]',
+                'thumbPath' => '@static/posts/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '@staticUrl/posts/[[profile]]_[[pk]].[[extension]]',
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+            ],
+        ];
     }
 
     public static function tableName()
