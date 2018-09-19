@@ -11,5 +11,9 @@ return [
             'class' => 'yii\caching\FileCache',
             'cachePath' => '@common/runtime/cache',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'cache' => 'cache',
+        ],
     ],
 ];
