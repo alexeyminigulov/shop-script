@@ -10,4 +10,5 @@ info "Restart web-stack"
 service php7.1-fpm restart
 service nginx restart
 service mysql restart
-service elasticsearch start
+service elasticsearch restart
+service redis-server restart

@@ -31,6 +31,9 @@ info "Update OS software"
 apt-get update
 apt-get upgrade -y
 
+info "Install Redis-server"
+apt-get install redis-server -y
+
 info "Install JDK"
 apt-get install default-jdk -y
 
