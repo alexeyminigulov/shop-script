@@ -1,11 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use Yii;
 use domain\entities\Shop\Product\Product;
 use domain\services\ContactService;
 use domain\services\UserService;
-use Yii;
-use yii\db\ActiveQuery;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -13,7 +12,7 @@ use yii\filters\AccessControl;
 use common\forms\LoginForm;
 use frontend\forms\PasswordResetRequestForm;
 use frontend\forms\ResetPasswordForm;
-use frontend\forms\SignupForm;
+use domain\forms\auth\SignupForm;
 use frontend\forms\ContactForm;
 
 /**
@@ -181,17 +180,21 @@ class SiteController extends Controller
     {
         $this->layout = 'layout_site';
 
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
+        $form = new SignupForm();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $user = $this->service->signup($form);
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
 
         return $this->render('signup', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

@@ -1,7 +1,8 @@
 <?php
-namespace domain\entities;
+namespace domain\entities\User;
 
 use domain\entities\Shop\Order;
+use domain\entities\User\events\UserConfirmEmail;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -24,10 +25,24 @@ use yii\web\IdentityInterface;
  *
  * @property Order[] $orders
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, UserEventInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
+
+    use UserEventsTrait;
+
+    public static function create($userName, $email, $password): self
+    {
+        $user = new self();
+        $user->username = $userName;
+        $user->email = $email;
+        $user->setPassword($password);
+        $user->generateAuthKey();
+        $user->addEvent(new UserConfirmEmail($user));
+
+        return $user;
+    }
 
     public function edit($username, $email)
     {

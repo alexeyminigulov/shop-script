@@ -2,6 +2,8 @@
 
 return [
     'class' => 'yii\web\UrlManager',
+    'baseUrl' => '',
+    'hostInfo' => $params['backendDomain'],
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [

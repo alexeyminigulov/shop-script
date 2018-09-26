@@ -3,10 +3,11 @@
 namespace domain\services;
 
 use common\forms\LoginForm;
-use domain\entities\User;
+use domain\entities\User\User;
 use domain\repositories\UserRepository;
 use frontend\forms\PasswordResetRequestForm;
 use frontend\forms\ResetPasswordForm;
+use domain\forms\auth\SignupForm;
 use yii\mail\MailerInterface;
 
 class UserService
@@ -18,6 +19,14 @@ class UserService
     {
         $this->repository = $repository;
         $this->mailer = $mailer;
+    }
+
+    public function signup(SignupForm $form): User
+    {
+        $user = User::create($form->username, $form->email, $form->password);
+        $this->repository->save($user);
+
+        return $user;
     }
 
     public function auth(LoginForm $form): User

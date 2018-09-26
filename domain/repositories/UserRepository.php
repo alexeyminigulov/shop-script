@@ -2,13 +2,20 @@
 
 namespace domain\repositories;
 
-use domain\entities\User;
-use domain\exceptions\EntityNotFoundException;
 use Yii;
-
+use domain\dispatcher\EventDispatcherInterface;
+use domain\entities\User\User;
+use domain\exceptions\EntityNotFoundException;
 
 class UserRepository
 {
+    private $dispatcher;
+
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     public function get($id): User
     {
         if (!$user = User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE])) {
@@ -83,5 +90,6 @@ class UserRepository
         if (!$user->save($runValidation)) {
             throw new \RuntimeException('User did not save.');
         }
+        $this->dispatcher->dispatchAll($user->releaseEvents());
     }
 }

@@ -2,9 +2,13 @@
 
 namespace common\bootstrap;
 
-use yii\base\BootstrapInterface;
+use Yii;
+use domain\dispatcher\EventDispatcher;
 use yii\di\Container;
-use domain\services\UserService;
+use domain\dispatcher\EventDispatcherInterface;
+use domain\entities\User\events\UserConfirmEmail;
+use domain\listeners\UserConfirmEmailListener;
+use yii\base\BootstrapInterface;
 use domain\repositories\UserRepository;
 use yii\mail\MailerInterface;
 
@@ -20,6 +24,14 @@ class Setup implements BootstrapInterface
         $container->setSingleton(MailerInterface::class, function () use ($app) {
             /* @var MailerInterface */
             return $app->mailer;
+        });
+
+        $container->setSingleton(EventDispatcherInterface::class, function (Container $container) {
+            return new EventDispatcher([
+                UserConfirmEmail::class => [
+                    [$container->get(UserConfirmEmailListener::class), 'handle'],
+                ],
+            ]);
         });
     }
 }
