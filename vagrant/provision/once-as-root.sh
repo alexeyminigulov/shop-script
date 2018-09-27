@@ -34,6 +34,9 @@ apt-get upgrade -y
 info "Install Redis-server"
 apt-get install redis-server -y
 
+info "Install supervisor"
+apt-get install supervisor -y
+
 info "Install JDK"
 apt-get install default-jdk -y
 
@@ -81,6 +84,10 @@ echo "Done!"
 info "Initailize databases for MySQL"
 mysql -uroot <<< "CREATE DATABASE shopscript"
 mysql -uroot <<< "CREATE DATABASE shopscript_test"
+echo "Done!"
+
+info "Enabling supervisor processes"
+ln -s /app/vagrant/supervisor/queue.conf /etc/supervisor/conf.d/queue.conf
 echo "Done!"
 
 info "Install composer"
