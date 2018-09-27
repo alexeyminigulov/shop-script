@@ -31,34 +31,34 @@ use frontend\widgets\CartWidget;
                             </a>
                         </li>
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__brands ">
-                            <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=product_features.view_all&amp;filter_id=10" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">Бренды</div>
+                            <a href="<?= Url::to(['blog/post/index']) ?>" class="ty-menu__item-link a-first-lvl">
+                                <div class="menu-lvl-ctn">Новости</div>
                             </a>
                         </li>
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__newest ">
-                            <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest" class="ty-menu__item-link a-first-lvl">
+                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Новинки</div>
                             </a>
                         </li>
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__hits ">
-                            <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.bestsellers" class="ty-menu__item-link a-first-lvl">
+                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.bestsellers" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Хиты продаж</div>
                             </a>
                         </li>
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__sale ">
-                            <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.on_sale" class="ty-menu__item-link a-first-lvl">
+                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.on_sale" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Скидки</div>
                             </a>
                         </li>
                         <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl last  ty-menu-item__promo ">
-                            <a  href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/promotions/" class="ty-menu__item-link a-first-lvl">
+                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/promotions/" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Акции</div>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="span5 top-phones-grid">
-                    <div class=" ty-float-right">
+                    <div class="ty-float-right">
                         <div class="ty-wysiwyg-content">
                             <div class="ty-cr-phone-number">
                                 <div class="ty-cr-phone"><a href="tel:+88000000000">+8(800) 0000000</a><br><a href="tel:+88000000000">+8(800) 0000000</a></div>

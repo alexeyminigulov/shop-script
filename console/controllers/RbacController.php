@@ -2,7 +2,7 @@
 namespace console\controllers;
 
 use Yii;
-use domain\entities\User;
+use domain\entities\User\User;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
 
