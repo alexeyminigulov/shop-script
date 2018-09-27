@@ -10,13 +10,10 @@ use frontend\widgets\BannerWidget;
 <div class="tygh-content clearfix">
     <div class="container-fluid  content-grid">
 
-
         <div class="container-fluid-row container-fluid-row-no-limit fullwidth-page-banners">
             <div class="row-fluid ">
                 <div class="span16 ">
-
                     <?= BannerWidget::widget() ?>
-
                 </div>
             </div>
         </div>
@@ -37,7 +34,6 @@ use frontend\widgets\BannerWidget;
                         </div>
                     </div>
 
-
                     <div class="row-fluid ">
                         <div class="span16 ">
 
@@ -53,9 +49,7 @@ use frontend\widgets\BannerWidget;
             </div>
         </div>
 
-
         <div class="container-fluid-row container-fluid-row-full-width pd-bottom">
-
             <div class="row-fluid ">
                 <div class="span16 ">
                     <div class="ty-mainbox-container clearfix">
@@ -78,7 +72,7 @@ use frontend\widgets\BannerWidget;
                     </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 </div>

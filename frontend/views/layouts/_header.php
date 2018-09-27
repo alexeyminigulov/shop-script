@@ -98,22 +98,19 @@ use frontend\widgets\CartWidget;
                             </div>
                         </div>
 
-
                         <div class="span5 cart-content-grid">
                             <?= CartWidget::widget() ?>
                             <div class="ty-dropdown-box  top-my-account ty-float-right">
-                                <div id="sw_dropdown_3946" class="ty-dropdown-box__title cm-combination unlogged">
 
+                                <div id="sw_dropdown_3946" class="ty-dropdown-box__title cm-combination unlogged">
                                     <a class="ty-account-info__title" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/profiles-update/">
                                         <i class="ty-icon-user"></i>&nbsp;
                                         <span class="ty-account-info__title-txt"><small>Ваш личный</small>Кабинет</span>
                                         <i class="ty-icon-down-micro ty-account-info__user-arrow"></i>
                                     </a>
-
                                 </div>
+
                                 <div id="dropdown_3946" class="cm-popup-box ty-dropdown-box__content hidden">
-
-
                                     <div id="account_info_3946">
                                         <ul class="ty-account-info">
                                             <?php if (!Yii::$app->user->isGuest): ?>
@@ -134,20 +131,18 @@ use frontend\widgets\CartWidget;
 
                                         <div class="ty-account-info__orders updates-wrapper track-orders" id="track_orders_block_3946">
                                             <form action="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/" method="POST" class="cm-ajax cm-post cm-ajax-full-render" name="track_order_quick">
-
-                                                <div class="ty-account-info__orders-txt">Отслеживание заказа</div>
-
+                                                <div class="ty-account-info__orders-txt">
+                                                    Отслеживание заказа
+                                                </div>
                                                 <div class="ty-account-info__orders-input ty-control-group ty-input-append">
                                                     <label for="track_order_item3946" class="cm-required hidden">Отслеживание заказа</label>
                                                     <input type="text" size="20" class="ty-input-text cm-hint" id="track_order_item3946" name="track_data" value="Номер заказа/E-mail" />
                                                     <button title="Выполнить" class="ty-btn-go" type="submit"><i class="ty-btn-go__icon ty-icon-right-dir"></i></button>
                                                 </div>
-
                                             </form>
                                         </div>
 
                                         <div class="ty-account-info__buttons buttons-container">
-
                                             <?php if (Yii::$app->user->isGuest): ?>
                                                 <a href="<?= Url::to(['site/login']) ?>" class="ty-btn ty-btn__secondary" rel="nofollow">
                                                     Войти
@@ -156,21 +151,16 @@ use frontend\widgets\CartWidget;
                                                     Регистрация
                                                 </a>
                                             <?php else: ?>
-
                                                 <?= Html::beginForm(['/site/logout'], 'post') ?>
-
                                                 <?= Html::submitButton('Выйти', ['class' => 'ty-btn ty-btn__primary']) ?>
-
                                                 <?= Html::endForm() ?>
-
                                             <?php endif; ?>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

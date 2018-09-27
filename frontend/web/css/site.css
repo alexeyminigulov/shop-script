@@ -132,3 +132,7 @@ a.desc:after {
 input.ty-price-slider__input-text {
     width: 88px;
 }
+
+* {
+    box-sizing: content-box;
+}
