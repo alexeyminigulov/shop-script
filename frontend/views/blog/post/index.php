@@ -1,10 +1,11 @@
 <?php
 
 /* @var $this \yii\web\View */
-/* @var $posts \domain\entities\Blog\Post[] */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 
 ?>
 <div class="tygh-content clearfix">
@@ -41,7 +42,7 @@ use yii\helpers\Url;
                             <div class="discussion-block" id="content_discussion">
                                 <div id="posts_list_0">
                                     <div class="ty-pagination-container cm-pagination-container" id="pagination_contents_comments_0">
-                                        <?php foreach ($posts as $post): ?>
+                                        <?php foreach ($dataProvider->getModels() as $post): ?>
                                         <div class="ty-discussion-post__content ty-mb-l">
                                             <div class="ty-discussion-post" id="post_130">
                                                 <span itemscope="" itemtype="http://schema.org/Review">
@@ -80,6 +81,13 @@ use yii\helpers\Url;
                         </div>
 
                     </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="col-sm-6 text-center">
+                    <?= LinkPager::widget([
+                        'pagination' => $dataProvider->getPagination(),
+                    ]) ?>
                 </div>
             </div>
         </div>

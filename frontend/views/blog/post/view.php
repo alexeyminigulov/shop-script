@@ -15,8 +15,8 @@ use yii\helpers\Url;
                     <div id="breadcrumbs_10">
                         <div itemscope="" itemtype="http://schema.org/BreadcrumbList" class="ty-breadcrumbs clearfix">
                             <span itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
-                                <a itemprop="item" href="<?= Yii::$app->homeUrl ?>" class="ty-breadcrumbs__a">
-                                   <bdi>Главная</bdi>
+                                <a itemprop="item" href="<?= Url::to(['blog/post/index']) ?>" class="ty-breadcrumbs__a">
+                                   <bdi>Новости</bdi>
                                 </a>
                             </span>
                             <span class="ty-breadcrumbs__slash">/</span>
