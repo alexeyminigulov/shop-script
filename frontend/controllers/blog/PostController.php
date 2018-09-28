@@ -21,4 +21,13 @@ class PostController extends Controller
             'posts' => $posts,
         ]);
     }
+
+    public function actionView($id)
+    {
+        $post = Post::findOne(['id' => $id]);
+
+        return $this->render('view', [
+            'post' => $post,
+        ]);
+    }
 }

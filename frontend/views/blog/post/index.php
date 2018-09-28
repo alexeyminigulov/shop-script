@@ -57,7 +57,10 @@ use yii\helpers\Url;
                                                 </span>
                                                 <div class="row-fluid">
                                                     <div class="span3">
-                                                        <?= Html::img($post->getImageFileUrl('photo'), ['style' => 'max-width:120px;height:auto']) ?>
+                                                        <?= Html::a(
+                                                            Html::img($post->getImageFileUrl('photo'), ['style' => 'max-width:120px;height:auto']),
+                                                            Url::to(['blog/post/view', 'id' => $post->id])
+                                                        ) ?>
                                                         <p>
                                                             <span class="ty-discussion-post__date">08/03/2014, 20:56</span>
                                                         </p>
