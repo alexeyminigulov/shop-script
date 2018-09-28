@@ -26,6 +26,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property string $status
  * @property int $weight
  * @property int $quantity
+ * @property float $rating
  *
  * @property Brand $brand
  * @property Value[] $values
@@ -96,6 +97,11 @@ class Product extends ActiveRecord
     public function eraseValues()
     {
         $this->values = [];
+    }
+
+    public function updateRating($rating)
+    {
+        $this->rating = $rating;
     }
 
     public function assignPicture(Picture $picture)

@@ -4,22 +4,19 @@
 /* @var $product \domain\entities\Shop\Product\Product */
 
 use yii\helpers\Html;
+use frontend\widgets\RatingStars;
 
 ?>
 <form action="http://demo.cs-cart.ru/stores/0074ef20992a3836/" method="post" name="product_form_214" enctype="multipart/form-data" class="cm-disable-empty-files  cm-ajax cm-ajax-full-render cm-ajax-status-middle  cm-processed-form">
     <div class="advanced-layer-01">
         <div class="ty-product-block__rating">
             <div class="ty-discussion__rating-wrapper" id="average_rating_product">
-                <span class="ty-nowrap ty-stars">
-                    <a class="cm-external-click" data-ca-scroll="content_discussion" data-ca-external-click-id="discussion">
-                        <i class="ty-stars__icon ty-icon-star"></i>
-                        <i class="ty-stars__icon ty-icon-star"></i>
-                        <i class="ty-stars__icon ty-icon-star"></i>
-                        <i class="ty-stars__icon ty-icon-star-half"></i>
-                        <i class="ty-stars__icon ty-icon-star-empty"></i>
-                    </a>
-                </span>
-                <a class="ty-discussion__review-a cm-external-click" data-ca-scroll="content_discussion" data-ca-external-click-id="discussion">2 Отзыва</a><a class="ty-discussion__review-write cm-dialog-opener cm-dialog-auto-size" data-ca-target-id="new_post_dialog_214" rel="nofollow">Написать отзыв</a>
+                <?= RatingStars::widget(['rating' => $product->rating]) ?>
+                <a class="ty-discussion__review-a cm-external-click" data-ca-scroll="content_discussion" data-ca-external-click-id="discussion">
+                    <?= Html::encode(count($product->discussions)) ?> Отзыва</a>
+                <a class="ty-discussion__review-write cm-dialog-opener cm-dialog-auto-size" data-ca-target-id="new_post_dialog_214" rel="nofollow">
+                    Написать отзыв
+                </a>
             </div>
         </div>
         <div class="ty-product-block__sku">
@@ -35,22 +32,17 @@ use yii\helpers\Html;
         <div class="span8 ty-product-options-grid">
             <div class="prices-container price-wrap">
                 <div class="ty-product-prices">
-                                             <span class="cm-reload-214 ty-list-price-block" id="old_price_update_214">
-                                                <!--old_price_update_214-->
-                                             </span>
+                    <span class="cm-reload-214 ty-list-price-block" id="old_price_update_214"></span>
                     <div class="ty-product-block__price-actual">
-                                                <span class="cm-reload-214 ty-price-update" id="price_update_214">
-                                                   <input type="hidden" name="appearance[show_price_values]" value="1">
-                                                   <input type="hidden" name="appearance[show_price]" value="1">
-                                                   <span class="ty-price" id="line_discounted_price_214"><bdi><span class="ty-price-num"><?= Html::encode($product->price) ?></span>&nbsp;<span class="ty-price-num"><span class="ty-rub">Р</span></span></bdi></span>
-                                                    <!--price_update_214-->
-                                                </span>
+                        <span class="cm-reload-214 ty-price-update" id="price_update_214">
+                           <span class="ty-price" id="line_discounted_price_214">
+                               <bdi>
+                                   <span class="ty-price-num"><?= Html::encode($product->price) ?></span>&nbsp;<span class="ty-price-num"><span class="ty-rub">Р</span></span>
+                               </bdi>
+                           </span>
+                        </span>
                     </div>
-                    <span class="cm-reload-214" id="line_discount_update_214">
-                                                <input type="hidden" name="appearance[show_price_values]" value="1">
-                                                <input type="hidden" name="appearance[show_list_discount]" value="1">
-                        <!--line_discount_update_214-->
-                                             </span>
+                    <span class="cm-reload-214" id="line_discount_update_214"></span>
                 </div>
             </div>
             <div class="cm-reload-214 stock-wrap" id="product_amount_update_214">
@@ -131,5 +123,4 @@ use yii\helpers\Html;
             </ul>
         </div>
     </div>
-    <input type="hidden" name="security_hash" class="cm-no-hide-input" value="e809baceaeeed99a23e1a09f43008161">
 </form>

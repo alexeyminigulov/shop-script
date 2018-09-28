@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use frontend\widgets\RatingStars;
 
 ?>
 <div class="ty-column4">
@@ -26,13 +27,7 @@ use yii\helpers\Url;
                         <a class="ty-btn ty-btn__text ty-add-to-compare cm-ajax cm-ajax-full-render text-button " href="http://demo.cs-cart.ru/stores/0074ef20992a3836/index.php?dispatch=product_features.add_product&amp;product_id=140&amp;redirect_url=index.php%3Fdispatch%3Dcategories.view%26category_id%3D180" rel="nofollow" data-ca-target-id="comparison_list,account_info*,abt__unitheme_compared_products">Сравнить</a>
                     </div>
                 </div>
-                <div class="grid-list__rating no-rating">
-                    <i class="ty-icon-star-empty"></i>
-                    <i class="ty-icon-star-empty"></i>
-                    <i class="ty-icon-star-empty"></i>
-                    <i class="ty-icon-star-empty"></i>
-                    <i class="ty-icon-star-empty"></i>
-                </div>
+                <?= RatingStars::widget(['rating' => $product->rating]) ?>
                 <div class="ty-grid-list__item-name">
                     <bdi>
                         <a href="<?= Url::to(['shop/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="Yamaha PDX-11 DB"><?= Html::encode($product->name) ?></a>

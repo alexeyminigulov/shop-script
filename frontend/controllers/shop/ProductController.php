@@ -1,12 +1,11 @@
 <?php
 namespace frontend\controllers\shop;
 
-use domain\entities\Shop\Discussion;
 use domain\repositories\Shop\DiscussionRepository;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use domain\entities\User;
+use domain\entities\User\User;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Product\Product;
 use domain\services\Shop\DiscussionService;
@@ -61,7 +60,9 @@ class ProductController extends Controller
         /** @var User $user */
         $user = Yii::$app->user->identity;
         $comment = new CommentForm($user, $product);
-        $discussions = $product->getDiscussions()->andWhere(['status' => Discussion::STATUS_ACTIVE])->all();
+        $discussions = $product->getDiscussions()
+//            ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+            ->all();
 
         return $this->render('view', [
             'product' => $product,
@@ -99,7 +100,7 @@ class ProductController extends Controller
         }
     }
 
-    protected function findModel($slug)
+    protected function findModel($slug): Product
     {
         if (($model = Product::find()->andWhere(['slug' => $slug])->joinWith(['discussions'])->one()) !== null) {
             return $model;

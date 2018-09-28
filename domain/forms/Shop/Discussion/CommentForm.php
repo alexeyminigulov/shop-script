@@ -3,7 +3,7 @@
 namespace domain\forms\Shop\Discussion;
 
 use yii\base\Model;
-use domain\entities\User;
+use domain\entities\User\User;
 use domain\entities\Shop\Product\Product;
 
 class CommentForm extends Model

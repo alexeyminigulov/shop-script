@@ -3,7 +3,7 @@
 namespace domain\entities\Shop;
 
 use yii\db\ActiveRecord;
-use domain\entities\User;
+use domain\entities\User\User;
 use domain\entities\Shop\Product\Product;
 use yii\helpers\Html;
 
