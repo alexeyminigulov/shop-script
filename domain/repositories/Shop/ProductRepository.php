@@ -24,6 +24,16 @@ class ProductRepository
         return $product;
     }
 
+    public function getBy($field, $value): Product
+    {
+        $product = Product::findOne([$field => $value]);
+
+        if (!$product) {
+            throw new EntityNotFoundException('Product is not found.');
+        }
+        return $product;
+    }
+
     /**
      * @param bool $onlyActive
      * @return Product[]

@@ -5,9 +5,15 @@
 
 use yii\helpers\Html;
 use frontend\widgets\RatingStars;
+use yii\widgets\ActiveForm;
 
 ?>
-<form action="http://demo.cs-cart.ru/stores/0074ef20992a3836/" method="post" name="product_form_214" enctype="multipart/form-data" class="cm-disable-empty-files  cm-ajax cm-ajax-full-render cm-ajax-status-middle  cm-processed-form">
+<?php $form = ActiveForm::begin([
+    'action' => ['shop/cart/add'],
+    'options' => [
+        'class' => 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle cm-processed-form',
+    ]
+]); ?>
     <div class="advanced-layer-01">
         <div class="ty-product-block__rating">
             <div class="ty-discussion__rating-wrapper" id="average_rating_product">
@@ -21,9 +27,9 @@ use frontend\widgets\RatingStars;
         </div>
         <div class="ty-product-block__sku">
             <div class="ty-control-group ty-sku-item cm-hidden-wrapper cm-reload-214" id="sku_update_214">
-                <input type="hidden" name="appearance[show_sku]" value="1">
+                <input type="hidden" name="AddProductForm[productCode]" value="<?= $product->code ?>">
                 <label class="ty-control-group__label" id="sku_214">КОД:</label>
-                <span class="ty-control-group__item">K02149B2ZX</span>
+                <span class="ty-control-group__item"><?= $product->code ?></span>
             </div>
         </div>
     </div>
@@ -71,7 +77,7 @@ use frontend\widgets\RatingStars;
                             <label class="ty-control-group__label" for="qty_count_214">Кол-во:</label>
                             <div class="ty-center ty-value-changer cm-value-changer">
                                 <a class="cm-increase ty-value-changer__increase">+</a>
-                                <input type="text" size="5" class="ty-value-changer__input cm-amount" id="qty_count_214" name="product_data[214][amount]" value="1" data-ca-min-qty="1">
+                                <input type="text" size="5" class="ty-value-changer__input cm-amount" id="qty_count_214" name="AddProductForm[amount]" value="1" data-ca-min-qty="1">
                                 <a class="cm-decrease ty-value-changer__decrease">−</a>
                             </div>
                         </div>
@@ -80,7 +86,7 @@ use frontend\widgets\RatingStars;
             </div>
             <div class="ty-product-block__button">
                 <div class="cm-reload-214 " id="add_to_cart_update_214">
-                    <button id="button_cart_214" class="ty-btn__primary ty-btn__big ty-btn__add-to-cart cm-form-dialog-closer ty-btn" type="submit" name="dispatch[checkout.add..214]">Купить</button>
+                    <button class="ty-btn__primary ty-btn__big ty-btn__add-to-cart cm-form-dialog-closer ty-btn" type="submit">Купить</button>
                 </div>
             </div>
             <div class="ty-product-list__feature" style="margin-top: 20px">
@@ -123,4 +129,4 @@ use frontend\widgets\RatingStars;
             </ul>
         </div>
     </div>
-</form>
+<?php ActiveForm::end(); ?>

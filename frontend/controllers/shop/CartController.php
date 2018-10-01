@@ -2,11 +2,10 @@
 namespace frontend\controllers\shop;
 
 use Yii;
-use yii\helpers\Html;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use domain\entities\Shop\Product\Product;
 use domain\services\Shop\CartService;
+use domain\forms\Shop\Cart\AddProductForm;
 
 /**
  * Catalog controller
@@ -22,6 +21,18 @@ class CartController extends Controller
         $this->service = $service;
     }
 
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'add' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $cartItems = $this->service->getCart()->getItems();
@@ -33,12 +44,20 @@ class CartController extends Controller
         ]);
     }
 
-    public function actionAdd($productId)
+    public function actionAdd()
     {
-        $product = $this->findProduct($productId);
+        $form = new AddProductForm();
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->add($form);
+                return $this->redirect(Yii::$app->request->referrer);
 
-        $this->service->add($product->id, 1);
-
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        Yii::$app->session->setFlash('error', 'Validation error.');
         return $this->redirect(Yii::$app->request->referrer);
     }
 
@@ -57,19 +76,5 @@ class CartController extends Controller
         $this->service->delete($id);
 
         return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    /**
-     * @param $id
-     * @return Product
-     * @throws NotFoundHttpException
-     */
-    protected function findProduct($id)
-    {
-        if (($model = Product::findOne(['id' => $id])) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

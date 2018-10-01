@@ -4,6 +4,7 @@ namespace domain\services\Shop;
 
 use domain\cart\Cart;
 use domain\cart\CartItem;
+use domain\forms\Shop\Cart\AddProductForm;
 use domain\repositories\Shop\ProductRepository;
 
 class CartService
@@ -22,11 +23,11 @@ class CartService
         return $this->cart;
     }
 
-    public function add($productId, $quantity): void
+    public function add(AddProductForm $form): void
     {
-        $product = $this->products->find($productId);
+        $product = $this->products->getBy('code', $form->productCode);
 
-        $this->cart->add(new CartItem($product, $quantity));
+        $this->cart->add(new CartItem($product, $form->amount));
     }
 
     public function set($id, $quantity): void
