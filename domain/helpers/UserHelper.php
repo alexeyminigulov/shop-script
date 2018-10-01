@@ -2,8 +2,8 @@
 
 namespace domain\helpers;
 
-use domain\entities\User;
 use yii\helpers\Html;
+use domain\entities\User\User;
 
 class UserHelper
 {

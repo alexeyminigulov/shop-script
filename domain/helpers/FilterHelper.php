@@ -3,7 +3,7 @@
 namespace domain\helpers;
 
 use domain\entities\Shop\Filter;
-use domain\entities\User;
+use domain\entities\User\User;
 use yii\helpers\Html;
 
 class FilterHelper

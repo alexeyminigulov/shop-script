@@ -26,6 +26,14 @@ class CartService
     public function add(AddProductForm $form): void
     {
         $product = $this->products->getBy('code', $form->productCode);
+        $cartItem = new CartItem($product, $form->amount);
+        $amount = $this->cart->getItem($cartItem->getId())
+            ? $this->cart->getItem($cartItem->getId())->getQuantity()
+            : 0;
+        $amount += $form->amount;
+        if ($product->quantity < $amount) {
+            throw new \DomainException('Товара не достаточно на складе.');
+        }
 
         $this->cart->add(new CartItem($product, $form->amount));
     }

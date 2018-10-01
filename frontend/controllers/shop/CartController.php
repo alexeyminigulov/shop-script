@@ -57,7 +57,6 @@ class CartController extends Controller
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
-        Yii::$app->session->setFlash('error', 'Validation error.');
         return $this->redirect(Yii::$app->request->referrer);
     }
 

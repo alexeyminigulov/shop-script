@@ -30,6 +30,17 @@ class Cart
         return $this->items;
     }
 
+    public function getItem($id): ?CartItem
+    {
+        $this->loadItems();
+        foreach ($this->items as $i => $current) {
+            if ($current->getId() == $id) {
+                return $current;
+            }
+        }
+        return null;
+    }
+
     public function getAmount(): int
     {
         $this->loadItems();

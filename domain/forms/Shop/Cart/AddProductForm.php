@@ -13,7 +13,8 @@ class AddProductForm extends Model
     {
         return [
             [['productCode'], 'required'],
-            [['productCode', 'amount'], 'integer', 'min' => 1],
+            [['productCode'], 'string'],
+            [['amount'], 'integer', 'min' => 1],
             [['amount'], 'default', 'value'=> 1],
         ];
     }

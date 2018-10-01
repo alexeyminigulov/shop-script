@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use frontend\widgets\CatalogWidget;
 use frontend\widgets\CartWidget;
+use common\widgets\Alert;
 
 ?>
 <div class="tygh-header clearfix">
@@ -167,3 +168,14 @@ use frontend\widgets\CartWidget;
         </div>
     </div>
 </div>
+<section class="content">
+    <div class="container-fluid-row">
+        <div class="row-fluid ">
+            <?= Alert::widget([
+                    'options' => [
+                        'style' => 'margin-bottom:0px;',
+                    ],
+            ]) ?>
+        </div>
+    </div>
+</section>
