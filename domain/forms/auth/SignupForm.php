@@ -12,6 +12,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $passwordRepeat;
+    public $verifyCode;
 
     public function rules()
     {
@@ -29,6 +31,18 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['passwordRepeat', 'required'],
+            ['passwordRepeat', 'compare', 'compareAttribute'=>'password', 'message'=>"Passwords don't match" ],
+
+            ['verifyCode', 'captcha'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'verifyCode' => 'Verification Code',
         ];
     }
 }

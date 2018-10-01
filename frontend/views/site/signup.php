@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
 
 $this->title = 'Регистрация';
 
@@ -26,6 +27,12 @@ $this->title = 'Регистрация';
                     <?= $form->field($model, 'email', ['options' => ['class' => 'ty-control-group']])->textInput(['class' => 'ty-input-text cm-focus']) ?>
 
                     <?= $form->field($model, 'password', ['options' => ['class' => 'ty-control-group']])->passwordInput(['class' => 'ty-input-text cm-autocomplete-off']) ?>
+
+                    <?= $form->field($model, 'passwordRepeat', ['options' => ['class' => 'ty-control-group']])->passwordInput(['class' => 'ty-input-text cm-autocomplete-off']) ?>
+
+                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                    ]) ?>
 
                     <div class="form-group">
                         <?= Html::submitButton('Регистрация', ['class' => 'ty-btn__login ty-btn__secondary ty-btn', 'name' => 'signup-button']) ?>
