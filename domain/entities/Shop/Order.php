@@ -28,6 +28,7 @@ use yii\helpers\Json;
  * @property string $customer_name
  * @property string $delivery_index
  * @property string $delivery_address
+ * @property int $grantCost
  *
  * @property OrderItem $items
  * @property CustomerData $customerData
@@ -71,6 +72,11 @@ class Order extends ActiveRecord
     public function canBePaid()
     {
         return true;
+    }
+
+    public function getGrantCost()
+    {
+        return $this->cost + $this->delivery_cost;
     }
 
     /**

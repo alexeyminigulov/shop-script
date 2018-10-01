@@ -52,7 +52,16 @@ use domain\helpers\ProductHelper;
                                     'delivery_method_name',
                                     'deliveryData.index',
                                     'deliveryData.address',
-                                    'cost',
+                                    [
+                                        'attribute' => 'delivery_cost',
+                                        'value' => ProductHelper::price($order->delivery_cost),
+                                        'format' => 'raw',
+                                    ],
+                                    [
+                                        'attribute' => 'cost',
+                                        'value' => ProductHelper::price($order->cost),
+                                        'format' => 'raw',
+                                    ],
                                     'note:ntext',
                                 ],
                             ]) ?>
@@ -69,24 +78,30 @@ use domain\helpers\ProductHelper;
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                    /** @var \domain\entities\Shop\OrderItem $item */
-                                    foreach ($order->items as $item): ?>
+                                        <?php
+                                        /** @var \domain\entities\Shop\OrderItem $item */
+                                        foreach ($order->items as $item): ?>
+                                            <tr>
+                                                <td class="text-left">
+                                                    <?= Html::encode($item->product_name) ?>
+                                                </td>
+                                                <td class="text-left">
+                                                    <?= Html::encode($item->product_code) ?>
+                                                    <?= Html::encode($item->product_name) ?>
+                                                </td>
+                                                <td class="text-left">
+                                                    <?= $item->quantity ?>
+                                                </td>
+                                                <td class="text-right"><?= ProductHelper::price($item->price) ?></td>
+                                                <td class="text-right"><?= ProductHelper::price($item->getCost()) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                         <tr>
-                                            <td class="text-left">
-                                                <?= Html::encode($item->product_name) ?>
+                                            <th colspan="4">Grand Total</th>
+                                            <td class="text-right">
+                                                <?= ProductHelper::price($order->grantCost) ?>
                                             </td>
-                                            <td class="text-left">
-                                                <?= Html::encode($item->product_code) ?>
-                                                <?= Html::encode($item->product_name) ?>
-                                            </td>
-                                            <td class="text-left">
-                                                <?= $item->quantity ?>
-                                            </td>
-                                            <td class="text-right"><?= ProductHelper::price($item->price) ?></td>
-                                            <td class="text-right"><?= ProductHelper::price($item->getCost()) ?></td>
                                         </tr>
-                                    <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

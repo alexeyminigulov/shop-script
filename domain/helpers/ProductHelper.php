@@ -24,10 +24,13 @@ class ProductHelper
         return $value / 1000 . ' kg';
     }
 
-    public static function price($value)
+    public static function price($value, $asHtml = true)
     {
         $value = number_format($value, 0, '', ' ');
 
-        return "<span>$value</span>&nbsp;<span class=\"ty-rub\">Р</span>";
+        if ($asHtml) {
+            return "<span>$value</span>&nbsp;<span class=\"ty-rub\">Р</span>";
+        }
+        return $value . ' rub';
     }
 }

@@ -31,7 +31,7 @@ class RobokassaController extends Controller
         $order = $this->loadModel($id);
         /** @var \robokassa\Merchant $merchant */
         $merchant = Yii::$app->get('robokassa');
-        return $merchant->payment($order->cost, $order->id, 'Оплата заказа', null, Yii::$app->user->identity->email);
+        return $merchant->payment($order->grantCost, $order->id, 'Оплата заказа', null, Yii::$app->user->identity->email);
     }
 
     public function actions()

@@ -35,7 +35,7 @@ class DeliveryForm extends Model
         $methods = DeliveryMethod::find()->availableForWeight($this->_weight)->orderBy('sort')->all();
 
         return ArrayHelper::map($methods, 'id', function (DeliveryMethod $method) {
-            return $method->name . ' (' . ProductHelper::price($method->cost) . ')';
+            return $method->name . ' (' . ProductHelper::price($method->cost, false) . ')';
         });
     }
 }
