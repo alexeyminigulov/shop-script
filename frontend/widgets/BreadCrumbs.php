@@ -3,6 +3,7 @@
 namespace frontend\widgets;
 
 use Yii;
+use yii\helpers\Url;
 use domain\entities\Shop\Category;
 use yii\widgets\Breadcrumbs as Widget;
 
@@ -25,7 +26,7 @@ class BreadCrumbs extends Widget
         if ($this->categories) {
 
             $links = array_map(function ($category) {
-                return ['label' => $category->name, 'url' => 'view?slug='. $category->slug];
+                return ['label' => $category->name, 'url' => Url::to(['shop/catalog/view', 'slug' => $category->slug])];
             }, $this->categories);
             $lastKey = count($links)-1;
             unset($links[$lastKey]['url']);
