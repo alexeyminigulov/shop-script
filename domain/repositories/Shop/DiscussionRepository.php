@@ -7,9 +7,9 @@ use domain\exceptions\EntityNotFoundException;
 
 class DiscussionRepository
 {
-    public function find($id): Discussion
+    public function find($userId, $productId): Discussion
     {
-        $discussion= Discussion::findOne(['id', $id]);
+        $discussion= Discussion::findOne(['user_id' => $userId, 'product_id' => $productId]);
 
         if (!$discussion) {
             throw new EntityNotFoundException('Discussion is not found.');

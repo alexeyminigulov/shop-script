@@ -50,4 +50,29 @@ class DiscussionService
 
         return $discussion;
     }
+
+    public function activate(Discussion $discussion): Discussion
+    {
+        $discussion = $this->repository->find($discussion->user_id, $discussion->product_id);
+
+        $discussion->activate();
+        $this->repository->save($discussion);
+
+        return $discussion;
+    }
+
+    public function draft(Discussion $discussion): Discussion
+    {
+        $discussion = $this->repository->find($discussion->user_id, $discussion->product_id);
+
+        $discussion->draft();
+        $this->repository->save($discussion);
+
+        return $discussion;
+    }
+
+    public function delete(Discussion $discussion)
+    {
+        $this->repository->delete($discussion);
+    }
 }

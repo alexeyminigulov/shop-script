@@ -47,6 +47,7 @@ use yii\helpers\Url;
                     ['label' => 'DeliveryMethod', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/delivery/index'])]],
                     ['label' => 'Banners', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/manager/banner/index'])]],
                     ['label' => 'Posts', 'icon' => 'file-code-o', 'url' => [Url::to(['blog/post/index'])]],
+                    ['label' => 'Discussions', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/discussion/index'])]],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
