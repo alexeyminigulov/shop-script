@@ -81,11 +81,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function actionComment()
+    public function actionComment($slug)
     {
         /** @var User $user */
         $user = Yii::$app->user->identity;
         $form = new CommentForm($user);
+        $product = Product::findOne(['slug', $slug]);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
@@ -98,6 +99,7 @@ class ProductController extends Controller
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
+        return $this->redirect(['view', 'slug' => $product->slug]);
     }
 
     protected function findModel($slug): Product

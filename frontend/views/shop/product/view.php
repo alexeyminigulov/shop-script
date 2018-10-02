@@ -73,7 +73,7 @@ MagnificPopup::register($this);
                                     </div>
                                     <div class="ty-discussion-post-popup hidden" id="new_post_dialog_214" title="Написать отзыв">
                                         <?php $form = ActiveForm::begin([
-                                            'action' => ['shop/product/comment'],
+                                            'action' => ['shop/product/comment', 'slug' => $product->slug],
                                             'options' => [
                                                 'class' => 'posts-form cm-processed-form',
                                                 'name' => 'add_post_form',

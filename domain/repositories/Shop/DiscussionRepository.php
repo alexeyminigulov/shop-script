@@ -9,12 +9,24 @@ class DiscussionRepository
 {
     public function find($userId, $productId): Discussion
     {
-        $discussion= Discussion::findOne(['user_id' => $userId, 'product_id' => $productId]);
+        $discussion= $this->getOneBy(['user_id' => $userId, 'product_id' => $productId]);
 
         if (!$discussion) {
             throw new EntityNotFoundException('Discussion is not found.');
         }
         return $discussion;
+    }
+
+    public function exist($condition)
+    {
+        $condition = $this->getOneBy($condition);
+
+        return !empty($condition);
+    }
+
+    public function getOneBy($condition)
+    {
+        return Discussion::findOne($condition);
     }
 
     public function save(Discussion $discussion, $runValidation = true)

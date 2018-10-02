@@ -30,6 +30,9 @@ class DiscussionService
 
     public function create(CommentForm $form): Discussion
     {
+        if ($this->repository->exist(['user_id' => $form->userId, 'product_id' => $form->productId])) {
+            throw new \DomainException('Вы уже оставляли отзыв.');
+        }
         $user = $this->users->get($form->userId);
         $product = $this->products->find($form->productId);
 

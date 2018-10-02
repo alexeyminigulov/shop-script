@@ -12,7 +12,6 @@ class m180916_095525_create_shop_discussions_table extends Migration
         $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
 
         $this->createTable('{{%shop_discussions}}', [
-            'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
             'product_id' => $this->integer()->notNull(),
             'text' => $this->text()->notNull(),
