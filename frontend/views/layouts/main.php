@@ -196,7 +196,7 @@ OwlCarouselAsset::register($this);
     };
 </script>
 
-
+<script type="text/javascript" src="<?= Yii::getAlias('@web/js/owl.carousel.min.js') ?>" ></script>
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/product_image_gallery.js') ?>" ></script>
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/tabs.js') ?>" ></script>
 <script type="text/javascript" src="<?= Yii::getAlias('@web/js/exceptions.js') ?>" ></script>
