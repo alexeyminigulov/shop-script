@@ -3,10 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $product \domain\entities\Shop\Product\Product */
 /* @var $categories \domain\entities\Shop\Category[] */
-/* @var $comment \domain\forms\Shop\Discussion\CommentForm */
+/* @var $comment null|\domain\forms\Shop\Discussion\CommentForm */
 /* @var $discussions \domain\entities\Shop\Discussion[] */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use frontend\widgets\BreadCrumbs;
 use frontend\widgets\ProductContentFeatures;
 use frontend\assets\JqueryZoomAsset;
@@ -71,6 +72,8 @@ MagnificPopup::register($this);
                                                 'product' => $product,
                                         ]) ?>
                                     </div>
+
+                                    <?php if (!empty($comment)): ?>
                                     <div class="ty-discussion-post-popup hidden" id="new_post_dialog_214" title="Написать отзыв">
                                         <?php $form = ActiveForm::begin([
                                             'action' => ['shop/product/comment', 'slug' => $product->slug],
@@ -118,7 +121,24 @@ MagnificPopup::register($this);
                                         <?php ActiveForm::end(); ?>
                                     </div>
                                 </div>
-                                <!-- Inline script moved to the bottom of the page -->
+                                <?php else: ?>
+                                <div class="popup-dialog hidden" id="new_post_dialog_214" title="Уведомление">
+                                    <p>
+                                        Для того чтобы оставить отзыв зарегистрируйтесь или войдите на сайт
+                                    </p>
+                                    <div class="ty-account-info__buttons buttons-container">
+                                        <a href="<?= Url::to(['site/login']) ?>" class="ty-btn ty-btn__secondary"
+                                           style="color:#fff;text-decoration: none;" rel="nofollow">
+                                            Войти
+                                        </a>
+                                        <a href="<?= Url::to(['site/signup']) ?>" class="ty-btn ty-btn__primary"
+                                           style="color:#fff;text-decoration: none;" rel="nofollow">
+                                            Регистрация
+                                        </a>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+
                                 <div class="ty-tabs cm-j-tabs clearfix">
                                     <ul class="ty-tabs__list">
                                         <li id="description" class="ty-tabs__item cm-js active"><a class="ty-tabs__a">Описание</a></li>

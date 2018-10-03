@@ -136,3 +136,8 @@ input.ty-price-slider__input-text {
 * {
     box-sizing: content-box;
 }
+
+.ty-discussion__rating-wrapper a:hover, .ty-cr-link a:hover {
+    text-decoration: none!important;
+    border-bottom: 1px solid #00548c!important;
+}

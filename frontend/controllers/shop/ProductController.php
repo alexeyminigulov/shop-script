@@ -1,11 +1,13 @@
 <?php
 namespace frontend\controllers\shop;
 
-use domain\repositories\Shop\DiscussionRepository;
 use Yii;
+use domain\repositories\Shop\DiscussionRepository;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use domain\entities\User\User;
+use domain\entities\Shop\Discussion;
 use yii\web\NotFoundHttpException;
 use domain\entities\Shop\Product\Product;
 use domain\services\Shop\DiscussionService;
@@ -44,6 +46,17 @@ class ProductController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['comment'],
+                'rules' => [
+                    [
+                        'actions' => ['comment'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -57,17 +70,26 @@ class ProductController extends Controller
     {
         $product = $this->findModel($slug);
         $categories = $this->repository->getWithParents($product->category_id, false);
-        /** @var User $user */
-        $user = Yii::$app->user->identity;
-        $comment = new CommentForm($user, $product);
         $discussions = $product->getDiscussions()
-//            ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+            ->andWhere(['status' => Discussion::STATUS_ACTIVE])
             ->all();
+
+        if (!Yii::$app->user->isGuest) {
+            /** @var User $user */
+            $user = Yii::$app->user->identity;
+            $comment = new CommentForm($user, $product);
+
+            return $this->render('view', [
+                'product' => $product,
+                'categories' => $categories,
+                'comment' => $comment,
+                'discussions' => $discussions,
+            ]);
+        }
 
         return $this->render('view', [
             'product' => $product,
             'categories' => $categories,
-            'comment' => $comment,
             'discussions' => $discussions,
         ]);
     }
