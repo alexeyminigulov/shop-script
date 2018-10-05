@@ -15,8 +15,8 @@ class m180801_071949_create_shop_discounts_table extends Migration
             'id' => $this->primaryKey(),
             'percent' => $this->integer()->notNull(),
             'name' => $this->string()->notNull(),
-            'from_date' => $this->date(),
-            'to_date' => $this->date(),
+            'from_date' => $this->integer()->notNull(),
+            'to_date' => $this->integer()->notNull(),
             'active' => $this->boolean()->notNull(),
             'sort' => $this->integer()->notNull(),
         ], $tableOptions);

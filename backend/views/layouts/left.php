@@ -45,6 +45,7 @@ use yii\helpers\Url;
                     ['label' => 'Filter', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/filter/index'])]],
                     ['label' => 'Product', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/product/index'])]],
                     ['label' => 'DeliveryMethod', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/delivery/index'])]],
+                    ['label' => 'Discount', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/discount/index'])]],
                     ['label' => 'Banners', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/manager/banner/index'])]],
                     ['label' => 'Posts', 'icon' => 'file-code-o', 'url' => [Url::to(['blog/post/index'])]],
                     ['label' => 'Discussions', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/discussion/index'])]],

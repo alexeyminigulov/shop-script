@@ -15,6 +15,9 @@ use yii\db\ActiveRecord;
  */
 class Discount extends ActiveRecord
 {
+    const STATUS_ACTIVE = true;
+    const STATUS_DRAFT = false;
+
     public static function create($percent, $name, $fromDate, $toDate, $sort): self
     {
         $discount = new static();
@@ -23,7 +26,7 @@ class Discount extends ActiveRecord
         $discount->from_date = $fromDate;
         $discount->to_date = $toDate;
         $discount->sort = $sort;
-        $discount->active = true;
+        $discount->active = self::STATUS_DRAFT;
         return $discount;
     }
 
@@ -34,6 +37,16 @@ class Discount extends ActiveRecord
         $this->from_date = $fromDate;
         $this->to_date = $toDate;
         $this->sort = $sort;
+    }
+
+    public function activate()
+    {
+        $this->active = self::STATUS_ACTIVE;
+    }
+
+    public function draft()
+    {
+        $this->active = self::STATUS_DRAFT;
     }
 
     public function isEnabled()
