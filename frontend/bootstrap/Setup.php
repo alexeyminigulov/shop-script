@@ -3,6 +3,7 @@
 namespace frontend\bootstrap;
 
 use domain\cart\Cart;
+use domain\cart\cost\calculator\DynamicCost;
 use domain\cart\cost\calculator\SimpleCost;
 use domain\cart\storage\CookieStorage;
 use domain\cart\storage\SessionStorage;
@@ -23,7 +24,7 @@ class Setup implements BootstrapInterface
 
         $container->setSingleton(Cart::class, function ($container, $params, $config) {
 //            return new Cart(new SessionStorage('cart_one', $container->get('yii\web\Session')), new SimpleCost());
-            return new Cart(new CookieStorage('cart_one', 3600), new SimpleCost());
+            return new Cart(new CookieStorage('cart_one', 3600), new DynamicCost(new SimpleCost()));
         });
 
         $container->setSingleton(Client::class, function ($container, $params, $config) {

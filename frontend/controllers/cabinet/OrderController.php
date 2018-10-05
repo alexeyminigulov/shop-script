@@ -44,6 +44,8 @@ class OrderController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'layout_site';
+
         /** @var User $user */
         $user = Yii::$app->user->identity;
         $orders = $user->orders;
@@ -55,6 +57,8 @@ class OrderController extends Controller
 
     public function actionView($id)
     {
+        $this->layout = 'layout_site';
+
         if (!$order = $this->orders->findOwn(\Yii::$app->user->id, $id)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
