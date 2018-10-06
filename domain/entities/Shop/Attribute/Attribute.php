@@ -4,6 +4,7 @@ namespace domain\entities\Shop\Attribute;
 
 use domain\entities\Shop\Filter;
 use domain\entities\Shop\Product\Value;
+use domain\repositories\Shop\ValueStorageAdapter;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Group;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -68,12 +69,12 @@ class Attribute extends ActiveRecord
 
     public function getMin()
     {
-        return Value::find()->where(['attribute_id' => $this->id])->min('value');
+        return \Yii::$container->get(ValueStorageAdapter::class)->getMin($this->id);
     }
 
     public function getMax()
     {
-        return Value::find()->where(['attribute_id' => $this->id])->max('value');
+        return \Yii::$container->get(ValueStorageAdapter::class)->getMax($this->id);
     }
 
     public function rules()

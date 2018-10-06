@@ -9,14 +9,16 @@ use domain\exceptions\EntityNotFoundException;
 
 class CategoryRepository
 {
+    private $adapter;
+
+    public function __construct(CategoryStorageAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
     public function find($id): Category
     {
-        $category = Category::findOne(['id', $id]);
-
-        if (!$category) {
-            throw new EntityNotFoundException('Category not found.');
-        }
-        return $category;
+        return $this->adapter->findById($id);
     }
 
     public function getPrev(Category $category): ?Category
@@ -53,8 +55,8 @@ class CategoryRepository
     {
         $category = $this->find($id);
 
-        $categories = $withRoot ? $category->getParents()->all()
-            : $category->getParents()->andFilterCompare('id', 1, '<>')->all();
+        $categories = $withRoot ? $this->adapter->getAllParents($category)
+            : $this->adapter->getAllParentsWithoutRoot($category);
 
         $categories[] = $category;
 
@@ -67,7 +69,7 @@ class CategoryRepository
 
         $groups = [];
         foreach ($categories as $category) {
-            $groups = array_merge($groups, $category->groups);
+            $groups = array_merge($groups, $this->adapter->getGroups($category));
         }
         if (empty($groups)) {
             throw new EntityNotFoundException('Groups is not found.');

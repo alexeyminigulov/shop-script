@@ -14,10 +14,12 @@ use yii\helpers\ArrayHelper;
 class ProductReadRepository
 {
     private $client;
+    private $adapter;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, ProductStorageAdapter $adapter)
     {
         $this->client = $client;
+        $this->adapter = $adapter;
     }
 
     public function getAll($categoryIds): DataProviderInterface
@@ -76,7 +78,7 @@ class ProductReadRepository
                             call_user_func(function () use ($form) {
                                 if (!empty($form->priceFrom) && !empty($form->priceTo)) {
                                     return [
-                                        ["range" => ["price" => ["gte" => $form->priceFrom, "lt" => $form->priceTo]]],
+                                        ["range" => ["price" => ["gte" => $form->priceFrom, "lte" => $form->priceTo]]],
                                         ["match" => ["category_slug" => $form->slug] ],
                                     ];
                                 }

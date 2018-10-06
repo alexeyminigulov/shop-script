@@ -4,18 +4,22 @@ namespace domain\forms\Shop\Search;
 
 use domain\entities\Shop\Attribute\Attribute;
 use domain\entities\Shop\Product\Product;
+use domain\readRepositories\Shop\ProductStorageAdapter;
 use elisdn\compositeForm\CompositeForm;
 
 /**
  * Class SearchForm
  *
  * @property ValueForm[] $values
+ * @property ProductStorageAdapter $adapter
  */
 class SearchForm extends CompositeForm
 {
     public $slug;
     public $priceFrom;
     public $priceTo;
+
+    private $adapter;
 
     public function __construct(array $attributes, $config = [])
     {
@@ -29,6 +33,8 @@ class SearchForm extends CompositeForm
 
         $this->values = array_combine($keys, $values);
 
+        $this->adapter = \Yii::$container->get(ProductStorageAdapter::class);
+
         parent::__construct($config);
     }
 
@@ -41,14 +47,19 @@ class SearchForm extends CompositeForm
         ];
     }
 
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
+
     public function getMinPrice()
     {
-        return Product::find()->min('price');
+        return $this->adapter->getMinPrice();
     }
 
     public function getMaxPrice()
     {
-        return Product::find()->max('price');
+        return $this->adapter->getMaxPrice();
     }
 
     protected function internalForms()

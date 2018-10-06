@@ -2,9 +2,12 @@
 
 namespace common\bootstrap;
 
+use domain\repositories\Shop\ValueStorageAdapter;
 use Yii;
 use domain\dispatcher\EventDispatcher;
 use yii\di\Container;
+use domain\readRepositories\Shop\ProductStorageAdapter;
+use domain\repositories\Shop\CategoryStorageAdapter;
 use domain\dispatcher\EventDispatcherInterface;
 use domain\entities\User\events\UserConfirmEmail;
 use domain\listeners\UserConfirmEmailListener;
@@ -33,5 +36,11 @@ class Setup implements BootstrapInterface
                 ],
             ]);
         });
+
+        $container->setSingleton(CategoryStorageAdapter::class);
+
+        $container->setSingleton(ProductStorageAdapter::class);
+
+        $container->setSingleton(ValueStorageAdapter::class);
     }
 }

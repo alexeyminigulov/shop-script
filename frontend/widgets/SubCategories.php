@@ -20,7 +20,10 @@ class SubCategories extends Widget
     private function getTemplate()
     {
         $tplSubCategories = '';
-        $categories = empty($this->category->children) ? $this->category->parent->children : $this->category->children;
+        $categories = $this->category->children;
+        if (empty($categories)) {
+            $categories = $this->category->parent->children;
+        }
 
         foreach ($categories as $category) {
             if ($this->category->id == $category->id) {
