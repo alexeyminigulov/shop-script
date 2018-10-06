@@ -3,7 +3,7 @@
 namespace domain\forms;
 
 use yii\base\Model;
-use domain\entities\User;
+use domain\entities\User\User;
 
 class ProfileForm extends Model
 {

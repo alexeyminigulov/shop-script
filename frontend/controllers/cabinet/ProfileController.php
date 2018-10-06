@@ -6,7 +6,6 @@ use domain\forms\ProfileForm;
 use domain\services\ProfileService;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use domain\entities\User;
 
 /**
  * Profile controller
@@ -40,7 +39,7 @@ class ProfileController extends Controller
     {
         $this->layout = 'layout_site';
 
-        /* @var $user \domain\entities\User */
+        /* @var $user \domain\entities\User\User */
         $user = Yii::$app->user->identity;
         $form = new ProfileForm($user);
 
