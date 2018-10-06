@@ -23,7 +23,7 @@ use domain\entities\Shop\Attribute\Attribute;
 
                     <?php $form = ActiveForm::begin([
                         'fieldClass' => 'frontend\widgets\FilterField',
-                        'action' => Url::to(['shop/catalog/search']),
+                        'action' => Url::to(['shop/catalog/view']),
                         'method' => 'get'
                     ]); ?>
 
