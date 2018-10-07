@@ -213,6 +213,11 @@ class Product extends ActiveRecord
         return $this->hasMany(Discussion::className(), ['product_id' => 'id']);
     }
 
+    public function getActiveDiscussions()
+    {
+        return $this->getDiscussions()->andWhere(['status' => self::STATUS_ACTIVE]);
+    }
+
     public function getPictures(): ActiveQuery
     {
         return $this->hasMany(Picture::className(), ['product_id' => 'id'])->orderBy('sort');

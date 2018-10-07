@@ -37,19 +37,7 @@ class DiscussionService
         $product = $this->products->find($form->productId);
 
         $discussion = Discussion::create($user->id, $product->id, $form->text, $form->rating);
-
-        $this->transaction->wrap(function() use ($discussion, $form) {
-
-            $this->repository->save($discussion);
-            $product = $this->products->find($form->productId);
-            $discussions = $product->getDiscussions()
-//            ->andWhere(['status' => Discussion::STATUS_ACTIVE])
-                ->asArray()->all();
-            $sumRatings = array_sum(ArrayHelper::getColumn($discussions, 'rating'));
-            $rating = $sumRatings / count($discussions);
-            $product->updateRating($rating);
-            $product->save();
-        });
+        $this->repository->save($discussion);
 
         return $discussion;
     }
@@ -59,7 +47,20 @@ class DiscussionService
         $discussion = $this->repository->find($discussion->user_id, $discussion->product_id);
 
         $discussion->activate();
-        $this->repository->save($discussion);
+
+        $this->transaction->wrap(function() use ($discussion) {
+
+            $this->repository->save($discussion);
+            $product = $this->products->find($discussion->product_id);
+            $discussions = $product->getDiscussions()
+                ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+                ->asArray()
+                ->all();
+            $sumRatings = array_sum(ArrayHelper::getColumn($discussions, 'rating'));
+            $rating = $sumRatings / count($discussions);
+            $product->updateRating($rating);
+            $this->products->save($product);
+        });
 
         return $discussion;
     }
@@ -69,13 +70,38 @@ class DiscussionService
         $discussion = $this->repository->find($discussion->user_id, $discussion->product_id);
 
         $discussion->draft();
-        $this->repository->save($discussion);
+
+        $this->transaction->wrap(function() use ($discussion) {
+
+            $this->repository->save($discussion);
+            $product = $this->products->find($discussion->product_id);
+            $discussions = $product->getDiscussions()
+                ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+                ->asArray()
+                ->all();
+            $sumRatings = array_sum(ArrayHelper::getColumn($discussions, 'rating'));
+            $rating = $sumRatings == 0 ? 0 : $sumRatings / count($discussions);
+            $product->updateRating($rating);
+            $this->products->save($product);
+        });
 
         return $discussion;
     }
 
     public function delete(Discussion $discussion)
     {
-        $this->repository->delete($discussion);
+        $this->transaction->wrap(function() use ($discussion) {
+
+            $this->repository->delete($discussion);
+            $product = $this->products->find($discussion->product_id);
+            $discussions = $product->getDiscussions()
+                ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+                ->asArray()
+                ->all();
+            $sumRatings = array_sum(ArrayHelper::getColumn($discussions, 'rating'));
+            $rating = $sumRatings == 0 ? 0 : $sumRatings / count($discussions);
+            $product->updateRating($rating);
+            $this->products->save($product);
+        });
     }
 }

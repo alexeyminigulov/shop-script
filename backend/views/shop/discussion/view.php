@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'btn btn-warning']);
         }
         ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Delete',
+            ['delete', 'userId' => $model->user_id, 'productId' => $model->product_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
