@@ -1,3 +1,7 @@
+<?php
+
+use yii\helpers\Url;
+?>
 <div class="tygh-footer clearfix" id="tygh_footer">
     <div class="container-fluid  ty-footer-grid">
 
@@ -15,11 +19,10 @@
                                 </div>
                                 <div class="ty-footer-general__body" id="footer-general_98">
                                     <ul id="account_info_links_3950" class="ty-account-info__links">
-                                        <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/login/">Войти</a></li>
-                                        <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/profiles-add/">Создать учетную запись</a></li>
-                                        <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/orders/">Заказы</a></li>
+                                        <li><a href="<?= Url::to(['site/login']) ?>">Войти</a></li>
+                                        <li><a href="<?= Url::to(['site/signup']) ?>">Создать учетную запись</a></li>
+                                        <li><a href="<?= Url::to(['/cabinet/order/index']) ?>">Заказы</a></li>
                                         <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/">Отложенные товары</a></li>
-                                        <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/">Список сравнения</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -45,12 +48,6 @@
                                         </li>
                                         <li class="ty-text-links__item ty-level-0">
                                             <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/bonusnye-bally/">Бонусные баллы</a>
-                                        </li>
-                                        <li class="ty-text-links__item ty-level-0">
-                                            <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/podarochnye-sertifikaty/">Подарочные сертификаты</a>
-                                        </li>
-                                        <li class="ty-text-links__item ty-level-0">
-                                            <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/sitemap/">Карта сайта</a>
                                         </li>
                                     </ul>
                                 </div>

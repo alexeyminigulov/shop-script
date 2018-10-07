@@ -31,27 +31,22 @@ use common\widgets\Alert;
                                 <span>Каталог товаров</span>
                             </a>
                         </li>
-                        <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__brands ">
+                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__brands">
                             <a href="<?= Url::to(['blog/post/index']) ?>" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Новости</div>
                             </a>
                         </li>
-                        <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__newest ">
+                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest">
                             <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Новинки</div>
                             </a>
                         </li>
-                        <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__hits ">
+                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__hits">
                             <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.bestsellers" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Хиты продаж</div>
                             </a>
                         </li>
-                        <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl  ty-menu-item__sale ">
-                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.on_sale" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">Скидки</div>
-                            </a>
-                        </li>
-                        <li class="ty-menu__item  ty-menu__item-nodrop  first-lvl last  ty-menu-item__promo ">
+                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl last ty-menu-item__promo">
                             <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/promotions/" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Акции</div>
                             </a>
@@ -116,14 +111,11 @@ use common\widgets\Alert;
                                         <ul class="ty-account-info">
                                             <?php if (!Yii::$app->user->isGuest): ?>
                                                 <li class="ty-account-info__item ty-dropdown-box__item">
-                                                    <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Учетная запись</a>
+                                                    <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/profile/update']) ?>" rel="nofollow">Учетная запись</a>
                                                 </li>
                                             <?php endif; ?>
                                             <li class="ty-account-info__item ty-dropdown-box__item">
                                                 <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Заказы</a>
-                                            </li>
-                                            <li class="ty-account-info__item ty-dropdown-box__item">
-                                                <a class="ty-account-info__a underlined" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/compare/" rel="nofollow">Список сравнения</a>
                                             </li>
                                             <li class="ty-account-info__item ty-dropdown-box__item">
                                                 <a class="ty-account-info__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow">Отложенные товары</a>
