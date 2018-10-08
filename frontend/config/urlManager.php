@@ -10,8 +10,8 @@ return [
     'rules' => [
         '' => 'site/index',
         'catalog/<slug:[\w\-]+>' => 'shop/catalog/view',
-        'product/<slug:[\w\-]+>' => 'shop/product/view',
-        'comment/<slug:[\w\-]+>' => 'shop/product/comment',
+        'product/<slug:[\w\-]+>' => 'shop/product/product/view',
+        'comment/<slug:[\w\-]+>' => 'shop/product/product/comment',
         'search' => 'shop/product/search',
         'cart' => 'shop/cart/index',
         'cart/<action:\w+>' => 'shop/cart/<action>',
@@ -26,6 +26,8 @@ return [
         'wish-list/add-to-cart/<id:\d+>' => 'cabinet/wishlist/add-to-cart',
         'GET wish-list/<id:\d+>' => 'cabinet/wishlist/view',
         'wish-list/delete/<id:\d+>' => 'cabinet/wishlist/delete',
+        'newest' => 'shop/product/newest/index',
+        'best-seller' => 'shop/product/best-seller/index',
         '<action:\w+>' => 'site/<action>',
 
         '<_c:[\w\-]+>' => '<_c>/index',

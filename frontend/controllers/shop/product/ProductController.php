@@ -1,5 +1,5 @@
 <?php
-namespace frontend\controllers\shop;
+namespace frontend\controllers\shop\product;
 
 use Yii;
 use domain\repositories\Shop\DiscussionRepository;

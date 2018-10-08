@@ -56,7 +56,7 @@ use domain\helpers\ProductHelper;
                     <bdi>
                         <?= Html::a(
                             $product->name,
-                            ['shop/product/view', 'slug' => $product->slug],
+                            ['shop/product/product/view', 'slug' => $product->slug],
                             [
                                 'class' => 'product-title',
                                 'title' => $product->name,

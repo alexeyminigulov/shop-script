@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
         <?php $form = ActiveForm::begin([
             'action' => ['shop/cart/add'],
             'options' => [
-                'class' => 'cm-disable-empty-files  cm-ajax cm-ajax-full-render cm-ajax-status-middle  cm-processed-form',
+                'class' => 'cm-disable-empty-files cm-ajax cm-ajax-full-render cm-ajax-status-middle cm-processed-form',
             ]
         ]); ?>
             <input type="hidden" name="AddProductForm[productCode]" value="<?= $product->code ?>">
@@ -40,7 +40,11 @@ use yii\widgets\ActiveForm;
                 <?= RatingStars::widget(['rating' => $product->rating]) ?>
                 <div class="ty-grid-list__item-name">
                     <bdi>
-                        <a href="<?= Url::to(['shop/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="Yamaha PDX-11 DB"><?= Html::encode($product->name) ?></a>
+                        <a href="<?= Url::to(['shop/product/product/view', 'slug' => $product->slug]) ?>"
+                           class="product-title"
+                           title="Yamaha PDX-11 DB">
+                            <?= Html::encode($product->name) ?>
+                        </a>
                     </bdi>
                 </div>
                 <div class="ty-grid-list__price ">

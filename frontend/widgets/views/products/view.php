@@ -9,7 +9,9 @@ use frontend\widgets\ProductBadge;
 ?>
 <div class="cat-view-grid" id="category_products_11">
     <div class="ty-pagination-container cm-pagination-container" id="pagination_contents">
-        <?= $this->render('_sort-container') ?>
+        <?php
+//        echo $this->render('_sort-container')
+        ?>
         <div class="grid-list ">
             <?php
             foreach ($dataProvider->getModels() as $product) {

@@ -31,6 +31,27 @@ class ProductReadRepository
         return $this->getProvider($query);
     }
 
+    public function getNewest(): DataProviderInterface
+    {
+        $query = Product::find()
+            ->where(['status' => Product::STATUS_ACTIVE])
+            ->limit(100)
+            ->joinWith(['mainPicture']);
+
+        return $this->getProvider($query);
+    }
+
+    public function getBestSellers(): DataProviderInterface
+    {
+        $query = Product::find()
+            ->where(['status' => Product::STATUS_ACTIVE])
+            ->orderBy('rating')
+            ->limit(100)
+            ->joinWith(['mainPicture']);
+
+        return $this->getProvider($query);
+    }
+
     /**
      * @param $q
      * @return null|ActiveDataProvider

@@ -37,12 +37,12 @@ use common\widgets\Alert;
                             </a>
                         </li>
                         <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest">
-                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.newest" class="ty-menu__item-link a-first-lvl">
+                            <a href="<?= Url::to(['shop/product/newest/index']) ?>" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Новинки</div>
                             </a>
                         </li>
                         <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__hits">
-                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.bestsellers" class="ty-menu__item-link a-first-lvl">
+                            <a href="<?= Url::to(['shop/product/best-seller/index']) ?>" class="ty-menu__item-link a-first-lvl">
                                 <div class="menu-lvl-ctn">Хиты продаж</div>
                             </a>
                         </li>

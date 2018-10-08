@@ -52,7 +52,7 @@ use domain\helpers\ProductHelper;
                 </div>
 
                 <div class="ty-grid-list__item-name">
-                    <a href="<?= Url::to(['shop/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="<?= Html::encode($product->name) ?>" >
+                    <a href="<?= Url::to(['shop/product/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="<?= Html::encode($product->name) ?>" >
                         <?= Html::encode($product->name) ?>
                     </a>
                 </div>
