@@ -5,6 +5,7 @@
 
 use frontend\widgets\ProductCarousel;
 use frontend\widgets\BannerWidget;
+use frontend\widgets\ProductCard;
 
 ?>
 <div class="tygh-content clearfix">
@@ -62,7 +63,11 @@ use frontend\widgets\BannerWidget;
 
                                 <?php foreach ($products as $product): ?>
 
-                                <?= $this->render('_product', ['product' => $product]) ?>
+                                <div class="ty-column5">
+                                    <?= ProductCard::widget([
+                                        'product' => $product,
+                                    ]) ?>
+                                </div>
 
                                 <?php endforeach; ?>
 
