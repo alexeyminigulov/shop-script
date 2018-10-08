@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
 <div class="tygh-footer clearfix" id="tygh_footer">
     <div class="container-fluid  ty-footer-grid">
@@ -19,8 +20,23 @@ use yii\helpers\Url;
                                 </div>
                                 <div class="ty-footer-general__body" id="footer-general_98">
                                     <ul id="account_info_links_3950" class="ty-account-info__links">
-                                        <li><a href="<?= Url::to(['site/login']) ?>">Войти</a></li>
-                                        <li><a href="<?= Url::to(['site/signup']) ?>">Создать учетную запись</a></li>
+                                        <?php if (!Yii::$app->user->isGuest): ?>
+                                            <?= '<li>'
+                                                    . Html::beginForm(['/site/logout'], 'post')
+                                                    . Html::submitButton(
+                                                        'Выйти',
+                                                        [
+                                                            'class' => 'btn btn-link logout',
+                                                            'style' => 'padding:0;outline:0;font-size:13px;',
+                                                        ]
+                                                    )
+                                                    . Html::endForm()
+                                                . '</li>';
+                                            ?>
+                                        <?php else: ?>
+                                            <li><a href="<?= Url::to(['site/login']) ?>">Войти</a></li>
+                                            <li><a href="<?= Url::to(['site/signup']) ?>">Создать учетную запись</a></li>
+                                        <?php endif; ?>
                                         <li><a href="<?= Url::to(['/cabinet/order/index']) ?>">Заказы</a></li>
                                         <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/">Отложенные товары</a></li>
                                     </ul>
