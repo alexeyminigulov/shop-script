@@ -67,7 +67,11 @@ use yii\helpers\Html;
                                                             </td>
                                                             <td class="ty-cart-content__product-elem ty-cart-content__description" style="width: 50%;">
                                                                 <a href="<?= Url::to(['shop/product/view', 'slug' => $cartItem->getProduct()->slug]) ?>" class="ty-cart-content__product-title"><?= $cartItem->getProduct()->name ?></a>
-                                                                <a class=" ty-cart-content__product-delete ty-delete-big" href="<?= Url::to(['shop/cart/delete', 'id' => $cartItem->getId()]) ?>" title="Удалить">&nbsp;<i class="ty-delete-big__icon ty-icon-cancel-circle"></i></a>
+                                                                <a class=" ty-cart-content__product-delete ty-delete-big"
+                                                                   href="<?= Url::to(['shop/cart/delete', 'id' => $cartItem->getId()]) ?>"
+                                                                   title="Удалить">
+                                                                    &nbsp;<i class="ty-delete-big__icon ty-icon-cancel-circle"></i>
+                                                                </a>
                                                                 <div class="ty-cart-content__sku ty-sku cm-hidden-wrapper">
                                                                     КОД:
                                                                     <span class="cm-reload-1386058436">

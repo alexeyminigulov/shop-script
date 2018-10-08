@@ -27,7 +27,7 @@ class CartController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'add' => ['post'],
+                    'add' => ['POST'],
                 ],
             ],
         ];

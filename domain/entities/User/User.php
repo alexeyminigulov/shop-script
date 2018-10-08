@@ -1,13 +1,15 @@
 <?php
 namespace domain\entities\User;
 
-use domain\entities\Shop\Order;
-use domain\entities\User\events\UserConfirmEmail;
 use Yii;
+use yii\db\ActiveRecord;
+use domain\entities\Shop\Order;
+use domain\entities\Shop\WishItem;
+use domain\entities\User\events\UserConfirmEmail;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
  * User model
@@ -24,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property Order[] $orders
+ * @property WishItem[] $wishItems
  */
 class User extends ActiveRecord implements IdentityInterface, UserEventInterface
 {
@@ -31,6 +34,17 @@ class User extends ActiveRecord implements IdentityInterface, UserEventInterface
     const STATUS_ACTIVE = 10;
 
     use UserEventsTrait;
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => ['wishItems'],
+            ],
+        ];
+    }
 
     public static function create($userName, $email, $password): self
     {
@@ -50,22 +64,31 @@ class User extends ActiveRecord implements IdentityInterface, UserEventInterface
         $this->email = $email;
     }
 
+    public function addWishItem(WishItem $wishItem)
+    {
+        $wishItems = $this->wishItems;
+        $wishItems[] = $wishItem;
+        $this->wishItems = $wishItems;
+    }
+
+    public function eraseWishItem(WishItem $wishItem)
+    {
+        $wishItems = $this->wishItems;
+        for ($i = 0; $i < count($wishItems); $i++) {
+            if ($wishItems[$i]->id == $wishItem->id) {
+                unset($wishItems[$i]);
+                continue;
+            }
+        }
+        $this->wishItems = $wishItems;
+    }
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return '{{%users}}';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
     }
 
     /**
@@ -193,5 +216,10 @@ class User extends ActiveRecord implements IdentityInterface, UserEventInterface
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['user_id' => 'id']);
+    }
+
+    public function getWishItems()
+    {
+        return $this->hasMany(WishItem::className(), ['user_id' => 'id']);
     }
 }

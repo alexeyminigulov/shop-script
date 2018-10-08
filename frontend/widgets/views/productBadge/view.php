@@ -56,10 +56,11 @@ use yii\widgets\ActiveForm;
                     <div class="button-container">
                         <div class="cm-reload-140">
                             <button class="ty-btn__primary ty-btn__big cm-form-dialog-closer ty-btn" type="submit">Купить</button>
-                            <a class="cm-dialog-opener cm-dialog-auto-size ty-btn ty-btn__text ty-cr-product-button" href="<?= Url::to(['shop/order/index']) ?>" rel="nofollow">
-                                <span>Купить в один клик</span>
+                            <a class="ty-btn ty-btn__text ty-cr-product-button"
+                               href="<?= Url::to(['cabinet/wishlist/add', 'id' => $product->id]) ?>" rel="nofollow">
+                                <span>В список желаемых</span>
                             </a>
-                            <div class="hidden" title="Купить в один клик"></div>
+                            <div class="hidden" title="Добавить в список желаемых"></div>
                         </div>
                     </div>
                 </div>

@@ -118,7 +118,7 @@ use common\widgets\Alert;
                                                 <a class="ty-account-info__a underlined" href="<?= Url::to(['/cabinet/order/index']) ?>" rel="nofollow">Заказы</a>
                                             </li>
                                             <li class="ty-account-info__item ty-dropdown-box__item">
-                                                <a class="ty-account-info__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/" rel="nofollow">Отложенные товары</a>
+                                                <a class="ty-account-info__a" href="<?= Url::to(['/cabinet/wishlist/index']) ?>" rel="nofollow">Отложенные товары</a>
                                             </li>
                                         </ul>
 

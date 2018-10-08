@@ -21,6 +21,11 @@ return [
         'post' => 'blog/post/index',
         'post/<id:\d+>' => 'blog/post/view',
         'order' => 'shop/order/index',
+        'wish-list' => 'cabinet/wishlist/index',
+        'wish-list/add' => 'cabinet/wishlist/add',
+        'wish-list/add-to-cart/<id:\d+>' => 'cabinet/wishlist/add-to-cart',
+        'GET wish-list/<id:\d+>' => 'cabinet/wishlist/view',
+        'wish-list/delete/<id:\d+>' => 'cabinet/wishlist/delete',
         '<action:\w+>' => 'site/<action>',
 
         '<_c:[\w\-]+>' => '<_c>/index',
