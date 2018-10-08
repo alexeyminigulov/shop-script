@@ -17,6 +17,8 @@ class m180704_100233_create_shop_products_table extends Migration
             'slug' => $this->string()->notNull(),
             'price' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
 
         $this->createIndex('{{%idx-shop_products-slug}}', '{{%shop_products}}', 'slug', true);

@@ -35,6 +35,7 @@ class ProductReadRepository
     {
         $query = Product::find()
             ->where(['status' => Product::STATUS_ACTIVE])
+            ->orderBy('created_at')
             ->limit(100)
             ->joinWith(['mainPicture']);
 

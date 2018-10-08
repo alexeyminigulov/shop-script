@@ -4,6 +4,7 @@ namespace domain\entities\Shop\Product;
 
 use domain\entities\Shop\Brand;
 use domain\entities\Shop\Discussion;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Category;
@@ -27,6 +28,8 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property int $weight
  * @property int $quantity
  * @property float $rating
+ * @property int $created_at
+ * @property int $updated_at
  *
  * @property Brand $brand
  * @property Value[] $values
@@ -42,6 +45,17 @@ class Product extends ActiveRecord
     const STATUS_HIDE = 0;
 
     private static $defaultPicture;
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => SaveRelationsBehavior::className(),
+                'relations' => ['values', 'pictures', 'mainPicture'],
+            ],
+        ];
+    }
 
     public static function create($code, $name, $slug,
                                   $price, $categoryId, $brandId,
@@ -249,16 +263,6 @@ class Product extends ActiveRecord
         }
 
         return parent::__get($name);
-    }
-
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => SaveRelationsBehavior::className(),
-                'relations' => ['values', 'pictures', 'mainPicture'],
-            ],
-        ];
     }
 
     public function afterSave($insert, $changedAttributes)
