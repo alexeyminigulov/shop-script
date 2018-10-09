@@ -21,11 +21,6 @@ use frontend\widgets\RatingStars;
                     'title' => '',
                 ]) ?>
             </a>
-            <span class="ty-discount-label color3 cm-reload-101000166">
-                <span class="ty-discount-label__item">
-                    <span class="ty-discount-label__value">Скидка<br><em>53%</em></span>
-                </span>
-            </span>
             <div class="grid-list-buttons">
                 <a class="ty-btn ty-btn__text ty-add-to-wish text-button"
                    href="<?= Url::to(['cabinet/wishlist/add', 'id' => $product->id])?>">
@@ -45,26 +40,10 @@ use frontend\widgets\RatingStars;
         </div>
 
         <div class="ty-grid-list__price ">
-                <span class="cm-reload-101000166 ty-price-update">
-                    <span class="ty-price" id="line_discounted_price_101000166">
-                        <bdi>
-                            <span class="ty-price-num"><?= ProductHelper::price($product->price) ?></span>
-                        </bdi>
-                    </span>
-                </span>
-            <span class="cm-reload-101000166 ty-list-price-block">
-                    <span class="ty-list-price ty-nowrap">
-                        <span class="ty-strike">
-                            <bdi>
-                                <span class="ty-list-price ty-nowrap"><?= ProductHelper::price($product->price) ?></span>
-                            </bdi>
-                        </span>
-                    </span>
-                </span>
-            <span class="cm-reload-101000166">
-                <span class="ty-list-price ty-save-price ty-nowrap color3">Вы экономите:&nbsp;
+            <span class="cm-reload-101000166 ty-price-update">
+                <span class="ty-price" id="line_discounted_price_101000166">
                     <bdi>
-                        <span><?= ProductHelper::price($product->price) ?></span>
+                        <span class="ty-price-num"><?= ProductHelper::price($product->price) ?></span>
                     </bdi>
                 </span>
             </span>
