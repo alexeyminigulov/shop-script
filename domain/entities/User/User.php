@@ -67,6 +67,11 @@ class User extends ActiveRecord implements IdentityInterface, UserEventInterface
     public function addWishItem(WishItem $wishItem)
     {
         $wishItems = $this->wishItems;
+        for ($i = 0; $i < count($wishItems); $i++) {
+            if ($wishItems[$i]->product_id == $wishItem->product_id) {
+                throw new \DomainException('Товар уже был добавлен в список желаемых.');
+            }
+        }
         $wishItems[] = $wishItem;
         $this->wishItems = $wishItems;
     }

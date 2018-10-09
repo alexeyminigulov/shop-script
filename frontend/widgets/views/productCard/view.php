@@ -22,22 +22,15 @@ use frontend\widgets\RatingStars;
                 ]) ?>
             </a>
             <span class="ty-discount-label color3 cm-reload-101000166">
-                    <span class="ty-discount-label__item">
-                        <span class="ty-discount-label__value">Скидка<br><em>53%</em></span>
-                    </span>
+                <span class="ty-discount-label__item">
+                    <span class="ty-discount-label__value">Скидка<br><em>53%</em></span>
                 </span>
+            </span>
             <div class="grid-list-buttons">
-                <div class="ty-quick-view-button">
-                    <a class="ty-btn ty-btn__secondary ty-btn__big cm-dialog-opener cm-dialog-auto-size"
-                       data-ca-view-id="166" data-ca-target-id="product_quick_view"
-                       href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=products.quick_view&amp;product_id=166&amp;prev_url=index.php&amp;n_plain=Y"
-                       data-ca-dialog-title="Быстрый просмотр товаров" rel="nofollow">Просмотр</a>
-                </div>
-                <a class="ty-btn ty-btn__text ty-add-to-wish cm-submit text-button"
-                   id="button_wishlist_101000166" data-ca-dispatch="dispatch[wishlist.add..166]">
+                <a class="ty-btn ty-btn__text ty-add-to-wish text-button"
+                   href="<?= Url::to(['cabinet/wishlist/add', 'id' => $product->id])?>">
                     Отложить
                 </a>
-                <a class="ty-btn ty-btn__text ty-add-to-compare cm-ajax cm-ajax-full-render text-button " href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=product_features.add_product&amp;product_id=166&amp;redirect_url=index.php" rel="nofollow" data-ca-target-id="comparison_list,account_info*,abt__unitheme_compared_products">Сравнить</a>
             </div>
         </div>
 
