@@ -35,6 +35,8 @@ class CartController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'layout_site';
+
         $cartItems = $this->service->getCart()->getItems();
         $cost = $this->service->getCart()->getCost();
 

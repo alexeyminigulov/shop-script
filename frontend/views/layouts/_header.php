@@ -82,7 +82,7 @@ use common\widgets\Alert;
                         <div class="span7 search-block-grid">
                             <div class=" top-search">
                                 <div class="ty-search-block">
-                                    <form action="<?= Url::to(['shop/product/search']) ?>" name="search_form" method="get">
+                                    <form action="<?= Url::to(['shop/product/product/search']) ?>" name="search_form" method="get">
 
                                         <input type="text" name="q" value="" id="search_input" title="Искать товары" class="ty-search-block__input cm-hint">
                                         <button title="Найти" class="ty-search-magnifier" type="submit">

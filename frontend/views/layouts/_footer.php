@@ -38,7 +38,7 @@ use yii\helpers\Html;
                                             <li><a href="<?= Url::to(['site/signup']) ?>">Создать учетную запись</a></li>
                                         <?php endif; ?>
                                         <li><a href="<?= Url::to(['/cabinet/order/index']) ?>">Заказы</a></li>
-                                        <li><a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/wishlist/">Отложенные товары</a></li>
+                                        <li><a href="<?= Url::to(['/cabinet/wishlist/index']) ?>">Отложенные товары</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@ use yii\helpers\Html;
                                 <div class="ty-footer-general__body" id="footer-general_15">
                                     <ul id="text_links_3951" class="ty-text-links">
                                         <li class="ty-text-links__item ty-level-0">
-                                            <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/o-kompanii/">О компании</a>
+                                            <a class="ty-text-links__a" href="<?= Url::to(['/site/about']) ?>">О компании</a>
                                         </li>
                                         <li class="ty-text-links__item ty-level-0">
                                             <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/blog/">Блог магазина</a>
@@ -63,7 +63,7 @@ use yii\helpers\Html;
                                             <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/index.php?dispatch=discussion.view&amp;thread_id=26">Отзывы покупателей</a>
                                         </li>
                                         <li class="ty-text-links__item ty-level-0">
-                                            <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/bonusnye-bally/">Бонусные баллы</a>
+                                            <a class="ty-text-links__a" href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/bonusnye-bally/">Карта сайта</a>
                                         </li>
                                     </ul>
                                 </div>

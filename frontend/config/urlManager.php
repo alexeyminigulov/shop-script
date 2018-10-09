@@ -12,7 +12,7 @@ return [
         'catalog/<slug:[\w\-]+>' => 'shop/catalog/view',
         'product/<slug:[\w\-]+>' => 'shop/product/product/view',
         'comment/<slug:[\w\-]+>' => 'shop/product/product/comment',
-        'search' => 'shop/product/search',
+        'search' => 'shop/product/product/search',
         'cart' => 'shop/cart/index',
         'cart/<action:\w+>' => 'shop/cart/<action>',
         'cabinet' => 'cabinet/profile/update',

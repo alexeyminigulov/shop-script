@@ -7,11 +7,9 @@ use yii\widgets\LinkPager;
 use frontend\widgets\ProductBadge;
 
 ?>
+<?php if (count($dataProvider->getModels())): ?>
 <div class="cat-view-grid" id="category_products_11">
     <div class="ty-pagination-container cm-pagination-container" id="pagination_contents">
-        <?php
-//        echo $this->render('_sort-container')
-        ?>
         <div class="grid-list ">
             <?php
             foreach ($dataProvider->getModels() as $product) {
@@ -32,3 +30,10 @@ use frontend\widgets\ProductBadge;
     </div>
     <div class="col-sm-6 text-right">Showing <?= $dataProvider->getCount() ?> of <?= $dataProvider->getTotalCount() ?></div>
 </div>
+<?php else: ?>
+    <div class="ty-mainbox-body">
+        <div class="ty-list-container">
+            <p style="font-size: 14px;">Ничего не найдено</p>
+        </div>
+    </div>
+<?php endif; ?>
