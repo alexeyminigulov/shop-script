@@ -2,16 +2,20 @@
 
 namespace domain\repositories\Shop;
 
+use domain\dispatcher\EventDispatcherInterface;
+use domain\entities\Shop\Product\events\ProductPersistence;
 use domain\entities\Shop\Product\Product;
 use domain\exceptions\EntityNotFoundException;
 
 class ProductRepository
 {
     private $categoryRepository;
+    private $dispatcher;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, EventDispatcherInterface $dispatcher)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->dispatcher = $dispatcher;
     }
 
     public function find($id): Product
@@ -71,6 +75,14 @@ class ProductRepository
     {
         if (!$product->save($runValidation)) {
             throw new \RuntimeException('Product did not save.');
+        }
+        $this->dispatcher->dispatch(new ProductPersistence($product));
+    }
+
+    public function delete(Product $product)
+    {
+        if ($product->delete() === false) {
+            throw new \RuntimeException('Product has not been delete.');
         }
     }
 }

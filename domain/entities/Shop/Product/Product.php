@@ -7,8 +7,8 @@ use domain\entities\Shop\Discussion;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use domain\entities\Shop\Category;
 use domain\entities\DefaultPicture;
+use domain\entities\Shop\Category\Category;
 use domain\entities\Shop\Attribute\Attribute;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 

@@ -16,12 +16,12 @@ class BestSellersWidget extends Widget
     {
         parent::init();
 
-        $cacheKey = 'best-sellers-widget';
+        $cacheKey = 'best-sellers-widget-products';
         if (!$bestSellers = Yii::$app->cache->get($cacheKey)) {
 
             $bestSellers = Product::find()->limit(5)->joinWith(['mainPicture'])->all();
             Yii::$app->cache->set($cacheKey, $bestSellers, null, new TagDependency([
-                'tags' => ['shop', 'best-sellers'],
+                'tags' => ['shop', 'products'],
             ]));
         }
         $this->bestSellers = $bestSellers;

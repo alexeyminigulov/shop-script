@@ -5,6 +5,8 @@ namespace domain\entities\Shop;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use domain\entities\Shop\Attribute\Attribute;
+use domain\entities\Shop\Category\Category;
+use domain\entities\Shop\Category\CategoryAssignment;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**

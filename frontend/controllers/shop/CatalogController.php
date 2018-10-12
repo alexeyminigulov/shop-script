@@ -5,7 +5,7 @@ use Yii;
 use domain\forms\Shop\Search\SearchForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use domain\repositories\Shop\CategoryRepository;
 use domain\readRepositories\Shop\ProductReadRepository;
 

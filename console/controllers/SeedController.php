@@ -4,7 +4,7 @@ namespace console\controllers;
 
 use Yii;
 use domain\entities\Shop\Brand;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use Faker\Factory;
 use yii\console\Controller;
 use domain\entities\Shop\Attribute\Attribute;
@@ -120,7 +120,7 @@ class SeedController extends Controller
         $category->save();
 
         $parentCategory = Category::findOne(['id' => 2]);
-        $category = Category::create('Computers', 'Computers', $parentCategory);
+        $category = Category::create('Computers', 'computers', $parentCategory);
         $category->save();
 
         $parentCategory = Category::findOne(['id' => 3]);

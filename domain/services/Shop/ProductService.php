@@ -114,6 +114,12 @@ class ProductService
         return $product;
     }
 
+    public function delete($id)
+    {
+        $product = $this->repository->find($id);
+        $this->repository->delete($product);
+    }
+
     public function deletePicture($productId, $pictureId)
     {
         $funcDeletePicture = function (Product $product, Picture $picture) {

@@ -2,6 +2,8 @@
 
 namespace common\bootstrap;
 
+use domain\entities\Shop\Product\events\ProductPersistence;
+use domain\listeners\Shop\Product\ProductPersistenceListener;
 use Yii;
 use yii\caching\Cache;
 use yii\di\Container;
@@ -48,6 +50,9 @@ class Setup implements BootstrapInterface
                 ],
                 BannerPersistence::class => [
                     [$container->get(BannerPersistenceListener::class), 'handle'],
+                ],
+                ProductPersistence::class => [
+                    [$container->get(ProductPersistenceListener::class), 'handle'],
                 ],
             ]);
         });
