@@ -9,26 +9,35 @@ return [
     'showScriptName' => false,
     'rules' => [
         '' => 'site/index',
-        'catalog/<slug:[\w\-]+>' => 'shop/catalog/view',
+        '<action:\w+>' => 'site/<action>',
+
         'product/<slug:[\w\-]+>' => 'shop/product/product/view',
         'comment/<slug:[\w\-]+>' => 'shop/product/product/comment',
-        'search' => 'shop/product/product/search',
-        'cart' => 'shop/cart/index',
-        'cart/<action:\w+>' => 'shop/cart/<action>',
-        'cabinet' => 'cabinet/profile/update',
-        'cabinet/order' => 'cabinet/order/index',
+        'search'                 => 'shop/product/product/search',
+
+        'newest'                 => 'shop/product/newest/index',
+        'best-seller'            => 'shop/product/best-seller/index',
+
+        'cart'                   => 'shop/cart/index',
+        'cart/<action:\w+>'      => 'shop/cart/<action>',
+
+        'catalog/<slug:[\w\-]+>' => 'shop/catalog/view',
+
+        'order'                  => 'shop/order/index',
+
+        'cabinet'                => 'cabinet/profile/update',
+
+        'cabinet/order'          => 'cabinet/order/index',
         'cabinet/order/<id:\d+>' => 'cabinet/order/view',
-        'post' => 'blog/post/index',
-        'post/<id:\d+>' => 'blog/post/view',
-        'order' => 'shop/order/index',
-        'wish-list' => 'cabinet/wishlist/index',
-        'wish-list/add' => 'cabinet/wishlist/add',
+
+        'wish-list'              => 'cabinet/wishlist/index',
+        'wish-list/add'          => 'cabinet/wishlist/add',
         'wish-list/add-to-cart/<id:\d+>' => 'cabinet/wishlist/add-to-cart',
-        'GET wish-list/<id:\d+>' => 'cabinet/wishlist/view',
-        'wish-list/delete/<id:\d+>' => 'cabinet/wishlist/delete',
-        'newest' => 'shop/product/newest/index',
-        'best-seller' => 'shop/product/best-seller/index',
-        '<action:\w+>' => 'site/<action>',
+        'GET wish-list/<id:\d+>'         => 'cabinet/wishlist/view',
+        'wish-list/delete/<id:\d+>'      => 'cabinet/wishlist/delete',
+
+        'post'                   => 'blog/post/index',
+        'post/<id:\d+>'          => 'blog/post/view',
 
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
