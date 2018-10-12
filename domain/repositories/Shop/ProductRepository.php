@@ -84,5 +84,6 @@ class ProductRepository
         if ($product->delete() === false) {
             throw new \RuntimeException('Product has not been delete.');
         }
+        $this->dispatcher->dispatch(new ProductPersistence($product));
     }
 }
