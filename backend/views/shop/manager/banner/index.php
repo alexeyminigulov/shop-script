@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $model \domain\entities\Shop\Manager\Banner */
+/* @var $model \domain\entities\Shop\Manager\Banner\Banner */
 /* @var $searchModel backend\forms\Shop\GroupSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

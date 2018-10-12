@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\entities\Shop;
+namespace domain\entities\Shop\Category;
 
 use yii\db\ActiveRecord;
 

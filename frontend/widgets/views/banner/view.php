@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
-/* @var $banners \domain\entities\Shop\Manager\Banner[] */
+/* @var $banners \domain\entities\Shop\Manager\Banner\Banner[] */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

@@ -2,7 +2,7 @@
 
 namespace domain\forms\Shop\Manager;
 
-use domain\entities\Shop\Manager\Banner;
+use domain\entities\Shop\Manager\Banner\Banner;
 use domain\validators\HexColorValidator;
 use yii\base\Model;
 use yii\web\UploadedFile;

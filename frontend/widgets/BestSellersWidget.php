@@ -2,8 +2,10 @@
 
 namespace frontend\widgets;
 
-use domain\entities\Shop\Product\Product;
+use Yii;
 use yii\base\Widget;
+use yii\caching\TagDependency;
+use domain\entities\Shop\Product\Product;
 
 class BestSellersWidget extends Widget
 {
@@ -13,7 +15,16 @@ class BestSellersWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->bestSellers = Product::find()->limit(5)->joinWith(['mainPicture'])->all();
+
+        $cacheKey = 'best-sellers-widget';
+        if (!$bestSellers = Yii::$app->cache->get($cacheKey)) {
+
+            $bestSellers = Product::find()->limit(5)->joinWith(['mainPicture'])->all();
+            Yii::$app->cache->set($cacheKey, $bestSellers, null, new TagDependency([
+                'tags' => ['shop', 'best-sellers'],
+            ]));
+        }
+        $this->bestSellers = $bestSellers;
     }
 
     public function run()

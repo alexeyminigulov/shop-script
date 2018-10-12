@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use domain\entities\Shop\Manager\Banner;
+use domain\entities\Shop\Manager\Banner\Banner;
 
 /* @var $this yii\web\View */
 /* @var $model \domain\forms\Shop\Manager\BannerForm */

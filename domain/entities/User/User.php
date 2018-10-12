@@ -9,6 +9,8 @@ use domain\entities\User\events\UserConfirmEmail;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
+use domain\entities\EventInterface;
+use domain\entities\EventsTrait;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
 /**
@@ -28,12 +30,12 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property Order[] $orders
  * @property WishItem[] $wishItems
  */
-class User extends ActiveRecord implements IdentityInterface, UserEventInterface
+class User extends ActiveRecord implements IdentityInterface, EventInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-    use UserEventsTrait;
+    use EventsTrait;
 
     public function behaviors()
     {

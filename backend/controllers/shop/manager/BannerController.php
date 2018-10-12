@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
-use domain\entities\Shop\Manager\Banner;
+use domain\entities\Shop\Manager\Banner\Banner;
 use domain\forms\Shop\Manager\BannerForm;
 use domain\services\Shop\Manager\BannerService;
 use backend\forms\Shop\Manager\BannerSearch;

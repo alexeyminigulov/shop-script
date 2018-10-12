@@ -2,8 +2,10 @@
 
 namespace frontend\widgets;
 
+use Yii;
 use yii\base\Widget;
-use domain\entities\Shop\Manager\Banner;
+use yii\caching\TagDependency;
+use domain\entities\Shop\Manager\Banner\Banner;
 
 class BannerWidget extends Widget
 {
@@ -13,8 +15,16 @@ class BannerWidget extends Widget
     public function init()
     {
         parent::init();
-        $this->banners = Banner::find()->limit(3)->all();
 
+        $cacheKey = 'banner-widget-banners';
+        if (!$banners = Yii::$app->cache->get($cacheKey)) {
+
+            $banners = Banner::find()->limit(3)->all();
+            Yii::$app->cache->set($cacheKey, $banners, null, new TagDependency([
+                'tags' => ['shop', 'banners'],
+            ]));
+        }
+        $this->banners = $banners;
     }
 
     public function run()

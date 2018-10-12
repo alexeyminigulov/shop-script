@@ -3,9 +3,10 @@
 namespace frontend\widgets;
 
 use Yii;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use domain\repositories\Shop\CategoryRepository;
 use yii\base\Widget;
+use yii\caching\TagDependency;
 
 class CatalogWidget extends Widget
 {
@@ -19,6 +20,16 @@ class CatalogWidget extends Widget
     {
         parent::init();
         $this->repository = Yii::$container->get(CategoryRepository::class);
+
+        $cacheKey = 'catalog-widget-categories';
+        if (!$categories = Yii::$app->cache->get($cacheKey)) {
+
+            $categories = Category::find()->andWhere(['<>', 'id', 1])->orderBy('lft')->all();
+            Yii::$app->cache->set($cacheKey, $categories, null, new TagDependency([
+                'tags' => ['shop', 'categories'],
+            ]));
+        }
+        $this->categories = $categories;
     }
 
     public function run()
@@ -37,7 +48,6 @@ class CatalogWidget extends Widget
     private function tplCatalog()
     {
         $result = "";
-        $this->categories = Category::find()->andWhere(['<>', 'id', 1])->orderBy('lft')->all();
 
         /** @var Category $category */
         foreach ($this->categories as $category) {

@@ -2,7 +2,7 @@
 
 namespace domain\helpers;
 
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use yii\helpers\ArrayHelper;
 
 class CategoryHelper

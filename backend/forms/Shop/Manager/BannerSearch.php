@@ -4,7 +4,7 @@ namespace backend\forms\Shop\Manager;
 
 use Yii;
 use yii\base\Model;
-use domain\entities\Shop\Manager\Banner;
+use domain\entities\Shop\Manager\Banner\Banner;
 use yii\data\ActiveDataProvider;
 
 /**

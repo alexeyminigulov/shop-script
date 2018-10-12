@@ -2,7 +2,7 @@
 
 namespace domain\services\Shop\Manager;
 
-use domain\entities\Shop\Manager\Banner;
+use domain\entities\Shop\Manager\Banner\Banner;
 use domain\forms\Shop\Manager\BannerForm;
 use domain\repositories\Shop\Manager\BannerRepository;
 

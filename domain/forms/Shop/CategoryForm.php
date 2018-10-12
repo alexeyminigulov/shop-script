@@ -2,7 +2,7 @@
 
 namespace domain\forms\Shop;
 
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use yii\base\Model;
 
 /**

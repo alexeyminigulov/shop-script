@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model \domain\entities\Shop\Manager\Banner */
+/* @var $model \domain\entities\Shop\Manager\Banner\Banner */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Banner', 'url' => ['index']];

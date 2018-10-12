@@ -4,7 +4,7 @@ namespace backend\forms\Shop;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 
 /**
  * CategorySearch represents the model behind the search form of `domain\entities\Shop\Category`.

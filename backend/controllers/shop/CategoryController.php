@@ -5,7 +5,7 @@ namespace backend\controllers\shop;
 use domain\forms\Shop\CategoryForm;
 use domain\services\Shop\CategoryService;
 use Yii;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use backend\forms\Shop\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

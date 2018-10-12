@@ -1,6 +1,6 @@
 <?php
 
-/* @var $banner \domain\entities\Shop\Manager\Banner */
+/* @var $banner \domain\entities\Shop\Manager\Banner\Banner */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

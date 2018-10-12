@@ -2,18 +2,22 @@
 
 namespace domain\repositories\Shop;
 
+use domain\dispatcher\EventDispatcherInterface;
 use domain\entities\Shop\Attribute\Attribute;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
+use domain\entities\Shop\Category\events\CategoryPersistence;
 use domain\entities\Shop\Group;
 use domain\exceptions\EntityNotFoundException;
 
 class CategoryRepository
 {
     private $adapter;
+    private $dispatcher;
 
-    public function __construct(CategoryStorageAdapter $adapter)
+    public function __construct(CategoryStorageAdapter $adapter, EventDispatcherInterface $dispatcher)
     {
         $this->adapter = $adapter;
+        $this->dispatcher = $dispatcher;
     }
 
     public function find($id): Category
@@ -40,8 +44,9 @@ class CategoryRepository
     public function save(Category $category, $runValidation = true)
     {
         if (!$category->save($runValidation)) {
-            throw new \RuntimeException('User did not save.');
+            throw new \RuntimeException('Category did not save.');
         }
+        $this->dispatcher->dispatch(new CategoryPersistence($category));
     }
 
     public function delete(Category $category)
@@ -49,6 +54,7 @@ class CategoryRepository
         if ($category->delete() === false) {
             throw new \RuntimeException('Category has not been deleted.');
         }
+        $this->dispatcher->dispatch(new CategoryPersistence($category));
     }
 
     public function getWithParents($id, $withRoot = true)

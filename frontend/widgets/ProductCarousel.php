@@ -2,7 +2,9 @@
 
 namespace frontend\widgets;
 
+use Yii;
 use yii\base\Widget;
+use yii\caching\TagDependency;
 use domain\entities\Shop\Product\Product;
 
 class ProductCarousel extends Widget
@@ -13,7 +15,16 @@ class ProductCarousel extends Widget
     public function init()
     {
         parent::init();
-        $this->products = Product::find()->limit(10)->joinWith(['mainPicture'])->all();
+
+        $cacheKey = 'product-carousel-products';
+        if (!$products = Yii::$app->cache->get($cacheKey)) {
+
+            $products = Product::find()->limit(10)->joinWith(['mainPicture'])->all();
+            Yii::$app->cache->set($cacheKey, $products, null, new TagDependency([
+                'tags' => ['shop', 'product-carousel'],
+            ]));
+        }
+        $this->products = $products;
     }
 
     public function run()

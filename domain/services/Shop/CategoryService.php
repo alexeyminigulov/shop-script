@@ -2,7 +2,7 @@
 
 namespace domain\services\Shop;
 
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use domain\forms\Shop\CategoryForm;
 use domain\repositories\Shop\CategoryRepository;
 use domain\exceptions\EntityNotFoundException;

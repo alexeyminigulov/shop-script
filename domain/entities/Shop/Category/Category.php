@@ -1,10 +1,11 @@
 <?php
 
-namespace domain\entities\Shop;
+namespace domain\entities\Shop\Category;
 
 use paulzi\nestedsets\NestedSetsBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use domain\entities\Shop\Group;
 
 /**
  * This is the model class for table "{{%shop_categories}}".

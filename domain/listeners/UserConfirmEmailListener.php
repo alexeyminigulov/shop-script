@@ -4,8 +4,6 @@ namespace domain\listeners;
 
 use Yii;
 use domain\jobs\User\UserConfirmEmailNotificator;
-use domain\entities\User\User;
-use yii\mail\MailerInterface;
 
 class UserConfirmEmailListener
 {

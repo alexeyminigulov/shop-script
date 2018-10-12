@@ -1,6 +1,6 @@
 <?php
 
-namespace domain\entities\Shop\Manager;
+namespace domain\entities\Shop\Manager\Banner;
 
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;

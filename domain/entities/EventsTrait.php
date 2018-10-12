@@ -1,8 +1,8 @@
 <?php
 
-namespace domain\entities\User;
+namespace domain\entities;
 
-trait UserEventsTrait
+trait EventsTrait
 {
     private $_events = [];
 
