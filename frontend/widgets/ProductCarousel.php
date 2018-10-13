@@ -21,7 +21,7 @@ class ProductCarousel extends Widget
 
             $products = Product::find()->limit(10)->joinWith(['mainPicture'])->all();
             Yii::$app->cache->set($cacheKey, $products, null, new TagDependency([
-                'tags' => ['shop', 'product-carousel'],
+                'tags' => ['shop', 'products'],
             ]));
         }
         $this->products = $products;

@@ -3,6 +3,7 @@
 namespace domain\readRepositories\Shop;
 
 use Yii;
+use yii\caching\Cache;
 use yii\caching\TagDependency;
 use domain\entities\Shop\Attribute\Attribute;
 use domain\forms\Shop\Search\ValueForm;
@@ -17,11 +18,13 @@ class ProductReadRepository
 {
     private $client;
     private $adapter;
+    private $cache;
 
-    public function __construct(Client $client, ProductStorageAdapter $adapter)
+    public function __construct(Client $client, ProductStorageAdapter $adapter, Cache $cache)
     {
         $this->client = $client;
         $this->adapter = $adapter;
+        $this->cache = $cache;
     }
 
     public function getAll($categoryIds): DataProviderInterface
@@ -93,7 +96,7 @@ class ProductReadRepository
     public function search(SearchForm $form)
     {
         $cacheKey = 'count-of-products';
-        if (!$size = Yii::$app->cache->get($cacheKey)) {
+        if (!$size = $this->cache->get($cacheKey)) {
 
             $size = Product::find()->count();
             Yii::$app->cache->set($cacheKey, $size, null, new TagDependency([

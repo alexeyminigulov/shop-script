@@ -20,6 +20,6 @@ class ProductPersistenceHandler
         if (!$parent->product instanceof Product) {
             throw new \DomainException('Passed parameter is not Product');
         }
-        TagDependency::invalidate($this->cache, ['products', 'product-carousel']);
+        TagDependency::invalidate($this->cache, ['products']);
     }
 }
