@@ -2,29 +2,43 @@
 
 namespace domain\readRepositories\Shop;
 
+use Yii;
+use yii\caching\TagDependency;
+use yii\caching\Cache;
 use domain\entities\Shop\Product\Product;
 
 class ProductStorageAdapter
 {
-    private $dataMapper = [];
+    private $cache;
+
+    public function __construct(Cache $cache)
+    {
+        $this->cache = $cache;
+    }
 
     public function getMinPrice(): int
     {
-        if (isset($this->dataMapper['getMinPrice'])) {
-            return $this->dataMapper['getMinPrice'];
-        }
-        $this->dataMapper['getMinPrice'] = Product::find()->min('price');;
+        $cacheKey = 'min-price';
+        if (!$minPrice = $this->cache->get($cacheKey)) {
 
-        return $this->dataMapper['getMinPrice'];
+            $minPrice = Product::find()->min('price');
+            Yii::$app->cache->set($cacheKey, $minPrice, null, new TagDependency([
+                'tags' => ['shop', 'products'],
+            ]));
+        }
+        return $minPrice;
     }
 
     public function getMaxPrice(): int
     {
-        if (isset($this->dataMapper['getMaxPrice'])) {
-            return $this->dataMapper['getMaxPrice'];
-        }
-        $this->dataMapper['getMaxPrice'] = Product::find()->max('price');;
+        $cacheKey = 'max-price';
+        if (!$maxPrice = $this->cache->get($cacheKey)) {
 
-        return $this->dataMapper['getMaxPrice'];
+            $maxPrice = Product::find()->max('price');
+            Yii::$app->cache->set($cacheKey, $maxPrice, null, new TagDependency([
+                'tags' => ['shop', 'products'],
+            ]));
+        }
+        return $maxPrice;
     }
 }
