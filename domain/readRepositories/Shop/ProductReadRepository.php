@@ -169,7 +169,8 @@ class ProductReadRepository
         $response = $this->client->search($params);
         $productIds = ArrayHelper::getColumn($response['hits']['hits'], '_id');
 
-        $query = Product::find()->alias('p')->andWhere(['id' => $productIds]);
+        $query = Product::find()->alias('p')->andWhere(['p.id' => $productIds])
+            ->joinWith(['mainPicture']);
 
         return $this->getProvider($query);
     }
