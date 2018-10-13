@@ -25,19 +25,18 @@ return [
 
         'order'                  => 'shop/order/index',
 
+        'post'                   => 'blog/post/index',
+        'post/<id:\d+>'          => 'blog/post/view',
+
         'cabinet'                => 'cabinet/profile/update',
 
         'cabinet/order'          => 'cabinet/order/index',
         'cabinet/order/<id:\d+>' => 'cabinet/order/view',
 
-        'wish-list'              => 'cabinet/wishlist/index',
-        'wish-list/add'          => 'cabinet/wishlist/add',
+        'wish-list'                      => 'cabinet/wishlist/index',
+        'wish-list/add'                  => 'cabinet/wishlist/add',
         'wish-list/add-to-cart/<id:\d+>' => 'cabinet/wishlist/add-to-cart',
-        'GET wish-list/<id:\d+>'         => 'cabinet/wishlist/view',
         'wish-list/delete/<id:\d+>'      => 'cabinet/wishlist/delete',
-
-        'post'                   => 'blog/post/index',
-        'post/<id:\d+>'          => 'blog/post/view',
 
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
