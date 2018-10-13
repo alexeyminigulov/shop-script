@@ -2,6 +2,8 @@
 
 namespace domain\readRepositories\Shop;
 
+use Yii;
+use yii\caching\TagDependency;
 use domain\entities\Shop\Attribute\Attribute;
 use domain\forms\Shop\Search\ValueForm;
 use Elasticsearch\Client;
@@ -90,10 +92,20 @@ class ProductReadRepository
 
     public function search(SearchForm $form)
     {
+        $cacheKey = 'count-of-products';
+        if (!$size = Yii::$app->cache->get($cacheKey)) {
+
+            $size = Product::find()->count();
+            Yii::$app->cache->set($cacheKey, $size, null, new TagDependency([
+                'tags' => ['shop', 'products'],
+            ]));
+        }
         $params = [
             'index' => 'shop_products',
             'type' => 'products',
             'body' => [
+                "from" => 0,
+                "size" => $size,
                 "query" => [
                     "bool" => [
                         "filter" =>
@@ -164,7 +176,7 @@ class ProductReadRepository
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 16,
+                'pageSize' => 12,
             ],
         ]);
 

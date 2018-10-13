@@ -23,11 +23,10 @@ use domain\entities\Shop\Attribute\Attribute;
 
                     <?php $form = ActiveForm::begin([
                         'fieldClass' => 'frontend\widgets\FilterField',
-                        'action' => Url::to(['shop/catalog/view']),
+                        'action' => Url::to(['shop/catalog/view', 'slug' => $model->slug]),
                         'method' => 'get'
                     ]); ?>
-
-                    <?= $form->field($model, 'slug')->hiddenInput()->error(false) ?>
+                    
                         <?= $this->render('_price', [
                             'form' => $model,
                         ]); ?>

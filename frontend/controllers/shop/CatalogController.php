@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers\shop;
 
+use domain\helpers\ActiveRecordHelper;
 use Yii;
 use domain\forms\Shop\Search\SearchForm;
 use yii\web\Controller;
@@ -39,7 +40,17 @@ class CatalogController extends Controller
         $form = new SearchForm($attributes);
         $form->load(Yii::$app->request->get());
 
-        $dataProvider = $this->products->search($form);
+        $getParams = Yii::$app->request->getQueryParams();
+        if (count($getParams) == 1) {
+
+            $descendantsCategory = array_merge([$category], $category->descendants);
+            $categoryIds = ActiveRecordHelper::getFields($descendantsCategory, 'id');
+            $dataProvider = $this->products->getAll($categoryIds);
+
+        } else {
+
+            $dataProvider = $this->products->search($form);
+        }
 
         return $this->render('view', [
             'category' => $category,
