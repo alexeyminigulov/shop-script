@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $product \domain\entities\Shop\Product\Product */
+/* @var $discussions \domain\entities\Shop\Discussion[] */
 
 use yii\helpers\Html;
 use frontend\widgets\RatingStars;
@@ -19,7 +20,7 @@ use yii\widgets\ActiveForm;
             <div class="ty-discussion__rating-wrapper" id="average_rating_product">
                 <?= RatingStars::widget(['rating' => $product->rating]) ?>
                 <a class="ty-discussion__review-a cm-external-click" data-ca-scroll="content_discussion" data-ca-external-click-id="discussion">
-                    <?= Html::encode(count($product->activeDiscussions)) ?> Отзыва</a>
+                    <?= Html::encode(count($discussions)) ?> Отзыва</a>
                 <a class="ty-discussion__review-write cm-dialog-opener cm-dialog-auto-size" data-ca-target-id="new_post_dialog_214" rel="nofollow">
                     Написать отзыв
                 </a>

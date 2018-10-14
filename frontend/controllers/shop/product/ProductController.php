@@ -71,7 +71,9 @@ class ProductController extends Controller
         $product = $this->findModel($slug);
         $categories = $this->repository->getWithParents($product->category_id, false);
         $discussions = $product->getDiscussions()
-            ->andWhere(['status' => Discussion::STATUS_ACTIVE])
+            ->alias('d')
+            ->andWhere(['d.status' => Discussion::STATUS_ACTIVE])
+            ->joinWith('user u')
             ->all();
 
         if (!Yii::$app->user->isGuest) {
@@ -126,7 +128,8 @@ class ProductController extends Controller
 
     protected function findModel($slug): Product
     {
-        if (($model = Product::find()->andWhere(['slug' => $slug])->joinWith(['discussions'])->one()) !== null) {
+        $model = Product::find()->andWhere(['slug' => $slug])->one();
+        if ($model !== null) {
             return $model;
         }
 

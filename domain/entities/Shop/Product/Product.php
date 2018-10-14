@@ -38,6 +38,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property Picture[] $pictures
  * @property Picture $mainPicture
  * @property Discussion[] $discussions
+ * @property Discussion[] $activeDiscussions
  */
 class Product extends ActiveRecord
 {
@@ -229,7 +230,7 @@ class Product extends ActiveRecord
 
     public function getActiveDiscussions()
     {
-        return $this->getDiscussions()->andWhere(['status' => self::STATUS_ACTIVE]);
+        return $this->getDiscussions()->alias('d')->andWhere(['d.status' => self::STATUS_ACTIVE]);
     }
 
     public function getPictures(): ActiveQuery

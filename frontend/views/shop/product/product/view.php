@@ -2,7 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $product \domain\entities\Shop\Product\Product */
-/* @var $categories \domain\entities\Shop\Category[] */
+/* @var $categories \domain\entities\Shop\Category\Category[] */
 /* @var $comment null|\domain\forms\Shop\Discussion\CommentForm */
 /* @var $discussions \domain\entities\Shop\Discussion[] */
 
@@ -69,14 +69,15 @@ MagnificPopup::register($this);
                                     </div>
                                     <div class="span9 ty-product-block__left">
                                         <?= $this->render('_card-product', [
-                                                'product' => $product,
+                                            'product' => $product,
+                                            'discussions' => $discussions,
                                         ]) ?>
                                     </div>
 
                                     <?php if (!empty($comment)): ?>
                                     <div class="ty-discussion-post-popup hidden" id="new_post_dialog_214" title="Написать отзыв">
                                         <?php $form = ActiveForm::begin([
-                                            'action' => ['shop/product/comment', 'slug' => $product->slug],
+                                            'action' => ['shop/product/product/comment', 'slug' => $product->slug],
                                             'options' => [
                                                 'class' => 'posts-form cm-processed-form',
                                                 'name' => 'add_post_form',

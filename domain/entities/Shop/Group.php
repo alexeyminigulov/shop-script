@@ -51,11 +51,6 @@ class Group extends ActiveRecord
         $this->categoryAssignments = [];
     }
 
-    public static function tableName()
-    {
-        return 'shop_attribute_groups';
-    }
-
     public function rules()
     {
         return [
@@ -94,5 +89,10 @@ class Group extends ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public static function tableName()
+    {
+        return '{{%shop_attribute_groups}}';
     }
 }
