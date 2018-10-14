@@ -53,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'value' => ProductHelper::statusName($model->status),
             ],
+            'text',
             'rating',
         ],
     ]) ?>
