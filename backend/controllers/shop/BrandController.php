@@ -5,6 +5,7 @@ namespace backend\controllers\shop;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use backend\forms\Shop\BrandSearch;
 use domain\entities\Shop\Brand;
 use domain\forms\Shop\BrandForm;
@@ -24,6 +25,15 @@ class BrandController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

@@ -3,6 +3,7 @@
 namespace backend\controllers\shop;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use domain\entities\Shop\Filter;
 use domain\forms\Shop\FilterForm;
@@ -18,6 +19,21 @@ class FilterController extends Controller
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**

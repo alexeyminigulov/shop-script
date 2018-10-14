@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use alexantr\elfinder\CKEditorAction;
 use alexantr\elfinder\ConnectorAction;
@@ -35,6 +36,21 @@ class ElfinderController extends Controller
             'ckeditor' => [
                 'class' => CKEditorAction::className(),
                 'connectorRoute' => 'connector',
+            ],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
             ],
         ];
     }

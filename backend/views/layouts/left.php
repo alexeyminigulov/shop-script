@@ -40,6 +40,7 @@ use yii\helpers\Url;
                     ['label' => 'Users', 'icon' => 'file-code-o', 'url' => ['/user']],
                     ['label' => 'Posts', 'icon' => 'file-code-o', 'url' => [Url::to(['blog/post/index'])]],
                     ['label' => 'Discussions', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/discussion/index'])]],
+                    ['label' => 'Banners', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/manager/banner/index'])]],
 
                     [
                         'label' => 'Shop',
@@ -54,7 +55,6 @@ use yii\helpers\Url;
                             ['label' => 'Product', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/product/index'])]],
                             ['label' => 'DeliveryMethod', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/delivery/index'])]],
                             ['label' => 'Discount', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/discount/index'])]],
-                            ['label' => 'Banners', 'icon' => 'file-code-o', 'url' => [Url::to(['shop/manager/banner/index'])]],
                         ],
                     ],
                 ],
