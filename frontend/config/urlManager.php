@@ -9,7 +9,6 @@ return [
     'showScriptName' => false,
     'rules' => [
         '' => 'site/index',
-        '<action:\w+>' => 'site/<action>',
 
         'product/<slug:[\w\-]+>' => 'shop/product/product/view',
         'comment/<slug:[\w\-]+>' => 'shop/product/product/comment',
@@ -37,6 +36,8 @@ return [
         'wish-list/add'                  => 'cabinet/wishlist/add',
         'wish-list/add-to-cart/<id:\d+>' => 'cabinet/wishlist/add-to-cart',
         'wish-list/delete/<id:\d+>'      => 'cabinet/wishlist/delete',
+
+        '<action:\w+>' => 'site/<action>',
 
         '<_c:[\w\-]+>' => '<_c>/index',
         '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
