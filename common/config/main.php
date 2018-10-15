@@ -11,8 +11,7 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\FileCache',
-            'cachePath' => '@common/runtime/cache',
+            'class' => 'yii\redis\Cache',
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
