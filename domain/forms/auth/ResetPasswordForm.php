@@ -1,5 +1,5 @@
 <?php
-namespace frontend\forms;
+namespace domain\forms\auth;
 
 use yii\base\Model;
 

@@ -10,10 +10,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\forms\LoginForm;
-use frontend\forms\PasswordResetRequestForm;
-use frontend\forms\ResetPasswordForm;
+use domain\forms\auth\PasswordResetRequestForm;
+use domain\forms\auth\ResetPasswordForm;
 use domain\forms\auth\SignupForm;
-use frontend\forms\ContactForm;
+use domain\forms\ContactForm;
 
 /**
  * Site controller

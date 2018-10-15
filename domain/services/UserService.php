@@ -5,8 +5,8 @@ namespace domain\services;
 use common\forms\LoginForm;
 use domain\entities\User\User;
 use domain\repositories\UserRepository;
-use frontend\forms\PasswordResetRequestForm;
-use frontend\forms\ResetPasswordForm;
+use domain\forms\auth\PasswordResetRequestForm;
+use domain\forms\auth\ResetPasswordForm;
 use domain\forms\auth\SignupForm;
 use yii\mail\MailerInterface;
 
