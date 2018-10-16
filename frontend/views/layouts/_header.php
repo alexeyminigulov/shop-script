@@ -46,9 +46,9 @@ use common\widgets\Alert;
                                 <div class="menu-lvl-ctn">Хиты продаж</div>
                             </a>
                         </li>
-                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl last ty-menu-item__promo">
-                            <a href="http://demo.cs-cart.ru/stores/8ae4a590ed09f99f/promotions/" class="ty-menu__item-link a-first-lvl">
-                                <div class="menu-lvl-ctn">Акции</div>
+                        <li class="ty-menu__item ty-menu__item-nodrop first-lvl ty-menu-item__newest last">
+                            <a href="<?= Url::to(['site/contact']) ?>" class="ty-menu__item-link a-first-lvl">
+                                <div class="menu-lvl-ctn">Поддержка</div>
                             </a>
                         </li>
                     </ul>

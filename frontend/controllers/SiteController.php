@@ -141,6 +141,8 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        $this->layout = 'layout_site';
+
         $form = new ContactForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
