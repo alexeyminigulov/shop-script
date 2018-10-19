@@ -39,7 +39,7 @@ OwlCarouselAsset::register($this);
                         <div class="span16 ">
                             <div class="ty-ut-panel">
                                 <div id="minimize_block" class="ty-ut-panel__wrapper">
-                                    <div class="ty-ut-panel__title" style="margin: 0 15px;">Демо CS-Cart + Unitheme</div>
+                                    <div class="ty-ut-panel__title" style="margin: 0 15px;">Демо Martix - интернет магазин</div>
                                 </div>
                             </div>
                         </div>
