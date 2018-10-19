@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use frontend\widgets\YandexMap;
 
 $this->title = 'Информация';
 
@@ -71,5 +72,10 @@ $this->title = 'Информация';
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span16" style="height:400px;">
+        <?= YandexMap::widget(); ?>
     </div>
 </div>
