@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\listeners\User;
+namespace domain\jobs\User;
 
 use domain\entities\User\User;
 use domain\services\mailer\Newsletter;
