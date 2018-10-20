@@ -253,4 +253,23 @@ class SiteController extends Controller
             'model' => $form,
         ]);
     }
+
+    /**
+     * Confirms email.
+     *
+     * @param string $token
+     * @return mixed
+     * @throws BadRequestHttpException
+     */
+    public function actionConfirmEmail($token)
+    {
+        try {
+            $this->service->confirmEmail($token);
+            Yii::$app->session->setFlash('success', 'Email успешно подтвержден.');
+            return $this->goHome();
+
+        } catch (\InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+    }
 }

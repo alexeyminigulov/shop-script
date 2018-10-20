@@ -85,6 +85,19 @@ class UserRepository
         return $user;
     }
 
+    public function findByConfirmEmailToken($token): User
+    {
+        $user = User::findOne([
+            'email_confirm_token' => $token,
+            'status' => User::STATUS_INACTIVE,
+        ]);
+
+        if (!$user) {
+            throw new \InvalidArgumentException('Wrong confirm email token.');
+        }
+        return $user;
+    }
+
     public function save(User $user, $runValidation = true)
     {
         if (!$user->save($runValidation)) {

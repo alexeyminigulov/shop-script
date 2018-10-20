@@ -6,6 +6,7 @@ use yii\db\ActiveRecord;
 use domain\entities\Shop\Order;
 use domain\entities\Shop\WishItem;
 use domain\entities\User\events\UserConfirmEmail;
+use domain\entities\User\events\UserSignupConfirmed;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\web\IdentityInterface;
@@ -25,6 +26,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $email_confirm_token
  * @property string $password write-only password
  *
  * @property Order[] $orders
@@ -32,7 +34,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  */
 class User extends ActiveRecord implements IdentityInterface, EventInterface
 {
-    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE= 0;
     const STATUS_ACTIVE = 10;
 
     use EventsTrait;
@@ -55,6 +57,9 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
         $user->email = $email;
         $user->setPassword($password);
         $user->generateAuthKey();
+        $user->status = self::STATUS_INACTIVE;
+        $user->email_confirm_token = Yii::$app->security->generateRandomString();
+        $user->generateAuthKey();
         $user->addEvent(new UserConfirmEmail($user));
 
         return $user;
@@ -64,6 +69,19 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
     {
         $this->username = $username;
         $this->email = $email;
+    }
+
+    public function confirm()
+    {
+        $this->status = self::STATUS_ACTIVE;
+        $this->email_confirm_token = null;
+        $this->addEvent(new UserSignupConfirmed($this));
+    }
+
+    public function passwordReset($password)
+    {
+        $this->setPassword($password);
+        $this->password_reset_token = null;
     }
 
     public function addWishItem(WishItem $wishItem)
@@ -90,17 +108,6 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
         $this->wishItems = $wishItems;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%users}}';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -208,12 +215,9 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
+    public static function tableName()
     {
-        $this->password_reset_token = null;
+        return '{{%users}}';
     }
 
     /**

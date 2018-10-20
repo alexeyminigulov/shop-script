@@ -5,7 +5,7 @@
 
 $baseUrl = \Yii::$app->params['frontendDomain'];
 $resetLink = \Yii::$app->get('frontendUrlManager')
-    ->createAbsoluteUrl(['site/reset-password', 'token' => $user->password_reset_token]);
+    ->createAbsoluteUrl(['site/confirm-email', 'token' => $user->email_confirm_token]);
 ?>
     Hello <?= $user->username ?>,
 

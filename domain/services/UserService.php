@@ -70,8 +70,14 @@ class UserService
             throw new \InvalidArgumentException('Token don not validated.');
         }
         $user = $this->repository->findByPasswordResetToken($token);
-        $user->setPassword($form->password);
-        $user->removePasswordResetToken();
+        $user->passwordReset($form->password);
+        $this->repository->save($user,false);
+    }
+
+    public function confirmEmail($token)
+    {
+        $user = $this->repository->findByConfirmEmailToken($token);
+        $user->confirm();
         $this->repository->save($user,false);
     }
 }

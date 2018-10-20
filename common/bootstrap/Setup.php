@@ -3,7 +3,11 @@
 namespace common\bootstrap;
 
 use domain\entities\Shop\Product\events\ProductPersistence;
+use domain\entities\User\events\UserSignupConfirmed;
 use domain\listeners\Shop\Product\ProductPersistenceListener;
+use domain\listeners\UserSignupConfirmedListener;
+use domain\services\mailer\MailChimp;
+use domain\services\mailer\Newsletter;
 use Yii;
 use yii\caching\Cache;
 use yii\di\Container;
@@ -40,10 +44,18 @@ class Setup implements BootstrapInterface
             return $app->cache;
         });
 
+        $container->setSingleton(Newsletter::class, function (Container $container) use ($app) {
+            return new MailChimp(new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
+                $app->params['mailChimpListId']);
+        });
+
         $container->setSingleton(EventDispatcherInterface::class, function (Container $container) {
             return new EventDispatcher([
                 UserConfirmEmail::class => [
                     [$container->get(UserConfirmEmailListener::class), 'handle'],
+                ],
+                UserSignupConfirmed::class => [
+                    [$container->get(UserSignupConfirmedListener::class), 'handle'],
                 ],
                 CategoryPersistence::class => [
                     [$container->get(CategoryPersistenceListener::class), 'handle'],
