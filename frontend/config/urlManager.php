@@ -9,6 +9,8 @@ return [
     'showScriptName' => false,
     'rules' => [
         '' => 'site/index',
+        'confirm-email' => 'site/confirm-email',
+        'reset-password' => 'site/reset-password',
 
         'product/<slug:[\w\-]+>' => 'shop/product/product/view',
         'comment/<slug:[\w\-]+>' => 'shop/product/product/comment',

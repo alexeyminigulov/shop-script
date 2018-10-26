@@ -187,6 +187,7 @@ class SiteController extends Controller
             try {
                 $user = $this->service->signup($form);
                 if (Yii::$app->getUser()->login($user)) {
+                    Yii::$app->session->setFlash('success', 'На указаную почту было отправлено сообщение с подтверждением.');
                     return $this->goHome();
                 }
             } catch (\DomainException $e) {
