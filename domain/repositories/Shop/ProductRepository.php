@@ -4,6 +4,7 @@ namespace domain\repositories\Shop;
 
 use domain\dispatcher\EventDispatcherInterface;
 use domain\entities\Shop\Product\events\ProductPersistence;
+use domain\entities\Shop\Product\events\ProductRemove;
 use domain\entities\Shop\Product\Product;
 use domain\exceptions\EntityNotFoundException;
 
@@ -84,6 +85,6 @@ class ProductRepository
         if ($product->delete() === false) {
             throw new \RuntimeException('Product has not been delete.');
         }
-        $this->dispatcher->dispatch(new ProductPersistence($product));
+        $this->dispatcher->dispatch(new ProductRemove($product));
     }
 }

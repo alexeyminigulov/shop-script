@@ -2,15 +2,20 @@
 
 namespace common\bootstrap;
 
+use Yii;
+use yii\di\Container;
+use yii\caching\Cache;
+use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
+use domain\entities\Shop\Product\events\ProductRemove;
 use domain\entities\Shop\Product\events\ProductPersistence;
 use domain\entities\User\events\UserSignupConfirmed;
 use domain\listeners\Shop\Product\ProductPersistenceListener;
+use domain\listeners\Shop\Product\ProductRemoveIndexListener;
+use domain\listeners\Shop\Product\ProductIndexerListener;
 use domain\listeners\UserSignupConfirmedListener;
 use domain\services\mailer\MailChimp;
 use domain\services\mailer\Newsletter;
-use Yii;
-use yii\caching\Cache;
-use yii\di\Container;
 use domain\dispatcher\EventDispatcher;
 use domain\listeners\Shop\Banner\BannerPersistenceListener;
 use domain\entities\Shop\Manager\Banner\events\BannerPersistence;
@@ -44,6 +49,10 @@ class Setup implements BootstrapInterface
             return $app->cache;
         });
 
+        $container->setSingleton(Client::class, function (Container $container) use ($app) {
+            return ClientBuilder::create()->setHosts([$app->params['hostES']])->build();
+        });
+
         $container->setSingleton(Newsletter::class, function (Container $container) use ($app) {
             return new MailChimp(new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
                 $app->params['mailChimpListId']);
@@ -65,6 +74,11 @@ class Setup implements BootstrapInterface
                 ],
                 ProductPersistence::class => [
                     [$container->get(ProductPersistenceListener::class), 'handle'],
+                    [$container->get(ProductIndexerListener::class), 'handle'],
+                ],
+                ProductRemove::class => [
+                    [$container->get(ProductPersistenceListener::class), 'handle'],
+                    [$container->get(ProductRemoveIndexListener::class), 'handle'],
                 ],
             ]);
         });
