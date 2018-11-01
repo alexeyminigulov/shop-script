@@ -7,6 +7,8 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [
+        '' => 'site/index',
+        'POST oauth2/<action:\w+>' => 'oauth2/rest/<action>',
 //        '<controller:[\w-]+>/index' => 'shop/<controller>/index',
     ],
 ];

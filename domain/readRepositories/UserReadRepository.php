@@ -15,4 +15,9 @@ class UserReadRepository
         }
         return $user;
     }
+
+    public function findActiveByUsername($username): ?User
+    {
+        return User::findOne(['username' => $username, 'status' => User::STATUS_ACTIVE]);
+    }
 }
