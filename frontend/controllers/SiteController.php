@@ -2,14 +2,15 @@
 namespace frontend\controllers;
 
 use Yii;
-use domain\entities\Shop\Product\Product;
-use domain\services\ContactService;
-use domain\services\UserService;
-use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use common\auth\Identity;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\forms\LoginForm;
+use yii\filters\AccessControl;
+use domain\services\UserService;
+use domain\services\ContactService;
+use yii\web\BadRequestHttpException;
+use domain\entities\Shop\Product\Product;
 use domain\forms\auth\PasswordResetRequestForm;
 use domain\forms\auth\ResetPasswordForm;
 use domain\forms\auth\SignupForm;
@@ -107,7 +108,7 @@ class SiteController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->service->auth($form);
-                Yii::$app->user->login($user, $form->rememberMe ? Yii::$app->params['user.rememberMe'] : 0);
+                Yii::$app->user->login(new Identity($user), $form->rememberMe ? Yii::$app->params['user.rememberMe'] : 0);
                 return $this->goBack();
 
             } catch (\DomainException $e) {
@@ -186,7 +187,7 @@ class SiteController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->service->signup($form);
-                if (Yii::$app->getUser()->login($user)) {
+                if (Yii::$app->user->login(new Identity($user))) {
                     Yii::$app->session->setFlash('success', 'На указаную почту было отправлено сообщение с подтверждением.');
                     return $this->goHome();
                 }

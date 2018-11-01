@@ -37,7 +37,7 @@ return [
             ],
         ],
         'user' => [
-            'identityClass' => 'domain\entities\User\User',
+            'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => false,
         ],
         'log' => [

@@ -7,9 +7,7 @@ use domain\entities\Shop\Order;
 use domain\entities\Shop\WishItem;
 use domain\entities\User\events\UserConfirmEmail;
 use domain\entities\User\events\UserSignupConfirmed;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\web\IdentityInterface;
 use domain\entities\EventInterface;
 use domain\entities\EventsTrait;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
@@ -32,7 +30,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property Order[] $orders
  * @property WishItem[] $wishItems
  */
-class User extends ActiveRecord implements IdentityInterface, EventInterface
+class User extends ActiveRecord implements EventInterface
 {
     const STATUS_INACTIVE= 0;
     const STATUS_ACTIVE = 10;
@@ -117,22 +115,6 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
-    {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
      * Finds user by name
      *
      * @param string $name
@@ -152,30 +134,6 @@ class User extends ActiveRecord implements IdentityInterface, EventInterface
     public static function findByEmail($email)
     {
         return static::findOne([ 'email' => $email, 'status' => User::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
     }
 
     /**
