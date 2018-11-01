@@ -3,6 +3,7 @@
 namespace domain\helpers;
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use domain\entities\User\User;
 
 class UserHelper
@@ -19,14 +20,19 @@ class UserHelper
     {
         return [
             User::STATUS_ACTIVE => 'active',
-            User::STATUS_DELETED => 'deleted',
+            User::STATUS_INACTIVE => 'deleted',
         ];
+    }
+
+    public static function statusName($status): string
+    {
+        return ArrayHelper::getValue(self::statusList(), $status);
     }
 
     private static function getStatus($code)
     {
         switch ($code) {
-            case User::STATUS_DELETED:
+            case User::STATUS_INACTIVE:
                 $label = 'deleted';
                 break;
             case User::STATUS_ACTIVE:
