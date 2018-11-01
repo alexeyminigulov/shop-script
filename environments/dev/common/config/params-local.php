@@ -2,6 +2,7 @@
 return [
     'frontendDomain' => 'shopscript.dev',
     'backendDomain' => 'backend.shopscript.dev',
+    'apiDomain' => 'api.shopscript.dev',
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'supportEmailName' => 'shopscript_robot',
