@@ -6,14 +6,9 @@ use domain\entities\User\User;
 
 class UserReadRepository
 {
-    function findActiveById($id): User
+    function findActiveById($id): ?User
     {
-        $user = User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
-
-        if (!$user) {
-            throw new \DomainException('User not found or not active.');
-        }
-        return $user;
+        return User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
     }
 
     public function findActiveByUsername($username): ?User

@@ -6,6 +6,7 @@ use domain\forms\ProfileForm;
 use domain\services\ProfileService;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use domain\readRepositories\UserReadRepository;
 
 /**
  * Profile controller
@@ -13,11 +14,13 @@ use yii\filters\AccessControl;
 class ProfileController extends Controller
 {
     private $service;
+    private $users;
 
-    public function __construct($id, $module, ProfileService $service, $config = [])
+    public function __construct($id, $module, ProfileService $service, UserReadRepository $users, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->users = $users;
     }
 
     public function behaviors()
@@ -39,8 +42,9 @@ class ProfileController extends Controller
     {
         $this->layout = 'layout_site';
 
+        $userId = Yii::$app->user->identity->getId();
         /* @var $user \domain\entities\User\User */
-        $user = Yii::$app->user->identity;
+        $user = $this->users->findActiveById($userId);
         $form = new ProfileForm($user);
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
