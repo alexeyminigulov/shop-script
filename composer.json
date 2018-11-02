@@ -15,7 +15,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.1",
-        "yiisoft/yii2": "~2.0.6",
+        "yiisoft/yii2": "2.0.11.2",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "^2.1",
@@ -27,16 +27,16 @@
         "bower-asset/jquery-zoom": "~1.7",
         "bower-asset/magnific-popup": "~1.1",
         "elisdn/yii2-composite-form": "~1.1",
-        "yii-cms/yii2-robokassa": "~1.2",
+        "yii-cms/yii2-robokassa": "~1.1",
         "bower-asset/owl.carousel": "~2.3",
         "elasticsearch/elasticsearch": "~6.0",
         "2amigos/yii2-ckeditor-widget": "~2.1",
         "alexantr/yii2-elfinder": "~1.5",
-        "yiisoft/yii2-queue": "~2.1",
+        "yiisoft/yii2-queue": "~2.0",
         "yiisoft/yii2-redis": "~2.0.0",
         "guzzlehttp/guzzle": "~5.3",
         "drewm/mailchimp-api": "^2.5",
-        "filsh/yii2-oauth2-server": "~2.0"
+        "filsh/yii2-oauth2-server": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

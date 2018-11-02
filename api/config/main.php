@@ -1,9 +1,9 @@
 <?php
 $params = array_merge(
-    require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
 );
 
 return [
@@ -57,6 +57,7 @@ return [
         'user' => [
             'identityClass' => 'common\auth\Identity',
             'enableAutoLogin' => false,
+            'enableSession' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -66,9 +67,6 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
         ],
         'urlManager' => require __DIR__ . './../config/urlManager.php',
     ],
@@ -86,7 +84,7 @@ return [
         'rules' => [
             [
                 'allow' => true,
-                'roles' => ['getIntoAdmin'],
+                'roles' => ['@'],
             ],
         ],
     ],

@@ -3,6 +3,7 @@ return [
     'frontendDomain' => 'martix.site',
     'backendDomain' => 'backend.martix.site',
     'apiDomain' => 'api.martix.site',
+    'staticHostInfo' => 'static.martix.site',
     'adminEmail' => 'leha.minigulov@mail.ru',
     'supportEmail' => 'alexey@martix.site',
     'supportEmailName' => 'martix_robot',

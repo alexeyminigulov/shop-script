@@ -708,3 +708,35 @@ PHP message: PHP Notice:  Undefined index: staticHostInfo in /app/api/config/mai
 PHP message: PHP Stack trace:
 PHP message: PHP   1. {main}() /app/api/web/index.php:0
 PHP message: PHP   2. require() /app/api/web/index.php:13" while reading response header from upstream, client: 192.168.83.1, server: api.shopscript.dev, request: "POST /oauth2/token HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.1-fpm.sock:", host: "api.shopscript.dev"
+2018/11/02 12:47:24 [error] 1887#1887: *11 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to undefined method filsh\yii2\oauth2server\Request::getIsAjax() in /app/vendor/yiisoft/yii2/web/ErrorHandler.php:499
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/ErrorHandler.php(115): yii\web\ErrorHandler->shouldRenderSimpleHtml()
+#1 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(Error))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(Error))
+#3 {main}
+Previous exception:
+Error: Call to undefined method filsh\yii2\oauth2server\Request::getScriptFile() in /app/vendor/yiisoft/yii2/web/Application.php:66
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Application.php(273): yii\web\Application->bootstrap()
+#1 /app/vendor/yiisoft/yii2/base/BaseObject.php(109): yii\base\Application->init()
+#2 /app/vendor/yiisoft/yii2/base/Application.php(206): yii\base\BaseObject->__construct(Array)
+#3 /app/api/web/index.php(17): yii\base\Application->__construct(Array)
+#4 {main}
+$_SE" while reading upstream, client: 192.168.83.1, server: api.shopscript.dev, request: "POST /oauth2/token HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.1-fpm.sock:", host: "api.shopscript.dev"
+2018/11/02 12:47:54 [error] 1887#1887: *13 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+Error: Call to undefined method filsh\yii2\oauth2server\Request::getIsAjax() in /app/vendor/yiisoft/yii2/web/ErrorHandler.php:499
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/web/ErrorHandler.php(115): yii\web\ErrorHandler->shouldRenderSimpleHtml()
+#1 /app/vendor/yiisoft/yii2/base/ErrorHandler.php(111): yii\web\ErrorHandler->renderException(Object(Error))
+#2 [internal function]: yii\base\ErrorHandler->handleException(Object(Error))
+#3 {main}
+Previous exception:
+Error: Call to undefined method filsh\yii2\oauth2server\Request::getScriptFile() in /app/vendor/yiisoft/yii2/web/Application.php:66
+Stack trace:
+#0 /app/vendor/yiisoft/yii2/base/Application.php(273): yii\web\Application->bootstrap()
+#1 /app/vendor/yiisoft/yii2/base/BaseObject.php(109): yii\base\Application->init()
+#2 /app/vendor/yiisoft/yii2/base/Application.php(206): yii\base\BaseObject->__construct(Array)
+#3 /app/api/web/index.php(17): yii\base\Application->__construct(Array)
+#4 {main}
+$_SE" while reading upstream, client: 192.168.83.1, server: api.shopscript.dev, request: "POST /oauth2/token HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.1-fpm.sock:", host: "api.shopscript.dev"

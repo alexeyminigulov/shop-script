@@ -5,10 +5,8 @@ return [
     'components' => [
         'user' => [
             'class' => 'yii\web\User',
-            'identityClass' => 'common\models\User',
-        ],
-        'request' => [
-            'cookieValidationKey' => 'test',
+            'identityClass' => 'common\auth\Identity',
+            'identityCookie' => new ReplaceArrayValue(['name' => '_identity', 'httpOnly' => true]),
         ],
     ],
 ];
