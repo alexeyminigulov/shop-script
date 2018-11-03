@@ -8,12 +8,13 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/'));
+        $I->amOnPage('/index.php');
         $I->canSee('Новинки в магазине');
 //        $I->see('My Application');
 //
-//        $I->seeLink('About');
-//        $I->click('About');
+        $I->seeLink('Информация');
+        $I->click('Информация');
+        $I->amOnPage('/about');
 //        $I->wait(2); // wait for page to be opened
 //
 //        $I->see('This is the About page.');

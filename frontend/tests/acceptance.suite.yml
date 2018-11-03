@@ -3,8 +3,8 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://shopscript.dev:4444
-            delay: 200
-            browser: chrome
+            url: http://shopscript.dev
+            port: 4444
+            browser: phantomjs
         - Yii2:
             part: init
