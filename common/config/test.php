@@ -6,7 +6,7 @@ return [
         'user' => [
             'class' => 'yii\web\User',
             'identityClass' => 'common\auth\Identity',
-            'identityCookie' => new ReplaceArrayValue(['name' => '_identity', 'httpOnly' => true]),
+            'identityCookie' => new \yii\helpers\ReplaceArrayValue(['name' => '_identity', 'httpOnly' => true]),
         ],
     ],
 ];
