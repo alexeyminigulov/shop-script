@@ -13,14 +13,14 @@ use yii\web\Controller;
  *     consumes={"application/json","application/xml","application/x-www-form-urlencoded"},
  *     @SWG\Info(
  *         version="1.0.0",
- *         title="Shop API",
+ *         title="Shop-Script API",
  *         description="HTTP JSON API",
  *     ),
  *     @SWG\SecurityScheme(
  *         securityDefinition="OAuth2",
  *         type="oauth2",
  *         flow="password",
- *         tokenUrl="http://api.shop.dev/oauth2/token"
+ *         tokenUrl="http://api.shopscript.dev/oauth2/token"
  *     ),
  *     @SWG\SecurityScheme(
  *         securityDefinition="Bearer",
@@ -43,6 +43,7 @@ use yii\web\Controller;
  *     )
  * )
  */
+
 class SiteController extends Controller
 {
     /**

@@ -61,7 +61,6 @@ class ProfileController extends Controller
  *  @SWG\Definition(
  *     definition="Profile",
  *     type="object",
- *     required={"id"},
  *     @SWG\Property(property="id", type="integer"),
  *     @SWG\Property(property="name", type="string"),
  *     @SWG\Property(property="email", type="string"),
