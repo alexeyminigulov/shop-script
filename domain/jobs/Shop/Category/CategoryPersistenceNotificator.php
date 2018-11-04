@@ -3,9 +3,9 @@
 namespace domain\jobs\Shop\Category;
 
 use domain\entities\Shop\Category\Category;
-use yii\queue\JobInterface;
+use yii\queue\Job;
 
-class CategoryPersistenceNotificator implements JobInterface
+class CategoryPersistenceNotificator implements Job
 {
     public $category;
     private $className;

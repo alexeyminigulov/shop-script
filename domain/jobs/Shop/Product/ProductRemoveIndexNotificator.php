@@ -2,10 +2,10 @@
 
 namespace domain\jobs\Shop\Product;
 
-use yii\queue\JobInterface;
+use yii\queue\Job;
 use domain\entities\Shop\Product\Product;
 
-class ProductRemoveIndexNotificator implements JobInterface
+class ProductRemoveIndexNotificator implements Job
 {
     public $product;
     private $className;

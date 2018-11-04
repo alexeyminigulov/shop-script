@@ -2,10 +2,10 @@
 
 namespace domain\jobs\Shop\Product;
 
-use yii\queue\JobInterface;
+use yii\queue\Job;
 use domain\entities\Shop\Product\Product;
 
-class ProductIndexerNotificator implements JobInterface
+class ProductIndexerNotificator implements Job
 {
     public $product;
     private $className;

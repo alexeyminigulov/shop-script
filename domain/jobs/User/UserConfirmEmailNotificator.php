@@ -3,9 +3,9 @@
 namespace domain\jobs\User;
 
 use domain\entities\User\User;
-use yii\queue\JobInterface;
+use yii\queue\Job;
 
-class UserConfirmEmailNotificator implements JobInterface
+class UserConfirmEmailNotificator implements Job
 {
     public $userId;
     private $className;

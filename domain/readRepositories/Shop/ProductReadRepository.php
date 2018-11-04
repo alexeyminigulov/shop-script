@@ -27,6 +27,14 @@ class ProductReadRepository
         $this->cache = $cache;
     }
 
+    public function all(): DataProviderInterface
+    {
+        $query = Product::find()->where(['status' => Product::STATUS_ACTIVE])
+            ->joinWith(['mainPicture']);
+
+        return $this->getProvider($query);
+    }
+
     public function getAll($categoryIds): DataProviderInterface
     {
         $query = Product::find()->where(['category_id' => $categoryIds])

@@ -3,9 +3,9 @@
 namespace domain\jobs\Shop\Product;
 
 use domain\entities\Shop\Product\Product;
-use yii\queue\JobInterface;
+use yii\queue\Job;
 
-class ProductPersistenceNotificator implements JobInterface
+class ProductPersistenceNotificator implements Job
 {
     public $product;
     private $className;

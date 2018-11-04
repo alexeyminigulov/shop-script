@@ -3,9 +3,9 @@
 namespace domain\jobs\Shop\Banner;
 
 use domain\entities\Shop\Manager\Banner\Banner;
-use yii\queue\JobInterface;
+use yii\queue\Job;
 
-class BannerPersistenceNotificator implements JobInterface
+class BannerPersistenceNotificator implements Job
 {
     public $banner;
     private $className;
