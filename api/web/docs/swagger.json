@@ -40,6 +40,60 @@
                 }
             }
         },
+        "/product": {
+            "get": {
+                "tags": [
+                    "Catalog"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ProductItem"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [],
+                        "OAuth2": []
+                    }
+                ]
+            }
+        },
+        "/product/{productId}": {
+            "get": {
+                "tags": [
+                    "Catalog"
+                ],
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "ID of product",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/ProductView"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [],
+                        "OAuth2": []
+                    }
+                ]
+            }
+        },
         "/user/profile": {
             "get": {
                 "tags": [
@@ -74,6 +128,139 @@
                     "type": "integer"
                 },
                 "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ProductItem": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "category": {
+                    "$ref": "#/definitions/ProductCategory"
+                },
+                "brand": {
+                    "$ref": "#/definitions/ProductBrand"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "_links": {
+                    "properties": {
+                        "self": {
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ProductView": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "category": {
+                    "$ref": "#/definitions/ProductCategory"
+                },
+                "brand": {
+                    "$ref": "#/definitions/ProductBrand"
+                },
+                "rating": {
+                    "type": "float"
+                },
+                "weight": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "ProductCategory": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "_links": {
+                    "properties": {
+                        "self": {
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ProductBrand": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "_links": {
+                    "properties": {
+                        "self": {
+                            "properties": {
+                                "href": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ProductPhoto": {
+            "properties": {
+                "thumbnail": {
+                    "type": "string"
+                },
+                "origin": {
                     "type": "string"
                 }
             },
