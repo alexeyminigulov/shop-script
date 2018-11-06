@@ -14,9 +14,7 @@ $this->title = 'Поддержка';
     <div class="span8 main-content-grid row-container">
 
         <div class="ty-mainbox-container clearfix">
-            <h1 class="ty-mainbox-title">
-                <?= Html::encode($this->title) ?>
-            </h1>
+            <h1 class="ty-mainbox-title"><?= Html::encode($this->title) ?></h1>
             <div class="ty-mainbox-body">
                 <div class="ty-account">
                     <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
