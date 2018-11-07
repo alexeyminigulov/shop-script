@@ -58,10 +58,10 @@ class Picture extends ActiveRecord
                     'thumb_400_350' => ['width' => 400, 'height' => 350, 'processor' => [new Watermark(400, 350), 'processor']],
                     'thumb_800_800' => ['width' => 800, 'height' => 800, 'processor' => [new Watermark(800, 800, '@frontend/web/image/logo.png'), 'processor']],
                 ],
-                'filePath' => '@static/[[pk]].[[extension]]',
-                'fileUrl' => '@staticUrl/[[pk]].[[extension]]',
-                'thumbPath' => '@static/[[profile]]_[[pk]].[[extension]]',
-                'thumbUrl' => '@staticUrl/[[profile]]_[[pk]].[[extension]]',
+                'filePath' => '@static/products/origin/[[attribute_product_id]]/[[pk]].[[extension]]',
+                'fileUrl' => '@staticUrl/products/origin/[[attribute_product_id]]/[[pk]].[[extension]]',
+                'thumbPath' => '@static/products/cache/[[attribute_product_id]]/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '@staticUrl/products/cache/[[attribute_product_id]]/[[profile]]_[[pk]].[[extension]]',
             ],
         ];
     }
