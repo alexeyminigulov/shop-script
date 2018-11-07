@@ -150,7 +150,7 @@ MagnificPopup::register($this);
                                 <div class="cm-tabs-content ty-tabs__content clearfix" id="tabs_content">
                                     <div id="content_description" class="ty-wysiwyg-content content-description">
                                         <div>
-                                            <p><span style="font-size: small;">Глянцевая поверхность ASUS CP6130 придает им элегантности, а бросающиаяся в глаза кнопка включения уместно расположена в середине корпуса. </span></p>
+                                            <p><span style="font-size: small;"><?= Html::encode($product->description) ?></span></p>
                                         </div>
                                     </div>
                                     <?= ProductContentFeatures::widget([

@@ -20,7 +20,7 @@ class UserHelper
     {
         return [
             User::STATUS_ACTIVE => 'active',
-            User::STATUS_INACTIVE => 'deleted',
+            User::STATUS_INACTIVE => 'inactive',
         ];
     }
 
@@ -33,7 +33,7 @@ class UserHelper
     {
         switch ($code) {
             case User::STATUS_INACTIVE:
-                $label = 'deleted';
+                $label = 'inactive';
                 break;
             case User::STATUS_ACTIVE:
                 $label = 'active';
