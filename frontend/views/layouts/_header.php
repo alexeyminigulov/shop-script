@@ -165,7 +165,7 @@ use common\widgets\Alert;
         <div class="row-fluid ">
             <?= Alert::widget([
                     'options' => [
-                        'style' => 'margin-bottom:0px;',
+                        'style' => 'position: relative;margin: 7px 0 0 0;',
                     ],
             ]) ?>
         </div>
