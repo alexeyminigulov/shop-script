@@ -78,7 +78,7 @@ class ProductController extends Controller
 
         if (!Yii::$app->user->isGuest) {
             /** @var User $user */
-            $user = Yii::$app->user->identity;
+            $user = Yii::$app->user->identity->getUser();
             $comment = new CommentForm($user, $product);
 
             return $this->render('view', [
