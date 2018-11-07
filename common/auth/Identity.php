@@ -63,6 +63,11 @@ class Identity implements IdentityInterface, UserCredentialsInterface
         return ['user_id' => $user->id];
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
     private static function getRepository(): UserReadRepository
     {
         return Yii::$container->get(UserReadRepository::class);

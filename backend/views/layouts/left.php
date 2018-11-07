@@ -1,6 +1,8 @@
 <?php
 
+use Yii;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 ?>
 
@@ -14,7 +16,7 @@ use yii\helpers\Url;
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= Html::encode(Yii::$app->user->identity->getUser()->username) ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
