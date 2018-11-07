@@ -239,8 +239,9 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
-        $form = new ResetPasswordForm();
+        $this->layout = 'layout_site';
 
+        $form = new ResetPasswordForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->passwordReset($form, $token);
