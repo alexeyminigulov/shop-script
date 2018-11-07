@@ -1,9 +1,10 @@
 <?php
 namespace backend\controllers;
 
-use domain\services\UserService;
 use Yii;
 use yii\web\Controller;
+use common\auth\Identity;
+use domain\services\UserService;
 use yii\filters\VerbFilter;
 use common\forms\LoginForm;
 
@@ -74,7 +75,7 @@ class SiteController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $user = $this->service->auth($form);
-                Yii::$app->user->login($user, $form->rememberMe ? Yii::$app->params['user.rememberMe'] : 0);
+                Yii::$app->user->login(new Identity($user), $form->rememberMe ? Yii::$app->params['user.rememberMe'] : 0);
                 return $this->goBack();
 
             } catch (\DomainException $e) {
