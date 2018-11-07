@@ -7,6 +7,10 @@ use yii\di\Container;
 use yii\caching\Cache;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use League\Flysystem\Adapter\Ftp;
+use League\Flysystem\Filesystem;
+use yiidreamteam\upload\ImageUploadBehavior;
+use domain\entities\behaviors\FlySystemImageUploadBehavior;
 use domain\entities\Shop\Product\events\ProductRemove;
 use domain\entities\Shop\Product\events\ProductPersistence;
 use domain\entities\User\events\UserSignupConfirmed;
@@ -88,5 +92,13 @@ class Setup implements BootstrapInterface
         $container->setSingleton(ProductStorageAdapter::class);
 
         $container->setSingleton(ValueStorageAdapter::class);
+
+        /*
+        $container->setSingleton(Filesystem::class, function () use ($app) {
+            return new Filesystem(new Ftp($app->params['ftp']));
+        });
+
+        $container->set(ImageUploadBehavior::class, FlySystemImageUploadBehavior::class);
+        */
     }
 }
