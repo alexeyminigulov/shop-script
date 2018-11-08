@@ -17,7 +17,7 @@ class ProductIndexerHandler
         $this->indexer = $indexer;
     }
 
-    public function handle(ProductPersistenceNotificator $parent)
+    public function handle(ProductIndexerNotificator $parent)
     {
         if (!$parent->product instanceof Product) {
             throw new \DomainException('Passed parameter is not Product');

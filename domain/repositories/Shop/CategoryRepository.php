@@ -86,15 +86,20 @@ class CategoryRepository
     public function getAttributes($id)
     {
         /** @var Group[] $groups */
-        $groups = $this->getGroups($id);
+        try {
+            $groups = $this->getGroups($id);
+
+        } catch (EntityNotFoundException $e) {
+            $groups = [];
+        }
         $attributes = [];
 
         foreach ($groups as $group) {
             $attributes = array_merge($attributes, $group->attributes0);
         }
-        if (empty($attributes)) {
+        /*if (empty($attributes)) {
             throw new EntityNotFoundException('Attributes is not found.');
-        }
+        }*/
         return $attributes;
     }
 
@@ -142,9 +147,10 @@ class CategoryRepository
         }));
 
         return array_filter($categories, function (Category $category) use ($parent) {
-            if ($parent->depth+1 >= $category->depth && $parent->lft < $category->lft) {
+            if ($parent->depth+1 >= $category->depth && $parent->lft < $category->lft && $parent->rgt > $category->rgt) {
                 return true;
             }
+            return false;
         });
     }
 }

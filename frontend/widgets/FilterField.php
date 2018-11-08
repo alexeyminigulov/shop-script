@@ -44,9 +44,9 @@ class FilterField extends ActiveField
 
     private function checkboxS($items, $options = [])
     {
-        if ($this->form->validationStateOn === ActiveForm::VALIDATION_STATE_ON_INPUT) {
-            $this->addErrorClassIfNeeded($options);
-        }
+//        if ($this->form->validationStateOn === ActiveForm::VALIDATION_STATE_ON_INPUT) {
+//            $this->addErrorClassIfNeeded($options);
+//        }
 
         $this->addAriaAttributes($options);
         $this->adjustLabelFor($options);

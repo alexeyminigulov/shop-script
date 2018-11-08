@@ -37,8 +37,8 @@ class ProductReadRepository
 
     public function getAll($categoryIds): DataProviderInterface
     {
-        $query = Product::find()->where(['category_id' => $categoryIds])
-            ->where(['status' => Product::STATUS_ACTIVE])
+        $query = Product::find()->andWhere(['category_id' => $categoryIds])
+            ->andWhere(['status' => Product::STATUS_ACTIVE])
             ->joinWith(['mainPicture']);
 
         return $this->getProvider($query);
@@ -92,7 +92,7 @@ class ProductReadRepository
 
         if ($ids) {
             $query = Product::find()
-//                ->andWhere(['status' => Product::STATUS_ACTIVE])
+                ->andWhere(['status' => Product::STATUS_ACTIVE])
                 ->andWhere(['id' => $ids]);
         } else {
             $query = Product::find()->where(['id' => 0]);
@@ -124,6 +124,10 @@ class ProductReadRepository
                                 if (!empty($form->priceFrom) && !empty($form->priceTo)) {
                                     return [
                                         ["range" => ["price" => ["gte" => $form->priceFrom, "lte" => $form->priceTo]]],
+                                        ["match" => ["category_slug" => $form->slug] ],
+                                    ];
+                                } else {
+                                    return [
                                         ["match" => ["category_slug" => $form->slug] ],
                                     ];
                                 }

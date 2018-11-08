@@ -50,7 +50,7 @@ class WishlistController extends Controller
         $this->layout = 'layout_site';
 
         /** @var User $user */
-        $user = Yii::$app->user->identity;
+        $user = Yii::$app->user->identity->getUser();
         $wishItems = $user->wishItems;
 
         return $this->render('index', [
@@ -65,7 +65,7 @@ class WishlistController extends Controller
     public function actionAdd($id)
     {
         try {
-            $wishItem = $this->service->add(Yii::$app->user->identity, $id);
+            $wishItem = $this->service->add(Yii::$app->user->identity->getUser(), $id);
             Yii::$app->session->setFlash('success', 'Success added.');
 
         } catch (\DomainException $e) {
@@ -82,7 +82,7 @@ class WishlistController extends Controller
     public function actionAddToCart($id)
     {
         try {
-            $this->service->addToCart(Yii::$app->user->identity, $id);
+            $this->service->addToCart(Yii::$app->user->identity->getUser(), $id);
             Yii::$app->session->setFlash('success', 'Added to cart.');
             return $this->redirect(['index']);
 

@@ -47,7 +47,7 @@ class OrderController extends Controller
         $this->layout = 'layout_site';
 
         /** @var User $user */
-        $user = Yii::$app->user->identity;
+        $user = Yii::$app->user->identity->getUser();
         $orders = $user->orders;
 
         return $this->render('index', [
