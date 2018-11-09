@@ -3,10 +3,10 @@
 namespace frontend\widgets;
 
 use Yii;
+use yii\base\Widget;
 use domain\entities\Shop\Filter;
 use domain\forms\Shop\Search\SearchForm;
-use yii\base\Widget;
-use domain\entities\Shop\Category;
+use domain\entities\Shop\Category\Category;
 use domain\repositories\Shop\CategoryRepository;
 
 class FiltersWidget extends Widget
@@ -44,6 +44,9 @@ class FiltersWidget extends Widget
 
     private function getTemplate()
     {
+        if (count($this->model->values) == 0) {
+            return '';
+        }
         return $this->render('filters/view', ['model' => $this->model]);
     }
 }

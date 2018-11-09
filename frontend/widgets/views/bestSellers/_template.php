@@ -12,7 +12,7 @@ use yii\helpers\Url;
         <div class="hit-label">
             <?= $index ?>
         </div>
-        <a href="<?= Url::to(['shop/product/view', 'slug' => $product->slug]) ?>">
+        <a href="<?= Url::to(['shop/product/product/view', 'slug' => $product->slug]) ?>">
             <?= Html::img($product->mainPicture->getThumbFileUrl('picture', 'thumb_50_50'), [
                 'class' => 'ty-pict cm-image',
                 'alt' => '',
@@ -22,7 +22,7 @@ use yii\helpers\Url;
     </div>
     <div class="ty-template-small__item-description">
         <bdi>
-            <a href="<?= Url::to(['shop/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="<?= Html::encode($product->name) ?>">
+            <a href="<?= Url::to(['shop/product/product/view', 'slug' => $product->slug]) ?>" class="product-title" title="<?= Html::encode($product->name) ?>">
                 <?= Html::encode($product->name) ?>
             </a>
         </bdi>
